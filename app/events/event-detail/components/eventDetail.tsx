@@ -11,7 +11,7 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
       <section
         className="rounded-2xl w-full h-[50vh] px-5 relative flex flex-col md:flex-row justify-center md:justify-between items-center"
         style={{
-          backgroundImage: `url(${event.imageUrl})`,
+          backgroundImage: `url(${event?.imageUrl})`,
           backgroundRepeat: `no-repeat`,
           backgroundSize: `cover`,
           backgroundClip: `border-box`,
