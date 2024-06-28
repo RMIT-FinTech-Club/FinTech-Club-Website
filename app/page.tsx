@@ -11,9 +11,6 @@ import IntroSection from "./components/intro";
 import IntroVideo from "./components/introVideo";
 import PastPartners from "./components/pastPartners";
 import UpcomingEvent from "./components/upcomingEvent";
-import Events from "./events/page";
-import LoginPage from "./login/page";
-import ProjectDetail from "./projects/[pid]/page";
 import Member from "./components/member";
 const Home = () => {
 	return (
