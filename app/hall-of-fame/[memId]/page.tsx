@@ -13,7 +13,7 @@ interface Member {
 }
 
 const Invidivual = ({ params }: { params: { memId: string } }) => {
-	const imageUrl = "HallOfFame-Background.svg";
+	const imageUrl = "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-Background.svg";
 
 	const [member, setMember] = useState<Member>({} as Member);
 
