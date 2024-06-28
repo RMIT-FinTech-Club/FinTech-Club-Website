@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
   if (isPublicPath && token) {
 
     // If trying to access a public path with a token, redirect to the home page
-    return NextResponse.redirect(new URL('/', request.nextUrl))
+    return NextResponse.redirect(new URL('/cms', request.nextUrl))
   }
 
   if (payload.role !== "admin") {
@@ -42,5 +42,6 @@ export const config = {
     matcher: [
       '/login',
       '/signup',
+      '/cms'
     ]
 }
