@@ -5,7 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import type React from "react";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
 	const [visible, setVisible] = useState(false);
@@ -28,7 +28,7 @@ const LoginPage = () => {
 				console.log(result);
 				toast.success(result.data.message, {
 					duration: 3000,
-					position: "bottom-center",
+					position: "top-center",
 				});
 			})
 			.catch((error) => {
@@ -48,6 +48,7 @@ const LoginPage = () => {
 	};
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 bg-white min-h-full w-full h-screen">
+			<Toaster position="top-center" />
 			<div className="col-span-0 flex flex-col md:col-span-1 mx-auto">
 				<img
 					src="loginPage/Logo.svg"
