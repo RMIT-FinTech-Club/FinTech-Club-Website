@@ -24,7 +24,7 @@ const ProjectPage = () => {
 							alt=""
 						/>
 						<div className="md:mt-0 mt-4 md:order-last">
-							<h2 className="text-[#2C305F]">Project type</h2>
+							<h2 className="text-[#2C305F]">Academic Projects</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
 								Lorem, ipsum dolor sit amet consectetur
 								adipisicing elit. Repudiandae iure deserunt
@@ -48,7 +48,7 @@ const ProjectPage = () => {
 									type="button"
 									className="w-28 text-white font-bold rounded-full bg-[#2C305F]"
 								>
-									Go to
+									<a href={"/projects/academic"}>Go to</a>
 								</Button>
 							</div>
 						</div>
@@ -62,7 +62,7 @@ const ProjectPage = () => {
 						/>
 						<div className="md:mt-0 mt-4">
 							<h2 className="text-[#2C305F] text-right">
-								Project type
+								Technical Projects
 							</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
 								Lorem, ipsum dolor sit amet consectetur
@@ -87,7 +87,7 @@ const ProjectPage = () => {
 									type="button"
 									className="w-28 text-white font-bold rounded-full bg-[#2C305F]"
 								>
-									Go to
+									<a href={"/projects/technical"}>Go to</a>
 								</Button>
 							</div>
 						</div>
@@ -100,7 +100,7 @@ const ProjectPage = () => {
 							alt=""
 						/>
 						<div className="md:mt-0 mt-4 md:order-last">
-							<h2 className="text-[#2C305F]">Project type</h2>
+							<h2 className="text-[#2C305F]">Media Projects</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
 								Lorem, ipsum dolor sit amet consectetur
 								adipisicing elit. Repudiandae iure deserunt
@@ -124,7 +124,7 @@ const ProjectPage = () => {
 									type="button"
 									className="w-28 text-white font-bold rounded-full bg-[#2C305F]"
 								>
-									Go to
+									<a href={"/projects/media"}>Go to</a>
 								</Button>
 							</div>
 						</div>
@@ -138,7 +138,7 @@ const ProjectPage = () => {
 						/>
 						<div className="md:mt-0 mt-4">
 							<h2 className="text-[#2C305F] text-right">
-								Project type
+								Event Projects
 							</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
 								Lorem, ipsum dolor sit amet consectetur
@@ -163,7 +163,7 @@ const ProjectPage = () => {
 									type="button"
 									className="w-28 text-white font-bold rounded-full bg-[#2C305F]"
 								>
-									Go to
+									<a href={"/projects/event"}>Go to</a>
 								</Button>
 							</div>
 						</div>
