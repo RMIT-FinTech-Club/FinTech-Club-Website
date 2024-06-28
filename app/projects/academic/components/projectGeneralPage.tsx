@@ -24,12 +24,12 @@ type ResearchPaper = {
 async function GET_PROJECTS() {
 	return axios
 		.get("/api/projects")
-		.then((res) => res.data)
-		.catch((err) => {
-			throw new Error(
-				err.response?.data?.message || "Failed to fetch projects",
-			);
-		});
+		.then((res) => res.data);
+		// .catch((err) => {
+		// 	throw new Error(
+		// 		err.response?.data?.message || "Failed to fetch projects",
+		// 	);
+		// });
 }
 
 export default function ProjectGeneralPage() {
@@ -52,7 +52,7 @@ export default function ProjectGeneralPage() {
 				<div className="grid md:grid-cols-3 md:mt-10 md:mb-44 w-full md:px-0">
 					<div className="flex flex-col gap-4 items-center md:col-span-2 md:order-first order-last">
 						<Suspense fallback={<ProjectCardSkeletonLoading />}>
-							<PROJECTS_SECTION />
+							{/* <PROJECTS_SECTION /> */}
 						</Suspense>
 					</div>
 					{/* projects filter  */}
@@ -74,7 +74,7 @@ function PROJECT_GENERAL_CARD({ project }: { project: ResearchPaper }) {
 						src="https://ik.imagekit.io/mbrrji2rk/ProjectGeneralImage.png?updatedAt=1715686577329"
 					/>
 				</div>
-				<div className="md:ml-6 flex flex-col justify-between">
+				<div className="md:ml-2 flex flex-col justify-between">
 					<div>
 						<h6 className="md:text-2xl text-xl font-bold text-black text-center">
 							{project.title}
@@ -182,11 +182,10 @@ function PROJECTS_FILTER() {
 					</div>
 					{isOpen && (
 						<div
-							className={`origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-transform transform ${
-								isOpen
+							className={`origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-transform transform ${isOpen
 									? "scale-100 opacity-100"
 									: "scale-95 opacity-0"
-							}`}
+								}`}
 							role="menu"
 							aria-orientation="vertical"
 							aria-labelledby="options-menu"
@@ -225,22 +224,20 @@ function PROJECTS_FILTER() {
 					<button
 						type="button"
 						onClick={() => toggleFilter("research")}
-						className={`mr-2 md:px-4 px-2 py-[4px] md:py-2 rounded-lg ${
-							filters.research
+						className={`mr-2 md:px-4 px-2 py-[4px] md:py-2 rounded-lg ${filters.research
 								? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
 								: "bg-gray-200 text-black"
-						}`}
+							}`}
 					>
 						Research
 					</button>
 					<button
 						type="button"
 						onClick={() => toggleFilter("podcast")}
-						className={`md:px-4 px-2 py-[4px] md:py-2  rounded-lg ${
-							filters.podcast
+						className={`md:px-4 px-2 py-[4px] md:py-2  rounded-lg ${filters.podcast
 								? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
 								: "bg-gray-200 text-black"
-						}`}
+							}`}
 					>
 						Article
 					</button>
@@ -253,11 +250,10 @@ function PROJECTS_FILTER() {
 						<button
 							type="button"
 							onClick={() => toggleFilter("newest")}
-							className={`mr-2 w-6 h-6 rounded ${
-								filters.newest
+							className={`mr-2 w-6 h-6 rounded ${filters.newest
 									? "bg-ft-primary-yellow"
 									: "bg-gray-200"
-							}`}
+								}`}
 						>
 							{filters.newest && "✓"}
 						</button>
@@ -267,11 +263,10 @@ function PROJECTS_FILTER() {
 						<button
 							type="button"
 							onClick={() => toggleFilter("oldest")}
-							className={`mr-2 w-6 h-6 rounded ${
-								filters.oldest
+							className={`mr-2 w-6 h-6 rounded ${filters.oldest
 									? "bg-ft-primary-yellow"
 									: "bg-gray-200"
-							}`}
+								}`}
 						>
 							{filters.oldest && "✓"}
 						</button>

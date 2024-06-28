@@ -1,4 +1,6 @@
+import React from "react";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 
 const ProjectPage = () => {
 	return (
@@ -124,7 +126,7 @@ const ProjectPage = () => {
 									type="button"
 									className="w-28 text-white font-bold rounded-full bg-[#2C305F]"
 								>
-									<a href={"/projects/media"}>Go to</a>
+									<Link href="/academic">Go to</Link>
 								</Button>
 							</div>
 						</div>
