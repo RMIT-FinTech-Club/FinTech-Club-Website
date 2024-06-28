@@ -1,8 +1,38 @@
+"use client";
 import { IconArrowsMaximize } from "@tabler/icons-react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+interface EventProject {
+	_id: string;
+	year: string,
+	eventName: string,
+	description: string,
+	sponsorURLs: string[],
+	recapURLs: string[],
+}
 
 const EventCard = () => {
+	const [eventProjectsData, setEventProjectsData] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	useEffect(() => {
+		const configuration = {
+			method: "get",
+			url: "/api/v1/eventprojects/getData",
+		};
+		axios(configuration)
+			.then((result) => {
+				setEventProjectsData(result.data.data);
+				console.log(result.data.data);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 	return (
 		<>
+
 			<div className="w-full my-14">
 				<h1 className="text-center text-[#dbb969]">Past Events</h1>
 				<p className="mx-auto md:mt-12 mt-6 md:px-10 px-9 text-lg tracking-wide text-center">
@@ -12,7 +42,28 @@ const EventCard = () => {
 					esse quas officiis, odio possimus error, numquam vel eaque.
 				</p>
 				<div className="grid md:grid-cols-3 md:grid-flow-row mt-12 gap-14 md:px-40 px-12">
-					<div className="w-full grid grid-rows-2 justify-self-center m-auto items-center text-center bg-[#dbb969] h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000">
+					{eventProjectsData.map((event: EventProject) => (
+						<a href={`/projects/event/${event._id}`} className="w-full grid grid-rows-2 justify-self-center m-auto items-center text-center bg-[#dbb969] h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000">
+							<div className="row-start-2 row-span-1 md:px-10 px-4 grid md:grid-cols-12 grid-cols-4">
+								<div className="w-fit h-fit md:col-span-2 col-span-1 bg-black hover:bg-black/90 rounded-2xl p-2 hover:p-4 transition-all duration-3000">
+									<IconArrowsMaximize
+										className="w-12 h-12"
+										stroke={2}
+										color="white"
+									/>
+								</div>
+								<div className="ml-5 md:col-span-10 col-span-3 justify-self-start text-left">
+									<div className="text-4xl font-extrabold">
+										{event.year}
+									</div>
+									<div className="md:text-xl text-lg">
+										{event.eventName}
+									</div>
+								</div>
+							</div>
+						</a>
+					))}
+					{/* <div className="w-full grid grid-rows-2 justify-self-center m-auto items-center text-center bg-[#dbb969] h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000">
 						<div className="row-start-2 row-span-1 md:px-10 px-4 grid md:grid-cols-12 grid-cols-4">
 							<div className="w-fit h-fit md:col-span-2 col-span-1 bg-black hover:bg-black/90 rounded-2xl p-2 hover:p-4 transition-all duration-3000">
 								<IconArrowsMaximize
@@ -125,7 +176,7 @@ const EventCard = () => {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>

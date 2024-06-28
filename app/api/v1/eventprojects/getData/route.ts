@@ -1,5 +1,5 @@
 import { connect } from "@/db/dbConfig";
-import TechnicalProject from "@/models/techincalProject";
+import EventProject from "@/models/eventProject";
 import { type NextRequest, NextResponse } from "next/server";
 
 connect();
@@ -7,12 +7,12 @@ connect();
 export async function GET(req: NextRequest) {
 	try {
 		// Create response
-		const allTechnicalProjects = await TechnicalProject.find({});
+		const allEventProjects = await EventProject.find({});
 		const response = NextResponse.json(
 			{
 				message: "Get data successfully",
 				success: true,
-				data: allTechnicalProjects,
+				data: allEventProjects,
 			},
 			{ status: 200 },
 		);

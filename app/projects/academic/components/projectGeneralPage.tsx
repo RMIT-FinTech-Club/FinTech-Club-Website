@@ -25,11 +25,11 @@ async function GET_PROJECTS() {
 	return axios
 		.get("/api/projects")
 		.then((res) => res.data);
-		// .catch((err) => {
-		// 	throw new Error(
-		// 		err.response?.data?.message || "Failed to fetch projects",
-		// 	);
-		// });
+	// .catch((err) => {
+	// 	throw new Error(
+	// 		err.response?.data?.message || "Failed to fetch projects",
+	// 	);
+	// });
 }
 
 export default function ProjectGeneralPage() {
@@ -183,8 +183,8 @@ function PROJECTS_FILTER() {
 					{isOpen && (
 						<div
 							className={`origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-transform transform ${isOpen
-									? "scale-100 opacity-100"
-									: "scale-95 opacity-0"
+								? "scale-100 opacity-100"
+								: "scale-95 opacity-0"
 								}`}
 							role="menu"
 							aria-orientation="vertical"
@@ -225,8 +225,8 @@ function PROJECTS_FILTER() {
 						type="button"
 						onClick={() => toggleFilter("research")}
 						className={`mr-2 md:px-4 px-2 py-[4px] md:py-2 rounded-lg ${filters.research
-								? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
-								: "bg-gray-200 text-black"
+							? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
+							: "bg-gray-200 text-black"
 							}`}
 					>
 						Research
@@ -235,8 +235,8 @@ function PROJECTS_FILTER() {
 						type="button"
 						onClick={() => toggleFilter("podcast")}
 						className={`md:px-4 px-2 py-[4px] md:py-2  rounded-lg ${filters.podcast
-								? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
-								: "bg-gray-200 text-black"
+							? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
+							: "bg-gray-200 text-black"
 							}`}
 					>
 						Article
@@ -251,8 +251,8 @@ function PROJECTS_FILTER() {
 							type="button"
 							onClick={() => toggleFilter("newest")}
 							className={`mr-2 w-6 h-6 rounded ${filters.newest
-									? "bg-ft-primary-yellow"
-									: "bg-gray-200"
+								? "bg-ft-primary-yellow"
+								: "bg-gray-200"
 								}`}
 						>
 							{filters.newest && "✓"}
@@ -264,8 +264,8 @@ function PROJECTS_FILTER() {
 							type="button"
 							onClick={() => toggleFilter("oldest")}
 							className={`mr-2 w-6 h-6 rounded ${filters.oldest
-									? "bg-ft-primary-yellow"
-									: "bg-gray-200"
+								? "bg-ft-primary-yellow"
+								: "bg-gray-200"
 								}`}
 						>
 							{filters.oldest && "✓"}
@@ -278,16 +278,16 @@ function PROJECTS_FILTER() {
 	);
 }
 
-async function PROJECTS_SECTION() {
-	const { data: projects } = useSuspenseQuery<ResearchPaper[]>({
-		queryKey: ["projects"],
-		queryFn: () => GET_PROJECTS(),
-	});
-	return (
-		<>
-			{projects.map((project: ResearchPaper) => (
-				<PROJECT_GENERAL_CARD key={project._id} project={project} />
-			))}
-		</>
-	);
-}
+// async function PROJECTS_SECTION() {
+// 	const { data: projects } = useSuspenseQuery<ResearchPaper[]>({
+// 		queryKey: ["projects"],
+// 		queryFn: () => GET_PROJECTS(),
+// 	});
+// 	return (
+// 		<>
+// 			{projects.map((project: ResearchPaper) => (
+// 				<PROJECT_GENERAL_CARD key={project._id} project={project} />
+// 			))}
+// 		</>
+// 	);
+// }
