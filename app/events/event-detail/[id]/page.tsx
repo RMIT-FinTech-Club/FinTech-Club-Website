@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import EventDetail from "../components/eventDetail";
@@ -8,63 +8,126 @@ import EventLocation from "../components/eventLocation";
 import ClipLoader from "react-spinners/ClipLoader";
 import type { EventDetails } from "../components/types";
 import type { Event } from "../../components/types";
-let eventData: EventDetails;
+import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+
 const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
-	const [data, setData] = useState<Event>();
-	const [isLoading, setIsLoading] = useState(true);
-	useEffect(() => {
-		// console.log(eventId);
-		const configuration = {
-			method: "post",
-			url: "/api/v1/events/getOneEvent",
-			data: {
-				id: params.id,
-			},
-		};
-		axios(configuration)
-			.then((result) => {
-				setData(result.data.data);
-				setIsLoading(false);
-				// console.log(result.data.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [params.id]);
-	return (
-		isLoading ? (
-			<section className="flex flex-col items-center h-screen w-full justify-center">
-			<ClipLoader color="#2C305F" />
-		</section>
-		) : (
-			<div className="flex flex-col my-16">
-			<div className="lg:flex">
-				{/* <EventDetail event={eventData} /> */}
-				<EventDetail event={data!} />
-				<EventLocation />
-			</div>
-			<div className="hidden lg:flex lg:absolute lg:top-1/3 lg:right-0">
-				<Image
-					loading="lazy"
-					src="/SideFinTechBearForEventDateAndLocation.svg"
-					alt="above decoration for event date and location"
-					width={200}
-					height={200}
-				/>
-			</div>
-			<div className="hidden lg:flex lg:justify-center lg:my-4">
-				{/* Below Decoration for Event Date and Location */}
-				<Image
-					loading="lazy"
-					src="/ThreeBearsAndDecorationsForEventDateAndLocation.svg"
-					alt="below decoration for event date and location"
-					width={1000}
-					height={250}
-				/>
-			</div>
-		</div>
-		)
-	);
+  const [data, setData] = useState<Event>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [eventList, setEventList] = useState<Event[]>();
+
+  useEffect(() => {
+    // console.log(eventId);
+    const configuration = {
+      method: "post",
+      url: "/api/v1/events/getOneEvent",
+      data: {
+        id: params.id,
+      },
+    };
+    axios(configuration)
+      .then((result) => {
+        setData(result.data.data);
+        setIsLoading(false);
+        // console.log(result.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [params.id]);
+
+  useEffect(() => {
+    // console.log(eventId);
+    const configuration = {
+      method: "get",
+      url: "/api/v1/events/getData",
+    };
+    axios(configuration)
+      .then((result) => {
+        setEventList(result.data.data);
+        setIsLoading(false);
+        // console.log(result.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // handle click on card to change data infor
+  const handleClick = (item: Event) => {
+	console.log(item)
+    setData(item);
+  };
+  return isLoading ? (
+    <section className="flex flex-col items-center h-screen w-full justify-center">
+      <ClipLoader color="#2C305F" />
+    </section>
+  ) : (
+    <div className="flex flex-col my-16 mx-side-margin-mobile md:mx-side-margin">
+      <div className="lg:flex">
+        {/* <EventDetail event={eventData} /> */}
+        <EventDetail event={data!} />
+        {/* <EventLocation /> */}
+      </div>
+      <div className="hidden lg:flex lg:absolute lg:top-1/3 lg:right-0">
+        <Image
+          loading="lazy"
+          src="/SideFinTechBearForEventDateAndLocation.svg"
+          alt="above decoration for event date and location"
+          width={200}
+          height={200}
+        />
+      </div>
+      <div className="hidden lg:flex lg:justify-center lg:my-4">
+        {/* Below Decoration for Event Date and Location */}
+        <Image
+          loading="lazy"
+          src="/ThreeBearsAndDecorationsForEventDateAndLocation.svg"
+          alt="below decoration for event date and location"
+          width={1000}
+          height={250}
+        />
+      </div>
+      <div>
+        <p className="font-black text-2xl my-10">
+          Other events that you might be interested
+        </p>
+        <div className=" gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {eventList?.map((item, index) => (
+            <Card
+              shadow="sm"
+              key={index}
+              isPressable
+              onClick={() => handleClick(item)}
+            >
+              <CardBody className="overflow-visible p-0">
+                {/* <Skeleton> */}
+                <Image
+                  shadow="sm"
+                  radius="none"
+                  width="100%"
+                  alt={item.name}
+                  className="w-full object-cover h-[140px] rounded-t-lg"
+                  src={item.imageUrl}
+                />
+                {/* </Skeleton> */}
+              </CardBody>
+              <CardFooter className="w-full p-5 flex-row justify-between">
+                {/* <Skeleton> */}
+                <div className="w-1/5">
+                  <p className="font-black">{item.date}</p>
+                </div>
+                <div className="w-3/5 text-center">
+                  <b className="text-lg font-black">{item.name}</b>
+                  <p className="text-default-500">{item.description}</p>
+                </div>
+                {/* </Skeleton> */}
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default EventDateAndLocation;
