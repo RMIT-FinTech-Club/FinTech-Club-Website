@@ -1,9 +1,12 @@
 "use client";
+import React, { useState } from "react";
 import { Image } from "@nextui-org/image";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
+import {Skeleton} from "@nextui-org/skeleton";
 import Link from "next/link";
 
 const Member = () => {
+	const [loading, setLoading] = useState(false);
 	const imageUrl = "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-Background.svg";
 	return (
 		<section
@@ -83,14 +86,17 @@ const Member = () => {
 						href={`/hall-of-fame/6675667ae6b4538e26bec36d`}
 					>
 						<Card className="card h-full" isFooterBlurred>
-							<Image
-								removeWrapper
-								alt="Card background"
-								className="z-0 w-full h-full object-cover"
-								src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/President.jpg"
-								radius="none"
-								isZoomed
-							/>
+							<Skeleton isLoaded={loading}>
+								<Image
+									removeWrapper
+									alt="Card background"
+									className="z-0 w-full h-full object-cover"
+									src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/President.jpg"
+									radius="none"
+									isZoomed
+									onLoad={() => setLoading(true)}
+								/>
+							</Skeleton>
 							<CardFooter className="card-content flex flex-col text-left -bottom-20 before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large w-[calc(100%_-_8px)] shadow-small ml-1 z-10 transition-all ease-out delay-150">
 								<p className=" text-base text-ft-primary-yellow-500">
 									Dung Nguyen

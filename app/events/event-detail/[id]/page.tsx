@@ -8,12 +8,13 @@ import EventLocation from "../components/eventLocation";
 import ClipLoader from "react-spinners/ClipLoader";
 import type { EventDetails } from "../components/types";
 import type { Event } from "../../components/types";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Skeleton } from "@nextui-org/react";
 
 const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
   const [data, setData] = useState<Event>();
   const [isLoading, setIsLoading] = useState(true);
   const [eventList, setEventList] = useState<Event[]>();
+  const [imageLoading, setImageLoading] = useState(false);
 
   useEffect(() => {
     // console.log(eventId);
@@ -69,13 +70,16 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
         {/* <EventLocation /> */}
       </div>
       <div className="hidden lg:flex lg:absolute lg:top-1/3 lg:right-0">
-        <Image
-          loading="lazy"
-          src="/SideFinTechBearForEventDateAndLocation.svg"
-          alt="above decoration for event date and location"
-          width={200}
-          height={200}
-        />
+        <Skeleton isLoaded={imageLoading}>
+          <Image
+            loading="lazy"
+            src="/SideFinTechBearForEventDateAndLocation.svg"
+            alt="above decoration for event date and location"
+            width={200}
+            height={200}
+            onLoad={() => setImageLoading(true)}
+          />
+        </Skeleton>
       </div>
       <div className="hidden lg:flex lg:justify-center lg:my-4">
         {/* Below Decoration for Event Date and Location */}
@@ -100,16 +104,17 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
               onClick={() => handleClick(item)}
             >
               <CardBody className="overflow-visible p-0">
-                {/* <Skeleton> */}
-                <Image
-                  shadow="sm"
-                  radius="none"
-                  width="100%"
-                  alt={item.name}
-                  className="w-full object-cover h-[140px] rounded-t-lg"
-                  src={item.imageUrl}
-                />
-                {/* </Skeleton> */}
+                <Skeleton isLoaded={imageLoading}>
+                  <Image
+                    shadow="sm"
+                    radius="none"
+                    width="100%"
+                    alt={item.name}
+                    className="w-full object-cover h-[140px] rounded-t-lg"
+                    src={item.imageUrl}
+                    onLoad={() => setImageLoading(true)}
+                  />
+                </Skeleton>
               </CardBody>
               <CardFooter className="w-full p-5 flex-row justify-between">
                 {/* <Skeleton> */}

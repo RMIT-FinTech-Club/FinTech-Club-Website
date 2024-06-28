@@ -8,10 +8,12 @@ import {
 import type React from "react";
 import { useEffect, useState } from "react";
 import type { Event } from "./types";
+import { Skeleton, Image } from "@nextui-org/react";
 
 const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const [displayDate, setDisplayDate] = useState(false);
+	const [imageLoading, setImageLoading] = useState(false);
 
 	// Effect to handle window resizing
 	useEffect(() => {
@@ -41,10 +43,12 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:grid-rows-1 md:gap-4 border rounded-lg shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
 			{/* Event Image */}
 			<div className="row-span-1 col-span-12 md:col-span-4 w-full">
+				<Skeleton isLoaded={imageLoading} className={imageLoading ? "hidden" : "block"} />
 				<img
 					src={event.imageUrl}
 					alt="Event"
 					className="w-full h-full object-cover"
+					onLoad={() => setImageLoading(true)}
 				/>
 			</div>
 
