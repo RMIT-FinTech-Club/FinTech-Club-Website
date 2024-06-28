@@ -169,6 +169,8 @@ export default function HistorySection() {
 										? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-36 h-36"
 										: "sm:inline-flex hidden lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] md:h-[120px]"
 										} `}
+									// On click for changing the year
+									onClick={() => emblaHorizontalApi?.scrollTo(index)}
 								>
 									<div
 										className={`mx-auto font-extrabold ${index === centerSlideIndex
