@@ -73,23 +73,23 @@ const Events = () => {
 			{/* Background decorations arranged with the bottom ones sticking to the screen corners */}
 			{/* Top decorations positioned lower relative to the header */}
 			<img
-				src="/events/decoration_mascot_left.png"
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/decoration_mascot_left.png"
 				alt="Left Mascot"
 				className="mascot absolute inset-y-0 left-0 h-96"
 			/>
 			<img
-				src="/events/decoration_left.svg"
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/decoration_left.svg"
 				alt="Left Decoration"
 				className="mascot absolute left-0 bottom-0 h-50"
 			/>
 
 			<img
-				src="/events/decoration_right.svg"
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/decoration_right.svg"
 				alt="Right Decoration"
 				className="mascot absolute right-0 bottom-0 h-50"
 			/>
 			<img
-				src="/events/decoration_mascot_right.png"
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/decoration_mascot_right.png"
 				alt="Right Mascot"
 				className="mascot absolute inset-y-0 right-0 h-96"
 			/>
