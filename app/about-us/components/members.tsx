@@ -82,7 +82,7 @@ const Members: React.FC = () => {
 				/>
 			</div>
 			{/* Right FinTech Bear Decoration */}
-			<div className="absolute right-20 bottom-4 md:scale-75 scale-50 invisible xl:visible">
+			<div className="absolute right-0 bottom-4 md:scale-75 scale-50 invisible xl:visible">
 				<Image
 					loading="lazy"
 					src="/bear-right-side.svg"
