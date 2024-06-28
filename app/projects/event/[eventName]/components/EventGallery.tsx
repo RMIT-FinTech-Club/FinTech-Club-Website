@@ -1,65 +1,21 @@
 "use client";
 
-import type React from "react";
+import React from "react";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import Slider from "react-slick";
 
-const eventPhotos = [
-	{
-		id: 1,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-1.JPG",
-		description: "Image 1",
-	},
-	{
-		id: 2,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-2.JPG",
-		description: "Image 2",
-	},
-	{
-		id: 3,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-3.JPG",
-		description: "Image 3",
-	},
-	{
-		id: 4,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-4.JPG",
-		description: "Image 4",
-	},
-	{
-		id: 5,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-5.JPG",
-		description: "Image 5",
-	},
-	{
-		id: 6,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-6.JPG",
-		description: "Image 6",
-	},
-	{
-		id: 7,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-7.JPG",
-		description: "Image 7",
-	},
-	{
-		id: 8,
-		url: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/forum-recap-8.JPG",
-		description: "Image 8",
-	},
-];
+interface RecapGalleryProps {
+	eventRecapURLs: string[];
+}
 
-type PhotoInfo = {
-	id: number;
-	url: string;
-	description: string;
-};
-
-const EventCard: React.FC<{ photoInfo: PhotoInfo }> = ({ photoInfo }) => {
+const EventCard: React.FC<{ url: string }> = ({ url }) => {
 	return (
-		<img
+		< img
 			className="w-full h-full rounded-2xl object-cover"
-			src={photoInfo.url}
-			alt={photoInfo.description}
+			src={url}
+			alt="Recap Photo"
 		/>
+
 	);
 };
 
@@ -89,7 +45,7 @@ const NextArrow: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
 	);
 };
 
-const EventGallery: React.FC = () => {
+const EventGallery: React.FC<{ eventRecapURLs: string[] }> = ({ eventRecapURLs }) => {
 	const settings = {
 		autoplay: true,
 		autoplaySpeed: 3000,
@@ -123,8 +79,8 @@ const EventGallery: React.FC = () => {
 					className="w-[90vw] md:w-[80vw] lg:w-[60vw] m-2"
 					{...settings}
 				>
-					{eventPhotos.map((photo) => (
-						<EventCard key={photo.id} photoInfo={photo} />
+					{eventRecapURLs.map((url, id) => (
+						<EventCard key={id} url={url} />
 					))}
 				</Slider>
 			</div>
