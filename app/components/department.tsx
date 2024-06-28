@@ -12,38 +12,35 @@ const Department = () => {
 	type DepartmentInfo = {
 		name: string;
 		description: string;
-		imageUrl: string;
-		background: string;
+		imageUrl?: string;
+		background?: string;
 	};
 
 	const departments: Record<Department, DepartmentInfo> = {
 		technology: {
 			name: "TECHNOLOGY DEPARTMENT",
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-			imageUrl: "url('Hr.png')",
-			background: "none",
+				"With an unquenchable thirst for coding, fixing bugs, and …, the Technology Department represents the second pillar of our organization. We are responsible for the development of the club’s technical projects, including the SnapID Computer Vision Project, RBPC Website, and currently the FinTech Club Website Project. Beyond practical coding projects, we also provide internal training & sharing sessions, public workshops, mentoring initiatives, and memorable bonding activities for Tech Dept. members. Our members receive the full package of skill improvement, industry connections, and a belonging environment.",
+			imageUrl: "Tech.png",
 		},
 		business: {
 			name: "BUSINESS DEPARTMENT",
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-			imageUrl: "url('Hr.png')",
-			background: "none",
+				"The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, hold meetings to evaluate working processes, propose toolkits, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
+			imageUrl: "Bus.png",
 		},
 		humanResources: {
 			name: "HR DEPARTMENT",
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-			imageUrl: "url('Hr.png')",
+				"What is a club, without its people? Where would the club’s fun and desirability be, without its culture? That is where the Human Resources Department comes in. HR is in charge of organizing the club’s internal bonding activities, the FinTech Olympics, Newbies Orientation Day, End of Semester Award Ceremony, and the FinTech Field Trip – in addition to ensuring member well-being, safety and connection via the HR Committee. The HR Department consists of some of the kindest, most caring, most enthusiastic members in FTC. So, if you want to be a part of this lovely community, join the HR Dept.!",
+			imageUrl: "Hr.png",
 			background: "url('Background.png')",
 		},
 		marketing: {
 			name: "MARKETING DEPARTMENT",
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-			imageUrl: "url('Hr.png')",
-			background: "none",
+				"With a creative and expressive mindset, the Marketing Department is accountable for maintaining and spreading the digital presence of the club’s story and mission. Through various media projects, collaborative teams, adventurous campaigns, the Marketing Dept. never failed to disappoint in generating the most engaging and visually appealing content to hook the eyes of curious FinTech Club followers! So, you want to express yourself, unleash your creativity, unbound your imagination? Join the Marketing Dept. to help us bolster our club presence, and fulfill your creative interests!",
+			imageUrl: "Mar.png",
 		},
 	};
 
@@ -54,12 +51,10 @@ const Department = () => {
 
 	return (
 		<section
-			className="relative flex flex-col-reverse w-full max-h-fit justify-center items-center lg:flex-row"
+			className="relative flex flex-col-reverse w-full max-h-fit justify-center items-center lg:flex-row bg-ft-primary-blue-900"
 			style={{
 				backgroundImage: department.background
-					? `url(${department.background
-							.replace("url('", "")
-							.replace("')", "")})`
+					? department.background
 					: "none",
 				backgroundSize: "cover",
 				backgroundPosition: "center",
@@ -135,9 +130,9 @@ const Department = () => {
 			<div className="relative h-full w-96 lg:min-w-60 lg:max-w-96 lg:h-5/6 md:w-2/5 flex justify-center items-center">
 				<Image
 					className="object-cover lg:h-full md:w-full"
-					src={department.imageUrl
-						.replace("url('", "")
-						.replace("')", "")}
+					src={department.imageUrl ?
+						department.imageUrl :
+						""}
 					// Remove url() wrapper, NextUI Image component doesn't support it :<, this will change "url('image.png')" to "image.png"
 					alt={`${department.name} Image`}
 				/>

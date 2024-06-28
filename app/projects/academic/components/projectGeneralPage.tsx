@@ -5,10 +5,10 @@ import {
 	IconCalendarMonth,
 	IconUser,
 } from "@tabler/icons-react";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Link from "next/link";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { ChevronDown, Filter } from "tabler-icons-react";
 import ProjectCardSkeletonLoading from "./ProjectCardSkeletonLoading";
 
@@ -21,18 +21,23 @@ type ResearchPaper = {
 	fileURL: string;
 };
 
-async function GET_PROJECTS() {
+async function getProjects() {
 	return axios
 		.get("/api/projects")
-		.then((res) => res.data);
-	// .catch((err) => {
-	// 	throw new Error(
-	// 		err.response?.data?.message || "Failed to fetch projects",
-	// 	);
-	// });
+		.then((res) => res.data)
+		.catch((err) => {
+			throw new Error(
+				err.response?.data?.message || "Failed to fetch projects",
+			);
+		});
 }
 
 export default function ProjectGeneralPage() {
+	const { data: projects, isFetching: isProjectFetching } = useQuery<ResearchPaper[]>({
+		queryKey: ["projects"],
+		queryFn: getProjects,
+	});
+
 	return (
 		<>
 			<div className="w-full md:px-16 px-5">
@@ -51,19 +56,22 @@ export default function ProjectGeneralPage() {
 				</div>
 				<div className="grid md:grid-cols-3 md:mt-10 md:mb-44 w-full md:px-0">
 					<div className="flex flex-col gap-4 items-center md:col-span-2 md:order-first order-last">
-						<Suspense fallback={<ProjectCardSkeletonLoading />}>
-							{/* <PROJECTS_SECTION /> */}
-						</Suspense>
+						{isProjectFetching
+							? <ProjectCardSkeletonLoading />
+							: projects?.map((project: ResearchPaper) => (
+								<ProjectGeneralCard key={project._id} project={project} />
+							))
+						}
 					</div>
 					{/* projects filter  */}
-					<PROJECTS_FILTER />
+					<ProjectsFilter />
 				</div>
 			</div>
 		</>
 	);
 }
 
-function PROJECT_GENERAL_CARD({ project }: { project: ResearchPaper }) {
+function ProjectGeneralCard({ project }: { project: ResearchPaper }) {
 	return (
 		<>
 			<div className="grid md:grid-cols-2 bg-ft-background shadow-lg rounded-lg p-4 w-fit">
@@ -111,7 +119,7 @@ function PROJECT_GENERAL_CARD({ project }: { project: ResearchPaper }) {
 	);
 }
 
-function PROJECTS_FILTER() {
+function ProjectsFilter() {
 	const [isOpen, setIsOpen] = useState(false);
 	type Filters = {
 		research: boolean;
@@ -277,17 +285,3 @@ function PROJECTS_FILTER() {
 		</div>
 	);
 }
-
-// async function PROJECTS_SECTION() {
-// 	const { data: projects } = useSuspenseQuery<ResearchPaper[]>({
-// 		queryKey: ["projects"],
-// 		queryFn: () => GET_PROJECTS(),
-// 	});
-// 	return (
-// 		<>
-// 			{projects.map((project: ResearchPaper) => (
-// 				<PROJECT_GENERAL_CARD key={project._id} project={project} />
-// 			))}
-// 		</>
-// 	);
-// }

@@ -23,11 +23,11 @@ const settings = {
 
 const UpcomingEvent = () => {
 	return (
-		<section className="flex flex-col gap-5 w-screen  py-3 lg:py-12">
+		<section className="flex flex-col px-side-margin gap-5 w-screen py-2 lg:py-12">
 			<h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
-				EVENTS
+				PROJECTS
 			</h1>
-			<section className="w-11/12 mx-auto">
+			<section className="mx-auto overflow-hidden w-full">
 				<section className="flex flex-row justify-between items-center w-full mb-5 gap-4">
 					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow md:hidden" />
 					<div className="text-ft-primary-yellow text-2xl font-semibold">
@@ -36,60 +36,20 @@ const UpcomingEvent = () => {
 					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow  md:w-full" />
 				</section>
 				<Slider {...settings}>
-					<CardEvent
-						eventName="Fintech Forum 2024"
-						location="Ohio"
-						title="Lorem Ispum"
-						detail="Lorem ipsum dolor sit amet, consectetur ..."
-						timeOnHour=" 24:00 - 25:00"
-						timeOnDay="30"
-						timeOnMonth="Feb"
-					/>
-					<CardEvent
-						eventName="Fintech Forum 2024"
-						location="Ohio"
-						title="Lorem Ispum"
-						detail="Lorem ipsum dolor sit amet, consectetur ..."
-						timeOnHour=" 24:00 - 25:00"
-						timeOnDay="30"
-						timeOnMonth="Feb"
-					/>
-					<CardEvent
-						eventName="Fintech Forum 2024"
-						location="Ohio"
-						title="Lorem Ispum"
-						detail="Lorem ipsum dolor sit amet, consectetur ..."
-						timeOnHour=" 24:00 - 25:00"
-						timeOnDay="30"
-						timeOnMonth="Feb"
-					/>
-					<CardEvent
-						eventName="Fintech Forum 2024"
-						location="Ohio"
-						title="Lorem Ispum"
-						detail="Lorem ipsum dolor sit amet, consectetur ..."
-						timeOnHour=" 24:00 - 25:00"
-						timeOnDay="30"
-						timeOnMonth="Feb"
-					/>
-					<CardEvent
-						eventName="Fintech Forum 2024"
-						location="Ohio"
-						title="Lorem Ispum"
-						detail="Lorem ipsum dolor sit amet, consectetur ..."
-						timeOnHour=" 24:00 - 25:00"
-						timeOnDay="30"
-						timeOnMonth="Feb"
-					/>
-					<CardEvent
-						eventName="Fintech Forum 2024"
-						location="Ohio"
-						title="Lorem Ispum"
-						detail="Lorem ipsum dolor sit amet, consectetur ..."
-						timeOnHour=" 24:00 - 25:00"
-						timeOnDay="30"
-						timeOnMonth="Feb"
-					/>
+					{Array.from({ length: 5 }).map((_, index) => {
+						return (
+							<CardEvent
+								key={index}
+								eventName="Fintech Forum 2024"
+								location="Ohio"
+								title="Lorem Ispum"
+								detail="Lorem ipsum dolor sit amet, consectetur ..."
+								timeOnHour=" 24:00 - 25:00"
+								timeOnDay="30"
+								timeOnMonth="Feb"
+							/>
+						)
+					})}
 				</Slider>
 			</section>
 		</section>
