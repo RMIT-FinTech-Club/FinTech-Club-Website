@@ -46,7 +46,7 @@ const Events = () => {
 	useEffect(() => {
 		const configuration = {
 			method: "get",
-			url: "/api/v1/events/getData",
+			url: "/api/v1/events/upcomming",
 		};
 		axios(configuration)
 			.then((result) => {

@@ -19,11 +19,8 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 	useEffect(() => {
 		// console.log(eventId);
 		const configuration = {
-			method: "post",
-			url: "/api/v1/events/getOneEvent",
-			data: {
-				id: params.id,
-			},
+			method: "get",
+			url: `/api/v1/events/upcomming/${params.id}`,
 		};
 		axios(configuration)
 			.then((result) => {
@@ -40,7 +37,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 		// console.log(eventId);
 		const configuration = {
 			method: "get",
-			url: "/api/v1/events/getData",
+			url: "/api/v1/events/upcomming",
 		};
 		axios(configuration)
 			.then((result) => {
