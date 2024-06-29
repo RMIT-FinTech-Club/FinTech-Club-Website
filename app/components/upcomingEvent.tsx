@@ -48,7 +48,7 @@ const UpcomingEvent = () => {
 								timeOnDay="30"
 								timeOnMonth="Feb"
 							/>
-						)
+						);
 					})}
 				</Slider>
 			</section>

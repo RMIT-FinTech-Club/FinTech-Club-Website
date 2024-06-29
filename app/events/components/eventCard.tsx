@@ -42,15 +42,35 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 	return (
 		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:grid-rows-1 md:gap-4 border rounded-lg shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
 			{/* Event Image */}
-			<div className="row-span-1 col-span-12 md:col-span-4 w-full">
-				<Skeleton isLoaded={imageLoading} className={imageLoading ? "hidden" : "block"} />
-				<img
-					src={event.imageUrl}
-					alt="Event"
-					className="w-full h-full object-cover"
-					onLoad={() => setImageLoading(true)}
-				/>
-			</div>
+			{imageLoading ? (
+				<div className="row-span-1 col-span-12 md:col-span-4 w-full">
+					<img
+						src={event.imageUrl}
+						alt="Event"
+						className={
+							imageLoading
+								? "block w-full h-full object-cover"
+								: "hidden"
+						}
+						onLoad={() => setImageLoading(true)}
+					/>
+				</div>
+			) : (
+				<Skeleton isLoaded={imageLoading}>
+					<div className="row-span-1 col-span-12 md:col-span-4 w-full">
+						<img
+							src={event.imageUrl}
+							alt="Event"
+							className={
+								imageLoading
+									? "block w-full h-full object-cover"
+									: "hidden"
+							}
+							onLoad={() => setImageLoading(true)}
+						/>
+					</div>
+				</Skeleton>
+			)}
 
 			{/* Event Info */}
 			<div className="date row-span-1 col-span-3 flex flex-col justify-between p-2 md:p-4 py-auto space-y-2 text-center align-middle mb-2">

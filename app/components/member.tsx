@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { Image } from "@nextui-org/image";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import {Skeleton} from "@nextui-org/skeleton";
+import { Skeleton } from "@nextui-org/skeleton";
 import Link from "next/link";
 
 const Member = () => {
 	const [loading, setLoading] = useState(false);
-	const imageUrl = "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-Background.svg";
+	const imageUrl =
+		"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-Background.svg";
 	return (
 		<section
 			className=" relative bg-cover bg-center h-fit pb-10 px-side-margin-mobile md:px-side-margin md:pb-10"
@@ -22,7 +23,10 @@ const Member = () => {
 				/>
 			</div> */}
 			<div className="absolute right-0 md:right-12 top-10 md:top-4 z-10 max-w-24 md:max-w-96">
-				<Image src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-ClubLogo.svg" radius="none" />
+				<Image
+					src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-ClubLogo.svg"
+					radius="none"
+				/>
 			</div>
 			<header className="flex z-10 mt-0 -mx-side-margin-mobile md:mt-10 md:-mx-side-margin">
 				<svg width="10%" height="100%" id="left-bar" aria-label="Line">

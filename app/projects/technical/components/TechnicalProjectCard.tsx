@@ -14,7 +14,13 @@ const TechnicalProjectCard: React.FC<{
 	projectTags: string[];
 	projectDescription: string;
 	projectImg: string;
-}> = ({ projectId, projectTitle, projectDescription, projectTags, projectImg }) => {
+}> = ({
+	projectId,
+	projectTitle,
+	projectDescription,
+	projectTags,
+	projectImg,
+}) => {
 	return (
 		<div className="flex odd:flex-row even:flex-row-reverse justify-between box-border p-2 rounded-xl">
 			<img
@@ -32,13 +38,13 @@ const TechnicalProjectCard: React.FC<{
 				<h2 className="text-[3rem] text-ft-primary-yellow font-bold max-sm:text-center">
 					{projectTitle}
 				</h2>
-				<p className="w-full text-justify">
-					{projectDescription}
-				</p>
+				<p className="w-full text-justify">{projectDescription}</p>
 				<div className="w-full flex justify-end">
 					<button className="text-white text-[1rem] font-semibold bg-ft-primary-blue hover:bg-ft-primary-blue-600 w-40 max-sm:w-full p-3 rounded-lg">
 						<span className="block w-full h-full hover:scale-110">
-							<a href={`/projects/technical/${projectId}`} >Read more</a>
+							<a href={`/projects/technical/${projectId}`}>
+								Read more
+							</a>
 						</span>
 					</button>
 				</div>

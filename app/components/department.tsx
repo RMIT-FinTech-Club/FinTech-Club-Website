@@ -33,7 +33,8 @@ const Department = () => {
 			name: "HR DEPARTMENT",
 			description:
 				"What is a club, without its people? Where would the club’s fun and desirability be, without its culture? That is where the Human Resources Department comes in. HR is in charge of organizing the club’s internal bonding activities, the FinTech Olympics, Newbies Orientation Day, End of Semester Award Ceremony, and the FinTech Field Trip – in addition to ensuring member well-being, safety and connection via the HR Committee. The HR Department consists of some of the kindest, most caring, most enthusiastic members in FTC. So, if you want to be a part of this lovely community, join the HR Dept.!",
-			imageUrl: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Hr.png",
+			imageUrl:
+				"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Hr.png",
 			background: "url('Background.png')",
 		},
 		marketing: {
@@ -130,9 +131,7 @@ const Department = () => {
 			<div className="relative h-full w-96 lg:min-w-60 lg:max-w-96 lg:h-5/6 md:w-2/5 flex justify-center items-center">
 				<Image
 					className="object-cover lg:h-full md:w-full"
-					src={department.imageUrl ?
-						department.imageUrl :
-						""}
+					src={department.imageUrl ? department.imageUrl : ""}
 					// Remove url() wrapper, NextUI Image component doesn't support it :<, this will change "url('image.png')" to "image.png"
 					alt={`${department.name} Image`}
 				/>

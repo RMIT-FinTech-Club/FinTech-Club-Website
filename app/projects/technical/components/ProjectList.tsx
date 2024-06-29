@@ -25,17 +25,17 @@ const ProjectList: React.FC = () => {
 	}, []);
 	return (
 		<div className="lg:w-[65vw] w-[90vw] mx-auto flex flex-col md:gap-24 gap-12 py-8">
-			{technicalProjectsData.map((project: TechnicalProject) =>
+			{technicalProjectsData.map((project: TechnicalProject) => (
 				<TechnicalProjectCard
 					projectId={project._id}
 					projectTitle={project.projectName}
 					projectTags={project.tags}
 					projectDescription={project.description}
 					projectImg={project.demoSrc}
-				/>)}
+				/>
+			))}
 		</div>
 	);
 };
 
 export default ProjectList;
-

@@ -1,3 +1,4 @@
+"use client"
 import {
 	Card,
 	CardBody,
@@ -5,10 +6,11 @@ import {
 	CardHeader,
 	Image,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
-
+import { Skeleton } from "@nextui-org/react";
 const ExecuteBoard = () => {
+	const [imageLoading, setImageLoading] = useState(false);
 	return (
 		<section className="relative bg-ft-primary-yellow-500 bg-cover bg-center h-full px-10 pt-6">
 			<main className="mx-side-margin-mobile mt-0 md:mx-side-margin">
@@ -16,11 +18,16 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
+								<Skeleton isLoaded={imageLoading} className="rounded-lg">
 								<Image
 									alt="Card background"
 									className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-									src={"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/MinhPhan-EVP.png"}
+									src={
+										"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/MinhPhan-EVP.png"
+									}
+									onLoad={() => setImageLoading(true)}
 								/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible pt-4 text-center">
@@ -35,11 +42,14 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
+								<Skeleton isLoaded={imageLoading} className="rounded-lg">
 								<Image
 									alt="Card background"
 									className="object-cover rounded-2xl bg-transparent text-center team-card-image"
 									src="ExecuteBoard/President.svg"
+									onLoad={() => setImageLoading(true)}
 								/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible pt-4 text-center">
@@ -54,11 +64,14 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
+								<Skeleton isLoaded={imageLoading} className="rounded-lg">
 								<Image
 									alt="Card background"
 									className="object-cover rounded-2xl bg-transparent text-center team-card-image"
 									src="ExecuteBoard/VicePresident.svg"
+									onLoad={() => setImageLoading(true)}
 								/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible pt-4 text-center">
@@ -73,11 +86,16 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex-col items-center">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible">
+								<Skeleton isLoaded={imageLoading} className="rounded-lg">
 								<Image
 									alt="Card background"
 									className="object-cover rounded-2xl bg-transparent text-center team-card-image scale-110"
-									src={"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png"}
+									src={
+										"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png"
+									}
+									onLoad={() => setImageLoading(true)}
 								/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible pt-4 text-center">
@@ -100,7 +118,7 @@ const ExecuteBoard = () => {
 						mi. Duis porttitor lectus quis turpis malesuada, eu
 						luctus elit dignissim.
 					</p>
-					<div className="mx-auto w-[214px] h-[2px] bg-black mt-6"/>
+					<div className="mx-auto w-[214px] h-[2px] bg-black mt-6" />
 				</div>
 			</main>
 		</section>
