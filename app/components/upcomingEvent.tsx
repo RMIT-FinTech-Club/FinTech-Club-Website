@@ -23,7 +23,7 @@ const settings = {
 
 const UpcomingEvent = () => {
 	return (
-		<section className="flex flex-col px-side-margin gap-5 w-screen py-2 lg:py-12">
+		<section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
 			<h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
 				PROJECTS
 			</h1>
