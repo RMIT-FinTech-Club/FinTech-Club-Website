@@ -28,22 +28,7 @@ const ProjectPage = () => {
 						<div className="md:mt-0 mt-4 md:order-last">
 							<h2 className="text-[#2C305F]">Academic Projects</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
-								Lorem, ipsum dolor sit amet consectetur
-								adipisicing elit. Repudiandae iure deserunt
-								consequatur! Repudiandae consequuntur corrupti
-								harum nemo ipsa cumque facere! Deleniti nisi
-								repudiandae nemo vitae cumque, quasi sit
-								adipisci consequatur? Dignissimos fugit fuga
-								recusandae labore at eum illum deserunt, nobis
-								quibusdam reiciendis, ullam laboriosam amet
-								facilis magni aliquid aperiam molestiae expedita
-								laudantium ipsa atque quasi? Deleniti officia
-								iusto asperiores reiciendis. Et blanditiis odit
-								eius eum ratione obcaecati similique quas vel
-								reiciendis. Facere ullam totam quidem dolorum
-								maiores dicta, consequuntur modi. Autem magnam
-								aspernatur itaque nam beatae, odio amet nihil
-								sint!
+								Academic projects are the backbone of our organization. These include research, framework creation, or peer-to-peer discussions. Despite their small-scale nature, they contribute to our organization’s enhanced understanding of the interplay between Finance, Business, Tech, and Digital Disruption.
 							</p>
 							<div className="flex flex-col items-center mt-6">
 								<Button
@@ -67,22 +52,7 @@ const ProjectPage = () => {
 								Technical Projects
 							</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
-								Lorem, ipsum dolor sit amet consectetur
-								adipisicing elit. Repudiandae iure deserunt
-								consequatur! Repudiandae consequuntur corrupti
-								harum nemo ipsa cumque facere! Deleniti nisi
-								repudiandae nemo vitae cumque, quasi sit
-								adipisci consequatur? Dignissimos fugit fuga
-								recusandae labore at eum illum deserunt, nobis
-								quibusdam reiciendis, ullam laboriosam amet
-								facilis magni aliquid aperiam molestiae expedita
-								laudantium ipsa atque quasi? Deleniti officia
-								iusto asperiores reiciendis. Et blanditiis odit
-								eius eum ratione obcaecati similique quas vel
-								reiciendis. Facere ullam totam quidem dolorum
-								maiores dicta, consequuntur modi. Autem magnam
-								aspernatur itaque nam beatae, odio amet nihil
-								sint!
+								Aimed at enhancing and refining members’ technical expertise, including coding, website & app development, analysis, data visualization, design-thinking, etc. These projects provide members with a medium of practice and creativity, and an opportunity to implement class-learnt theories to real-life initiatives.
 							</p>
 							<div className="flex flex-col items-center mt-6">
 								<Button
@@ -104,22 +74,7 @@ const ProjectPage = () => {
 						<div className="md:mt-0 mt-4 md:order-last">
 							<h2 className="text-[#2C305F]">Media Projects</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
-								Lorem, ipsum dolor sit amet consectetur
-								adipisicing elit. Repudiandae iure deserunt
-								consequatur! Repudiandae consequuntur corrupti
-								harum nemo ipsa cumque facere! Deleniti nisi
-								repudiandae nemo vitae cumque, quasi sit
-								adipisci consequatur? Dignissimos fugit fuga
-								recusandae labore at eum illum deserunt, nobis
-								quibusdam reiciendis, ullam laboriosam amet
-								facilis magni aliquid aperiam molestiae expedita
-								laudantium ipsa atque quasi? Deleniti officia
-								iusto asperiores reiciendis. Et blanditiis odit
-								eius eum ratione obcaecati similique quas vel
-								reiciendis. Facere ullam totam quidem dolorum
-								maiores dicta, consequuntur modi. Autem magnam
-								aspernatur itaque nam beatae, odio amet nihil
-								sint!
+								Aimed at enhancing our members’ marketing skills and bolstering FinTech Club’s image, media projects facilitate the creation of informative, educational and trendy content that delights our club FanPage’s 5000+ people audience. These could include short-form reels, medium and long-form videos, infographics, magazines, and podcasts.
 							</p>
 							<div className="flex flex-col items-center mt-6">
 								<Button
@@ -143,22 +98,8 @@ const ProjectPage = () => {
 								Event Projects
 							</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
-								Lorem, ipsum dolor sit amet consectetur
-								adipisicing elit. Repudiandae iure deserunt
-								consequatur! Repudiandae consequuntur corrupti
-								harum nemo ipsa cumque facere! Deleniti nisi
-								repudiandae nemo vitae cumque, quasi sit
-								adipisci consequatur? Dignissimos fugit fuga
-								recusandae labore at eum illum deserunt, nobis
-								quibusdam reiciendis, ullam laboriosam amet
-								facilis magni aliquid aperiam molestiae expedita
-								laudantium ipsa atque quasi? Deleniti officia
-								iusto asperiores reiciendis. Et blanditiis odit
-								eius eum ratione obcaecati similique quas vel
-								reiciendis. Facere ullam totam quidem dolorum
-								maiores dicta, consequuntur modi. Autem magnam
-								aspernatur itaque nam beatae, odio amet nihil
-								sint!
+								Events are larger-scale/larger-impact projects of FinTech Club. These include open academic forums, public workshops, a national competition, etc. Events spread the image and ideas of FinTech Club, whilst engaging the community to this exciting field!
+
 							</p>
 							<div className="flex flex-col items-center mt-6">
 								<Button
