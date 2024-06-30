@@ -19,7 +19,7 @@ const upCommingEventsSchema = new mongoose.Schema(
             required: [true, "Please provide event registration link"],
         },
         dateTime: {
-            type: String,
+            type: Date,
             required: [true, "Please provide event date time"],
         },
         time: {

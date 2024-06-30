@@ -29,7 +29,7 @@ const Navbar = () => {
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
 				<div className="logo relative w-14 h-14">
 					<img
-						src="/navbar/ft_logo.png"
+						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png"
 						alt="FinTech Club Logo"
 						className="absolute top-0 left-1/2 transform -translate-x-1/2"
 					/>

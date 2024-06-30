@@ -1,10 +1,10 @@
-import ProjectGeneralPage from "./components/projectGeneralPage"
+import ProjectGeneralPage from "./components/projectGeneralPage";
 
-const AcademicProject = () => { 
-  return (
-    <>
-    <ProjectGeneralPage />
-    </>
-  )
-}
-export default AcademicProject
+const AcademicProject = () => {
+	return (
+		<>
+			<ProjectGeneralPage />
+		</>
+	);
+};
+export default AcademicProject;

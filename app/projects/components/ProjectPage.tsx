@@ -26,7 +26,9 @@ const ProjectPage = () => {
 							alt=""
 						/>
 						<div className="md:mt-0 mt-4 md:order-last">
-							<h2 className="text-[#2C305F]">Academic Projects</h2>
+							<h2 className="text-[#2C305F]">
+								Academic Projects
+							</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
 								Academic projects are the backbone of our organization. These include research, framework creation, or peer-to-peer discussions. Despite their small-scale nature, they contribute to our organization’s enhanced understanding of the interplay between Finance, Business, Tech, and Digital Disruption.
 							</p>

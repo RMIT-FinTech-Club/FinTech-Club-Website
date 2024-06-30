@@ -54,19 +54,19 @@ const HerosectionVid: React.FC = () => {
 				}}
 				className="absolute bottom-16 right-0 left-0"
 			>
-				<motion.h2
+				{/* <motion.h2
 					className="text-center w-full text-ft-text-bright"
 					variants={textAppearVariants}
 				>
 					Welcome to FinTech
-				</motion.h2>
+				</motion.h2> */}
 				<br />
 
 				<motion.p
 					className="text-center w-full text-ft-text-bright"
 					variants={textAppearVariants}
 				>
-					April 1st 2025, Report
+					Swipe down to discover more
 				</motion.p>
 
 				<motion.div variants={textAppearVariants}>

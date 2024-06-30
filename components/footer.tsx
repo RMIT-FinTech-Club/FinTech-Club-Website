@@ -23,7 +23,7 @@ const Footer = () => {
 						</div>
 						<img
 							className="w-[125px] h-[125px] mt-[20px] mb-[40px] md:mb-0"
-							src="/whiteLogo.png"
+							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/whiteLogo.png"
 							alt="White logo"
 						/>
 					</div>
