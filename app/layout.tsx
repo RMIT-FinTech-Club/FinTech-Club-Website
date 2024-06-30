@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 	},
 	description: siteConfig.description,
 	icons: {
-		icon: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/favicon.png",
-		shortcut: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/favicon.png",
+		icon: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png",
+		shortcut: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png",
 		apple: "/apple-touch-icon.png",
 	},
 };
