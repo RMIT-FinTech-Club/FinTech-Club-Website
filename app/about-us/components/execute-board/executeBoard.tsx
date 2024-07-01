@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
 	Card,
 	CardBody,
@@ -18,15 +18,18 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
-								<Skeleton isLoaded={imageLoading} className="rounded-lg">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-									src={
-										"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/MinhPhan-EVP.png"
-									}
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-lg"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-2xl bg-transparent text-center team-card-image"
+										src={
+											"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/MinhPhan-EVP.png"
+										}
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -42,13 +45,16 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
-								<Skeleton isLoaded={imageLoading} className="rounded-lg">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-									src="ExecuteBoard/President.svg"
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-lg"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-2xl bg-transparent text-center team-card-image"
+										src="ExecuteBoard/President.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -64,13 +70,16 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
-								<Skeleton isLoaded={imageLoading} className="rounded-lg">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-									src="ExecuteBoard/VicePresident.svg"
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-lg"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-2xl bg-transparent text-center team-card-image"
+										src="ExecuteBoard/VicePresident.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -86,15 +95,18 @@ const ExecuteBoard = () => {
 					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
 						<CardHeader className="py-2 px-5 flex-col items-center">
 							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible">
-								<Skeleton isLoaded={imageLoading} className="rounded-lg">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-2xl bg-transparent text-center team-card-image scale-110"
-									src={
-										"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png"
-									}
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-lg"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-2xl bg-transparent text-center team-card-image scale-110"
+										src={
+											"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png"
+										}
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>

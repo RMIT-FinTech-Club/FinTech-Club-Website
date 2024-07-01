@@ -5,6 +5,7 @@ import EventDescription from "./components/EventDescription";
 import EventGallery from "./components/EventGallery";
 import Sponsor from "./components/Sponsor";
 import { useState, useEffect } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface EventProject {
 	_id: string;
@@ -46,7 +47,11 @@ const EventDetailPage: React.FC = () => {
 				console.log(error);
 			});
 	}, []);
-	return (
+	return isLoading ? (
+		<section className="flex flex-col items-center h-screen w-full justify-center">
+			<ClipLoader color="#2C305F" size={60}/>
+		</section>
+	) : (
 		<div className="w-100 h-auto">
 			<EventDescription
 				eventName={projectData.eventName}

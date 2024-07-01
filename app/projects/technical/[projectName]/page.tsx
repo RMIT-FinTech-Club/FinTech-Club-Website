@@ -5,6 +5,7 @@ import ProjectTeam from "./components/projectTeam";
 import TechStack from "./components/techStack";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 // import { TechnicalProject } from "../components/TechnicalProject";
 
 interface TeamMember {
@@ -59,7 +60,11 @@ const TechnicalProjectPage: React.FC<{ params: { id: string } }> = ({
 				console.log(error);
 			});
 	}, [params.id]);
-	return (
+	return isLoading ? (
+		<section className="flex flex-col items-center h-screen w-full justify-center">
+			<ClipLoader color="#2C305F" size={60}/>
+		</section>
+	) : (
 		<div className="w-100 h-auto bg-ft-background">
 			<ProjectDescription
 				projectName={projectData.projectName}

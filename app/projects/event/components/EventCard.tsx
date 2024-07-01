@@ -2,6 +2,7 @@
 import { IconArrowsMaximize } from "@tabler/icons-react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface EventProject {
 	_id: string;
@@ -30,7 +31,11 @@ const EventCard = () => {
 				console.log(error);
 			});
 	}, []);
-	return (
+	return isLoading ? (
+		<section className="flex flex-col items-center h-screen w-full justify-center">
+			<ClipLoader color="#2C305F" size={60}/>
+		</section>
+	) : (
 		<>
 			<div className="w-full my-14">
 				<h1 className="text-center text-[#dbb969]">Past Events</h1>
