@@ -57,7 +57,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 	};
 	return isLoading ? (
 		<section className="flex flex-col items-center h-screen w-full justify-center">
-			<ClipLoader color="#2C305F" />
+			<ClipLoader color="#2C305F" size={60}/>
 		</section>
 	) : (
 		<div className="flex flex-col my-16 mx-side-margin-mobile md:mx-side-margin">
@@ -81,14 +81,16 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 			<div className="hidden lg:flex lg:justify-center lg:my-4">
 				{/* Below Decoration for Event Date and Location */}
 				<Skeleton isLoaded={imageLoading}>
-				<Image
-					loading="lazy"
-					src="/ThreeBearsAndDecorationsForEventDateAndLocation.svg"
-					alt="below decoration for event date and location"
-					width={1000}
-					height={250}
-					onLoad={() => {setImageLoading(true)}}
-				/>
+					<Image
+						loading="lazy"
+						src="/ThreeBearsAndDecorationsForEventDateAndLocation.svg"
+						alt="below decoration for event date and location"
+						width={1000}
+						height={250}
+						onLoad={() => {
+							setImageLoading(true);
+						}}
+					/>
 				</Skeleton>
 			</div>
 			<div>

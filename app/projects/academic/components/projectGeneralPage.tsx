@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown, Filter } from "tabler-icons-react";
 import ProjectCardSkeletonLoading from "./ProjectCardSkeletonLoading";
+import ClipLoader from "react-spinners/ClipLoader";
 
 type ResearchPaper = {
 	_id: string;
@@ -21,18 +22,30 @@ type ResearchPaper = {
 	fileURL: string;
 };
 
-async function getProjects() {
-	return axios
-		.get("/api/projects")
-		.then((res) => res.data)
-		.catch((err) => {
-			throw new Error(
-				err.response?.data?.message || "Failed to fetch projects",
-			);
-		});
-}
+// async function getProjects() {
+// 	return axios
+// 		.get("/api/projects")
+// 		.then((res) => res.data)
+// 		.catch((err) => {
+// 			throw new Error(
+// 				err.response?.data?.message || "Failed to fetch projects",
+// 			);
+// 		});
+// }
 
 export default function ProjectGeneralPage() {
+	const [isLoading, setIsLoading] = useState(true);
+	async function getProjects() {
+		return axios
+			.get("/api/projects")
+			.then((res) => res.data)
+			.catch((err) => {
+				throw new Error(
+					err.response?.data?.message || "Failed to fetch projects",
+				);
+			});
+	}
+
 	const { data: projects, isFetching: isProjectFetching } = useQuery<
 		ResearchPaper[]
 	>({
@@ -40,7 +53,7 @@ export default function ProjectGeneralPage() {
 		queryFn: getProjects,
 	});
 
-	return (
+	return projects ? (
 		<>
 			<div className="w-full md:px-16 px-5">
 				<div className="grid grid-cols-12 md:py-10 items-center">
@@ -74,6 +87,10 @@ export default function ProjectGeneralPage() {
 				</div>
 			</div>
 		</>
+	) : (
+		<section className="flex flex-col items-center h-screen w-full justify-center">
+			<ClipLoader color="#2C305F" size={60}/>
+		</section>
 	);
 }
 

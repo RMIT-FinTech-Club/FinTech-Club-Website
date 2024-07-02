@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
 	Card,
 	CardBody,
@@ -13,8 +13,8 @@ import "./styles.css";
 const ManagementBoard = () => {
 	const [imageLoading, setImageLoading] = useState(false);
 	return (
-		<section className=" relative bg-ft-primary-yellow-500 bg-cover bg-center h-full md:pt-32 md:pb-20">
-			<main className="mx-side-margin-mobile mt-0 md:mx-side-margin">
+		<section className=" relative bg-ft-primary-yellow-500 h-fit md:pt-32 md:pb-20 md:px-0 px-3">
+			<main>
 				<div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:mb-10">
 					<Card
 						className="py-4 -px-2 bg-transparent"
@@ -23,13 +23,16 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Skeleton isLoaded={imageLoading} className="rounded-full">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/VicePresident.svg"
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/VicePresident.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -49,13 +52,16 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex-col items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Skeleton isLoaded={imageLoading} className="rounded-full">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/President.svg"
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/President.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -75,13 +81,16 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex-col items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Skeleton isLoaded={imageLoading} className="rounded-full">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/CFO.svg"
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/CFO.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -101,14 +110,17 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Skeleton isLoaded={imageLoading} className="rounded-full">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/VicePresident.svg"
-									shadow="none"
-									onLoad={() => setImageLoading(true)}
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/VicePresident.svg"
+										shadow="none"
+										onLoad={() => setImageLoading(true)}
+									/>
 								</Skeleton>
 							</div>
 						</CardHeader>
@@ -122,7 +134,7 @@ const ManagementBoard = () => {
 						</CardBody>
 					</Card>
 				</div>
-				<div className=" grid gap-2 md:grid-cols-1 md:gap-2 text-center pt-14 px-32">
+				<div className=" grid gap-2 md:grid-cols-1 md:gap-2 text-center py-9">
 					<h4 className=" text-ft-primary-blue-500">
 						MEET OUR <strong>MANAGEMENT BOARD</strong>
 					</h4>

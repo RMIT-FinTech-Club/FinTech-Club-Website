@@ -5,9 +5,11 @@ import HerosectionVid from "./components/heroVideoSection";
 import IntroSection from "./components/intro";
 import UpcomingEvent from "./components/upcomingEvent";
 import Member from "./components/member";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const Home = () => {
 	return (
 		<div className="flex min-h-screen flex-col justify-center items-center">
+			<SpeedInsights />
 			<HerosectionVid />
 			<HeroSection />
 			<IntroSection />

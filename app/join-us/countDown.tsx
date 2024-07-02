@@ -1,6 +1,6 @@
 "use client";
+import { motion } from "framer-motion";
 import { fontMono } from "@/config/fonts";
-import { Button } from "@nextui-org/react";
 import { useEffect, useRef, useState } from "react";
 import "../../styles/join-us/countDown.css";
 
@@ -50,7 +50,7 @@ export default function CountDown() {
 		<div className="countDown-container h-screen w-screen flex justify-center items-start">
 			<div className="w-full z-10 mt-16 absolute flex flex-col justify-center items-center">
 				<h1
-					className={`mb-7 md:mb-14 text-[#F9FAFB] text-3xl md:text-6xl font-bold ${fontMono.style}`}
+					className={`mb-7 md:mb-14 text-[#F9FAFB] text-2xl md:text-6xl font-bold ${fontMono.style}`}
 				>
 					Count down to form closed
 				</h1>
@@ -98,12 +98,14 @@ export default function CountDown() {
 						</section>
 					</div>
 				</div>
-				<Button
-					className="text-2xl md:text-5xl px-5 md:px-10 py-6 md:py-12 bg-[#0D1742] border-2 md:border-4 border-white text-[#F9FAFB]"
-					size="lg"
+				<motion.div
+					className="text-2xl md:text-5xl px-5 md:px-10 py-6 md:py-12 bg-[#0D1742] border-2 md:border-4  rounded-3xl border-white text-[#F9FAFB] cursor-pointer"
+					whileHover={{ scale: 1.2 }}
+					whileTap={{ scale: 0.9 }}
+					transition={{ type: "spring", stiffness: 400, damping: 17 }}
 				>
 					Join us here
-				</Button>
+				</motion.div>
 			</div>
 		</div>
 	);
