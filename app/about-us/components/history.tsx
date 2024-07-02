@@ -2,9 +2,6 @@
 import { fontSans } from "@/config/fonts";
 import { motion } from "framer-motion";
 import {
-	Modal,
-	ModalBody,
-	ModalContent,
 	useDisclosure,
 } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -47,18 +44,9 @@ const historyData = [
 ];
 
 export default function HistorySection() {
-	const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
 	const [emblaHorizontalRef, emblaHorizontalApi] = useEmblaCarousel({
 		loop: false,
 		dragFree: true,
-	});
-
-	const [emblaVerticalRef, emblaVerticalApi] = useEmblaCarousel({
-		loop: false,
-		dragFree: true,
-		axis: "y",
-		align: "center",
 	});
 
 	const [centerSlideIndex, setCenterSlideIndex] = useState<number>(0);
@@ -75,22 +63,11 @@ export default function HistorySection() {
 				emblaHorizontalApi.off("select", onSelect);
 			};
 		}
-
-		if (emblaVerticalApi) {
-			const onSelect = () => {
-				const selectedIndex = emblaVerticalApi.selectedScrollSnap();
-				setCenterSlideIndex(selectedIndex);
-			};
-
-			emblaVerticalApi.on("select", onSelect);
-			return () => {
-				emblaVerticalApi.off("select", onSelect);
-			};
-		}
-	}, [emblaHorizontalApi, emblaVerticalApi]);
+	}, [emblaHorizontalApi]);
 
 	useEffect(() => {
-		console.log(historyData[centerSlideIndex]);
+		const screenWidth = window.innerWidth;
+		console.log((screenWidth/2) - 53);
 	}, [centerSlideIndex]);
 
 	return (
@@ -131,7 +108,7 @@ export default function HistorySection() {
 					</div>
 
 					<div
-						className={`mx-auto mt-[16px] md:px-0 px-20 text-black text-lg ${fontSans.style} tracking-wide text-center`}
+						className={`mx-auto mt-[16px] md:px-0 px-11 text-black text-lg ${fontSans.style} tracking-wide text-center`}
 					>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 						Cras viverra viverra eros, eu euismod arcu dignissim
@@ -145,37 +122,38 @@ export default function HistorySection() {
 			</div>
 
 			{/* desktop version */}
-			<div className="hidden items-center w-full mt-8 md:grid md:grid-cols-7 grid-cols-1 overflow-hidden">
+			<div className="items-center w-full md:mt-8 md:grid md:grid-cols-7 grid-cols-1 overflow-hidden my-auto">
 				<img
 					alt="fintech mascot"
 					className="md:block hidden md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 				<div
-					className={`mt-[93px] mb-[77px] md:w-[0px] w-auto md:h-[300px] h-[100px] grid grid-cols-3 col-span-5 z-0 md: mx-auto ${centerSlideIndex === 0
+					className={`mt-[93px] mb-[77px] md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${centerSlideIndex === 0
 						? "pr-96"
 						: centerSlideIndex === historyData.length - 1
-							? "pl-96"
-							: "px-96"
+							? " md:pr-0"
+							: " md:pr-0"
 						}`}
 					ref={emblaHorizontalRef}
 				>
-					<div className="flex justify-between items-center">
+					<div className="flex items-center col-start-2">
 						{historyData.map((data, index) => {
 							return (
 								<div
 									key={data.year}
-									className={`flex shrink-0 md:ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${index === centerSlideIndex
-										? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-36 h-36"
-										: "sm:inline-flex hidden lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] md:h-[120px]"
-										} `}
+									className={`flex shrink-0 md:ml-[50px] ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${index === centerSlideIndex
+										? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-48 h-48"
+										: "sm:inline-flex lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] w-[100px] md:h-[120px] h-[100px]"
+										}
+										${index === historyData.length - 1 ? "" : ""} `}
 									// On click for changing the year
 									onClick={() => emblaHorizontalApi?.scrollTo(index)}
 								>
 									<div
 										className={`mx-auto font-extrabold ${index === centerSlideIndex
 											? "text-orange-300 md:text-4xl lg:text-5xl text-3xl"
-											: "sm:inline-flex hidden text-slate-700 md:text-3xl lg:text-4xl"
+											: "sm:inline-flex text-slate-700 md:text-3xl lg:text-4xl"
 											} ${fontSans.style}`}
 									>
 										{data.year}
@@ -192,88 +170,6 @@ export default function HistorySection() {
 				/>
 			</div>
 
-			{/* mobile version */}
-			<div className="md:hidden items-center w-full grid grid-cols-3">
-				<img
-					alt=""
-					className="w-[250px] md:hidden h-auto transform -scale-x-100 rotate-[-24.12deg]"
-					src="https://ik.imagekit.io/mbrrji2rk/3164276f-e306-432f-ab36-b9a275439de7.jpg?updatedAt=1713241506012"
-				/>
-				<div className="mt-[93px] mb-[77px] md:w-[0px] w-auto md:h-[300px] h-[100px] md:mx-auto">
-					<div className="flex w-auto justify-between items-center">
-						<div className="flex shrink-0 md:ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 mx-auto w-32 h-32">
-							<div
-								className={`mx-auto font-extrabold text-orange-300 md:text-4xl lg:text-5xl text-3xl ${fontSans.style}`}
-							>
-								2022
-							</div>
-						</div>
-					</div>
-				</div>
-				<img
-					alt=""
-					className="w-[250px] md:hidden h-auto transform rotate-[24.12deg] justify-self-end"
-					src="https://ik.imagekit.io/mbrrji2rk/3164276f-e306-432f-ab36-b9a275439de7.jpg?updatedAt=1713241506012"
-				/>
-			</div>
-
-			<div
-				className="md:hidden mx-auto text-center font-semibold text-2xl text-[#5E5E92]"
-				onClick={onOpen}
-				onKeyUp={(e) => {
-					if (e.key === "Enter" || e.key === " ") {
-						onOpen();
-					}
-				}}
-			>
-				change
-			</div>
-
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-				<ModalContent>
-					{() => (
-						<>
-							<ModalBody>
-								<div
-									className={`w-auto h-[850px] grid grid-rows-5 z-0 m-auto ${centerSlideIndex === 0
-										? ""
-										: centerSlideIndex ===
-											historyData.length - 1
-											? "pl-96"
-											: "px-96"
-										}`}
-									ref={emblaVerticalRef}
-								>
-									<div className="flex flex-col justify-between items-center gap-40 justify-self-center">
-										{historyData.map((data, index) => {
-											return (
-												<div
-													key={data.year}
-													className={`flex shrink-0 md:ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${index ===
-														centerSlideIndex
-														? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-52 h-52"
-														: "sm:inline-flex w-44 h-44 bg-amber-200"
-														} `}
-												>
-													<div
-														className={`mx-auto font-semibold ${index ===
-															centerSlideIndex
-															? "text-orange-300 text-5xl"
-															: "sm:inline-flex text-slate-700 text-4xl"
-															} ${fontSans.style}`}
-													>
-														{data.year}
-													</div>
-												</div>
-											);
-										})}
-									</div>
-								</div>
-							</ModalBody>
-						</>
-					)}
-				</ModalContent>
-			</Modal>
 			<div className="grid md:grid-cols-3 justify-between md:h-96 mb-56 items-center w-full">
 				<img
 					alt=""
@@ -292,26 +188,14 @@ export default function HistorySection() {
 				>
 					<div className="md:col-span-1 col-span-full">
 						<div
-							className={`md:mb-[26px] mb-2 mx-auto text-center text-slate-400 md:text-5xl text-3xl md:px-0 font-semibold ${fontSans.style}`}
+							className={`md:mb-[26px] mb-2 mx-auto text-pretty text-center text-slate-400 md:text-5xl text-3xl font-semibold ${fontSans.style}`}
 						>
 							{/* Develop and Grow */}
 							{historyData[centerSlideIndex].title}
 						</div>
 						<div
-							className={`mx-auto text-justify text-black text-lg font-medium ${fontSans.style} tracking-wide md:p-0 px-14`}
+							className={`mx-auto text-justify text-black text-lg font-medium ${fontSans.style} md:p-0 px-11`}
 						>
-							{/* Richard McClintock, a Latin professor at Hampden-Sydney
-						College in Virginia, looked up one of the more obscure
-						Latin words, consectetur, from a Lorem Ipsum passage,
-						and going through the cites of the word in classical
-						literature, discovered the undoubtable source. Lorem
-						Ipsum comes from sections 1.10.32 and 1.10.33 of "de
-						Finibus Bonorum et Malorum" (The Extremes of Good and
-						Evil) by Cicero, written in 45 BC. This book is a
-						treatise on the theory of ethics, very popular during
-						the Renaissance. The first line of Lorem Ipsum, "Lorem
-						ipsum dolor sit amet..", comes from a line in section
-						1.10.32. */}
 							{historyData[centerSlideIndex].content}
 						</div>
 					</div>

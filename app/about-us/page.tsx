@@ -7,7 +7,7 @@ import Members from "./components/members";
 import VisionMission from "./components/vision-mission/missionVision";
 const AboutUs = () => {
 	return (
-		<div>
+		<>
 			<HistorySection />
 			<VisionMission />
 			<FinTechInTheEyes />
@@ -15,7 +15,7 @@ const AboutUs = () => {
 			<ManagementBoard />
 			<Members />
 			{/* <CoreValue /> */}
-		</div>
+		</>
 	);
 };
 
