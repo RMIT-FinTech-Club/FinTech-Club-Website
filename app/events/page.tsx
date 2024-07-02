@@ -63,7 +63,7 @@ const Events = () => {
 		</section>
 	) : (
 		<section className="relative">
-			<div className=" flex flex-col gap-8 items-center justify-center w-full md:w-screen">
+			<div className=" flex flex-col gap-8 items-center justify-center px-side-margin-mobile w-full mb-10 md:w-screen">
 				<HeaderTitlePage text="Our Upcoming Events" />
 
 				{eventsData?.map((event) => (

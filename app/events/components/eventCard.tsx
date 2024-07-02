@@ -89,7 +89,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 						strokeWidth={2}
 						style={{ color: primaryYellow }}
 					/>
-					{displayDate ? event.time : event.dateTime}
+					{displayDate ? event.time : event.fullDate}
 				</div>
 				<div className="flex items-center text-md">
 					{event.type === "Offline" ? (

@@ -31,6 +31,10 @@
     }
 }
 
+.decoration {
+  display: hidden;
+}
+
 .date {
   display: none;
 }
@@ -65,5 +69,11 @@
     }
     .date {
       display: block
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .decoration {
+      display: absolute
     }
   }
