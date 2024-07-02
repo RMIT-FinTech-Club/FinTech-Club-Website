@@ -10,12 +10,11 @@ interface RecapGalleryProps {
 
 const EventCard: React.FC<{ url: string }> = ({ url }) => {
 	return (
-		< img
+		<img
 			className="w-full h-full rounded-2xl object-cover"
 			src={url}
 			alt="Recap Photo"
 		/>
-
 	);
 };
 
@@ -45,7 +44,9 @@ const NextArrow: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
 	);
 };
 
-const EventGallery: React.FC<{ eventRecapURLs: string[] }> = ({ eventRecapURLs }) => {
+const EventGallery: React.FC<{ eventRecapURLs: string[] }> = ({
+	eventRecapURLs,
+}) => {
 	const settings = {
 		autoplay: true,
 		autoplaySpeed: 3000,

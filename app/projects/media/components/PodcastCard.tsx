@@ -46,4 +46,3 @@ const PodcastCard: React.FC = () => {
 };
 
 export default PodcastCard;
-

@@ -9,16 +9,21 @@ const IntroSection = () => {
 			<div className="flex flex-col md:w-1/3 justify-center gap-4">
 				<div className="flex flex-col justify-center text-center gap-3">
 					<h4 className="text-ft-primary-yellow">80+</h4>
-					<h5 className="text-ft-primary-blue">Active Club Members</h5>
+					<h5 className="text-ft-primary-blue">
+						Active Club Members
+					</h5>
 					<p>
-						From diverse backgrounds, be it Finance, Business, Technology, Marketing, Design Studies, and more.
+						From diverse backgrounds, be it Finance, Business,
+						Technology, Marketing, Design Studies, and more.
 					</p>
 				</div>
 				<div className="flex flex-col justify-center text-center gap-3">
 					<h4 className="text-ft-primary-yellow">50+</h4>
 					<h5 className="text-ft-primary-blue">Club Projects</h5>
 					<p>
-						Include academic events, competitions, workshops, training, creative & media projects, technical development, and organizational projects.
+						Include academic events, competitions, workshops,
+						training, creative & media projects, technical
+						development, and organizational projects.
 					</p>
 				</div>
 			</div>
@@ -31,16 +36,21 @@ const IntroSection = () => {
 			<div className="flex flex-col md:w-1/3 justify-center gap-4">
 				<div className="flex flex-col justify-center text-center gap-3">
 					<h4 className="text-ft-primary-yellow">60+</h4>
-					<h5 className="text-ft-primary-blue">Academic & Industry Partners</h5>
+					<h5 className="text-ft-primary-blue">
+						Academic & Industry Partners
+					</h5>
 					<p>
-						In broad industries such as Traditional FinTech, Web3 FinTech, Finance, Technology, Healthcare, Venture Capital, etc.
+						In broad industries such as Traditional FinTech, Web3
+						FinTech, Finance, Technology, Healthcare, Venture
+						Capital, etc.
 					</p>
 				</div>
 				<div className="flex flex-col justify-center text-center gap-3">
 					<h4 className="text-ft-primary-yellow">5000+</h4>
 					<h5 className="text-ft-primary-blue">FanPage followings</h5>
 					<p>
-						A testament to FinTech Club’s prominence in the RMIT Community and beyond!
+						A testament to FinTech Club’s prominence in the RMIT
+						Community and beyond!
 					</p>
 				</div>
 			</div>

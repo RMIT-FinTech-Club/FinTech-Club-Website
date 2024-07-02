@@ -26,7 +26,9 @@ const ProjectPage = () => {
 							alt=""
 						/>
 						<div className="md:mt-0 mt-4 md:order-last">
-							<h2 className="text-[#2C305F]">Academic Projects</h2>
+							<h2 className="text-[#2C305F]">
+								Academic Projects
+							</h2>
 							<p className="md:mt-9 mt-4 text-balance text-justify">
 								Lorem, ipsum dolor sit amet consectetur
 								adipisicing elit. Repudiandae iure deserunt

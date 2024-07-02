@@ -14,33 +14,27 @@ export async function middleware(request: NextRequest) {
 
   // Verify token
   const secretKey = await new TextEncoder().encode(process.env.JWT_SECRET);
-  const { payload } = await jwtVerify(token, secretKey, {
-    algorithms: ["HS256"],
-  });
-  // console.log(payload)
-
-  // Redirect logic based on the path and token presence
-  if (isPublicPath && token) {
-
-    // If trying to access a public path with a token, redirect to the home page
-    return NextResponse.redirect(new URL('/', request.nextUrl))
-  }
-
-  if (payload.role !== "admin") {
+  if (token) {
+    const secretKey = await new TextEncoder().encode(process.env.JWT_SECRET);
+    const { payload } = await jwtVerify(token, secretKey, {
+      algorithms: ["HS256"],
+    });
+    // If trying to access a protected path without a token, redirect to the login page
+    if (payload?.role !== "admin") {
+      return NextResponse.redirect(new URL('/login', request.nextUrl))
+    }
+  } else {
+    // If trying to access a public path with an invalid token, redirect to login page
     return NextResponse.redirect(new URL('/login', request.nextUrl))
   }
-
-  // If trying to access a protected path without a token, redirect to the login page
-  if (!token) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl))
-  }
-
 }
 
 // It specifies the paths for which this middleware should be executed. 
 export const config = {
     matcher: [
-      '/login',
-      '/signup',
+      '/cms',
+      '/api/research',
+      '/api/v1/podcast',
+      '/podcast-form'
     ]
 }

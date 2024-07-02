@@ -1,11 +1,12 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
+import axios from "axios";
 
 const settings = {
 	className: "w-full",
@@ -22,8 +23,22 @@ const settings = {
 };
 
 const UpcomingEvent = () => {
+	const [upcomingEvents, setUpcomingEvents] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get("/api/v1/events/upcomming")
+			.then((response) => {
+				setUpcomingEvents(response.data.data);
+				console.log(response.data.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
+
 	return (
-		<section className="flex flex-col px-side-margin gap-5 w-screen py-2 lg:py-12">
+		<section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
 			<h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
 				PROJECTS
 			</h1>
@@ -36,19 +51,22 @@ const UpcomingEvent = () => {
 					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow  md:w-full" />
 				</section>
 				<Slider {...settings}>
-					{Array.from({ length: 5 }).map((_, index) => {
+					{upcomingEvents.map((event, index) => {
+						// Split date to get month and day
+						const dateMonth = (event["date"] as string).split(" ");
+
 						return (
 							<CardEvent
-								key={index}
-								eventName="Fintech Forum 2024"
-								location="Ohio"
-								title="Lorem Ispum"
+								key={event["_id"]}
+								eventName="No name"
+								location={event["location"]}
+								title={event["description"]}
 								detail="Lorem ipsum dolor sit amet, consectetur ..."
-								timeOnHour=" 24:00 - 25:00"
-								timeOnDay="30"
-								timeOnMonth="Feb"
+								timeOnHour={event["time"]}
+								timeOnDay={dateMonth[0]}
+								timeOnMonth={dateMonth[1]}
 							/>
-						)
+						);
 					})}
 				</Slider>
 			</section>

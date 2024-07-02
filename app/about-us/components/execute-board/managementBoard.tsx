@@ -1,14 +1,17 @@
+"use client";
 import {
 	Card,
 	CardBody,
 	CardFooter,
 	CardHeader,
 	Image,
+	Skeleton,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
 const ManagementBoard = () => {
+	const [imageLoading, setImageLoading] = useState(false);
 	return (
 		<section className=" relative bg-ft-primary-yellow-500 h-fit md:pt-32 md:pb-20 md:px-0 px-3">
 			<main>
@@ -20,11 +23,17 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/VicePresident.svg"
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/VicePresident.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible py-2 text-center">
@@ -43,11 +52,17 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex-col items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/President.svg"
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/President.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible py-2 text-center">
@@ -66,11 +81,17 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex-col items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/CFO.svg"
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/CFO.svg"
+										onLoad={() => setImageLoading(true)}
+									/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible py-2 text-center">
@@ -89,12 +110,18 @@ const ManagementBoard = () => {
 					>
 						<CardHeader className="py-2 px-5 flex flex-col justify-items-center">
 							<div className="bg-white rounded-full relative overflow-visible">
-								<Image
-									alt="Card background"
-									className="object-cover rounded-full bg-transparent management-card-image"
-									src="ExecuteBoard/VicePresident.svg"
-									shadow="none"
-								/>
+								<Skeleton
+									isLoaded={imageLoading}
+									className="rounded-full"
+								>
+									<Image
+										alt="Card background"
+										className="object-cover rounded-full bg-transparent management-card-image"
+										src="ExecuteBoard/VicePresident.svg"
+										shadow="none"
+										onLoad={() => setImageLoading(true)}
+									/>
+								</Skeleton>
 							</div>
 						</CardHeader>
 						<CardBody className="overflow-visible py-2 text-center">
@@ -117,7 +144,7 @@ const ManagementBoard = () => {
 						mi. Duis porttitor lectus quis turpis malesuada, eu
 						luctus elit dignissim.
 					</p>
-					<div className="mx-auto w-[214px] h-[2px] bg-black mt-6"/>
+					<div className="mx-auto w-[214px] h-[2px] bg-black mt-6" />
 				</div>
 			</main>
 		</section>

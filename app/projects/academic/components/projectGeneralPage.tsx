@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown, Filter } from "tabler-icons-react";
 import ProjectCardSkeletonLoading from "./ProjectCardSkeletonLoading";
+import ClipLoader from "react-spinners/ClipLoader";
 
 type ResearchPaper = {
 	_id: string;
@@ -21,24 +22,38 @@ type ResearchPaper = {
 	fileURL: string;
 };
 
-async function getProjects() {
-	return axios
-		.get("/api/projects")
-		.then((res) => res.data)
-		.catch((err) => {
-			throw new Error(
-				err.response?.data?.message || "Failed to fetch projects",
-			);
-		});
-}
+// async function getProjects() {
+// 	return axios
+// 		.get("/api/projects")
+// 		.then((res) => res.data)
+// 		.catch((err) => {
+// 			throw new Error(
+// 				err.response?.data?.message || "Failed to fetch projects",
+// 			);
+// 		});
+// }
 
 export default function ProjectGeneralPage() {
-	const { data: projects, isFetching: isProjectFetching } = useQuery<ResearchPaper[]>({
+	const [isLoading, setIsLoading] = useState(true);
+	async function getProjects() {
+		return axios
+			.get("/api/projects")
+			.then((res) => res.data)
+			.catch((err) => {
+				throw new Error(
+					err.response?.data?.message || "Failed to fetch projects",
+				);
+			});
+	}
+
+	const { data: projects, isFetching: isProjectFetching } = useQuery<
+		ResearchPaper[]
+	>({
 		queryKey: ["projects"],
 		queryFn: getProjects,
 	});
 
-	return (
+	return projects ? (
 		<>
 			<div className="w-full md:px-16 px-5">
 				<div className="grid grid-cols-12 md:py-10 items-center">
@@ -56,18 +71,26 @@ export default function ProjectGeneralPage() {
 				</div>
 				<div className="grid md:grid-cols-3 md:mt-10 md:mb-44 w-full md:px-0">
 					<div className="flex flex-col gap-4 items-center md:col-span-2 md:order-first order-last">
-						{isProjectFetching
-							? <ProjectCardSkeletonLoading />
-							: projects?.map((project: ResearchPaper) => (
-								<ProjectGeneralCard key={project._id} project={project} />
+						{isProjectFetching ? (
+							<ProjectCardSkeletonLoading />
+						) : (
+							projects?.map((project: ResearchPaper) => (
+								<ProjectGeneralCard
+									key={project._id}
+									project={project}
+								/>
 							))
-						}
+						)}
 					</div>
 					{/* projects filter  */}
 					<ProjectsFilter />
 				</div>
 			</div>
 		</>
+	) : (
+		<section className="flex flex-col items-center h-screen w-full justify-center">
+			<ClipLoader color="#2C305F" size={60}/>
+		</section>
 	);
 }
 
@@ -190,10 +213,11 @@ function ProjectsFilter() {
 					</div>
 					{isOpen && (
 						<div
-							className={`origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-transform transform ${isOpen
-								? "scale-100 opacity-100"
-								: "scale-95 opacity-0"
-								}`}
+							className={`origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-transform transform ${
+								isOpen
+									? "scale-100 opacity-100"
+									: "scale-95 opacity-0"
+							}`}
 							role="menu"
 							aria-orientation="vertical"
 							aria-labelledby="options-menu"
@@ -232,20 +256,22 @@ function ProjectsFilter() {
 					<button
 						type="button"
 						onClick={() => toggleFilter("research")}
-						className={`mr-2 md:px-4 px-2 py-[4px] md:py-2 rounded-lg ${filters.research
-							? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
-							: "bg-gray-200 text-black"
-							}`}
+						className={`mr-2 md:px-4 px-2 py-[4px] md:py-2 rounded-lg ${
+							filters.research
+								? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
+								: "bg-gray-200 text-black"
+						}`}
 					>
 						Research
 					</button>
 					<button
 						type="button"
 						onClick={() => toggleFilter("podcast")}
-						className={`md:px-4 px-2 py-[4px] md:py-2  rounded-lg ${filters.podcast
-							? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
-							: "bg-gray-200 text-black"
-							}`}
+						className={`md:px-4 px-2 py-[4px] md:py-2  rounded-lg ${
+							filters.podcast
+								? "md:bg-ft-primary-yellow bg-ft-primary-blue text-white"
+								: "bg-gray-200 text-black"
+						}`}
 					>
 						Article
 					</button>
@@ -258,10 +284,11 @@ function ProjectsFilter() {
 						<button
 							type="button"
 							onClick={() => toggleFilter("newest")}
-							className={`mr-2 w-6 h-6 rounded ${filters.newest
-								? "bg-ft-primary-yellow"
-								: "bg-gray-200"
-								}`}
+							className={`mr-2 w-6 h-6 rounded ${
+								filters.newest
+									? "bg-ft-primary-yellow"
+									: "bg-gray-200"
+							}`}
 						>
 							{filters.newest && "✓"}
 						</button>
@@ -271,10 +298,11 @@ function ProjectsFilter() {
 						<button
 							type="button"
 							onClick={() => toggleFilter("oldest")}
-							className={`mr-2 w-6 h-6 rounded ${filters.oldest
-								? "bg-ft-primary-yellow"
-								: "bg-gray-200"
-								}`}
+							className={`mr-2 w-6 h-6 rounded ${
+								filters.oldest
+									? "bg-ft-primary-yellow"
+									: "bg-gray-200"
+							}`}
 						>
 							{filters.oldest && "✓"}
 						</button>

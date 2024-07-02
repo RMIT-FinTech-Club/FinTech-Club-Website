@@ -4,6 +4,7 @@ import TechnicalProject from "./TechnicalProject";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TechnicalProjectCard from "./TechnicalProjectCard";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const ProjectList: React.FC = () => {
 	const [technicalProjectsData, setTechnicalProjectsData] = useState([]);
@@ -23,19 +24,23 @@ const ProjectList: React.FC = () => {
 				console.log(error);
 			});
 	}, []);
-	return (
+	return isLoading ? (
+		<section className="flex flex-col items-center h-screen w-full justify-center">
+			<ClipLoader color="#2C305F" size={60}/>
+		</section>
+	) : (
 		<div className="lg:w-[65vw] w-[90vw] mx-auto flex flex-col md:gap-24 gap-12 py-8">
-			{technicalProjectsData.map((project: TechnicalProject) =>
+			{technicalProjectsData.map((project: TechnicalProject) => (
 				<TechnicalProjectCard
 					projectId={project._id}
 					projectTitle={project.projectName}
 					projectTags={project.tags}
 					projectDescription={project.description}
 					projectImg={project.demoSrc}
-				/>)}
+				/>
+			))}
 		</div>
 	);
 };
 
 export default ProjectList;
-
