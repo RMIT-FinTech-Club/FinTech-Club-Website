@@ -50,7 +50,7 @@ export default function CountDown() {
 		<div className="countDown-container h-screen w-screen flex justify-center items-start">
 			<div className="w-full z-10 mt-16 absolute flex flex-col justify-center items-center">
 				<h1
-					className={`mb-7 md:mb-14 text-[#F9FAFB] text-3xl md:text-6xl font-bold ${fontMono.style}`}
+					className={`mb-7 md:mb-14 text-[#F9FAFB] text-2xl md:text-6xl font-bold ${fontMono.style}`}
 				>
 					Count down to form closed
 				</h1>
