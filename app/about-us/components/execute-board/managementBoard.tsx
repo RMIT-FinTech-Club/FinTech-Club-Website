@@ -13,8 +13,8 @@ import "./styles.css";
 const ManagementBoard = () => {
 	const [imageLoading, setImageLoading] = useState(false);
 	return (
-		<section className=" relative bg-ft-primary-yellow-500 bg-cover bg-center h-full md:pt-32 md:pb-20">
-			<main className="mx-side-margin-mobile mt-0 md:mx-side-margin">
+		<section className=" relative bg-ft-primary-yellow-500 h-fit md:pt-32 md:pb-20 md:px-0 px-3">
+			<main>
 				<div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:mb-10">
 					<Card
 						className="py-4 -px-2 bg-transparent"
@@ -134,7 +134,7 @@ const ManagementBoard = () => {
 						</CardBody>
 					</Card>
 				</div>
-				<div className=" grid gap-2 md:grid-cols-1 md:gap-2 text-center pt-14 px-32">
+				<div className=" grid gap-2 md:grid-cols-1 md:gap-2 text-center py-9">
 					<h4 className=" text-ft-primary-blue-500">
 						MEET OUR <strong>MANAGEMENT BOARD</strong>
 					</h4>

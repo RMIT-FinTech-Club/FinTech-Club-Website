@@ -1,126 +1,52 @@
-"use client";
+'use client'
 import {
 	Card,
 	CardBody,
-	CardFooter,
 	CardHeader,
 	Image,
 } from "@nextui-org/react";
-import React, { useState } from "react";
+import React from "react";
 import "./styles.css";
-import { Skeleton } from "@nextui-org/react";
+
+type ExecutiveBoardCardProps = {
+	image: string;
+	name: string;
+	position: string;
+}
+
+const executiveBoardData = [
+	{
+		image: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/MinhPhan-EVP.png",
+		name: "PHAN NHAT MINH",
+		position: "External Vice President",
+	},
+	{
+		image: "ExecuteBoard/President.svg",
+		name: "NGUYEN MANH DUNG",
+		position: "President",
+	},
+	{
+		image: "ExecuteBoard/VicePresident.svg",
+		name: "HOANG NGUYEN NHAT MINH",
+		position: "Internal Vice President",
+	},
+	{
+		image: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png",
+		name: "DANG TRAN TIEN",
+		position: "Chief of Finance Officer",
+	}
+]
+
 const ExecuteBoard = () => {
-	const [imageLoading, setImageLoading] = useState(false);
 	return (
-		<section className="relative bg-ft-primary-yellow-500 bg-cover bg-center h-full px-10 pt-6">
+		<section className="relative bg-ft-primary-yellow-500 bg-cover bg-center pt-6">
 			<main className="mx-side-margin-mobile mt-0 md:mx-side-margin">
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-4 my-16">
-					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
-						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
-							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
-								<Skeleton
-									isLoaded={imageLoading}
-									className="rounded-lg"
-								>
-									<Image
-										alt="Card background"
-										className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-										src={
-											"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/MinhPhan-EVP.png"
-										}
-										onLoad={() => setImageLoading(true)}
-									/>
-								</Skeleton>
-							</div>
-						</CardHeader>
-						<CardBody className="overflow-visible pt-4 text-center">
-							<h6 className="font-bold text-3xl text-ft-primary-blue-500">
-								PHAN NHAT MINH
-							</h6>
-							<h6 className="text-lg text-ft-primary-blue-500">
-								External Vice President
-							</h6>
-						</CardBody>
-					</Card>
-					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
-						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
-							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
-								<Skeleton
-									isLoaded={imageLoading}
-									className="rounded-lg"
-								>
-									<Image
-										alt="Card background"
-										className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-										src="ExecuteBoard/President.svg"
-										onLoad={() => setImageLoading(true)}
-									/>
-								</Skeleton>
-							</div>
-						</CardHeader>
-						<CardBody className="overflow-visible pt-4 text-center">
-							<h6 className="font-bold text-3xl text-ft-primary-blue-500">
-								NGUYEN MANH DUNG
-							</h6>
-							<h6 className="text-lg text-ft-primary-blue-500">
-								President
-							</h6>
-						</CardBody>
-					</Card>
-					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
-						<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
-							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
-								<Skeleton
-									isLoaded={imageLoading}
-									className="rounded-lg"
-								>
-									<Image
-										alt="Card background"
-										className="object-cover rounded-2xl bg-transparent text-center team-card-image"
-										src="ExecuteBoard/VicePresident.svg"
-										onLoad={() => setImageLoading(true)}
-									/>
-								</Skeleton>
-							</div>
-						</CardHeader>
-						<CardBody className="overflow-visible pt-4 text-center">
-							<h6 className="font-bold text-3xl text-ft-primary-blue-500">
-								HOANG NGUYEN NHAT MINH
-							</h6>
-							<h6 className="text-lg text-ft-primary-blue-500">
-								Internal Vice President
-							</h6>
-						</CardBody>
-					</Card>
-					<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
-						<CardHeader className="py-2 px-5 flex-col items-center">
-							<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible">
-								<Skeleton
-									isLoaded={imageLoading}
-									className="rounded-lg"
-								>
-									<Image
-										alt="Card background"
-										className="object-cover rounded-2xl bg-transparent text-center team-card-image scale-110"
-										src={
-											"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png"
-										}
-										onLoad={() => setImageLoading(true)}
-									/>
-								</Skeleton>
-							</div>
-						</CardHeader>
-						<CardBody className="overflow-visible pt-4 text-center">
-							<h6 className="font-bold text-3xl text-ft-primary-blue-500">
-								DANG TRAN TIEN
-							</h6>
-							<h6 className="text-lg text-ft-primary-blue-500">
-								Chief of Finance Officer
-							</h6>
-						</CardBody>
-					</Card>
+				<div className="grid grid-cols-1 gap-8 md:grid-cols-4 my-16 md:px-0 px-10">
+					{executiveBoardData.map((item: ExecutiveBoardCardProps) => (
+						<ExecutiveBoardCard  {...item} />
+					))}
 				</div>
-				<div className="grid gap-2 md:grid-cols-1 md:gap-2 text-center pt-14 px-32">
+				<div className="grid gap-2 md:grid-cols-1 md:gap-2 text-center pb-9">
 					<h4 className="text-ft-primary-blue-500">
 						MEET OUR <strong>EXECUTIVE BOARD</strong>
 					</h4>
@@ -136,5 +62,31 @@ const ExecuteBoard = () => {
 		</section>
 	);
 };
+
+function ExecutiveBoardCard({ image, name, position }: ExecutiveBoardCardProps) {
+	return (
+		<>
+			<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
+				<CardHeader className="py-2 px-5 flex flex-col justify-items-center ">
+					<div className="bg-ft-primary-yellow-500 rounded-2xl relative overflow-visible h-full">
+						<Image
+							alt="Card background"
+							className="object-cover rounded-2xl bg-transparent text-center team-card-image"
+							src={image}
+						/>
+					</div>
+				</CardHeader>
+				<CardBody className="overflow-visible pt-4 text-center">
+					<h6 className="font-bold md:text-3xl text-2xl text-ft-primary-blue-500">
+						{name}
+					</h6>
+					<h6 className="text-lg text-ft-primary-blue-500">
+						{position}
+					</h6>
+				</CardBody>
+			</Card>
+		</>
+	)
+}
 
 export default ExecuteBoard;
