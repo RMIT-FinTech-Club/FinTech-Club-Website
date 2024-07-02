@@ -3,7 +3,7 @@ import React from "react";
 
 const PodcastDescription = () => {
 	return (
-		<div className="w-full lg:w-3/5 px-4 relative overflow-auto h-48 lg:h-auto">
+		<div className="w-full px-4 relative overflow-auto h-48 lg:h-auto">
 			<p className="text-ft-text-bright py-2 text-center lg:text-start">
 				Lorem ipsum dolor sit amet consectetur. Pretium commodo amet vel
 				sit pharetra facilisis viverra. Ipsum viverra vitae elit tellus
