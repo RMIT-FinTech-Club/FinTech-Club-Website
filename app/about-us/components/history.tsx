@@ -1,9 +1,7 @@
 "use client";
 import { fontSans } from "@/config/fonts";
 import { motion } from "framer-motion";
-import {
-	useDisclosure,
-} from "@nextui-org/react";
+import { useDisclosure } from "@nextui-org/react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useState } from "react";
 import "../../../styles/about-us/historyPage.css";
@@ -71,12 +69,12 @@ export default function HistorySection() {
 
 	useEffect(() => {
 		const screenWidth = window.innerWidth;
-		console.log((screenWidth/2) - 53);
+		console.log(screenWidth / 2 - 53);
 	}, [centerSlideIndex]);
 
 	return (
 		<>
-			<div className="mx-auto w-full md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-8 justify-center items-center gap-4">
+			<div className="mx-auto w-screen md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-8 justify-center items-center gap-4">
 				<div className="md:inline-flex sm:hidden md:w-full md:h-1 bg-black flex items-center col-span-1">
 					<div className="md:inline-block sm:hidden md:w-6 md:h-6 bg-black rounded-full" />
 				</div>
@@ -133,12 +131,13 @@ export default function HistorySection() {
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 				<div
-					className={`mt-[93px] mb-[77px] md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${centerSlideIndex === 0
-						? "pr-96"
-						: centerSlideIndex === historyData.length - 1
-							? " md:pr-0"
-							: " md:pr-0"
-						}`}
+					className={`mt-[93px] mb-[77px] md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${
+						centerSlideIndex === 0
+							? "pr-96"
+							: centerSlideIndex === historyData.length - 1
+								? " md:pr-0"
+								: " md:pr-0"
+					}`}
 					ref={emblaHorizontalRef}
 				>
 					<div className="flex items-center col-start-2">
@@ -146,10 +145,11 @@ export default function HistorySection() {
 							return (
 								<div
 									key={data.year}
-									className={`flex shrink-0 md:ml-[50px] ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${index === centerSlideIndex
-										? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-48 h-48"
-										: "sm:inline-flex lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] w-[100px] md:h-[120px] h-[100px]"
-										}
+									className={`flex shrink-0 md:ml-[50px] ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${
+										index === centerSlideIndex
+											? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-48 h-48"
+											: "sm:inline-flex lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] w-[100px] md:h-[120px] h-[100px]"
+									}
 										${index === historyData.length - 1 ? "" : ""} `}
 									// On click for changing the year
 									onClick={() =>
@@ -157,10 +157,11 @@ export default function HistorySection() {
 									}
 								>
 									<div
-										className={`mx-auto font-extrabold ${index === centerSlideIndex
-											? "text-orange-300 md:text-4xl lg:text-5xl text-3xl"
-											: "sm:inline-flex text-slate-700 md:text-3xl lg:text-4xl"
-											} ${fontSans.style}`}
+										className={`mx-auto font-extrabold ${
+											index === centerSlideIndex
+												? "text-orange-300 md:text-4xl lg:text-5xl text-3xl"
+												: "sm:inline-flex text-slate-700 md:text-3xl lg:text-4xl"
+										} ${fontSans.style}`}
 									>
 										{data.year}
 									</div>

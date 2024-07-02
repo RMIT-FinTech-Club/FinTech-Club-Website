@@ -187,7 +187,7 @@ const Department = () => {
 
 	return (
 		<section
-			className="relative flex flex-col-reverse w-full max-h-fit justify-center items-center lg:flex-row bg-ft-primary-blue-900"
+			className="relative flex flex-col-reverse w-sceen max-h-fit px-side-margin-mobile md:px-20 justify-center items-center lg:flex-row bg-ft-primary-blue-900"
 			style={{
 				backgroundImage: department.background
 					? department.background
@@ -200,7 +200,7 @@ const Department = () => {
 
 			{/* Mobile buttons bar */}
 			<div className="flex md:hidden justify-center items-center w-full p-2">
-				<Slider {...settings} className="w-80" >
+				<Slider {...settings} className="w-80">
 					<Button
 						onClick={() => setDepartment(departments.technology)}
 						variant="light"
@@ -216,7 +216,9 @@ const Department = () => {
 						BUSINESS
 					</Button>
 					<Button
-						onClick={() => setDepartment(departments.humanResources)}
+						onClick={() =>
+							setDepartment(departments.humanResources)
+						}
 						variant="light"
 						className="text-white bg-transparent hover:bg-ft-primary-yellow-500 rounded-[10px] transition duration-300"
 					>
@@ -279,7 +281,7 @@ const Department = () => {
 
 			{/* Department right image */}
 			<div className="relative w-full h-full md:h-5/6 md:w-2/5 flex justify-center items-center">
-			<Image
+				<Image
 					className="object-cover md:h-full md:w-full"
 					src={department.imageUrl
 						.replace("url('", "")

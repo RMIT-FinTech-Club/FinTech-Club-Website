@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Button } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import React from "react";

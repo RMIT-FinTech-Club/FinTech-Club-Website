@@ -62,7 +62,7 @@ const Members: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col gap-8 relative items-center justify-center overflow-x-hidden xl:overflow-x-visible overflow-y-hidden xl:overflow-y-visible mt-10">
+		<div className="flex flex-col gap-8 relative w-screen items-center justify-center overflow-x-hidden xl:overflow-x-visible overflow-y-hidden xl:overflow-y-visible mt-10">
 			<HeaderTitlePage text="members" />
 			<div className="flex justify-center">
 				<MemberFilter
