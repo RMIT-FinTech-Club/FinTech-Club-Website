@@ -53,11 +53,11 @@ const EventDetailPage: React.FC = () => {
 		</section>
 	) : (
 		<div className="w-100 h-auto">
-			<EventDescription
+			{/* <EventDescription
 				eventName={projectData.eventName}
 				eventDescription={projectData.description}
 				eventThumbnail={projectData.eventThumbnail}
-			/>
+			/> */}
 			<Sponsor />
 			<EventGallery eventRecapURLs={projectData.recapURLs} />
 		</div>

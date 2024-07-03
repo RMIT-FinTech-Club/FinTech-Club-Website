@@ -13,14 +13,11 @@ import {
     IconVolume,
     IconVolumeOff,
 } from "@tabler/icons-react";
-import { color } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import SpeedSelector from "./audioSpeedSelector";
-import FollowUs from "./followUs";
-import PodcastTitle from "./podcastTitle";
-import { set } from "mongoose";
 
-const PodcastMainFunction = () => {
+const PodcastMainFunction: React.FC<{audioFileUrl: string, title: string}> = ({audioFileUrl, title}) => {
+    console.log(`check titlte: ${title}`)
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
     const [isVolumeOn, setIsVolumeOn] = useState<boolean>(true);
@@ -38,7 +35,7 @@ const PodcastMainFunction = () => {
         const audioElement = audioRef.current;
         if (audioElement) {
             audioElement.volume = 1;
-            audioElement.src = "/audio/audio1.mp3";
+            audioElement.src = `${audioFileUrl}`;
             audioElement.addEventListener("timeupdate", onTimeUpdate);
             audioElement.addEventListener("loadedmetadata", () => {
                 setDuration(audioElement.duration || 0);
@@ -119,7 +116,9 @@ const PodcastMainFunction = () => {
         <div className="my-4 w-full">
             <audio ref={audioRef} controls={false} />
             <div className="lg:flex lg:flex-col">
-                <PodcastTitle />
+               <div className="py-2 lg:py-4">
+			<h5 className="text-ft-text-bright">{title}</h5>
+		</div>
                 <Slider
                     minValue={0}
                     value={currentProgress}
