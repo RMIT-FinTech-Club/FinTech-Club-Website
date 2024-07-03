@@ -33,11 +33,9 @@ const ProjectDetail = () => {
 							rel="noreferrer"
 						>
 							<Button
-								auto
-								icon={<IconLink stroke={2} />}
-								className="py-4 items-center justify-center flex-grow my-auto px-6 rounded-full drop-shadow-lg text-xl text-white duration-300"
-								style={{ backgroundColor: "#DCB968", hover: { backgroundColor: "#b89e52" }, active: { backgroundColor: "#a2864a" } }}
+								className="bg-[#DCB968] py-4 items-center justify-center flex-grow my-auto px-6 rounded-full drop-shadow-lg text-xl text-white duration-300 hover:bg-[#b89e52] active:bg-[#a2864a]"
 							>
+								<IconLink stroke={2} />
 								Full access
 							</Button>
 						</Link>

@@ -18,9 +18,9 @@ interface Author {
 	title: string;
 	profileImageUrl: string;
 }
-export async function GET(){
+export async function GET() {
 	try {
-	const podcasts = await Podcast.find({});
+		const podcasts = await Podcast.find({});
 		return NextResponse.json(podcasts, { status: 200 });
 	} catch (error: any) {
 		console.error(error.message);
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
 		checkInstanceOfFile(audioFile, "authorFile");
 		checkInstanceOfFile(thumnailFile, "thumnailFile");
 
-		authors = authors.map((item) => JSON.parse(item));
+		// authors = authors.map((item) => JSON.parse(item));
 
 		if (
 			checkFile(audioFile) &&

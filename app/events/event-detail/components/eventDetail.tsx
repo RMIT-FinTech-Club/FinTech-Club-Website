@@ -9,34 +9,41 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 	return (
 		<div className="items-center w-full h-full lg:mx-side-margin 2xl:mx-16 my-4 2xl:my-8 justify-between">
 			<section
-				className="rounded-2xl w-full h-[50vh] px-5 relative flex flex-col md:flex-row justify-center md:justify-between items-center"
+				className="relative flex md:flex-row justify-center md:justify-between items-center w-full h-[50vh] rounded-2xl bg-cover bg-center"
 				style={{
 					backgroundImage: `url(${event?.imageUrl})`,
-					backgroundRepeat: `no-repeat`,
-					backgroundSize: `cover`,
-					backgroundClip: `border-box`,
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: 'cover',
+					backgroundClip: 'border-box',
 				}}
 			>
-				<div className="backdrop-blur-sm py-1 2xl:py-4">
-					<h5 className="font-black text-white my-5 py-1 2xl:py-2 text-center lg:text-left">
+				<div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/20 rounded-2xl" />
+				<div className="relative z-10 w-full p-6 text-white">
+					<h1 className="text-3xl md:text-5xl font-black my-5">
+						{/* {event?.name} */} Hackathon Hack-A-Venture
+					</h1>
+					<h5 className="text-lg md:text-2xl mb-3">
 						{event?.description}
-						{/* change to {event?.name} later because there is not any data...*/}
 					</h5>
-					<p className="text-white text-4xl py-1 2xl:py-2 text-justify">
-						{event?.description}
-					</p>
+					<div className="flex flex-row gap-4 mt-4 max-md:justify-center">
+						<a href={event?.registrationLink}>
+							<Button size="lg" color="secondary" variant="solid" className="bg-yellow-500 hover:bg-yellow-600 text-black">
+								Join Event
+							</Button>
+						</a>
+						<a href={event?.registrationLink}>
+							<Button size="lg" color="secondary" variant="solid" className="bg-blue-500 hover:bg-blue-600 text-white">
+								Event Booklet
+							</Button>
+						</a>
+					</div>
 				</div>
-				<div className="backdrop-blur-sm place-items-cente rounded-xl ">
-					<Button size="lg" color="primary" variant="solid">
-						<a href={event?.registrationLink}>Join event</a>
-					</Button>
-				</div>
-				{/* <img
-          className="block w-full object-cover rounded-xl"
-          src={event?.imageUrl}
-          alt={event?.description}
-        /> */}
 			</section>
+
+
+
+
+
 			<section className="w-full my-10 flex md:flex-row flex-col">
 				{/* Left content */}
 				<div className="w-full md:h-100 flex flex-col justify-between md:w-2/5 md:px-4">
