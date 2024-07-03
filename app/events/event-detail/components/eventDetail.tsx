@@ -7,7 +7,7 @@ import { CSSProperties } from "react";
 const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 	console.log(event);
 	return (
-		<div className="items-center w-full h-full md:mx-side-margin 2xl:mx-16 my-4 2xl:my-8 justify-between">
+		<div className="items-center w-full h-full lg:mx-side-margin 2xl:mx-16 my-4 2xl:my-8 justify-between">
 			<section
 				className="rounded-2xl w-full h-[50vh] px-5 relative flex flex-col md:flex-row justify-center md:justify-between items-center"
 				style={{
@@ -37,37 +37,37 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
           alt={event?.description}
         /> */}
 			</section>
-			<section className="my-10 flex md:flex-row flex-col">
+			<section className="w-full my-10 flex md:flex-row flex-col">
 				{/* Left content */}
-				<div className="w-full md:w-2/3 px-4">
+				<div className="w-full md:h-100 flex flex-col justify-between md:w-2/5 md:px-4">
 					<div className="my-1 py-1 2xl:my-2 2xl:py-4">
-						<h5 className="font-black py-1 2xl:py-2 text-center lg:text-left">
+						<h6 className="font-black py-1 2xl:py-2 text-left">
 							Description
-						</h5>
+						</h6>
 						<p className="py-1 2xl:py-2 text-justify">
 							{event?.description}
 						</p>
 					</div>
 					<div className="my-1 py-1 2xl:my-2 2xl:py-4">
-						<h5 className="font-black py-1 2xl:py-2 text-center lg:text-left">
+						<h6 className="font-black py-1 2xl:py-2 text-left">
 							Date
-						</h5>
+						</h6>
 						<p className="py-1 2xl:py-2 text-justify">
 							{event?.dateTime}
 						</p>
 					</div>
 					<div className="my-1 py-1 2xl:my-2 2xl:py-4">
-						<h5 className="font-black py-1 2xl:py-2 text-center lg:text-left">
+						<h6 className="font-black py-1 2xl:py-2 text-left">
 							Link
-						</h5>
+						</h6>
 						<p className="py-1 2xl:py-2 text-justify">
 							{event?.registrationLink}
 						</p>
 					</div>
 				</div>
 				{/* Right content */}
-				<div className="py-1 md:px-4 2xl:py-4 md:w-1/3">
-					<h5 className="font-black py-1 2xl:py-2 mb-4 text-center lg:text-left">
+				<div className="py-4 lg:py-1 md:px-4 2xl:py-4 md:w-3/5">
+					<h5 className="font-black py-1 2xl:py-2 mb-4 text-left">
 						Event Location
 					</h5>
 					<iframe

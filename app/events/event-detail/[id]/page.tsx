@@ -61,7 +61,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 		</section>
 	) : (
 		<div className="flex flex-col my-16 mx-side-margin-mobile md:mx-side-margin">
-			<div className="lg:flex">
+			<div className="w-full lg:flex">
 				{/* <EventDetail event={eventData} /> */}
 				<EventDetail event={data!} />
 				{/* <EventLocation /> */}
