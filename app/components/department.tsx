@@ -153,7 +153,7 @@ const Department = () => {
 			description:
 				"The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, hold meetings to evaluate working processes, propose toolkits, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
 			imageUrl: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg')",
-			background: "none",
+			background: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg')",
 		},
 		humanResources: {
 			name: "HR DEPARTMENT",
@@ -194,6 +194,7 @@ const Department = () => {
 					: "none",
 				backgroundSize: "cover",
 				backgroundPosition: "center",
+				backgroundOrigin: "blur"
 			}}
 		>
 			{/* Department background image */}
