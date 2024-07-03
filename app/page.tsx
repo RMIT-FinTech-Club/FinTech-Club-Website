@@ -8,7 +8,7 @@ import Member from "./components/member";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const Home = () => {
 	return (
-		<div className="flex min-h-screen flex-col justify-center items-center">
+		<div className="flex min-h-screen flex-col justify-center items-center px-side-margin-mobile">
 			<SpeedInsights />
 			<HerosectionVid />
 			<HeroSection />

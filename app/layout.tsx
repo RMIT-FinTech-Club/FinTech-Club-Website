@@ -1,3 +1,4 @@
+import "@styles/globals.css";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
@@ -5,7 +6,6 @@ import { siteConfig } from "@/config/site";
 import { Link } from "@nextui-org/link";
 import "react-toastify/dist/ReactToastify.css";
 import "@styles/carousel.css";
-import "@styles/globals.css";
 import clsx from "clsx";
 import type { Metadata } from "next";
 // import { Navbar } from "@/components/navbar";
@@ -44,7 +44,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html className="overflow-x-hidden" lang="en" suppressHydrationWarning>
 			<head />
 			<body
 				className={clsx(
@@ -70,7 +70,9 @@ export default function RootLayout({
 					/>
 					<div className="relative items-center flex flex-col h-screen">
 						{<Navbar />}
-						<main className="min-w-full flex-grow">{children}</main>
+						<main className="flex-grow overflow-x-clip">
+							{children}
+						</main>
 						{<Footer />}
 					</div>
 				</Providers>

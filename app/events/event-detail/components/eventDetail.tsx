@@ -60,7 +60,7 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 							Date
 						</h6>
 						<p className="py-1 2xl:py-2 text-justify">
-							{event?.dateTime}
+							{event?.fullDate}
 						</p>
 					</div>
 					<div className="my-1 py-1 2xl:my-2 2xl:py-4">

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+
+    html, body {
+        font-family: 'Poppins', system-ui, sans-serif;
+    }
+
     p {
         @apply text-ft-body-1;
     }
@@ -24,6 +29,10 @@
     h6 {
         @apply text-ft-heading-6;
     }
+}
+
+.decoration {
+  display: hidden;
 }
 
 .date {
@@ -60,5 +69,11 @@
     }
     .date {
       display: block
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .decoration {
+      display: absolute
     }
   }

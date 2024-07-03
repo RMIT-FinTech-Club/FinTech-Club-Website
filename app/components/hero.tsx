@@ -24,7 +24,7 @@ const bottomImages = [
 
 const HeroSection = () => {
 	return (
-		<div className="w-11/12 py-3 lg:py-12 flex-col justify-start items-center gap-6 md:gap-12 flex">
+		<div className="w-screen lg:py-12 flex-col justify-start items-center p-side-margin-mobile md:p-20 gap-6 md:gap-12 flex">
 			<div className=" justify-start items-center gap-6 md:gap-[60px] flex flex-col md:flex-row ">
 				<div className="w-full md:w-1/2 h-full">
 					<h5>What is</h5>

@@ -34,12 +34,20 @@ const HeaderTitlePage: React.FC<HeaderTitlePageProps> = ({ text }) => {
 	const [first, middle, last] = displayText.split(" ");
 
 	return (
-		<section className="flex justify-center my-4 mx-auto items-center max-w-4xl w-full">
+		<section className="flex justify-center my-4 mx-auto items-center max-w-4xl w-full relative">
 			<div className="relative flex items-center w-full lg:w-auto">
 				{/* Left arrow */}
 				<div className="bg-ft-primary-blue-500 h-1 w-full lg:w-64 lg:block hidden" />
 				<div className="absolute bg-ft-primary-blue-500 h-4 w-full lg:w-4 rounded-full lg:block hidden" />
 			</div>
+			<img
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/events/balloon-bottom-left.svg"
+				className="decoration absolute md:hidden bottom-0 left-0 h-12 w-12"
+			/>
+			<img
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/events/balloon-bottom-left.svg"
+				className="decoration absolute md:hidden top-0 right-0 h-12 w-12"
+			/>
 			{/* Text with spacing adjustments */}
 			<div
 				className={`flex mx-8 xl:mx-16 text-center w-full ${
@@ -47,14 +55,14 @@ const HeaderTitlePage: React.FC<HeaderTitlePageProps> = ({ text }) => {
 				}`}
 			>
 				{windowWidth < 640 ? (
-					<>
-						<h5 className="uppercase text-ft-primary-yellow font-bold flex-grow text-lg">
+					<section className="relative">
+						<h5 className="uppercase text-ft-primary-yellow font-bold flex-grow leading-10">
 							upcoming
 						</h5>
-						<h5 className="uppercase text-ft-primary-blue-500 font-bold flex-grow text-lg">
+						<h5 className="uppercase text-ft-primary-blue-500 font-bold flex-grow ">
 							events
 						</h5>
-					</>
+					</section>
 				) : (
 					<>
 						<h5 className="uppercase text-ft-primary-blue-500 font-bold flex-grow px-2">

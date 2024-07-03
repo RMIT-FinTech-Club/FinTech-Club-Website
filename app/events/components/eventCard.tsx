@@ -75,9 +75,9 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 			{/* Event Info */}
 			<div className="date row-span-1 col-span-3 flex flex-col justify-between p-2 md:p-4 py-auto space-y-2 text-center align-middle mb-2">
 				<div className="flex flex-col align-middle h-full">
-					<h2 className="my-auto text-ft-primary-yellow-500">
+					<p className="my-auto text-ft-primary-yellow-500 text-2xl font-bold">
 						{event.date}
-					</h2>
+					</p>
 				</div>
 			</div>
 			<div className="row-span-1 col-span-9 md:col-span-6 flex flex-col justify-between p-1 md:p-4 space-y-2 mb-2">

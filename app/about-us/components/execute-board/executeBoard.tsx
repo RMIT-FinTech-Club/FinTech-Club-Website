@@ -1,10 +1,5 @@
-'use client'
-import {
-	Card,
-	CardBody,
-	CardHeader,
-	Image,
-} from "@nextui-org/react";
+"use client";
+import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import React from "react";
 import "./styles.css";
 
@@ -12,7 +7,7 @@ type ExecutiveBoardCardProps = {
 	image: string;
 	name: string;
 	position: string;
-}
+};
 
 const executiveBoardData = [
 	{
@@ -34,8 +29,8 @@ const executiveBoardData = [
 		image: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Tien+Dang.png",
 		name: "DANG TRAN TIEN",
 		position: "Chief of Finance Officer",
-	}
-]
+	},
+];
 
 const ExecuteBoard = () => {
 	return (
@@ -43,7 +38,7 @@ const ExecuteBoard = () => {
 			<main className="mx-side-margin-mobile mt-0 md:mx-side-margin">
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-4 my-16 md:px-0 px-10">
 					{executiveBoardData.map((item: ExecutiveBoardCardProps) => (
-						<ExecutiveBoardCard  {...item} />
+						<ExecutiveBoardCard {...item} />
 					))}
 				</div>
 				<div className="grid gap-2 md:grid-cols-1 md:gap-2 text-center pb-9">
@@ -63,7 +58,11 @@ const ExecuteBoard = () => {
 	);
 };
 
-function ExecutiveBoardCard({ image, name, position }: ExecutiveBoardCardProps) {
+function ExecutiveBoardCard({
+	image,
+	name,
+	position,
+}: ExecutiveBoardCardProps) {
 	return (
 		<>
 			<Card className="py-4 px-2 rounded-3xl bg-gray-100 relative overflow-visible">
@@ -86,7 +85,7 @@ function ExecutiveBoardCard({ image, name, position }: ExecutiveBoardCardProps) 
 				</CardBody>
 			</Card>
 		</>
-	)
+	);
 }
 
 export default ExecuteBoard;

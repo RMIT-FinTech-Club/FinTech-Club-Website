@@ -85,49 +85,159 @@ export const tailwindExtendedThemeConfig: Partial<CustomThemeConfig> = {
     spacing: {
         "side-margin-mobile": "1rem",
         "side-margin": "8.375rem",
-    }
+    },
+    // fontFamily: {
+    //     sans: ['Poppins', 'system-ui', 'sans-serif'],
+    // },
 }
 
 export const responsiveStylingConfig = {
     // fontWeight: regular 400, medium 500, semi-bold 600, bold 700
     // fontSize: 1rem = 16px
+    // default: {
+    //     fontSize: {
+    //         'ft-heading-1': ["2rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+    //         'ft-heading-2': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //         'ft-heading-3': ["1.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //         'ft-subtitle-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //         'ft-subtitle-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "500" }],
+    //         'ft-body-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //         'ft-body-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //     }
+    // },
+    // md: {
+    //     fontSize: {
+    //         'ft-heading-1': ["6rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+    //         'ft-heading-2': ["4rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+    //         'ft-heading-3': ["3.5rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+    //         'ft-heading-4': ["3rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+    //         'ft-heading-5': ["2.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //         'ft-heading-6': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //         'ft-body-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //         'ft-body-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //     }
+    // },
     default: {
         fontSize: {
-            'ft-heading-1': ["2rem", { lineHeight: "2.5rem", fontWeight: "700" }],
-            'ft-heading-2': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
-            'ft-heading-3': ["1.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
-            'ft-subtitle-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "600" }],
-            'ft-subtitle-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "500" }],
-            'ft-body-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "400" }],
-            'ft-body-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "400" }],
-            'testagain': '1rem',
+            'ft-heading-1': ["3rem", { lineHeight: "1.75rem", fontWeight: "700" }],
+            'ft-heading-2': ["2.75rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+            'ft-heading-3': ["2.5rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+            'ft-heading-4': ["2.25rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+            'ft-heading-5': ["2rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+            'ft-heading-6': ["1.75rem", { lineHeight: "1.75rem", fontWeight: "600" }],
+            'ft-subtitle-1': ["2rem", { lineHeight: "1.5rem", fontWeight: "600" }],
+            'ft-subtitle-2': ["1.5rem", { lineHeight: "1.5rem", fontWeight: "500" }],
+            'ft-body-1': ["1rem", { lineHeight: "1.5rem", fontWeight: "400" }],
+            'ft-body-2': ["0.875rem", { lineHeight: "1.5rem", fontWeight: "400" }],
+        }
+    },
+    sm: {
+        fontSize: {
+            'ft-heading-1': ["4rem", { lineHeight: "3rem", fontWeight: "700" }],
+            'ft-heading-2': ["3.75rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-heading-3': ["3.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-heading-4': ["3rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-heading-5': ["2.75rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-heading-6': ["2.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-subtitle-1': ["2rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-subtitle-2': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "500" }],
+            'ft-body-1': ["1rem", { lineHeight: "1.5rem", fontWeight: "400" }],
+            'ft-body-2': ["0.75rem", { lineHeight: "1.5rem", fontWeight: "400" }],
         }
     },
     md: {
         fontSize: {
-            'ft-heading-1': ["6rem", { lineHeight: "2.5rem", fontWeight: "700" }],
-            'ft-heading-2': ["4rem", { lineHeight: "2.5rem", fontWeight: "700" }],
-            'ft-heading-3': ["3.5rem", { lineHeight: "2.5rem", fontWeight: "700" }],
-            'ft-heading-4': ["3rem", { lineHeight: "2.5rem", fontWeight: "700" }],
-            'ft-heading-5': ["2.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
-            'ft-heading-6': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
-            'ft-body-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "400" }],
-            'ft-body-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+            'ft-heading-1': ["5rem", { lineHeight: "4.5rem", fontWeight: "700" }],
+            'ft-heading-2': ["4rem", { lineHeight: "4rem", fontWeight: "600" }],
+            'ft-heading-3': ["3.5rem", { lineHeight: "3.5rem", fontWeight: "600" }],
+            'ft-heading-4': ["3rem", { lineHeight: "3rem", fontWeight: "600" }],
+            'ft-heading-5': ["2.5rem", { lineHeight: "2.75rem", fontWeight: "600" }],
+            'ft-heading-6': ["2rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-subtitle-1': ["2.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+            'ft-subtitle-2': ["2rem", { lineHeight: "2.5rem", fontWeight: "500" }],
+            'ft-body-1': ["1.1rem", { lineHeight: "1.75rem", fontWeight: "400" }],
+            'ft-body-2': ["0.875rem", { lineHeight: "1.75rem", fontWeight: "400" }],
         }
     },
-    // lg: {
+    lg: {
+        fontSize: {
+            'ft-heading-1': ["6rem", { lineHeight: "6.5rem", fontWeight: "700" }],
+            'ft-heading-2': ["5rem", { lineHeight: "5.5rem", fontWeight: "600" }],
+            'ft-heading-3': ["4.5rem", { lineHeight: "4.5rem", fontWeight: "600" }],
+            'ft-heading-4': ["4rem", { lineHeight: "4rem", fontWeight: "600" }],
+            'ft-heading-5': ["3rem", { lineHeight: "3.5rem", fontWeight: "600" }],
+            'ft-heading-6': ["2.5rem", { lineHeight: "3rem", fontWeight: "600" }],
+            'ft-subtitle-1': ["3.5rem", { lineHeight: "3.5rem", fontWeight: "600" }],
+            'ft-subtitle-2': ["3rem", { lineHeight: "3rem", fontWeight: "500" }],
+            'ft-body-1': ["1.25rem", { lineHeight: "2rem", fontWeight: "400" }],
+            'ft-body-2': ["1rem", { lineHeight: "2rem", fontWeight: "400" }],
+        }
+    }
+    /*
+        The font size config below is more accurated in design system which fit better.
+        However since the use of font size is not consistent in the project, the above config is used instead.
+
+        Using the below config will definite break the UI of the project and requrie a lot of changes to be made.
+        (Despite that, even the above config isnt perfectly tailored to the project, but at least it's require less changes to be made)
+
+        However, for the sake of the design system, the below config should be used instead of the above config.
+        Else if leave longer in the project, it might cause more issues in the future.
+
+    */
+    // default: {
     //     fontSize: {
-    //         'ft-heading': "10rem",
+    //       'ft-heading-1': ["2rem", { lineHeight: "2.5rem", fontWeight: "700" }],
+    //       'ft-heading-2': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-3': ["1.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-4': ["1rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-5': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-6': ["0.75rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-subtitle-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-subtitle-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "500" }],
+    //       'ft-body-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //       'ft-body-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "400" }],
     //     }
-    // },
-    // xl: {
+    //   },
+    //   sm: {
     //     fontSize: {
-    //         'ft-heading': "15rem",
+    //       'ft-heading-1': ["2.5rem", { lineHeight: "3rem", fontWeight: "700" }],
+    //       'ft-heading-2': ["2rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-3': ["1.75rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-4': ["1.5rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-5': ["1.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-6': ["1rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-subtitle-1': ["1.25rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-subtitle-2': ["1rem", { lineHeight: "2.5rem", fontWeight: "500" }],
+    //       'ft-body-1': ["1rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //       'ft-body-2': ["0.875rem", { lineHeight: "2.5rem", fontWeight: "400" }],
     //     }
-    // },
-    // "2xl": {
+    //   },
+    //   md: {
     //     fontSize: {
-    //         'ft-heading': "20rem",
+    //       'ft-heading-1': ["4rem", { lineHeight: "4.5rem", fontWeight: "700" }],
+    //       'ft-heading-2': ["3.5rem", { lineHeight: "4rem", fontWeight: "600" }],
+    //       'ft-heading-3': ["3rem", { lineHeight: "3.5rem", fontWeight: "600" }],
+    //       'ft-heading-4': ["2.5rem", { lineHeight: "3rem", fontWeight: "600" }],
+    //       'ft-heading-5': ["2rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-heading-6': ["1.5rem", { lineHeight: "2rem", fontWeight: "600" }],
+    //       'ft-subtitle-1': ["2rem", { lineHeight: "2.5rem", fontWeight: "600" }],
+    //       'ft-subtitle-2': ["1.75rem", { lineHeight: "2.5rem", fontWeight: "500" }],
+    //       'ft-body-1': ["1.5rem", { lineHeight: "2rem", fontWeight: "400" }],
+    //       'ft-body-2': ["1.25rem", { lineHeight: "1.75rem", fontWeight: "400" }],
     //     }
-    // }
+    //   },
+    //   lg: {
+    //     fontSize: {
+    //       'ft-heading-1': ["6rem", { lineHeight: "6.5rem", fontWeight: "700" }],
+    //       'ft-heading-2': ["5rem", { lineHeight: "5.5rem", fontWeight: "600" }],
+    //       'ft-heading-3': ["4rem", { lineHeight: "4.5rem", fontWeight: "600" }],
+    //       'ft-heading-4': ["3.5rem", { lineHeight: "4rem", fontWeight: "600" }],
+    //       'ft-heading-5': ["3rem", { lineHeight: "3.5rem", fontWeight: "600" }],
+    //       'ft-heading-6': ["2.5rem", { lineHeight: "3rem", fontWeight: "600" }],
+    //       'ft-subtitle-1': ["3rem", { lineHeight: "3.5rem", fontWeight: "600" }],
+    //       'ft-subtitle-2': ["2.5rem", { lineHeight: "3rem", fontWeight: "500" }],
+    //       'ft-body-1': ["2rem", { lineHeight: "2.5rem", fontWeight: "400" }],
+    //       'ft-body-2': ["1.75rem", { lineHeight: "2rem", fontWeight: "400" }],
+    //     }
+    //   }
 } as ResponsiveStylingConfig

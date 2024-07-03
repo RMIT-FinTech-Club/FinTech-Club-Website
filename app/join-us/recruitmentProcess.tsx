@@ -7,9 +7,13 @@ const RecruitmentProcess = () => {
 			{/* Laptop view */}
 			<div className="hidden lg:flex lg:flex-col relative">
 				<div className="w-full h-auto">
-					<img className="w-full object-cover" src="RecruitmentProcessDesktop.png" alt="Recruitment Process" />
+					<img
+						className="w-full object-cover"
+						src="RecruitmentProcessDesktop.png"
+						alt="Recruitment Process"
+					/>
 				</div>
-				
+
 				<div className="flex self-center justify-evenly w-1/2 my-16 mx-auto">
 					<RoadToFtcButton
 						text="Apply Now"
@@ -24,7 +28,11 @@ const RecruitmentProcess = () => {
 			{/* Mobile view */}
 			<div className="flex flex-col relative items-center justify-around lg:hidden">
 				<div className="w-full h-auto my-14">
-					<img className="w-full object-cover" src="RecruitmentProcessMobile.png" alt="Recruitment Process" />
+					<img
+						className="w-full object-cover"
+						src="RecruitmentProcessMobile.png"
+						alt="Recruitment Process"
+					/>
 				</div>
 				<div className="flex flex-col">
 					<RoadToFtcButton

@@ -4,7 +4,7 @@ export interface Event {
 	description: string;
 	imageUrl: string;
 	registrationLink: string;
-	dateTime: string;
+	fullDate: string;
 	time: string;
 	date: string;
 	location: string;

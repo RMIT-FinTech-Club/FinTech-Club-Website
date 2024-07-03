@@ -31,17 +31,17 @@ export default function FinTechInTheEyes() {
 					President
 				</h2>
 				<h2
-					className={`text-2xl md:text-4xl text-center md:text-start md:py-2 md:mb-6 text-[#2B305E] font-extrabold ${fontMono.style}`}
+					className={`text-2xl md:text-4xl text-center md:text-start mt-4 md:mt-0 md:py-2 md:mb-6 text-[#2B305E] font-extrabold ${fontMono.style}`}
 				>
 					Nguyen Manh Dung
 				</h2>
 				<h2
-					className={`md:hidden text-1xl text-center text-[#DBB968] ${fontMono.style}`}
+					className={`md:hidden text-1xl text-center mt-3 text-[#DBB968] ${fontMono.style}`}
 				>
 					President
 				</h2>
 				<p
-					className={`text-1xl md:text-2xl text-justify md:text-left ${fontMono.style}`}
+					className={`text-1xl md:text-2xl text-justify mt-4 md:mt-0 mb-0 md:mb-36 md:text-left ${fontMono.style}`}
 				>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 					Suspendisse aliquam eget turpis sed lacinia. Proin vitae leo

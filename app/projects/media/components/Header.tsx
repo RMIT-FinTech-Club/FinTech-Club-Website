@@ -28,7 +28,6 @@ const Header: React.FC = () => {
 						<div className="w-1/5 h-1 bg-white mt-8 lg:mt-32" />
 						<p className="text-sm sm:text-base lg:text-lg xl:text-xl mt-4">
 							Informative & Educational FinTech-related content.
-
 						</p>
 					</div>
 				</div>

@@ -22,6 +22,8 @@ export async function middleware(request: NextRequest) {
     // If trying to access a protected path without a token, redirect to the login page
     if (payload?.role !== "admin") {
       return NextResponse.redirect(new URL('/login', request.nextUrl))
+    } else {
+      return NextResponse.next()
     }
   } else {
     // If trying to access a public path with an invalid token, redirect to login page

@@ -59,11 +59,11 @@ const Events = () => {
 	}, []);
 	return isLoading ? (
 		<section className="flex flex-col items-center h-screen w-full justify-center">
-			<ClipLoader color="#2C305F" size={60}/>
+			<ClipLoader color="#2C305F" size={60} />
 		</section>
 	) : (
 		<section className="relative">
-			<div className=" flex flex-col gap-8 items-center justify-center w-full md:w-screen">
+			<div className=" flex flex-col gap-8 items-center justify-center px-side-margin-mobile w-full mb-10 md:w-screen">
 				<HeaderTitlePage text="Our Upcoming Events" />
 
 				{eventsData?.map((event) => (
