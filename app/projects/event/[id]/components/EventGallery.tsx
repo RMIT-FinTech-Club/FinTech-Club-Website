@@ -1,7 +1,6 @@
 "use client";
-
+import { PreArrow, NextArrow } from "@/components/carouselArrows";
 import React from "react";
-import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import Slider from "react-slick";
 
 interface RecapGalleryProps {
@@ -15,32 +14,6 @@ const EventCard: React.FC<{ url: string }> = ({ url }) => {
 			src={url}
 			alt="Recap Photo"
 		/>
-	);
-};
-
-const PreArrow: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
-	return (
-		<div className="absolute top-1/2 left-3 z-10">
-			<button
-				onClick={onClick}
-				className="flex justify-center w-10 h-10 rounded-full bg-ft-primary-yellow hover:bg-ft-primary-yellow-600"
-			>
-				<MdOutlineNavigateBefore size={40} color="white" />
-			</button>
-		</div>
-	);
-};
-
-const NextArrow: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
-	return (
-		<div className="absolute top-1/2 right-3 z-10">
-			<button
-				onClick={onClick}
-				className="flex justify-center w-10 h-10 rounded-full bg-ft-primary-yellow hover:bg-ft-primary-yellow-600"
-			>
-				<MdOutlineNavigateNext size={40} color="white" />
-			</button>
-		</div>
 	);
 };
 

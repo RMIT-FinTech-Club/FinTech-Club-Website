@@ -43,11 +43,8 @@ const TechnicalProjectPage: React.FC<{ params: { id: string } }> = ({
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		const configuration = {
-			method: "post",
-			url: "/api/v1/technicalprojects/getOneTechnicalProject",
-			data: {
-				id: "667e0e9ad27faa3bbed379d7",
-			},
+			method: "get",
+			url: `/api/v1/technicalprojects/${params.id}`,
 		};
 		// console.log(params.id);
 		axios(configuration)

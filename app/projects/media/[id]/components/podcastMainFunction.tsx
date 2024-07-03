@@ -13,14 +13,13 @@ import {
 	IconVolume,
 	IconVolumeOff,
 } from "@tabler/icons-react";
-import { color } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import SpeedSelector from "./audioSpeedSelector";
-import FollowUs from "./followUs";
-import PodcastTitle from "./podcastTitle";
-import { set } from "mongoose";
+// import PodcastTitle from "./podcastTitle";
+import HeaderPodcastPage from "./headerPodcastPage";
 
-const PodcastMainFunction = () => {
+const PodcastMainFunction: React.FC<{ audioFileUrl: string, title: string }> = ({ audioFileUrl, title }) => {
+	console.log(`check titlte: ${title}`)
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
 	const [isVolumeOn, setIsVolumeOn] = useState<boolean>(true);
@@ -119,7 +118,8 @@ const PodcastMainFunction = () => {
 		<div className="my-4 w-full">
 			<audio ref={audioRef} controls={false} />
 			<div className="lg:flex lg:flex-col">
-				<PodcastTitle />
+				{/* <PodcastTitle /> */}
+				<HeaderPodcastPage text={title} />
 				<Slider
 					minValue={0}
 					value={currentProgress}
