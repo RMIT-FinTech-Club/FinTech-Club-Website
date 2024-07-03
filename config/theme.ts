@@ -178,7 +178,7 @@ export const responsiveStylingConfig = {
         However since the use of font size is not consistent in the project, the above config is used instead.
 
         Using the below config will definite break the UI of the project and requrie a lot of changes to be made.
-        (Despite that, even the above config isnt perfectly tailored to the project, it's at least require less changes to be made)
+        (Despite that, even the above config isnt perfectly tailored to the project, but at least it's require less changes to be made)
 
         However, for the sake of the design system, the below config should be used instead of the above config.
         Else if leave longer in the project, it might cause more issues in the future.
