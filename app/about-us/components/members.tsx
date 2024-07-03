@@ -74,21 +74,21 @@ const Members: React.FC = () => {
 				<MemberList members={filteredMember} itemsPerPage={10} />
 			</div>
 			{/* Left Eclipses Decoration  */}
-			<div className="absolute left-0 md:scale-100 scale-50 invisible xl:visible">
+			{/* <div className="absolute left-0 md:scale-100 scale-50 invisible xl:visible">
 				<Image
 					loading="lazy"
 					src="/multiple-bubbles-left-side.svg"
 					alt="left side bubble"
 				/>
-			</div>
+			</div> */}
 			{/* Right FinTech Bear Decoration */}
-			<div className="absolute right-0 bottom-4 md:scale-75 scale-50 invisible xl:visible">
+			{/* <div className="absolute right-0 bottom-4 md:scale-75 scale-50 invisible xl:visible">
 				<Image
 					loading="lazy"
 					src="/bear-right-side.svg"
 					alt="bear right side"
 				/>
-			</div>
+			</div> */}
 			{/* Below Eclipses Decoration  */}
 			<div className="absolute -bottom-14 right-56 scale-100 invisible xl:visible">
 				<Image

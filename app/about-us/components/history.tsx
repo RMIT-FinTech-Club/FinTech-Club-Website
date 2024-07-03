@@ -124,14 +124,14 @@ export default function HistorySection() {
 			</div>
 
 			{/* desktop version */}
-			<div className="items-center w-full md:mt-8 md:grid md:grid-cols-7 grid-cols-1 overflow-hidden my-auto">
+			<div className="items-center w-screen md:mt-0 md:grid md:grid-cols-12 grid-cols-1 overflow-hidden my-auto">
 				<img
 					alt="fintech mascot"
-					className="md:block hidden md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
+					className="md:block hidden md:col-span-2 md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 				<div
-					className={`mt-[93px] mb-[77px] md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${
+					className={`mt-[93px] mb-[77px] md:col-span-8 md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${
 						centerSlideIndex === 0
 							? "pr-96"
 							: centerSlideIndex === historyData.length - 1
@@ -140,7 +140,7 @@ export default function HistorySection() {
 					}`}
 					ref={emblaHorizontalRef}
 				>
-					<div className="flex items-center col-start-2">
+					<div className="flex items-center col-start-2 ">
 						{historyData.map((data, index) => {
 							return (
 								<div
@@ -172,19 +172,19 @@ export default function HistorySection() {
 				</div>
 				<img
 					alt="fintech mascot"
-					className=" md:block hidden md:w-[400px] lg:w-[600px] rotate-[-58.03deg] rounded-[59px] z-10 "
+					className=" md:block hidden md:col-span-2 md:w-[400px] lg:w-[600px] rotate-[-58.03deg] rounded-[59px] z-10 "
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 			</div>
 
-			<div className="grid md:grid-cols-3 justify-between md:h-96 mb-56 items-center w-full">
+			<div className="grid md:grid-cols-12 justify-between md:h-80 mb-40 items-center w-screen">
 				<img
 					alt=""
-					className="md:w-[250px] hidden md:inline-block md:h-auto rotate-[-24.12deg]"
+					className="md:w-[250px] md:col-span-3 hidden md:inline-block md:h-auto rotate-[-24.12deg]"
 					src="https://ik.imagekit.io/mbrrji2rk/3164276f-e306-432f-ab36-b9a275439de7.jpg?updatedAt=1713241506012"
 				/>
 				<motion.div
-					className="box"
+					className="box col-span-6"
 					key={centerSlideIndex}
 					initial={{ opacity: 0, scale: 0.5 }}
 					animate={{ opacity: 1, scale: 1 }}
@@ -209,7 +209,7 @@ export default function HistorySection() {
 				</motion.div>
 				<img
 					alt=""
-					className="md:w-[250px] md:inline-block hidden md:h-auto transform -scale-x-100 rotate-[24.12deg] justify-self-end"
+					className="md:w-[250px] md:col-span-3 md:inline-block hidden md:h-auto transform -scale-x-100 rotate-[24.12deg] justify-self-end"
 					src="https://ik.imagekit.io/mbrrji2rk/3164276f-e306-432f-ab36-b9a275439de7.jpg?updatedAt=1713241506012"
 				/>
 			</div>
