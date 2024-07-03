@@ -1,3 +1,5 @@
+// components/Header.tsx
+
 import type React from "react";
 
 const Header: React.FC = () => {
@@ -17,7 +19,7 @@ const Header: React.FC = () => {
 							FinTech Club Initiatives
 						</p>
 						<h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl my-4 lg:my-8 text-[#dbb969]">
-							Technical
+							Academic
 							<br />
 							Projects
 						</h1>
@@ -25,7 +27,8 @@ const Header: React.FC = () => {
 					<div className="w-full lg:w-3/5 flex flex-col font-light mt-4 lg:mt-0">
 						<div className="w-1/5 h-1 bg-white mt-8 lg:mt-32" />
 						<p className="text-sm sm:text-base lg:text-lg xl:text-xl mt-4">
-							Member hard skill development that is connected to real-world use.
+							Informative & Educational FinTech-related content.
+
 						</p>
 					</div>
 				</div>
