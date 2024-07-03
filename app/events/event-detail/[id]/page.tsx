@@ -60,7 +60,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 			<ClipLoader color="#2C305F" size={60} />
 		</section>
 	) : (
-		<div className="flex flex-col my-16 mx-side-margin-mobile md:mx-side-margin">
+		<div className="flex flex-col my-16 mx-side-margin-mobile md:mx-[80px]">
 			<div className="w-full lg:flex">
 				{/* <EventDetail event={eventData} /> */}
 				<EventDetail event={data!} />
@@ -93,7 +93,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 					/>
 				</Skeleton>
 			</div>
-			<div>
+			<div className="mx-24">
 				<p className="font-black text-2xl my-10">
 					Other events that you might be interested
 				</p>
@@ -121,16 +121,13 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 							</CardBody>
 							<CardFooter className="w-full p-5 flex-row justify-between">
 								{/* <Skeleton> */}
-								<div className="w-1/5">
-									<p className="font-black">{item.date}</p>
+								<div className="w-1/6">
+									<p className="font-black">{item.date === "To be updated" ? "TBD" : item.date}</p>
 								</div>
-								<div className="w-3/5 text-center">
-									<b className="text-lg font-black">
+								<div className="w-4/5 text-center">
+									<b className="text-lg font-[600] text-justify">
 										{item.name}
 									</b>
-									<p className="text-default-500">
-										{item.description}
-									</p>
 								</div>
 								{/* </Skeleton> */}
 							</CardFooter>

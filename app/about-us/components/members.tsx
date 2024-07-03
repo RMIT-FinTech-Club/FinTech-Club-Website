@@ -63,7 +63,7 @@ const Members: React.FC = () => {
 
 	return (
 		<div className="flex flex-col gap-8 relative w-screen items-center justify-center overflow-x-hidden xl:overflow-x-visible overflow-y-hidden xl:overflow-y-visible mt-10">
-			<HeaderTitlePage text="members" />
+			<HeaderTitlePage text="active members" />
 			<div className="flex justify-center">
 				<MemberFilter
 					departments={departments.filter(Boolean) as string[]}

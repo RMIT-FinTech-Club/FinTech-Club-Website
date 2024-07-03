@@ -40,7 +40,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 	const primaryBlue = "#2C305F";
 
 	return (
-		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:max-h-60 md:grid-rows-1 md:gap-4 border rounded-lg shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
+		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:max-h-60 md:grid-rows-1 md:gap-4 border rounded-2xl shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
 			{/* Event Image */}
 			{imageLoading ? (
 				<div className="row-span-1 col-span-12 md:col-span-4 w-full">
@@ -133,7 +133,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 				/>
 				<a
 					href={`/events/event-detail/${event._id}`}
-					className="text-ft-primary-yellow rotate-90 text-lg font-bold z-10"
+					className="text-ft-primary-yellow rotate-90 text-lg font-semibold z-10 uppercase"
 				>
 					Explore More
 				</a>

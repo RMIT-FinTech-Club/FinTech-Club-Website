@@ -15,6 +15,8 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import SpeedSelector from "./audioSpeedSelector";
+// import PodcastTitle from "./podcastTitle";
+import HeaderPodcastPage from "./headerPodcastPage";
 
 const PodcastMainFunction: React.FC<{ audioFileUrl: string, title: string }> = ({ audioFileUrl, title }) => {
 	console.log(`check titlte: ${title}`)
@@ -116,7 +118,8 @@ const PodcastMainFunction: React.FC<{ audioFileUrl: string, title: string }> = (
 		<div className="my-4 w-full">
 			<audio ref={audioRef} controls={false} />
 			<div className="lg:flex lg:flex-col">
-				<PodcastTitle />
+				{/* <PodcastTitle /> */}
+				<HeaderPodcastPage text={title} />
 				<Slider
 					minValue={0}
 					value={currentProgress}
