@@ -26,13 +26,10 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	try {
-		const {
-		} = await req.json();
+		const {} = await req.json();
 
 		// Create Technical
-		const newTechnical = await new TechnicalProject({
-
-		}).save();
+		const newTechnical = await new TechnicalProject({}).save();
 
 		return NextResponse.json(
 			{ message: "Technical created", data: newTechnical },

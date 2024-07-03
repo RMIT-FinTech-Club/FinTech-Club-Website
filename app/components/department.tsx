@@ -145,29 +145,37 @@ const Department = () => {
 			name: "TECHNOLOGY DEPARTMENT",
 			description:
 				"With an unquenchable thirst for coding, fixing bugs, and …, the Technology Department represents the second pillar of our organization. We are responsible for the development of the club’s technical projects, including the SnapID Computer Vision Project, RBPC Website, and currently the FinTech Club Website Project. Beyond practical coding projects, we also provide internal training & sharing sessions, public workshops, mentoring initiatives, and memorable bonding activities for Tech Dept. members. Our members receive the full package of skill improvement, industry connections, and a belonging environment.",
-			imageUrl: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept.svg')",
-			background: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept-bg.jpg')",
+			imageUrl:
+				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept.svg')",
+			background:
+				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept-bg.jpg')",
 		},
 		business: {
 			name: "BUSINESS DEPARTMENT",
 			description:
 				"The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, hold meetings to evaluate working processes, propose toolkits, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
-			imageUrl: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg')",
-			background: "url(https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept-bg.png)",
+			imageUrl:
+				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg')",
+			background:
+				"url(https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept-bg.png)",
 		},
 		humanResources: {
 			name: "HR DEPARTMENT",
 			description:
 				"What is a club, without its people? Where would the club’s fun and desirability be, without its culture? That is where the Human Resources Department comes in. HR is in charge of organizing the club’s internal bonding activities, the FinTech Olympics, Newbies Orientation Day, End of Semester Award Ceremony, and the FinTech Field Trip – in addition to ensuring member well-being, safety and connection via the HR Committee. The HR Department consists of some of the kindest, most caring, most enthusiastic members in FTC. So, if you want to be a part of this lovely community, join the HR Dept.!",
-			imageUrl: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept.svg')",
-			background: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept-bg.jpg')",
+			imageUrl:
+				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept.svg')",
+			background:
+				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept-bg.jpg')",
 		},
 		marketing: {
 			name: "MARKETING DEPARTMENT",
 			description:
 				"With a creative and expressive mindset, the Marketing Department is accountable for maintaining and spreading the digital presence of the club’s story and mission. Through various media projects, collaborative teams, adventurous campaigns, the Marketing Dept. never failed to disappoint in generating the most engaging and visually appealing content to hook the eyes of curious FinTech Club followers! So, you want to express yourself, unleash your creativity, unbound your imagination? Join the Marketing Dept. to help us bolster our club presence, and fulfill your creative interests!",
-			imageUrl: "url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept.svg')",
-			background: "url(https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept-bg.png)",
+			imageUrl:
+				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept.svg')",
+			background:
+				"url(https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept-bg.png)",
 		},
 	};
 
@@ -185,6 +193,10 @@ const Department = () => {
 		arrows: false,
 	};
 
+	const [hrButton, setHrButton] = useState(true);
+	const [busButton, setBusButton] = useState(false);
+	const [marButton, setMarButton] = useState(false);
+	const [techButton, setTechButton] = useState(false);
 	return (
 		<section
 			className="relative flex flex-col-reverse w-full max-h-fit px-side-margin-mobile md:px-20 justify-center items-center lg:flex-row bg-ft-primary-blue-900"
@@ -253,32 +265,70 @@ const Department = () => {
 				{/* Desktop buttons */}
 				<div className="hidden md:flex mt-6 gap-4">
 					<Button
-						onClick={() => setDepartment(departments.technology)}
-						variant="light"
-						className="text-white"
+						onClick={() => {
+							setDepartment(departments.technology);
+							setTechButton(true);
+							setHrButton(false);
+							setBusButton(false);
+							setMarButton(false);
+						}}
+						variant={techButton ? "solid" : "light"}
+						className={
+							techButton
+								? "text-white bg-ft-primary-yellow-500"
+								: "text-white"
+						}
 					>
 						TECHNOLOGY
 					</Button>
 					<Button
-						onClick={() => setDepartment(departments.business)}
-						variant="light"
-						className="text-white"
+						onClick={() => {
+							setDepartment(departments.business);
+							setTechButton(false);
+							setHrButton(false);
+							setBusButton(true);
+							setMarButton(false);
+						}}
+						variant={busButton ? "solid" : "light"}
+						className={
+							busButton
+								? "text-white bg-ft-primary-yellow-500"
+								: "text-white"
+						}
 					>
 						BUSINESS
 					</Button>
 					<Button
-						onClick={() =>
-							setDepartment(departments.humanResources)
+						onClick={() => {
+							setDepartment(departments.humanResources);
+							setTechButton(false);
+							setHrButton(true);
+							setBusButton(false);
+							setMarButton(false);
+						}}
+						variant={hrButton ? "solid" : "light"}
+						className={
+							hrButton
+								? "text-white bg-ft-primary-yellow-500"
+								: "text-white"
 						}
-						variant="light"
-						className="text-white"
 					>
 						HUMAN RESOURCES
 					</Button>
 					<Button
-						onClick={() => setDepartment(departments.marketing)}
-						variant="light"
-						className="text-white"
+						onClick={() => {
+							setDepartment(departments.marketing);
+							setTechButton(false);
+							setHrButton(false);
+							setBusButton(false);
+							setMarButton(true);
+						}}
+						variant={marButton ? "solid" : "light"}
+						className={
+							marButton
+								? "text-white bg-ft-primary-yellow-500"
+								: "text-white"
+						}
 					>
 						MARKETING
 					</Button>
@@ -294,6 +344,7 @@ const Department = () => {
 						.replace("')", "")}
 					// Remove url() wrapper, NextUI Image component doesn't support it :<, this will change "url('image.png')" to "image.png"
 					alt={`${department.name} Image`}
+					loading="lazy"
 				/>
 			</div>
 		</section>

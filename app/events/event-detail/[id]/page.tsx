@@ -122,7 +122,11 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 							<CardFooter className="w-full p-5 flex-row justify-between">
 								{/* <Skeleton> */}
 								<div className="w-1/6">
-									<p className="font-black">{item.date === "To be updated" ? "TBD" : item.date}</p>
+									<p className="font-black">
+										{item.date === "To be updated"
+											? "TBD"
+											: item.date}
+									</p>
 								</div>
 								<div className="w-4/5 text-center">
 									<b className="text-lg font-[600] text-justify">

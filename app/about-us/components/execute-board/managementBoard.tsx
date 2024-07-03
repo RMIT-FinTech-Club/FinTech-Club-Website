@@ -40,7 +40,9 @@ const ManagementBoard = () => {
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
 								<h6 className="font-bold text-3xl pb-2">
-									TRUONG MINH<br />NGOC
+									TRUONG MINH
+									<br />
+									NGOC
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Business
@@ -71,7 +73,9 @@ const ManagementBoard = () => {
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
 								<h6 className="font-bold text-3xl pb-2">
-									NGUYEN BAO<br />NGOC
+									NGUYEN BAO
+									<br />
+									NGOC
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Human Resources
@@ -102,7 +106,9 @@ const ManagementBoard = () => {
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
 								<h6 className="font-bold text-3xl pb-2">
-									NGUYEN TRAN<br />HOANG ANH
+									NGUYEN TRAN
+									<br />
+									HOANG ANH
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Marketing
@@ -134,7 +140,9 @@ const ManagementBoard = () => {
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
 								<h6 className="font-bold text-3xl pb-2">
-									HUYNH LE DIEM<br />QUI
+									HUYNH LE DIEM
+									<br />
+									QUI
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Technology
@@ -148,7 +156,8 @@ const ManagementBoard = () => {
 						MEET OUR <strong>MANAGEMENT BOARD</strong>
 					</h5>
 					<p className="w-full md:w-4/6 mx-auto text-2xl">
-						Meet the talented representatives behind the four pillars of RMIT Vietnam FinTech Club!
+						Meet the talented representatives behind the four
+						pillars of RMIT Vietnam FinTech Club!
 					</p>
 					<div className="mx-auto w-[214px] h-[4px] bg-ft-primary-blue-500 mt-6" />
 				</div>

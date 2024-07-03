@@ -22,7 +22,8 @@ const executiveBoardData = [
 		image: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/executive_board/DungNguyen-President.svg",
 		name: "NGUYEN MANH DUNG",
 		position: "President",
-		linkedin: "https://www.linkedin.com/in/nguy%E1%BB%85n-m%E1%BA%A1nh-d%C5%A9ng-598173262/",
+		linkedin:
+			"https://www.linkedin.com/in/nguy%E1%BB%85n-m%E1%BA%A1nh-d%C5%A9ng-598173262/",
 	},
 	{
 		image: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/executive_board/IVP-removebg-preview.png",
@@ -52,7 +53,8 @@ const ExecuteBoard = () => {
 						MEET OUR <strong>EXECUTIVE BOARD</strong>
 					</h5>
 					<p className="w-full md:w-4/6 mx-auto text-2xl">
-						Meet the fierce, brilliant, and passionate minds behind the FinTech Club machine!
+						Meet the fierce, brilliant, and passionate minds behind
+						the FinTech Club machine!
 					</p>
 					<div className="mx-auto w-[214px] h-[4px] bg-ft-primary-blue-500 mt-6" />
 				</div>
@@ -80,12 +82,8 @@ function ExecutiveBoardCard({
 					</div>
 				</CardHeader>
 				<CardBody className="overflow-visible pt-4 text-center">
-					<h6 className="font-bold md:text-3xl text-2xl">
-						{name}
-					</h6>
-					<p className="text-lg font-semibold">
-						{position}
-					</p>
+					<h6 className="font-bold md:text-3xl text-2xl">{name}</h6>
+					<p className="text-lg font-semibold">{position}</p>
 				</CardBody>
 			</Card>
 		</Link>

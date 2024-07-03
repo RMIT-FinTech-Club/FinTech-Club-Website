@@ -26,13 +26,10 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	try {
-		const {
-		} = await req.json();
+		const {} = await req.json();
 
 		// Create event
-		const newEvent = await new EventProject({
-
-		}).save();
+		const newEvent = await new EventProject({}).save();
 
 		return NextResponse.json(
 			{ message: "Event created", data: newEvent },

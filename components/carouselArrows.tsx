@@ -3,10 +3,10 @@ import { HTMLAttributes } from "react";
 import { ChevronLeft, ChevronRight } from "tabler-icons-react";
 
 interface ArrowProps extends HTMLAttributes<HTMLDivElement> {
-    buttonOnClick?: () => void;
+	buttonOnClick?: () => void;
 }
 
-export const PreArrow: React.FC<ArrowProps> = ({buttonOnClick, ...props}) => {
+export const PreArrow: React.FC<ArrowProps> = ({ buttonOnClick, ...props }) => {
 	return (
 		<div {...props} className={clsx("z-10", props.className)}>
 			<button
@@ -19,7 +19,10 @@ export const PreArrow: React.FC<ArrowProps> = ({buttonOnClick, ...props}) => {
 	);
 };
 
-export const NextArrow: React.FC<ArrowProps> = ({buttonOnClick, ...props}) => {
+export const NextArrow: React.FC<ArrowProps> = ({
+	buttonOnClick,
+	...props
+}) => {
 	return (
 		<div {...props} className={clsx("absolute z-10", props.className)}>
 			<button

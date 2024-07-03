@@ -4,7 +4,7 @@ import ProjectList from "./components/ProjectList";
 
 const Home = () => {
 	return (
-		<div className="bg-ft-background">
+		<div className="bg-ft-background w-screen">
 			<Header />
 			<ProjectList />
 		</div>

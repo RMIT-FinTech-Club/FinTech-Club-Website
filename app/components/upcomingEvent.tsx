@@ -10,82 +10,85 @@ import axios from "axios";
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
 
 const settings = {
-    className: "w-full",
-    // dots: true,
-    infinite: true,
-    autoplay: true,
-    // arrows: false,
-    autoSpeed: 1000,
-    dragagable: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    variableWidth: true,
-    initialSlide: 0,
-} as Settings
+	className: "w-full",
+	// dots: true,
+	infinite: true,
+	autoplay: true,
+	// arrows: false,
+	autoSpeed: 1000,
+	dragagable: true,
+	speed: 500,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	variableWidth: true,
+	initialSlide: 0,
+} as Settings;
 
 const UpcomingEvent = () => {
-    const [upcomingEvents, setUpcomingEvents] = useState([]);
+	const [upcomingEvents, setUpcomingEvents] = useState([]);
 
-    const sliderRef = useRef<Slider>(null);
+	const sliderRef = useRef<Slider>(null);
 
-    useEffect(() => {
-        axios
-            .get("/api/v1/events/upcomming")
-            .then((response) => {
-                setUpcomingEvents(response.data.data);
-                console.log(response.data.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+	useEffect(() => {
+		axios
+			.get("/api/v1/events/upcomming")
+			.then((response) => {
+				setUpcomingEvents(response.data.data);
+				console.log(response.data.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 
-    return (
-        <section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
-            <h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
-                PROJECTS
-            </h1>
-            <section className="relative mx-auto w-full">
-                <section className="flex flex-row justify-between items-center w-full mb-5 gap-4">
-                    <hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow md:hidden" />
-                    <div className="text-ft-primary-yellow text-2xl font-semibold">
-                        2024
-                    </div>
-                    <hr className="w-1/3 border-b-2 border-solid border-ft-primary-yellow md:w-full" />
-                </section>
-                <PreArrow
-                    buttonOnClick={() => {
-                        sliderRef?.current?.slickPrev();
-                    }}
-                    className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16" />
-                <Slider ref={sliderRef} {...settings}>
-                    {upcomingEvents.map((event, index) => {
-                        // Split date to get month and day
-                        const dateMonth = (event["date"] as string).split(" ");
+	return (
+		<section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
+			<h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
+				PROJECTS
+			</h1>
+			<section className="relative mx-auto w-full">
+				<section className="flex flex-row justify-between items-center w-full mb-5 gap-4">
+					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow md:hidden" />
+					<div className="text-ft-primary-yellow text-2xl font-semibold">
+						2024
+					</div>
+					<hr className="w-1/3 border-b-2 border-solid border-ft-primary-yellow md:w-full" />
+				</section>
+				<PreArrow
+					buttonOnClick={() => {
+						sliderRef?.current?.slickPrev();
+					}}
+					className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16"
+				/>
+				<Slider ref={sliderRef} {...settings}>
+					{upcomingEvents.map((event, index) => {
+						// Split date to get month and day
+						const dateMonth = (event["date"] as string).split(" ");
 
-                        return (
-                            <CardEvent
-                                key={event["_id"]}
-                                eventName="No name"
-                                location={event["location"]}
-                                title={event["description"]}
-                                detail="Lorem ipsum dolor sit amet, consectetur ..."
-                                timeOnHour={event["time"]}
-                                timeOnDay={dateMonth[0]}
-                                timeOnMonth={dateMonth[1]}
-                            />
-                        );
-                    })}
-                </Slider>
-                <NextArrow
-                    buttonOnClick={() => {
-                        sliderRef?.current?.slickNext();
-                    }}
-                    className="hidden md:block absolute top-1/2 -translate-y-1/2 -right-16" />
-            </section>
-        </section>
-    );
+						return (
+							<CardEvent
+								key={event["_id"]}
+								imageUrl={event["imageUrl"]}
+								eventName="No name"
+								location={event["location"]}
+								title={event["name"]}
+								detail={event["description"]}
+								timeOnHour={event["time"]}
+								timeOnDay={dateMonth[0]}
+								timeOnMonth={dateMonth[1]}
+							/>
+						);
+					})}
+				</Slider>
+				<NextArrow
+					buttonOnClick={() => {
+						sliderRef?.current?.slickNext();
+					}}
+					className="hidden md:block absolute top-1/2 -translate-y-1/2 -right-16"
+				/>
+			</section>
+		</section>
+	);
 };
 
 export default UpcomingEvent;

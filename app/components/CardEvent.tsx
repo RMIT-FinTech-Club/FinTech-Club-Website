@@ -8,6 +8,7 @@ import {
 } from "@nextui-org/react";
 type CardEventContent = {
 	eventName: string;
+	imageUrl: string;
 	location: string;
 	title: string;
 	detail: string;
@@ -17,6 +18,7 @@ type CardEventContent = {
 };
 const CardEvent = ({
 	eventName,
+	imageUrl,
 	location,
 	title,
 	detail,
@@ -33,7 +35,7 @@ const CardEvent = ({
 					width="100%"
 					className="w-full object-cover h-[200px]"
 					alt="Card background"
-					src="/ProjectGeneralImage.png"
+					src={imageUrl}
 				/>
 			</CardBody>
 			<CardFooter className=" text-white gap-2 md:text-ft-primary-blue">
