@@ -20,9 +20,9 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 				<div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/20 rounded-2xl" />
 				<div className="relative z-10 w-full p-6 text-white">
 					<h1 className="text-3xl md:text-5xl font-black my-5">
-						{/* {event?.name} */} Hackathon Hack-A-Venture
+						{event?.name}
 					</h1>
-					<h5 className="text-lg md:text-2xl mb-3">
+					<h5 className="text-md md:text-lg mb-3">
 						{event?.description}
 					</h5>
 					<div className="flex flex-row gap-4 mt-4 max-md:justify-center">

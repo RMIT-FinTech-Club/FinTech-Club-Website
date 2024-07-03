@@ -40,7 +40,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 	const primaryBlue = "#2C305F";
 
 	return (
-		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:grid-rows-1 md:gap-4 border rounded-lg shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
+		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:max-h-60 md:grid-rows-1 md:gap-4 border rounded-lg shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
 			{/* Event Image */}
 			{imageLoading ? (
 				<div className="row-span-1 col-span-12 md:col-span-4 w-full">
@@ -81,7 +81,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 				</div>
 			</div>
 			<div className="row-span-1 col-span-9 md:col-span-6 flex flex-col justify-between p-1 md:p-4 space-y-2 mb-2">
-				<h3 className="text-xl font-bold">{event.description}</h3>
+				<h3 className="text-xl font-bold">{event.name}</h3>
 				<div className="flex items-center text-md">
 					<IconClock
 						className="mr-2 text-lg"
@@ -89,7 +89,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 						strokeWidth={2}
 						style={{ color: primaryYellow }}
 					/>
-					{displayDate ? event.time : event.dateTime}
+					{displayDate ? event.dateTime : event.time}
 				</div>
 				<div className="flex items-center text-md">
 					{event.type === "Offline" ? (
