@@ -8,6 +8,6 @@ export const fontMono = FontMono({
 
 export const fontSans = FontSans({
     subsets: ["latin"],
-    weight: "500",
-    variable: "--font-mono",
+    weight: ['400', '500', '600', '700'],
+    display: "swap",
   })
