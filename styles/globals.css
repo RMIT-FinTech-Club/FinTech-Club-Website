@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+
+    html, body {
+        font-family: 'Poppins', system-ui, sans-serif;
+    }
+
     p {
         @apply text-ft-body-1;
     }
