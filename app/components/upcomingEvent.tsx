@@ -7,24 +7,24 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
 import axios from "axios";
-import '@styles/carousel-dynamic-heigth.css'
+import "@styles/carousel-dynamic-heigth.css";
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
 
 const settings = {
-    className: "w-full center",
-    // dots: true,
-    infinite: true,
-    autoplay: true,
-    // arrows: false,
-    centerMode: true,
-    autoSpeed: 1000,
-    dragagable: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    variableWidth: true,
-    initialSlide: 0,
-} as Settings
+	className: "w-full center",
+	// dots: true,
+	infinite: true,
+	autoplay: true,
+	// arrows: false,
+	centerMode: true,
+	autoSpeed: 1000,
+	dragagable: true,
+	speed: 500,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	variableWidth: true,
+	initialSlide: 0,
+} as Settings;
 
 const UpcomingEvent = () => {
 	const [upcomingEvents, setUpcomingEvents] = useState([]);

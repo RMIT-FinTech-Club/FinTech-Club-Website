@@ -103,7 +103,7 @@ const Navbar = () => {
 							<Link
 								className="font-bold text-white hover:text-ft-secondary-yellow"
 								href={item.href}
-                                onClick={() => setIsOpen(false)}
+								onClick={() => setIsOpen(false)}
 							>
 								{item.label}
 							</Link>

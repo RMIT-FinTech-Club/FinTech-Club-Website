@@ -5,7 +5,7 @@ import {
 	CardFooter,
 	CardHeader,
 	Image,
-    CardProps
+	CardProps,
 } from "@nextui-org/react";
 import clsx from "clsx";
 import { CSSProperties, HTMLAttributes, RefObject } from "react";
@@ -20,7 +20,7 @@ interface CardEventContent extends CardProps {
 	timeOnHour: string;
 	timeOnDay: string;
 	timeOnMonth: string;
-};
+}
 
 const CardEvent = ({
 	eventName,
@@ -33,7 +33,11 @@ const CardEvent = ({
 	timeOnMonth,
 }: CardEventContent) => {
 	return (
-		<Card className={clsx('flex min-h-full w-[250px] sm:w-[300px] md:w-[350px] lg:w-[500px] flex-col mr-5 mb-6')}>
+		<Card
+			className={clsx(
+				"flex min-h-full w-[250px] sm:w-[300px] md:w-[350px] lg:w-[500px] flex-col mr-5 mb-6",
+			)}
+		>
 			<CardBody className="p-0 overflow-visible">
 				<Image
 					shadow="sm"
@@ -53,7 +57,9 @@ const CardEvent = ({
 					<h1 className="text-xl font-bold w-full text-wrap md:font-semibold truncate line-clamp-1">
 						{title}
 					</h1>
-					<p className="text-medium w-full text-wrap truncate line-clamp-1">{detail}</p>
+					<p className="text-medium w-full text-wrap truncate line-clamp-1">
+						{detail}
+					</p>
 				</div>
 			</CardFooter>
 			{/* For mobile */}
