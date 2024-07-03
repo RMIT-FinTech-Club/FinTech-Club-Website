@@ -5,7 +5,7 @@ const PodcastCard: React.FC = () => {
 		<div className="w-[80%] sm:w-1/2 md:w-1/3 lg:w-1/4 min-w-[360px] aspect-[1/1] shadow-lg rounded-xl relative overflow-hidden group">
 			<div className="absolute top-0 left-0 w-full h-full bg-black opacity-20 transition-all duration-300 group-hover:opacity-0" />
 			<img
-				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/philip-an-podcast.png"
+				src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Projects/Media/fintechtainment-logo.png"
 				alt="Avatar"
 				className="w-full h-full object-cover rounded-lg"
 			/>
