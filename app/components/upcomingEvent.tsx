@@ -7,14 +7,16 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
 import axios from "axios";
+import '@styles/carousel-dynamic-heigth.css'
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
 
 const settings = {
-    className: "w-full",
+    className: "w-full center",
     // dots: true,
     infinite: true,
     autoplay: true,
     // arrows: false,
+    centerMode: true,
     autoSpeed: 1000,
     dragagable: true,
     speed: 500,

@@ -6,18 +6,22 @@ import IntroSection from "./components/intro";
 import UpcomingEvent from "./components/upcomingEvent";
 import Member from "./components/member";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import IntroVideo from "./components/introVideo";
 const Home = () => {
-	return (
-		<div className="flex min-h-screen flex-col justify-center items-center">
-			<SpeedInsights />
-			<HerosectionVid />
-			<HeroSection />
-			<IntroSection />
-			<Department />
-			<Member />
-			<UpcomingEvent />
-		</div>
-	);
+    return (
+        <>
+            <IntroVideo />
+            <div className="flex min-h-screen flex-col justify-center items-center">
+                <SpeedInsights />
+                <HerosectionVid />
+                <HeroSection />
+                <IntroSection />
+                <Department />
+                <Member />
+                <UpcomingEvent />
+            </div>
+        </>
+    );
 };
 
 export default Home;
