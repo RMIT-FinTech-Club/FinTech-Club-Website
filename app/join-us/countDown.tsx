@@ -48,8 +48,9 @@ export default function CountDown() {
 	}, [timerCount]);
 
 	return (
-		<div className="countDown-container h-screen w-screen flex justify-center items-start">
-			<div className="w-full z-10 mt-16 absolute flex flex-col justify-center items-center">
+		<div className="relative countDown-container h-screen w-screen flex justify-center items-start">
+			<div className="absolute w-full h-full top-0 left-0 bg-black opacity-60" />
+			<div className="w-full z-10 mt-12 absolute flex flex-col justify-center gap-8 items-center">
 				<h1
 					className={`mb-7 md:mb-14 text-[#F9FAFB] text-2xl md:text-6xl font-bold ${fontMono.style}`}
 				>
@@ -58,7 +59,7 @@ export default function CountDown() {
 				<div className="timer-container w-full md:w-4/5">
 					<div className="timer w-full flex flex-col md:flex-row  justify-between items-center text-center mb-7 md:mb-14">
 						<section
-							className={`text-[#F9FAFB] mb-12 md:mb-0 ${fontMono.style}`}
+							className={`text-[#F9FAFB] mb-6 md:mb-0 ${fontMono.style}`}
 						>
 							<p className="text-5xl md:text-8xl mb-5 font-black">
 								{days}
@@ -68,7 +69,7 @@ export default function CountDown() {
 							</p>
 						</section>
 						<section
-							className={`text-[#F9FAFB] mb-12 md:mb-0 font-bold ${fontMono.style}`}
+							className={`text-[#F9FAFB] mb-6 md:mb-0 font-bold ${fontMono.style}`}
 						>
 							<p className="text-5xl md:text-8xl mb-5 font-black">
 								{hours}
@@ -78,7 +79,7 @@ export default function CountDown() {
 							</p>
 						</section>
 						<section
-							className={`text-[#F9FAFB] mb-12 md:mb-0 font-bold ${fontMono.style}`}
+							className={`text-[#F9FAFB] mb-6 md:mb-0 font-bold ${fontMono.style}`}
 						>
 							<p className="text-5xl md:text-8xl mb-5 font-black">
 								{minutes}

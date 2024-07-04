@@ -138,6 +138,7 @@ const Department = () => {
 		description: string;
 		imageUrl: string;
 		background: string;
+		color: string;
 	};
 
 	const departments: Record<Department, DepartmentInfo> = {
@@ -149,6 +150,7 @@ const Department = () => {
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept.svg')",
 			background:
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept-bg.jpg')",
+			color: "text-[#73EEBF]",
 		},
 		business: {
 			name: "BUSINESS DEPARTMENT",
@@ -158,6 +160,7 @@ const Department = () => {
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg')",
 			background:
 				"url(https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept-bg.png)",
+			color: "text-[#6a3bed]",
 		},
 		humanResources: {
 			name: "HR DEPARTMENT",
@@ -167,6 +170,7 @@ const Department = () => {
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept.svg')",
 			background:
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept-bg.jpg')",
+			color: "text-[#29C0F2]",
 		},
 		marketing: {
 			name: "MARKETING DEPARTMENT",
@@ -176,6 +180,7 @@ const Department = () => {
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept.svg')",
 			background:
 				"url(https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept-bg.png)",
+			color: "text-[#E689EE]",
 		},
 	};
 
@@ -254,7 +259,7 @@ const Department = () => {
 				style={{ flex: 1 }}
 			>
 				{/* These elements will be pushed down on mobile due to the absolute positioning of the buttons bar */}
-				<h4 className="font-bold text-ft-primary-yellow text-wrap text-xl md:text-5xl sm:text-4xl">
+				<h4 className={`font-bold ${department.color} text-wrap text-xl md:text-5xl sm:text-4xl`}>
 					{department.name}
 				</h4>
 				<h4 className="text-ft-text-bright mt-4">BE ONE OF US!</h4>
@@ -275,7 +280,7 @@ const Department = () => {
 						variant={techButton ? "solid" : "light"}
 						className={
 							techButton
-								? "text-white bg-ft-primary-yellow-500"
+								? "text-black text-semibold bg-[#73EEBF]"
 								: "text-white"
 						}
 					>
@@ -292,7 +297,7 @@ const Department = () => {
 						variant={busButton ? "solid" : "light"}
 						className={
 							busButton
-								? "text-white bg-ft-primary-yellow-500"
+								? "text-black text-semibold bg-[#6a3bed]"
 								: "text-white"
 						}
 					>
@@ -309,7 +314,7 @@ const Department = () => {
 						variant={hrButton ? "solid" : "light"}
 						className={
 							hrButton
-								? "text-white bg-ft-primary-yellow-500"
+								? "text-black text-semibold bg-[#29C0F2]"
 								: "text-white"
 						}
 					>
@@ -326,7 +331,7 @@ const Department = () => {
 						variant={marButton ? "solid" : "light"}
 						className={
 							marButton
-								? "text-white bg-ft-primary-yellow-500"
+								? "text-black text-semibold bg-[#E689EE]"
 								: "text-white"
 						}
 					>
