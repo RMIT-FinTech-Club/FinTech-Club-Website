@@ -126,10 +126,10 @@ export default function HistorySection() {
 			</div>
 
 			{/* desktop version */}
-			<div className="items-center w-full md:mt-8 md:grid md:grid-cols-7 grid-cols-1 overflow-hidden my-auto">
+			<div className="items-center w-full md:mt-8 md:grid md:grid-cols-7 grid-cols-1 overflow-hidden my-auto overflow-x-hidden">
 				<img
 					alt="fintech mascot"
-					className="md:block hidden md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
+					className="md:block hidden md:w-[500px] scale-150 lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 				<div
@@ -171,7 +171,7 @@ export default function HistorySection() {
 				</div>
 				<img
 					alt="fintech mascot"
-					className=" md:block hidden md:w-[400px] lg:w-[600px] rotate-[-58.03deg] rounded-[59px] z-10 "
+					className=" md:block hidden md:w-[500px] scale-150 lg:w-[600px] rotate-[-58.03deg] rounded-[59px] z-10 "
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 			</div>
