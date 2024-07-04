@@ -30,7 +30,7 @@ const IntroSection = () => {
 			{/* Image */}
 			{/* <MaskImage src='/ImageMask.svg' /> */}
 			<div className="md:w-1/3" style={{ aspectRatio: "1/ 1.5" }}>
-				<MaskImage src="/AchievementsBg.png" />
+				<MaskImage src="/AchievementBg.png" />
 			</div>
 			{/* Right text */}
 			<div className="flex flex-col md:w-1/3 justify-center gap-4">

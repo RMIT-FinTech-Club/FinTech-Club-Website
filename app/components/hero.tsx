@@ -4,20 +4,20 @@ import React from "react";
 const bottomImages = [
 	{
 		id: "1",
-		src: "",
+		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/z5587551509111_944f7e7fe24867670f1674c8636b736f.jpg",
 		size: "w-full md:w-1/4",
 		alt: "Placeholder image",
 	},
 	{
 		id: "2",
 		size: "hidden md:block w-full md:w-1/2",
-		src: "",
+		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/IMG_0501.JPG",
 		alt: "Placeholder image",
 	},
 	{
 		id: "3",
 		size: "hidden md:block w-full md:w-1/4",
-		src: "",
+		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/2.png",
 		alt: "Placeholder image",
 	},
 ];
@@ -40,7 +40,7 @@ const HeroSection = () => {
 						interconnected nature of Technological advancement and
 						real Business issues.
 					</p>
-					<div className="justify-start items-center gap-6 flex">
+					<div className="justify-start items-center gap-6 flex mt-8">
 						<Button
 							className="bg-ft-primary-blue text-ft-text-bright"
 							variant="solid"
@@ -55,10 +55,10 @@ const HeroSection = () => {
 						</Button>
 					</div>
 				</div>
-				<div className="w-full md:w-1/2 h-[300px] md:h-[200px] lg:h-[300px] rounded-xl relative border-2 border-black">
+				<div className="w-full md:w-1/2 h-[300px] md:h-[200px] lg:h-[300px] rounded-xl relative ">
 					<Image
-						className="w-full h-full absolute object-cover"
-						src=""
+						className="w-full h-full object-cover"
+						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/1.png"
 						alt="Placeholder image"
 					/>
 				</div>
@@ -67,15 +67,10 @@ const HeroSection = () => {
 				{bottomImages.map((img, _idx) => (
 					<div
 						key={img.id}
-						className={`h-[300px] md:h-[200px] lg:h-[300px] relative border-2 rounded-xl border-black 
+						className={`h-[300px] md:h-[200px] lg:h-[300px] relative rounded-xl 
 							${img.size}`}
-					>
-						<Image
-							className="w-full h-full absolute object-cover"
-							src={img.src}
-							alt={img.alt}
-						/>
-					</div>
+						style={{ backgroundImage: `url(${img.src})`, backgroundSize: "cover", backgroundPosition: "center" }}
+					/>
 				))}
 			</div>
 		</div>
