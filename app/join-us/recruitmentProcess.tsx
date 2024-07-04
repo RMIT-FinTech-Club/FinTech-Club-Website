@@ -43,6 +43,7 @@ const RecruitmentProcess = () => {
 						text="Our Booklet"
 						color="bg-ft-primary-yellow-500"
 					/>
+					
 				</div>
 			</div>
 		</>

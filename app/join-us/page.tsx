@@ -7,7 +7,7 @@ const JoinUs = () => {
 		<>
 			<CountDown />
 			<RecruitmentProcess />
-			<BondingActivities />
+			{/* <BondingActivities /> */}
 		</>
 	);
 };
