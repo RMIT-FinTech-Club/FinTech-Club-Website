@@ -1,18 +1,22 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
+import React, { useEffect, useRef, useState } from "react";
+import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
 import axios from "axios";
+import "@styles/carousel-dynamic-heigth.css";
+import { NextArrow, PreArrow } from "@/components/carouselArrows";
 
 const settings = {
-	className: "w-full",
-	dots: false,
+	className: "w-full center",
+	// dots: true,
 	infinite: true,
 	autoplay: true,
+	// arrows: false,
+	centerMode: true,
 	autoSpeed: 1000,
 	dragagable: true,
 	speed: 500,
@@ -20,10 +24,12 @@ const settings = {
 	slidesToScroll: 1,
 	variableWidth: true,
 	initialSlide: 0,
-};
+} as Settings;
 
 const UpcomingEvent = () => {
 	const [upcomingEvents, setUpcomingEvents] = useState([]);
+
+	const sliderRef = useRef<Slider>(null);
 
 	useEffect(() => {
 		axios
@@ -42,15 +48,21 @@ const UpcomingEvent = () => {
 			<h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
 				PROJECTS
 			</h1>
-			<section className="mx-auto overflow-hidden w-full">
+			<section className="relative mx-auto w-full">
 				<section className="flex flex-row justify-between items-center w-full mb-5 gap-4">
 					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow md:hidden" />
 					<div className="text-ft-primary-yellow text-2xl font-semibold">
 						2024
 					</div>
-					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow  md:w-full" />
+					<hr className="w-1/3 border-b-2 border-solid border-ft-primary-yellow md:w-full" />
 				</section>
-				<Slider {...settings}>
+				<PreArrow
+					buttonOnClick={() => {
+						sliderRef?.current?.slickPrev();
+					}}
+					className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16"
+				/>
+				<Slider ref={sliderRef} {...settings}>
 					{upcomingEvents.map((event, index) => {
 						// Split date to get month and day
 						const dateMonth = (event["date"] as string).split(" ");
@@ -58,10 +70,11 @@ const UpcomingEvent = () => {
 						return (
 							<CardEvent
 								key={event["_id"]}
+								imageUrl={event["imageUrl"]}
 								eventName="No name"
 								location={event["location"]}
-								title={event["description"]}
-								detail="Lorem ipsum dolor sit amet, consectetur ..."
+								title={event["name"]}
+								detail={event["description"]}
 								timeOnHour={event["time"]}
 								timeOnDay={dateMonth[0]}
 								timeOnMonth={dateMonth[1]}
@@ -69,6 +82,12 @@ const UpcomingEvent = () => {
 						);
 					})}
 				</Slider>
+				<NextArrow
+					buttonOnClick={() => {
+						sliderRef?.current?.slickNext();
+					}}
+					className="hidden md:block absolute top-1/2 -translate-y-1/2 -right-16"
+				/>
 			</section>
 		</section>
 	);

@@ -40,7 +40,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 	const primaryBlue = "#2C305F";
 
 	return (
-		<div className="grid grid-rows-2 grid-cols-12 gap-2 md:grid-rows-1 md:gap-4 border rounded-lg shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
+		<div className="grid grid-rows-1 grid-cols-12 gap-2 md:max-h-60 md:grid-rows-1 md:gap-4 border rounded-2xl shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
 			{/* Event Image */}
 			{imageLoading ? (
 				<div className="row-span-1 col-span-12 md:col-span-4 w-full">
@@ -56,7 +56,10 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 					/>
 				</div>
 			) : (
-				<Skeleton isLoaded={imageLoading}>
+				<Skeleton
+					isLoaded={imageLoading}
+					className="row-span-1 col-span-12 md:col-span-4 w-full"
+				>
 					<div className="row-span-1 col-span-12 md:col-span-4 w-full">
 						<img
 							src={event.imageUrl}
@@ -75,13 +78,13 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 			{/* Event Info */}
 			<div className="date row-span-1 col-span-3 flex flex-col justify-between p-2 md:p-4 py-auto space-y-2 text-center align-middle mb-2">
 				<div className="flex flex-col align-middle h-full">
-					<h2 className="my-auto text-ft-primary-yellow-500">
+					<p className="my-auto text-ft-primary-yellow-500 text-2xl font-bold">
 						{event.date}
-					</h2>
+					</p>
 				</div>
 			</div>
-			<div className="row-span-1 col-span-9 md:col-span-6 flex flex-col justify-between p-1 md:p-4 space-y-2 mb-2">
-				<h3 className="text-xl font-bold">{event.description}</h3>
+			<div className="row-span-1 col-span-9 md:col-span-6 flex flex-col justify-center p-1 md:p-4 space-y-2 mb-2">
+				<h3 className="text-xl font-bold">{event.name}</h3>
 				<div className="flex items-center text-md">
 					<IconClock
 						className="mr-2 text-lg"
@@ -89,7 +92,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 						strokeWidth={2}
 						style={{ color: primaryYellow }}
 					/>
-					{displayDate ? event.time : event.dateTime}
+					{event.date}
 				</div>
 				<div className="flex items-center text-md">
 					{event.type === "Offline" ? (
@@ -133,7 +136,7 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 				/>
 				<a
 					href={`/events/event-detail/${event._id}`}
-					className="text-ft-primary-yellow rotate-90 text-lg font-bold z-10"
+					className="text-ft-primary-yellow rotate-90 text-lg font-semibold z-10 uppercase"
 				>
 					Explore More
 				</a>

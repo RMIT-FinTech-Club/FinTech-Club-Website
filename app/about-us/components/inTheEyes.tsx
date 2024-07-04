@@ -31,25 +31,25 @@ export default function FinTechInTheEyes() {
 					President
 				</h2>
 				<h2
-					className={`text-2xl md:text-4xl text-center md:text-start md:py-2 md:mb-6 text-[#2B305E] font-extrabold ${fontMono.style}`}
+					className={`text-2xl md:text-4xl text-center md:text-start mt-4 md:mt-0 md:py-2 md:mb-6 text-[#2B305E] font-extrabold ${fontMono.style}`}
 				>
 					Nguyen Manh Dung
 				</h2>
 				<h2
-					className={`md:hidden text-1xl text-center text-[#DBB968] ${fontMono.style}`}
+					className={`md:hidden text-1xl text-center mt-3 text-[#DBB968] ${fontMono.style}`}
 				>
 					President
 				</h2>
 				<p
-					className={`text-1xl md:text-2xl text-justify md:text-left ${fontMono.style}`}
+					className={`text-1xl md:text-2xl text-justify mt-4 md:mt-0 mb-0 md:mb-36 md:text-left ${fontMono.style}`}
 				>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Suspendisse aliquam eget turpis sed lacinia. Proin vitae leo
-					non massa egestas cursus. Aliquam convallis malesuada
-					tortor, in ornare orci euismod non. Etiam non tincidunt
-					nibh. Donec porta placerat tortor, et vulputate nisl
-					molestie at. Ut nisl mi, vehicula quis sapien non, vulputate
-					luctus odio.
+					FinTech Club changed my life. Joining RMIT was challenging
+					as an introvert, making new friends difficult. College was
+					lonely until I found the FinTech Club, where like-minded
+					individuals shared my passion for growth. Winning the
+					"Star-Up" competition boosted my confidence and skills.
+					Becoming President allowed me to give back to this uplifting
+					community.
 				</p>
 			</div>
 			<div className="md:block hidden flex-col justify-betwwen md:col-span-2 mt-32">

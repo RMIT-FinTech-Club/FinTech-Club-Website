@@ -1,9 +1,12 @@
 export interface Event {
 	_id: string;
+	imageUrl: string;
 	name: string;
 	description: string;
-	imageUrl: string;
 	registrationLink: string;
+	bookletLink: string;
+	objective: string;
+	participants: string;
 	dateTime: string;
 	time: string;
 	date: string;

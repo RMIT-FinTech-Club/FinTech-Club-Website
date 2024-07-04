@@ -2,7 +2,6 @@
 import { Image } from "@nextui-org/image";
 import { Button, Checkbox, Input } from "@nextui-org/react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import type React from "react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -12,7 +11,6 @@ const LoginPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const toggleVisibility = () => setVisible(!visible);
-	const router = useRouter();
 	const login = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const configuration = {

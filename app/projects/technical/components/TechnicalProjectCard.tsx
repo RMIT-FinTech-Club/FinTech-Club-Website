@@ -1,4 +1,7 @@
+"use client";
 import type React from "react";
+import { Skeleton } from "@nextui-org/react";
+import { useState } from "react";
 
 const TechnicalTag: React.FC<{ tagName: string }> = ({ tagName }) => {
 	return (
@@ -21,14 +24,17 @@ const TechnicalProjectCard: React.FC<{
 	projectTags,
 	projectImg,
 }) => {
+	const [isLoaded, setIsLoaded] = useState(false);
 	return (
 		<div className="flex odd:flex-row even:flex-row-reverse justify-between box-border p-2 rounded-xl">
-			<img
-				className="rounded-xl w-[20vw] max-sm:hidden aspect-square"
-				src={projectImg}
-				alt=""
-			></img>
-
+			<Skeleton isLoaded={isLoaded} className="rounded-xl">
+				<img
+					className="rounded-xl w-[20vw] max-sm:hidden aspect-square object-cover"
+					src={projectImg}
+					alt="project image"
+					onLoad={() => setIsLoaded(true)}
+				/>
+			</Skeleton>
 			<div className="flex flex-col lg:w-[40vw] md:w-[60vw] sm:w-full min-w-[320px] relative gap-2">
 				<div className="flex gap-2 max-sm:justify-center">
 					{projectTags.map((tag, id) => (

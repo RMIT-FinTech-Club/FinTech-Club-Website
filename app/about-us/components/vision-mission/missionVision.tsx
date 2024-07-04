@@ -6,12 +6,12 @@ const VisionMission = () => {
 		mission: {
 			title: "Mission",
 			content:
-				'To realize our vision, our objective in 2024 is to create impactful high-scale events, organize more meaningful and member-centric workshops, and diversify our projects to create more opportunities for members to learn and connect with real-world experts, gaining them valuable industry insights.',
+				"To realize our vision, our objective in 2024 is to create impactful high-scale events, organize more meaningful and member-centric workshops, and diversify our projects to create more opportunities for members to learn and connect with real-world experts, gaining them valuable industry insights.",
 		},
 		vision: {
 			title: "Vision",
 			content:
-				'Our vision is simple: to build a valuable hub for Finance, Technology, Business, and FinTech enthusiasts. Valuable to us means a club that can incubate knowledge, skills, practical experience and connections for its members, while engaging and educating the community into the FinTech industry.',
+				"Our vision is simple: to build a valuable hub for Finance, Technology, Business, and FinTech enthusiasts. Valuable to us means a club that can incubate knowledge, skills, practical experience and connections for its members, while engaging and educating the community into the FinTech industry.",
 		},
 	};
 

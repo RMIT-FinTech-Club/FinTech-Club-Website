@@ -11,6 +11,7 @@ interface EventProject {
 	description: string;
 	sponsorURLs: string[];
 	recapURLs: string[];
+	eventThumbnail: string;
 }
 
 const EventCard = () => {
@@ -19,7 +20,7 @@ const EventCard = () => {
 	useEffect(() => {
 		const configuration = {
 			method: "get",
-			url: "/api/v1/eventprojects/getData",
+			url: "/api/v1/eventprojects",
 		};
 		axios(configuration)
 			.then((result) => {
@@ -42,22 +43,24 @@ const EventCard = () => {
 					Forums and Competitions
 				</h1>
 				<p className="font-poppins text-base sm:text-lg md:text-xl lg:text-2xl text-justify mt-4 w-4/5 mx-auto font-light">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Cupiditate, ut. Quos sunt expedita ut eum delectus ducimus
-					doloribus officia repudiandae neque, dolor dolorum
-					voluptatum, non ratione aliquam molestias! Possimus,
-					perferendis!
+					Our club envisions becoming a dynamic hub for organizing
+					forums and competitions that inspire innovation and
+					collaboration. We aim to create a vibrant community where
+					individuals can exchange ideas, showcase talents, and engage
+					in healthy competition. By hosting diverse events, we strive
+					to foster intellectual growth, enhance skills, and build
+					lasting connections among members.
 				</p>
 				<div className="w-1/5 h-1 bg-black my-8 mx-auto" />
 				<div className="grid lg:grid-cols-2 lg:grid-flow-row mt-12 gap-14 md:px-40 px-12">
 					{eventProjectsData.map((event: EventProject) => (
 						<a
-							href={`/projects/event/${event._id}`}
+							href={`#`}
 							className="relative w-full lg:max-w-[400px] justify-self-center m-auto items-center text-center bg-ft-background h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000"
 						>
 							<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#DCB968] hover:bg-gradient-to-b hover:from-[#ffe098] hover:to-black to-black opacity-40 transition-all duration-300 group-hover:opacity-0 rounded-2xl" />
 							<img
-								src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Projects/Media/fintechtainment-logo.png"
+								src={event.eventThumbnail}
 								alt="Avatar"
 								className="w-full h-full object-cover rounded-lg"
 							/>

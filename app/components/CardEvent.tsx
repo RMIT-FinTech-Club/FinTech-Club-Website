@@ -5,18 +5,26 @@ import {
 	CardFooter,
 	CardHeader,
 	Image,
+	CardProps,
 } from "@nextui-org/react";
-type CardEventContent = {
+import clsx from "clsx";
+import { CSSProperties, HTMLAttributes, RefObject } from "react";
+import Slider from "react-slick";
+
+interface CardEventContent extends CardProps {
 	eventName: string;
+	imageUrl: string;
 	location: string;
 	title: string;
 	detail: string;
 	timeOnHour: string;
 	timeOnDay: string;
 	timeOnMonth: string;
-};
+}
+
 const CardEvent = ({
 	eventName,
+	imageUrl,
 	location,
 	title,
 	detail,
@@ -25,27 +33,33 @@ const CardEvent = ({
 	timeOnMonth,
 }: CardEventContent) => {
 	return (
-		<Card className="flex flex-col mr-5 mb-6 md:w-unit-7xl">
+		<Card
+			className={clsx(
+				"flex min-h-full w-[250px] sm:w-[300px] md:w-[350px] lg:w-[500px] flex-col mr-5 mb-6",
+			)}
+		>
 			<CardBody className="p-0 overflow-visible">
 				<Image
 					shadow="sm"
 					radius="lg"
 					width="100%"
-					className="w-full object-cover h-[200px]"
+					className="w-full object-cover h-[150px] lg:h-[200px]"
 					alt="Card background"
-					src="/ProjectGeneralImage.png"
+					src={imageUrl}
 				/>
 			</CardBody>
-			<CardFooter className=" text-white gap-2 md:text-ft-primary-blue">
-				<div className="bg-ft-primary-blue w-auto rounded-lg px-4 flex justify-around content-center md:flex-col md:items-center  md:bg-transparent md:text-ft-primary-blue">
-					<h1 className="text-3xl md:text-4xl">{timeOnDay}</h1>
-					<h3 className="text-2xl md:text-4xl">{timeOnMonth}</h3>
+			<CardFooter className="w-full text-white gap-2 md:text-ft-primary-blue">
+				<div className="bg-ft-primary-blue w-auto rounded-lg px-4 flex justify-around items-center gap-2 md:gap-0 content-center md:flex-col md:items-center  md:bg-transparent md:text-ft-primary-blue">
+					<p className="text-sm font-bold">{timeOnDay}</p>
+					<p className="text-md font-bold">{timeOnMonth}</p>
 				</div>
-				<div className="hidden  md:block md:w-full md:text-ft-primary-blue">
-					<h1 className="text-4xl font-bold md:font-semibold">
+				<div className="hidden md:block md:w-full md:text-ft-primary-blue">
+					<h1 className="text-xl font-bold w-full text-wrap md:font-semibold truncate line-clamp-1">
 						{title}
 					</h1>
-					<p className="text-lg w-full">{detail}</p>
+					<p className="text-medium w-full text-wrap truncate line-clamp-1">
+						{detail}
+					</p>
 				</div>
 			</CardFooter>
 			{/* For mobile */}

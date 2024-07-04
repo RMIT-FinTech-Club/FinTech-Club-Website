@@ -1,14 +1,15 @@
-'use client'
-import { Button } from "@nextui-org/react";
+"use client";
+import { Button, Link } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import React from "react";
 
 interface RoadToFtcButtonProps {
 	text: string;
 	color: string;
+	link: string;
 }
 
-const RoadToFtcButton = ({ text, color }: RoadToFtcButtonProps) => {
+const RoadToFtcButton = ({ text, color, link }: RoadToFtcButtonProps) => {
 	return (
 		<div>
 			{/* Laptop view */}
@@ -20,6 +21,8 @@ const RoadToFtcButton = ({ text, color }: RoadToFtcButtonProps) => {
 				<div className="hidden lg:flex">
 					<Button
 						className={`mx-8 my-2 py-2 px-4 ${color} text-white font-bold rounded-xl w-96 h-24 text-4xl`}
+						href={link}
+						as={Link}
 					>
 						{text}
 					</Button>
