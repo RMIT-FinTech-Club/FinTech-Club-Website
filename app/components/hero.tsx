@@ -1,5 +1,6 @@
 import { Button, Image } from "@nextui-org/react";
 import React from "react";
+import Link from "next/link";
 
 const bottomImages = [
 	{
@@ -45,13 +46,17 @@ const HeroSection = () => {
 							className="bg-ft-primary-blue text-ft-text-bright"
 							variant="solid"
 						>
-							Read More
+							<Link href="/about-us">
+								Read More
+							</Link>
 						</Button>
 						<Button
 							className="bg-ft-primary-blue text-ft-text-bright"
 							variant="solid"
 						>
-							Join Us
+							<Link href="/join-us">
+								Join Us
+							</Link>
 						</Button>
 					</div>
 				</div>

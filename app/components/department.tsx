@@ -145,7 +145,7 @@ const Department = () => {
 		technology: {
 			name: "TECHNOLOGY DEPARTMENT",
 			description:
-				"With an unquenchable thirst for coding, fixing bugs, and …, the Technology Department represents the second pillar of our organization. We are responsible for the development of the club’s technical projects, including the SnapID Computer Vision Project, RBPC Website, and currently the FinTech Club Website Project. Beyond practical coding projects, we also provide internal training & sharing sessions, public workshops, mentoring initiatives, and memorable bonding activities for Tech Dept. members. Our members receive the full package of skill improvement, industry connections, and a belonging environment.",
+				"With an unquenchable thirst for coding, fixing bugs, the Technology Department represents the second pillar of our organization. We are responsible for the development of the club’s technical projects, including the SnapID Computer Vision Project, RBPC Website, and currently the FinTech Club Website Project. Beyond practical coding projects, we also provide internal training & sharing sessions, public workshops, mentoring initiatives, and memorable bonding activities for Tech Dept. members. Our members receive the full package of skill improvement, industry connections, and a belonging environment.",
 			imageUrl:
 				"url('https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept.svg')",
 			background:

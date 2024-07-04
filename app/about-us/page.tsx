@@ -27,7 +27,7 @@ const AboutUs = () => {
 			<FinTechInTheEyes />
 			<ExecuteBoard />
 			<ManagementBoard />
-			<Members />
+			{/* <Members /> */}
 			{/* <CoreValue /> */}
 		</>
 	);
