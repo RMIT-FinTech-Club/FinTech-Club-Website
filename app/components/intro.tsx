@@ -160,7 +160,7 @@ const MaskImage: React.FC<MaskImageProps> = ({
 			width={300}
 			height={0}
 			className="object-cover w-full h-full"
-			src={src}
+			src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/ClubPage.jpg"
 			alt="Fintech club members"
 			style={style}
 		/>
