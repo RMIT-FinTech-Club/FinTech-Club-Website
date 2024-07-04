@@ -43,9 +43,13 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
 	try {
 		const {
-			description,
 			imageUrl,
+			name,
+			description,
 			registrationLink,
+			bookletLink,
+			objective,
+			participants,
 			dateTime,
 			time,
 			date,
@@ -55,9 +59,13 @@ export async function POST(req: NextRequest) {
 
 		// Create event
 		const newEvent = await new UpCommingEvents({
-			description,
 			imageUrl,
+			name,
+			description,
 			registrationLink,
+			bookletLink,
+			objective,
+			participants,
 			dateTime,
 			time,
 			date,

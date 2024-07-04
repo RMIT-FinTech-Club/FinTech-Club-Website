@@ -2,14 +2,14 @@ import { Image } from "@nextui-org/react";
 import type React from "react";
 
 interface CardProps {
-	title: string;
+	name: string;
 	description: string;
 	date: string;
 	imageUrl: string;
 }
 
 const EventCard: React.FC<CardProps> = ({
-	title,
+	name,
 	description,
 	date,
 	imageUrl,
@@ -20,7 +20,7 @@ const EventCard: React.FC<CardProps> = ({
 				isZoomed
 				width={10000}
 				src={imageUrl}
-				alt={title}
+				alt={name}
 				className="object-cover h-[350px] rounded-2xl z-10"
 			/>
 
@@ -29,8 +29,8 @@ const EventCard: React.FC<CardProps> = ({
 					<h5>{date}</h5>
 				</div>
 				<div>
-					<h3 className="text-ft-heading-5 font-bold">{title}</h3>
-					<p>{description}</p>
+					<h3 className="text-ft-heading-5 font-bold">{name}</h3>
+					{/* <p className="truncate">{description}</p> */}
 				</div>
 			</div>
 		</div>

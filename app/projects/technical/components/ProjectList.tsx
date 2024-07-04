@@ -12,7 +12,7 @@ const ProjectList: React.FC = () => {
 	useEffect(() => {
 		const configuration = {
 			method: "get",
-			url: "/api/v1/technicalprojects/getData",
+			url: "/api/v1/technicalprojects",
 		};
 		axios(configuration)
 			.then((result) => {
@@ -26,7 +26,7 @@ const ProjectList: React.FC = () => {
 	}, []);
 	return isLoading ? (
 		<section className="flex flex-col items-center h-screen w-full justify-center">
-			<ClipLoader color="#2C305F" size={60}/>
+			<ClipLoader color="#2C305F" size={60} />
 		</section>
 	) : (
 		<div className="lg:w-[65vw] w-[90vw] mx-auto flex flex-col md:gap-24 gap-12 py-8">

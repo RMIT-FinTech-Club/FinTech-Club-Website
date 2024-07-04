@@ -11,7 +11,7 @@ const Member = () => {
 		"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/HallOfFame-Background.svg";
 	return (
 		<section
-			className=" relative bg-cover bg-center h-fit pb-10 px-side-margin-mobile md:px-side-margin md:pb-10"
+			className=" relative bg-cover bg-center h-fit pb-10 w-screen px-side-margin-mobile md:px-side-margin md:pb-10"
 			style={{ backgroundImage: `url(${imageUrl})` }}
 		>
 			{/* <div className="absolute right-10 bottom-0 z-0 max-w-44 md:max-w-96">
@@ -53,8 +53,8 @@ const Member = () => {
 				<div className=" basis-2/12 w-full mx-3 md:mx-5 text-ft-text-bright content-center">
 					<h1>HALL</h1>
 					<div className="flex flex-row">
-						<h4 className="-mt-2 md:mt-7">OF</h4>
-						<h1 className="-mt-3 md:mt-10">FAME</h1>
+						<h5 className="mt-2 md:-mt-2">OF</h5>
+						<h1 className="mt-3 md:-mt-4">FAME</h1>
 					</div>
 				</div>
 				<svg className=" basis-9/12" height="80%" aria-label="Line">

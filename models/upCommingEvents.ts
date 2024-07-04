@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const upCommingEventsSchema = new mongoose.Schema(
     {
+        imageUrl: {
+            type: String,
+            required: [true, "Please provide event image"],
+        },
         name: {
             type: String,
             required: [true, "Please provide event name"],
@@ -10,15 +14,21 @@ const upCommingEventsSchema = new mongoose.Schema(
             type: String,
             required: [true, "Please provide event description"],
         },
-        imageUrl: {
-            type: String,
-            required: [true, "Please provide event image"],
-        },
         registrationLink: {
             type: String,
-            required: [true, "Please provide event registration link"],
         },
-        dateTime: {
+        bookletLink: {
+            type: String,
+        },
+        objective: {
+            type: String,
+            required: [true, "Please provide event objective"],
+        },
+        participants: {
+            type: String,
+            required: [true, "Please provide event participants"],
+        },
+        fullDate: {
             type: Date,
             required: [true, "Please provide event date time"],
         },

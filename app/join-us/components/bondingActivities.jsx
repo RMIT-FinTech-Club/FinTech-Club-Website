@@ -47,7 +47,7 @@ const BondingActivities = () => {
     }, [scrollClass]);
 
     return (
-        <>
+        <section className="w-screen">
         <h4 className="w-full text-center mt-10 text-ft-primary-blue hidden md:block">Internal Activities</h4>
         <h1 className="w-full text-center mt-10 text-ft-primary-blue block md:hidden">Internal Activities</h1>
         <div className="flex flex-col md:flex-row w-full md:justify-end items-center mb-8">
@@ -305,7 +305,7 @@ const BondingActivities = () => {
                 </div>
             </div>
         </div>
-        </>
+        </section>
     );
 };
 

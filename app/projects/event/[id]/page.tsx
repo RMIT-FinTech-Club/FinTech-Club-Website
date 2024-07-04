@@ -17,7 +17,7 @@ interface EventProject {
 	recapURLs: string[];
 }
 
-const EventDetailPage: React.FC = () => {
+const EventDetailPage = ({ params }: { params: { id: string } }) => {
 	const [projectData, setProjectData] = useState<EventProject>({
 		_id: "",
 		year: "",
@@ -27,14 +27,12 @@ const EventDetailPage: React.FC = () => {
 		sponsorURLs: [],
 		recapURLs: [],
 	});
+	console.log(params.id);
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		const configuration = {
-			method: "post",
-			url: "/api/v1/eventprojects/getOneEventProject",
-			data: {
-				id: "667e662dd27faa3bbed379e1",
-			},
+			method: "get",
+			url: `/api/v1/eventprojects/${params.id}`,
 		};
 		// console.log(params.id);
 		axios(configuration)
@@ -46,10 +44,10 @@ const EventDetailPage: React.FC = () => {
 			.catch((error) => {
 				console.log(error);
 			});
-	}, []);
+	}, [params.id]);
 	return isLoading ? (
 		<section className="flex flex-col items-center h-screen w-full justify-center">
-			<ClipLoader color="#2C305F" size={60}/>
+			<ClipLoader color="#2C305F" size={60} />
 		</section>
 	) : (
 		<div className="w-100 h-auto">

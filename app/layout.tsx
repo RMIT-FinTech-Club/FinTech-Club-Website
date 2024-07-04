@@ -70,7 +70,9 @@ export default function RootLayout({
 					/>
 					<div className="relative items-center flex flex-col h-screen">
 						{<Navbar />}
-						<main className="flex-grow overflow-x-clip">{children}</main>
+						<main className="flex-grow overflow-x-clip">
+							{children}
+						</main>
 						{<Footer />}
 					</div>
 				</Providers>
