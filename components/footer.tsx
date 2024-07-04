@@ -14,7 +14,7 @@ const Footer = () => {
 					<div className="mt-[20px] flex flex-col-reverse items-center md:block">
 						<div className="flex flex-col items-center md:block mb-[40px] md:mb-0 w-[90%] md:w-full">
 							<h5 className="text-ft-text-bright mb-4">About Us</h5>
-							<p className="text-ft-text-bright text-center md:text-left">
+							<p className="text-ft-text-bright text-center md:text-justify">
 								RMIT FinTech Club is the first ever student-led Financial Technology club in Vietnam, founded in 2020. Founded on the mission to bring Business & Technology students together to learn, exchange ideas, innovate, and build things together{" "}
 							</p>
 						</div>
@@ -34,22 +34,22 @@ const Footer = () => {
 							</a>
 						</li>
 						<li>
-							<a href="/" className="block mb-2">
+							<a href="/about-us" className="block mb-2">
 								<p className="text-ft-text-bright">About Us</p>
 							</a>
 						</li>
 						<li>
-							<a href="/" className="block mb-2">
+							<a href="/events" className="block mb-2">
 								<p className="text-ft-text-bright">Events</p>
 							</a>
 						</li>
 						<li>
-							<a href="/" className="block mb-2">
+							<a href="/projects" className="block mb-2">
 								<p className="text-ft-text-bright">Projects</p>
 							</a>
 						</li>
 						<li>
-							<a href="/" className="block">
+							<a href="/join-us" className="block">
 								<p className="text-ft-text-bright">Join Us</p>
 							</a>
 						</li>
