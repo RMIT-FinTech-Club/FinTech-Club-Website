@@ -1,11 +1,14 @@
 .countDown-container {
-    background: url("../../public/CountDownDesktop.png") center bottom no-repeat;
-    background-size: 100%;
+	background: url("https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/join_us/countdown-bg.jpg")
+		center bottom no-repeat;
+	background-size: 100%;
+	backdrop-filter: blur(10px);
 }
 
 @media screen and (max-width: 768px) {
-    .countDown-container {
-            background: url("https://ik.imagekit.io/wsdkzaaovq/Hero%20Section.svg?updatedAt=1718877523809") left top no-repeat;
-            background-size:  500%;
-        }
+	.countDown-container {
+		background: url("https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/join_us/countdown-bg.jpg")
+			left top no-repeat;
+		background-size: 500%;
+	}
 }

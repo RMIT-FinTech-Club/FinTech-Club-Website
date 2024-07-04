@@ -39,10 +39,8 @@ const ManagementBoard = () => {
 								</div>
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
-								<h6 className="font-bold text-3xl pb-2">
-									TRUONG MINH
-									<br />
-									NGOC
+								<h6 className="font-bold text-[22px] pb-2">
+									TRUONG MINH NGOC
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Business
@@ -72,10 +70,8 @@ const ManagementBoard = () => {
 								</div>
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
-								<h6 className="font-bold text-3xl pb-2">
-									NGUYEN BAO
-									<br />
-									NGOC
+								<h6 className="font-bold text-[22px] pb-2">
+									NGUYEN BAO NGOC
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Human Resources
@@ -105,10 +101,8 @@ const ManagementBoard = () => {
 								</div>
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
-								<h6 className="font-bold text-3xl pb-2">
-									NGUYEN TRAN
-									<br />
-									HOANG ANH
+								<h6 className="font-bold text-[22px] pb-2">
+									NGUYEN TRAN HOANG ANH
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Marketing
@@ -139,10 +133,8 @@ const ManagementBoard = () => {
 								</div>
 							</CardHeader>
 							<CardBody className="overflow-visible py-4 text-center">
-								<h6 className="font-bold text-3xl pb-2">
-									HUYNH LE DIEM
-									<br />
-									QUI
+								<h6 className="font-bold text-[22px] pb-2">
+									HUYNH LE DIEM QUI
 								</h6>
 								<p className="text-lg font-semibold">
 									Head of Technology

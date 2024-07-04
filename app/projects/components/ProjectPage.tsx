@@ -108,7 +108,7 @@ const ProjectPage = () => {
 										href={"/projects/technical"}
 										className="my-4"
 									>
-										Go to
+										Explore more
 									</a>
 								</Button>
 							</div>
