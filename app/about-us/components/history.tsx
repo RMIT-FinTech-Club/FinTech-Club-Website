@@ -127,11 +127,11 @@ export default function HistorySection() {
 			<div className="items-center w-screen md:mt-0 md:grid md:grid-cols-12 grid-cols-1 overflow-hidden my-auto">
 				<img
 					alt="fintech mascot"
-					className="md:block hidden md:col-span-2 md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
+					className="md:block hidden md:col-span-1 scale-[2.5] md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] z-10"
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 				<div
-					className={`mt-[93px] mb-[77px] md:col-span-8 md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${
+					className={`mt-[93px] mb-[77px] md:col-span-10 md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${
 						centerSlideIndex === 0
 							? "pr-96"
 							: centerSlideIndex === historyData.length - 1
@@ -172,7 +172,7 @@ export default function HistorySection() {
 				</div>
 				<img
 					alt="fintech mascot"
-					className=" md:block hidden md:col-span-2 md:w-[400px] lg:w-[600px] rotate-[-58.03deg] rounded-[59px] z-10 "
+					className=" md:block hidden md:col-span-1 scale-[2.5] md:w-[400px] lg:w-[600px] rotate-[-58.03deg] rounded-[59px] z-10 "
 					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
 				/>
 			</div>

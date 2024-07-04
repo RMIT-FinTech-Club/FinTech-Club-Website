@@ -17,7 +17,6 @@ const ProjectList: React.FC = () => {
 		axios(configuration)
 			.then((result) => {
 				setTechnicalProjectsData(result.data.data);
-				console.log(result.data.data);
 				setIsLoading(false);
 			})
 			.catch((error) => {
@@ -30,13 +29,14 @@ const ProjectList: React.FC = () => {
 		</section>
 	) : (
 		<div className="lg:w-[65vw] w-[90vw] mx-auto flex flex-col md:gap-24 gap-12 py-8">
-			{technicalProjectsData.map((project: TechnicalProject) => (
+			{technicalProjectsData.map((project: TechnicalProject, index) => (
 				<TechnicalProjectCard
 					projectId={project._id}
 					projectTitle={project.projectName}
 					projectTags={project.tags}
 					projectDescription={project.description}
 					projectImg={project.demoSrc}
+					isImageLast={index % 2 === 1}
 				/>
 			))}
 		</div>

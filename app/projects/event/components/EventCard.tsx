@@ -25,7 +25,6 @@ const EventCard = () => {
 		axios(configuration)
 			.then((result) => {
 				setEventProjectsData(result.data.data);
-				console.log(result.data.data);
 				setIsLoading(false);
 			})
 			.catch((error) => {
