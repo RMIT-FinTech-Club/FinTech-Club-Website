@@ -11,9 +11,9 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 				className="relative flex flex-col md:flex-row justify-center md:justify-between items-center w-full h-[50vh] rounded-2xl bg-cover bg-center"
 				style={{
 					backgroundImage: `url(${event?.imageUrl})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundSize: 'cover',
-					backgroundClip: 'border-box',
+					backgroundRepeat: "no-repeat",
+					backgroundSize: "cover",
+					backgroundClip: "border-box",
 				}}
 			>
 				<div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50 rounded-2xl" />
@@ -26,12 +26,20 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 					</h5>
 					<div className="flex flex-row gap-4 mt-4 max-md:justify-center">
 						<a href={event?.registrationLink}>
-							<Button size="lg" variant="solid" className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold">
+							<Button
+								size="lg"
+								variant="solid"
+								className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold"
+							>
 								Join Event
 							</Button>
 						</a>
 						<a href={event?.registrationLink}>
-							<Button size="lg" variant="bordered" className="border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black font-bold">
+							<Button
+								size="lg"
+								variant="bordered"
+								className="border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black font-bold"
+							>
 								Event Booklet
 							</Button>
 						</a>
@@ -63,10 +71,18 @@ const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
 							Event Date & Time
 						</h6>
 						<p className="py-1 2xl:py-2 text-justify break-all">
-							<span className="text-ft-primary-yellow-600 font-bold">Date: </span>{event?.time.split(",")[0]}
+							<span className="text-ft-primary-yellow-600 font-bold">
+								Date:{" "}
+							</span>
+							{event?.time.split(",")[0]}
 						</p>
 						<p className="py-1 2xl:py-2 text-justify break-all">
-							<span className="text-ft-primary-yellow-600 font-bold">Time: </span>{event?.time === "To be updated" ? "All day" : event?.time.split(",")[1]}
+							<span className="text-ft-primary-yellow-600 font-bold">
+								Time:{" "}
+							</span>
+							{event?.time === "To be updated"
+								? "All day"
+								: event?.time.split(",")[1]}
 						</p>
 					</div>
 				</div>

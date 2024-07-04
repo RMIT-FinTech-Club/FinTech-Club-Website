@@ -60,6 +60,7 @@ const HeroSection = () => {
 						className="w-full h-full object-cover"
 						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/1.png"
 						alt="Placeholder image"
+						loading="lazy"
 					/>
 				</div>
 			</div>
@@ -69,7 +70,11 @@ const HeroSection = () => {
 						key={img.id}
 						className={`h-[300px] md:h-[200px] lg:h-[300px] relative rounded-xl 
 							${img.size}`}
-						style={{ backgroundImage: `url(${img.src})`, backgroundSize: "cover", backgroundPosition: "center" }}
+						style={{
+							backgroundImage: `url(${img.src})`,
+							backgroundSize: "cover",
+							backgroundPosition: "center",
+						}}
 					/>
 				))}
 			</div>

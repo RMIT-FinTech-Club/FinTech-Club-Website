@@ -148,7 +148,8 @@ const ManagementBoard = () => {
 						MEET OUR <strong>MANAGEMENT BOARD</strong>
 					</h5>
 					<p className="w-full md:w-4/6 mx-auto text-2xl">
-						Meet the talented representatives behind the four pillars of RMIT Vietnam FinTech Club!
+						Meet the talented representatives behind the four
+						pillars of RMIT Vietnam FinTech Club!
 					</p>
 					<div className="mx-auto w-[214px] h-[4px] bg-ft-primary-blue-500 mt-6" />
 				</div>

@@ -21,10 +21,15 @@ const ProjectDetail = () => {
 						/>
 					</div>
 					<div className="place-self-start justify-self-start md:col-span-7 col-span-9 my-auto">
-						<h6 className="font-bold text-lg" style={{ color: "#2C305F" }}>
+						<h6
+							className="font-bold text-lg"
+							style={{ color: "#2C305F" }}
+						>
 							Lorem ipsum dolor sit amet
 						</h6>
-						<h6 className="text-gray-600">Lorem ipsum dolor sit amet</h6>
+						<h6 className="text-gray-600">
+							Lorem ipsum dolor sit amet
+						</h6>
 					</div>
 					<div className="md:justify-self-end md:col-span-4 col-span-12 my-auto md:w-fit w-full">
 						<Link
@@ -32,9 +37,7 @@ const ProjectDetail = () => {
 							target="_blank"
 							rel="noreferrer"
 						>
-							<Button
-								className="bg-[#DCB968] py-4 items-center justify-center flex-grow my-auto px-6 rounded-full drop-shadow-lg text-xl text-white duration-300 hover:bg-[#b89e52] active:bg-[#a2864a]"
-							>
+							<Button className="bg-[#DCB968] py-4 items-center justify-center flex-grow my-auto px-6 rounded-full drop-shadow-lg text-xl text-white duration-300 hover:bg-[#b89e52] active:bg-[#a2864a]">
 								<IconLink stroke={2} />
 								Full access
 							</Button>
@@ -44,21 +47,43 @@ const ProjectDetail = () => {
 				<Card className="max-w-full my-4">
 					<CardBody>
 						<p style={{ color: "#2C305F" }}>
-							Make beautiful websites regardless of your design experience.
+							Make beautiful websites regardless of your design
+							experience.
 						</p>
 					</CardBody>
 				</Card>
 				<p>
-					The FinTech Forum 2024 is set to be the most dynamic student-driven FinTech event, with a mission to educate and immerse students into the various aspects of the FinTech Universe! As we begin to officially launch the event, we would like to acknowledge the contributions made by our esteemed Sponsors that have made our event possible.
+					The FinTech Forum 2024 is set to be the most dynamic
+					student-driven FinTech event, with a mission to educate and
+					immerse students into the various aspects of the FinTech
+					Universe! As we begin to officially launch the event, we
+					would like to acknowledge the contributions made by our
+					esteemed Sponsors that have made our event possible.
 				</p>
-				<Divider className="my-6" style={{ backgroundColor: "#2C305F" }} />
+				<Divider
+					className="my-6"
+					style={{ backgroundColor: "#2C305F" }}
+				/>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<div>
-						<h5 className="text-xl font-semibold" style={{ color: "#2C305F" }}>Lorem ipsum dolor sit amet</h5>
+						<h5
+							className="text-xl font-semibold"
+							style={{ color: "#2C305F" }}
+						>
+							Lorem ipsum dolor sit amet
+						</h5>
 					</div>
 					<div className="grid grid-cols-2 grid-rows-2 text-center gap-6">
-						{["https://i.pravatar.cc/150?img=1", "https://i.pravatar.cc/150?img=2", "https://i.pravatar.cc/150?img=3", "https://i.pravatar.cc/150?img=4"].map((src, index) => (
-							<div key={index} className="flex flex-row items-center">
+						{[
+							"https://i.pravatar.cc/150?img=1",
+							"https://i.pravatar.cc/150?img=2",
+							"https://i.pravatar.cc/150?img=3",
+							"https://i.pravatar.cc/150?img=4",
+						].map((src, index) => (
+							<div
+								key={index}
+								className="flex flex-row items-center"
+							>
 								<Avatar isBordered radius="sm" src={src} />
 							</div>
 						))}

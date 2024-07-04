@@ -1,11 +1,13 @@
 import Image from "next/image";
 import React, { ReactNode } from "react";
 
-const PodcastDescription: React.FC<{description: string }> = ({description}) => {
+const PodcastDescription: React.FC<{ description: string }> = ({
+	description,
+}) => {
 	return (
 		<div className="w-full px-4 relative overflow-auto h-48 lg:h-auto">
 			<p className="text-ft-text-bright py-2 text-center lg:text-start">
-			{description}	
+				{description}
 			</p>
 		</div>
 	);

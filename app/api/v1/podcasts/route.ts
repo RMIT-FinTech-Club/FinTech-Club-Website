@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
 				uploadObject.authors[i].profileImageUrl =
 					`https://d2prwyp3rwi40.cloudfront.net/${authorFileName}`;
 			}
-			console.log(`uploadObject : ${JSON.stringify(uploadObject)}`)
+			console.log(`uploadObject : ${JSON.stringify(uploadObject)}`);
 			const podcast = await Podcast.create(uploadObject);
 			podcast.save();
 			return NextResponse.json(

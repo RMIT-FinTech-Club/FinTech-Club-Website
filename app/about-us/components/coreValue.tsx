@@ -2,7 +2,7 @@ import react from "react";
 
 const CoreValue = () => {
 	return (
-		<div className="flex flex-col w-fit mx-auto my-[20px]">
+		<div className="flex flex-col w-screen mx-auto my-[20px]">
 			<h5 className="mx-auto mb-5 text-[#3B679F]">
 				What we truly believe in ...
 			</h5>

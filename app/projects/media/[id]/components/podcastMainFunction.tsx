@@ -18,8 +18,11 @@ import SpeedSelector from "./audioSpeedSelector";
 // import PodcastTitle from "./podcastTitle";
 import HeaderPodcastPage from "./headerPodcastPage";
 
-const PodcastMainFunction: React.FC<{ audioFileUrl: string, title: string }> = ({ audioFileUrl, title }) => {
-	console.log(`check titlte: ${title}`)
+const PodcastMainFunction: React.FC<{
+	audioFileUrl: string;
+	title: string;
+}> = ({ audioFileUrl, title }) => {
+	console.log(`check titlte: ${title}`);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
 	const [isVolumeOn, setIsVolumeOn] = useState<boolean>(true);
