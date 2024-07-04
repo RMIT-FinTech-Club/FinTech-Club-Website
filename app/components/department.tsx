@@ -190,7 +190,7 @@ const Department = () => {
 		speed: 500,
 		slidesToShow: 2,
 		slidesToScroll: 2,
-		arrows: false,
+		arrows: true,
 	};
 
 	const [hrButton, setHrButton] = useState(true);
@@ -213,7 +213,7 @@ const Department = () => {
 			{/* Department background image */}
 
 			{/* Mobile buttons bar */}
-			<div className="flex md:hidden justify-center items-center w-full p-2">
+			<div className="flex sm:hidden justify-center items-center w-full p-2">
 				<Slider {...settings} className="w-80">
 					<Button
 						onClick={() => setDepartment(departments.technology)}
@@ -254,16 +254,16 @@ const Department = () => {
 				style={{ flex: 1 }}
 			>
 				{/* These elements will be pushed down on mobile due to the absolute positioning of the buttons bar */}
-				<h4 className="font-bold text-ft-primary-yellow text-wrap">
+				<h4 className="font-bold text-ft-primary-yellow text-wrap text-xl md:text-5xl sm:text-4xl">
 					{department.name}
 				</h4>
 				<h4 className="text-ft-text-bright mt-4">BE ONE OF US!</h4>
-				<p className="ft-body-2 text-ft-text-bright w-full mt-6 text-center md:text-left">
+				<p className="ft-body-2 text-ft-text-bright w-full mt-6 text-justify md:text-left">
 					{department.description}
 				</p>
 
 				{/* Desktop buttons */}
-				<div className="hidden md:flex mt-6 gap-4">
+				<div className=" hidden sm:flex mt-6 gap-4">
 					<Button
 						onClick={() => {
 							setDepartment(departments.technology);
