@@ -36,7 +36,7 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 								</p>
 							</div>
 							<h1 className="leading-normal text-[19px] font-extrabold text-white">
-								{data.description}
+								{data.title}
 							</h1>
 						</div>
 						<div className="h-[4/5] bg-white w-[2px] opacity-50" />
@@ -49,7 +49,7 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 									Fintech Club
 								</p>
 							</div>
-							<Link href={`/projects/media/${data._id}`}>
+							<Link href={`https://www.facebook.com/share/v/4bnKFoitNzB5KUfj/`}>
 								<FaCirclePlay
 									className="block m-auto mt-4 cursor-pointer"
 									size={50}
