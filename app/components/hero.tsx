@@ -1,4 +1,4 @@
-import { Button, Image } from "@nextui-org/react";
+import { Button, image, Image } from "@nextui-org/react";
 import React from "react";
 import Link from "next/link";
 
@@ -6,18 +6,18 @@ const bottomImages = [
 	{
 		id: "1",
 		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/z5587551509111_944f7e7fe24867670f1674c8636b736f.jpg",
-		size: "w-full md:w-1/4",
+		size: "hidden md:block w-full md:w-1/4",
 		alt: "Placeholder image",
 	},
 	{
 		id: "2",
-		size: "hidden md:block w-full md:w-1/2",
+		size: "md:block w-full md:w-1/2",
 		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/IMG_0501.JPG",
 		alt: "Placeholder image",
 	},
 	{
 		id: "3",
-		size: "hidden md:block w-full md:w-1/4",
+		size: " md:block w-full md:w-1/4",
 		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/2.png",
 		alt: "Placeholder image",
 	},
@@ -59,25 +59,23 @@ const HeroSection = () => {
 						</Button>
 					</div>
 				</div>
-				<div className="w-full md:w-1/2 h-[300px] md:h-[200px] lg:h-[300px] rounded-xl relative ">
+				<div className="w-full md:w-1/2 rounded-xl relative ">
 					<Image
-						className="w-full h-full object-cover"
+						className="w-full object-cover"
 						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/1.png"
 						alt="Placeholder image"
 						loading="lazy"
 					/>
 				</div>
 			</div>
-			<div className="flex-col md:flex-row justify-end items-center gap-12 flex w-full">
+			<div className="flex-col md:flex-row justify-end items-center gap-6 flex w-full">
 				{bottomImages.map((img, _idx) => (
 					<div
 						key={img.id}
 						className={`h-[300px] md:h-[200px] lg:h-[300px] relative rounded-xl 
-							${img.size}`}
+							${img.size} bg-cover bg-center`}
 						style={{
 							backgroundImage: `url(${img.src})`,
-							backgroundSize: "cover",
-							backgroundPosition: "center",
 						}}
 					/>
 				))}
