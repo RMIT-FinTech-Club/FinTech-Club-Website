@@ -74,7 +74,7 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			className="sticky top-0 z-50 flex w-full transition-colors duration-300 bg-ft-primary-blue shadow-md"
+			className="sticky top-0 py-2 z-50 flex w-full transition-colors duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
 				<div className="logo relative w-14 h-14">
@@ -103,7 +103,7 @@ const Navbar = () => {
 							<Link
 								className="font-bold text-white hover:text-ft-secondary-yellow"
 								href={item.href}
-                                onClick={() => setIsOpen(false)}
+								onClick={() => setIsOpen(false)}
 							>
 								{item.label}
 							</Link>

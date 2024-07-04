@@ -14,7 +14,7 @@ export default function CountDown() {
 	const interval = useRef<NodeJS.Timeout>();
 
 	const timerCount = () => {
-		const expiredDay = new Date(2024, 7, 16, 23, 59, 59);
+		const expiredDay = new Date("2024-07-16T00:00:00Z");
 		interval.current = setInterval(() => {
 			const now = new Date();
 			const totalDays = expiredDay.getTime() - now.getTime();

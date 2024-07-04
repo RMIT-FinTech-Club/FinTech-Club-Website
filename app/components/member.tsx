@@ -40,7 +40,7 @@ const hallOfFame = [
 		name: "Nguyen Doan Nghia",
 		imageURL: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/hall-of-fame/Nguyen+Doan+Nghia.jpeg",
 		title: "Marketing Department MVP",
-		linkedin: "#",
+		linkedin: "https://www.linkedin.com/in/nghia-nguyen-78631218b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
 	},
 ]
 
