@@ -80,7 +80,7 @@ function ExecutiveBoardCard({
 					</div>
 				</CardHeader>
 				<CardBody className="overflow-visible pt-4 text-center">
-					<h6 className="font-bold md:text-3xl text-2xl">
+					<h6 className="font-bold md:text-xl text-lg">
 						{name}
 					</h6>
 					<p className="text-lg font-semibold">
