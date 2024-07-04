@@ -125,7 +125,7 @@ const Member = () => {
                     */}
 				{hallOfFame.map((member) => (
 					<Link
-						href={member.imageURL}
+						href={member.linkedin}
 					>
 						<Card className="card h-full relative" isFooterBlurred>
 							<Skeleton isLoaded={loading}>
