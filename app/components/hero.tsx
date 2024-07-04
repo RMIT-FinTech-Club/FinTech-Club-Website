@@ -30,7 +30,10 @@ const HeroSection = () => {
 				<div className="w-full md:w-1/2 h-full">
 					<h5>What is</h5>
 					<br />
-					<h4 className="text-[#000A64] font-[1000] uppercase"><span className="text-[#EBB040]">Fin</span>Tech Club <span className="text-black">?</span></h4>
+					<h4 className="text-[#000A64] font-[1000] uppercase">
+						<span className="text-[#EBB040]">Fin</span>Tech Club{" "}
+						<span className="text-black">?</span>
+					</h4>
 					<br />
 					<p className="line-clamp-6 md:line-clamp-2 lg:line-clamp-3">
 						We’re the first ever student-led Financial Technology
@@ -46,17 +49,13 @@ const HeroSection = () => {
 							className="bg-ft-primary-blue text-ft-text-bright"
 							variant="solid"
 						>
-							<Link href="/about-us">
-								Read More
-							</Link>
+							<Link href="/about-us">Read More</Link>
 						</Button>
 						<Button
 							className="bg-ft-primary-blue text-ft-text-bright"
 							variant="solid"
 						>
-							<Link href="/join-us">
-								Join Us
-							</Link>
+							<Link href="/join-us">Join Us</Link>
 						</Button>
 					</div>
 				</div>

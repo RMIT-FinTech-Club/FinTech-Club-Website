@@ -43,7 +43,13 @@ const EventCard = () => {
 					Forums and Competitions
 				</h1>
 				<p className="font-poppins text-base sm:text-lg md:text-xl lg:text-2xl text-justify mt-4 w-4/5 mx-auto font-light">
-					Our club envisions becoming a dynamic hub for organizing forums and competitions that inspire innovation and collaboration. We aim to create a vibrant community where individuals can exchange ideas, showcase talents, and engage in healthy competition. By hosting diverse events, we strive to foster intellectual growth, enhance skills, and build lasting connections among members.
+					Our club envisions becoming a dynamic hub for organizing
+					forums and competitions that inspire innovation and
+					collaboration. We aim to create a vibrant community where
+					individuals can exchange ideas, showcase talents, and engage
+					in healthy competition. By hosting diverse events, we strive
+					to foster intellectual growth, enhance skills, and build
+					lasting connections among members.
 				</p>
 				<div className="w-1/5 h-1 bg-black my-8 mx-auto" />
 				<div className="grid lg:grid-cols-2 lg:grid-flow-row mt-12 gap-14 md:px-40 px-12">

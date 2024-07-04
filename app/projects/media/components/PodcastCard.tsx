@@ -49,7 +49,9 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 									Fintech Club
 								</p>
 							</div>
-							<Link href={`https://www.facebook.com/share/v/4bnKFoitNzB5KUfj/`}>
+							<Link
+								href={`https://www.facebook.com/share/v/4bnKFoitNzB5KUfj/`}
+							>
 								<FaCirclePlay
 									className="block m-auto mt-4 cursor-pointer"
 									size={50}

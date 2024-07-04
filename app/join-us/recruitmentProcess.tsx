@@ -47,7 +47,6 @@ const RecruitmentProcess = () => {
 						color="bg-ft-primary-yellow-500"
 						link="https://drive.google.com/file/d/1NwzxwyUt0x3LRenK-7_qU-qojNYbQ7zW/view?fbclid=IwZXh0bgNhZW0CMTAAAR1ttDbU_fSG_bFD6V_UwFcEBdM0r7XAznRgfMlx97gcnyhksci5lcJxaK4_aem_7nrsDCiN0-qXbEQVgnMQAg"
 					/>
-					
 				</div>
 			</div>
 		</>

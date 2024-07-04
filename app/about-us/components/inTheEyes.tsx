@@ -43,7 +43,13 @@ export default function FinTechInTheEyes() {
 				<p
 					className={`text-1xl md:text-2xl text-justify mt-4 md:mt-0 mb-0 md:mb-36 md:text-left ${fontMono.style}`}
 				>
-					FinTech Club changed my life. Joining RMIT was challenging as an introvert, making new friends difficult. College was lonely until I found the FinTech Club, where like-minded individuals shared my passion for growth. Winning the "Star-Up" competition boosted my confidence and skills. Becoming President allowed me to give back to this uplifting community.
+					FinTech Club changed my life. Joining RMIT was challenging
+					as an introvert, making new friends difficult. College was
+					lonely until I found the FinTech Club, where like-minded
+					individuals shared my passion for growth. Winning the
+					"Star-Up" competition boosted my confidence and skills.
+					Becoming President allowed me to give back to this uplifting
+					community.
 				</p>
 			</div>
 			<div className="md:block hidden flex-col justify-betwwen md:col-span-2 mt-32">

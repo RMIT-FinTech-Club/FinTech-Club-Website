@@ -13,9 +13,15 @@ const Footer = () => {
 				<div className="md:w-1/3 w-full">
 					<div className="mt-[20px] flex flex-col-reverse items-center md:block">
 						<div className="flex flex-col items-center md:block mb-[40px] md:mb-0 w-[90%] md:w-full">
-							<h5 className="text-ft-text-bright mb-4">About Us</h5>
+							<h5 className="text-ft-text-bright mb-4">
+								About Us
+							</h5>
 							<p className="text-ft-text-bright text-center md:text-justify">
-								RMIT FinTech Club is the first ever student-led Financial Technology club in Vietnam, founded in 2020. Founded on the mission to bring Business & Technology students together to learn, exchange ideas, innovate, and build things together{" "}
+								RMIT FinTech Club is the first ever student-led
+								Financial Technology club in Vietnam, founded in
+								2020. Founded on the mission to bring Business &
+								Technology students together to learn, exchange
+								ideas, innovate, and build things together{" "}
 							</p>
 						</div>
 						<img
@@ -27,7 +33,9 @@ const Footer = () => {
 				</div>
 				<div className="md:w-1/3 w-full flex justify-center md:justify-end mb-[40px] md:mb-0">
 					<ul className="mt-[20px] text-center md:text-left">
-						<h5 className="text-ft-text-bright mb-4">Important Links</h5>
+						<h5 className="text-ft-text-bright mb-4">
+							Important Links
+						</h5>
 						<li>
 							<a href="/" className="block mb-2">
 								<p className="text-ft-text-bright">Home</p>

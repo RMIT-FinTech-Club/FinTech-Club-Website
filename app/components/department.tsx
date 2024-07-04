@@ -259,7 +259,9 @@ const Department = () => {
 				style={{ flex: 1 }}
 			>
 				{/* These elements will be pushed down on mobile due to the absolute positioning of the buttons bar */}
-				<h4 className={`font-bold ${department.color} text-wrap text-xl md:text-5xl sm:text-4xl`}>
+				<h4
+					className={`font-bold ${department.color} text-wrap text-xl md:text-5xl sm:text-4xl`}
+				>
 					{department.name}
 				</h4>
 				<h4 className="text-ft-text-bright mt-4">BE ONE OF US!</h4>

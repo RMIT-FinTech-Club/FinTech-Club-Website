@@ -3,6 +3,8 @@ import clsx from "clsx";
 import Image from "next/image";
 import type React from "react";
 import CountUp from "react-countup";
+import { Skeleton } from "@nextui-org/react";
+import { useState } from "react";
 // import { useCountUp } from 'react-countup';
 // import { useInView } from 'react-intersection-observer';
 // import { useEffect, useState } from "react";
@@ -47,6 +49,7 @@ import CountUp from "react-countup";
 // };
 
 const IntroSection = () => {
+	const [isLoaded, setIsLoaded] = useState(false);
 	return (
 		<section className="flex flex-col md:flex-row items-center gap-6 w-11/12 py-3 lg:py-12">
 			{/* Left text */}
@@ -59,8 +62,7 @@ const IntroSection = () => {
 							)}
 						</CountUp>
 						+</h4> */}
-					<h4 className="text-ft-primary-yellow">
-						80+</h4>
+					<h4 className="text-ft-primary-yellow">80+</h4>
 					<h5 className="text-ft-primary-blue">
 						Active Club Members
 					</h5>
@@ -77,8 +79,7 @@ const IntroSection = () => {
 							)}
 						</CountUp>
 						+</h4> */}
-					<h4 className="text-ft-primary-yellow">
-						50+</h4>
+					<h4 className="text-ft-primary-yellow">50+</h4>
 					<h5 className="text-ft-primary-blue">Club Projects</h5>
 					<p>
 						Include academic events, competitions, workshops,
@@ -102,8 +103,7 @@ const IntroSection = () => {
 							)}
 						</CountUp>
 						+</h4> */}
-					<h4 className="text-ft-primary-yellow">
-						60+</h4>
+					<h4 className="text-ft-primary-yellow">60+</h4>
 					<h5 className="text-ft-primary-blue">
 						Academic & Industry Partners
 					</h5>
@@ -121,8 +121,7 @@ const IntroSection = () => {
 							)}
 						</CountUp>
 						+</h4> */}
-					<h4 className="text-ft-primary-yellow">
-						5000+</h4>
+					<h4 className="text-ft-primary-yellow">5000+</h4>
 					<h5 className="text-ft-primary-blue">FanPage followings</h5>
 					<p>
 						A testament to FinTech Club’s prominence in the RMIT
@@ -170,6 +169,7 @@ const MaskImage: React.FC<MaskImageProps> = ({
 			src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/club.svg"
 			alt="Fintech club members"
 			style={style}
+			loading="lazy"
 		/>
 	);
 };

@@ -106,7 +106,9 @@ export default function CountDown() {
 					whileTap={{ scale: 0.9 }}
 					transition={{ type: "spring", stiffness: 400, damping: 17 }}
 				>
-					<Link href="https://l.facebook.com/l.php?u=https%3A%2F%2Fbit.ly%2FFTC_MEMB%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR2oTO9hfUgqP4CK9torQTPhvbroI-THRft8vb4mzKFK7FCAQWIcuE-_T4w_aem_BmHz_4iIPJXGEl3HcM0MKw&h=AT24rQsKDxyuzrlHXwEHOaHR4q0YbmTLyu_yZwq1F7pNmm-ouEg5v-icJ66w_WFHXZ4h3y_AyDVQWYaJzZUbHZwoB-aY-VQ6fFHCgwkxDrvLw7LHeyqLZhWKgWNUA-5mwd2sRL8Pmw&__tn__=-UK-R&c[0]=AT3ZE3z3TKSb3HPxOyDAKjdLJdFWMTw64Y_zhonPN7RDYYa3PGI8nzO0B5_bt9vYMv1l1KUkowM478nfP600bafMWqB_UrhkXfZ_WM-YFqUNqZWwcsB6-kZmthZixp7YEVJjDIvowF7jlkd-CR2b1ricFlgZahL8pNvwm3e_-qETcqJ3NN1DrT0JIsnqngcKXgP8Q4Y_CbBBVESFeeeA21aUp1gn4eQlzuJH">Join us here</Link>
+					<Link href="https://l.facebook.com/l.php?u=https%3A%2F%2Fbit.ly%2FFTC_MEMB%3Ffbclid%3DIwZXh0bgNhZW0CMTAAAR2oTO9hfUgqP4CK9torQTPhvbroI-THRft8vb4mzKFK7FCAQWIcuE-_T4w_aem_BmHz_4iIPJXGEl3HcM0MKw&h=AT24rQsKDxyuzrlHXwEHOaHR4q0YbmTLyu_yZwq1F7pNmm-ouEg5v-icJ66w_WFHXZ4h3y_AyDVQWYaJzZUbHZwoB-aY-VQ6fFHCgwkxDrvLw7LHeyqLZhWKgWNUA-5mwd2sRL8Pmw&__tn__=-UK-R&c[0]=AT3ZE3z3TKSb3HPxOyDAKjdLJdFWMTw64Y_zhonPN7RDYYa3PGI8nzO0B5_bt9vYMv1l1KUkowM478nfP600bafMWqB_UrhkXfZ_WM-YFqUNqZWwcsB6-kZmthZixp7YEVJjDIvowF7jlkd-CR2b1ricFlgZahL8pNvwm3e_-qETcqJ3NN1DrT0JIsnqngcKXgP8Q4Y_CbBBVESFeeeA21aUp1gn4eQlzuJH">
+						Join us here
+					</Link>
 				</motion.div>
 			</div>
 		</div>

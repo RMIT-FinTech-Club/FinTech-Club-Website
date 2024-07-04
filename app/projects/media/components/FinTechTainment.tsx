@@ -27,7 +27,10 @@ const FinTechTainment: React.FC = () => {
 				FinTechTainment
 			</h1>
 			<p className="font-poppins text-base sm:text-lg md:text-xl lg:text-2xl text-justify mt-4 w-4/5 mx-auto font-light">
-				FinTechTainment is play of words between “FinTech” and “Entertainment”. It is a media/podcast project aimed at interviewing industry professionals with topics in the fields of: Business, Finance, Technology and Entrepreneurship.
+				FinTechTainment is play of words between “FinTech” and
+				“Entertainment”. It is a media/podcast project aimed at
+				interviewing industry professionals with topics in the fields
+				of: Business, Finance, Technology and Entrepreneurship.
 			</p>
 			<div className="w-1/5 h-1 bg-black my-8 mx-auto" />
 			<section className="w-full flex justify-center mt-8">
