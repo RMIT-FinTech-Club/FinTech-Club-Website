@@ -109,13 +109,13 @@ export default function HistorySection() {
 						</span>
 					</div>
 
-					<div
+					{/* <div
 						className={`mx-auto mt-[16px] md:px-0 px-11 text-black text-lg ${fontSans.style} tracking-wide text-center`}
 					>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 						Cras viverra viverra eros, eu euismod arcu dignissim
 						quis. Phasellus sollicitudin
-					</div>
+					</div> */}
 				</div>
 
 				<div className="md:inline-flex sm:hidden md:w-full md:h-1 bg-black flex flex-row-reverse items-center justify-self-end col-span-1">
