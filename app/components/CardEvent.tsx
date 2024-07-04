@@ -25,7 +25,7 @@ const CardEvent = ({
 	timeOnMonth,
 }: CardEventContent) => {
 	return (
-		<Card className="flex flex-col mr-5 mb-6 md:w-unit-7xl">
+		<Card className="flex max-w-[500px] flex-col mr-5 mb-6 md:w-unit-7xl">
 			<CardBody className="p-0 overflow-visible">
 				<Image
 					shadow="sm"
@@ -41,8 +41,8 @@ const CardEvent = ({
 					<h1 className="text-3xl md:text-4xl">{timeOnDay}</h1>
 					<h3 className="text-2xl md:text-4xl">{timeOnMonth}</h3>
 				</div>
-				<div className="hidden  md:block md:w-full md:text-ft-primary-blue">
-					<h1 className="text-4xl font-bold md:font-semibold">
+				<div className="hidden md:block md:w-full md:text-ft-primary-blue">
+					<h1 className="text-4xl font-bold w-full text-wrap md:font-semibold truncate line-clamp-2">
 						{title}
 					</h1>
 					<p className="text-lg w-full">{detail}</p>

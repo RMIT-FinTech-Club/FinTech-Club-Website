@@ -13,6 +13,20 @@ import {
 } from "./actions";
 
 connectMongoDb();
+interface Author {
+	name: string;
+	title: string;
+	profileImageUrl: string;
+}
+export async function GET() {
+	try {
+		const podcasts = await Podcast.find({});
+		return NextResponse.json(podcasts, { status: 200 });
+	} catch (error: any) {
+		console.error(error.message);
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
+}
 
 export async function POST(req: NextRequest) {
 	interface AuthorsType {
@@ -33,7 +47,7 @@ export async function POST(req: NextRequest) {
 		const publisher = form.get("publisher") as string;
 		const publicationDate = form.get("publicationDate") as string;
 		const language = form.get("language") as string;
-		let authors = form.getAll("authors[]") as Array<string>;
+		let authors = form.getAll("authors[]") as unknown as Array<Author>;
 		const authorFiles = form.getAll("authorFiles[]") as Array<File>;
 		const audioFile = form.get("audioFile") as File;
 		const thumnailFile = form.get("thumnailFile") as File;
@@ -51,7 +65,7 @@ export async function POST(req: NextRequest) {
 		checkInstanceOfFile(audioFile, "authorFile");
 		checkInstanceOfFile(thumnailFile, "thumnailFile");
 
-		authors = authors.map((item) => JSON.parse(item));
+		// authors = authors.map((item) => JSON.parse(item));
 
 		if (
 			checkFile(audioFile) &&
@@ -61,7 +75,7 @@ export async function POST(req: NextRequest) {
 			const uploadObject = {
 				title: title,
 				description: description,
-				authors: [{ profileImageUrl: "" }],
+				authors: authors,
 				publisher: publisher,
 				publicationDate: publicationDate,
 				language: language,
@@ -85,8 +99,10 @@ export async function POST(req: NextRequest) {
 					thumnailFile.type,
 				);
 			}
+
 			uploadObject.thumnailFileUrl = `https://d2prwyp3rwi40.cloudfront.net/${thumnailFileName}`;
 			uploadObject.audioFileUrl = `https://d2prwyp3rwi40.cloudfront.net/${audioFileName}`;
+
 			for (let i = 0; i < authorFiles.length; ++i) {
 				const authorFileName = randomName();
 				if (authorFiles[i] instanceof File) {
@@ -99,6 +115,7 @@ export async function POST(req: NextRequest) {
 				uploadObject.authors[i].profileImageUrl =
 					`https://d2prwyp3rwi40.cloudfront.net/${authorFileName}`;
 			}
+			console.log(`uploadObject : ${JSON.stringify(uploadObject)}`)
 			const podcast = await Podcast.create(uploadObject);
 			podcast.save();
 			return NextResponse.json(

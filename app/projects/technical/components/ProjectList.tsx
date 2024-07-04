@@ -12,7 +12,7 @@ const ProjectList: React.FC = () => {
 	useEffect(() => {
 		const configuration = {
 			method: "get",
-			url: "/api/v1/technicalprojects/getData",
+			url: "/api/v1/technicalprojects",
 		};
 		axios(configuration)
 			.then((result) => {

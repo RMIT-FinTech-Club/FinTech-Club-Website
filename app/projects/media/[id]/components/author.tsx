@@ -6,6 +6,7 @@ interface AuthorListProps {
 }
 
 const AuthorList = ({ authorDetails }: AuthorListProps) => {
+    console.log(`check authorDetail: ${JSON.stringify(authorDetails)}`);
 	return (
 		<div className="flex lg:flex-col my-2 px-4">
 			<h5 className="hidden lg:block text-ft-text-bright py-4">
