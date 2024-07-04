@@ -18,7 +18,7 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
 	title: {
-		default: siteConfig.name,
+		default: "RMIT Vietnam FinTech Club",
 		template: `%s - ${siteConfig.name}`,
 	},
 	description: siteConfig.description,
