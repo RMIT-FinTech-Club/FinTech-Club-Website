@@ -37,7 +37,7 @@ const ProjectPage = () => {
 				</div>
 
 				<div className="grid md:grid-cols-1 md:grid-flow-row grid-flow-row-dense max-md:mt-8 mt-28 md:gap-y-32 gap-y-14 md:gap-x-11 md:px-36 px-11 w-full">
-					<div className="grid md:grid-cols-2 md:gap-x-11">
+					{/* <div className="grid md:grid-cols-2 md:gap-x-11">
 						<img
 							className="mx-auto object-cover max-md:w-full w-4/5 rounded-2xl"
 							src="https://placehold.co/1000x900"
@@ -71,17 +71,17 @@ const ProjectPage = () => {
 								</Button>
 							</div>
 						</div>
-					</div>
+					</div> */}
 
 					<div className="grid md:grid-cols-2 md:gap-x-11">
 						<img
-							className="mx-auto object-cover max-md:w-full w-4/5 md:order-last rounded-2xl"
+							className="mx-auto object-cover max-md:w-full w-4/5 rounded-2xl"
 							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Projects/Technical/technical-project.png"
 							alt="Technical Projects"
 							style={{ aspectRatio: "1/1" }}
 						/>
 						<div className="md:mt-0 mt-4 flex flex-col justify-center">
-							<h2 className="text-[#2C305F] text-right max-md:text-center xl:text-[3.5rem] lg:text-[2.25rem] md:font-extrabold text-[2rem]">
+							<h2 className="text-[#2C305F] max-md:text-center xl:text-[3.5rem] lg:text-[2.25rem] md:font-extrabold text-[2rem]">
 								Technical Projects
 							</h2>
 							<p className="lg:mt-6 md:mt-4 mt-2 text-balance text-justify xl:text-[1.3rem] lg:text-[1rem] md:text-[0.75rem]">
@@ -111,12 +111,12 @@ const ProjectPage = () => {
 
 					<div className="grid md:grid-cols-2 md:gap-x-11">
 						<img
-							className="mx-auto object-cover max-md:w-full w-4/5 rounded-2xl"
+							className="mx-auto object-cover max-md:w-full w-4/5 md:order-last rounded-2xl"
 							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Projects/Media/media-projects.png"
 							alt="Media Projects"
 						/>
-						<div className="md:mt-0 mt-4 md:order-last flex flex-col justify-center">
-							<h2 className="text-[#2C305F] max-md:text-center xl:text-[3.5rem] lg:text-[2.25rem] md:font-extrabold text-[2rem]">
+						<div className="md:mt-0 mt-4 flex flex-col justify-center">
+							<h2 className="text-[#2C305F] text-right max-md:text-center xl:text-[3.5rem] lg:text-[2.25rem] md:font-extrabold text-[2rem]">
 								Media Projects
 							</h2>
 							<p className="lg:mt-6 md:mt-4 mt-2 text-balance text-justify xl:text-[1.3rem] lg:text-[1rem] md:text-[0.75rem]">
@@ -147,13 +147,13 @@ const ProjectPage = () => {
 
 					<div className="grid md:grid-cols-2 md:gap-x-11">
 						<img
-							className="mx-auto object-cover max-md:w-full w-4/5 md:order-last rounded-2xl"
+							className="mx-auto object-cover max-md:w-full w-4/5 rounded-2xl"
 							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Projects/Technical/event-project.png"
 							alt="Event Projects"
 							style={{ aspectRatio: "1/1" }}
 						/>
 						<div className="md:mt-0 mt-4 flex flex-col justify-center">
-							<h2 className="text-[#2C305F] text-right max-md:text-center xl:text-[3.5rem] lg:text-[2.25rem] md:font-extrabold text-[2rem]">
+							<h2 className="text-[#2C305F] max-md:text-center xl:text-[3.5rem] lg:text-[2.25rem] md:font-extrabold text-[2rem]">
 								Event Projects
 							</h2>
 							<p className="lg:mt-6 md:mt-4 mt-2 text-balance text-justify xl:text-[1.3rem] lg:text-[1rem] md:text-[0.75rem]">
