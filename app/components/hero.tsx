@@ -1,6 +1,7 @@
-import { Button, image, Image } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const bottomImages = [
 	{
@@ -11,7 +12,7 @@ const bottomImages = [
 	},
 	{
 		id: "2",
-		size: "md:block w-full md:w-1/2",
+		size: "md:block w-full md:w-1/2 ",
 		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/IMG_0501.JPG",
 		alt: "Placeholder image",
 	},
@@ -64,19 +65,27 @@ const HeroSection = () => {
 						className="w-full object-cover"
 						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/1.png"
 						alt="Placeholder image"
-						loading="lazy"
+						fetchPriority="high"
+						loading="eager"
+						width={1000}
+						height={1000}
+						priority={true}
 					/>
 				</div>
 			</div>
 			<div className="flex-col md:flex-row justify-end items-center gap-6 flex w-full">
 				{bottomImages.map((img, _idx) => (
-					<div
+					<Image
+						src={img.src}
+						alt={img.alt}
 						key={img.id}
+						width={1000}
+						height={200}
+						fetchPriority="high"
+						loading="eager"
+						priority={true}
 						className={`h-[300px] md:h-[200px] lg:h-[300px] relative rounded-xl 
-							${img.size} bg-cover bg-center`}
-						style={{
-							backgroundImage: `url(${img.src})`,
-						}}
+							${img.size} object-cover`}
 					/>
 				))}
 			</div>
