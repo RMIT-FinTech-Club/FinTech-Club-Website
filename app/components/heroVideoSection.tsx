@@ -2,8 +2,6 @@
 import { IconChevronCompactDown } from "@tabler/icons-react";
 import clsx from "clsx";
 import {
-	AnimationControls,
-	TargetAndTransition,
 	type Variants,
 	motion,
 } from "framer-motion";
@@ -35,6 +33,7 @@ const HerosectionVid: React.FC = () => {
 				autoPlay
 				muted
 				loop
+				playsInline
 				id="hero-section-bg-vid"
 				className={clsx(
 					"w-full h-full", // Full screen

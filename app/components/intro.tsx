@@ -50,7 +50,7 @@ const IntroSection = () => {
 			</div>
 			{/* Image */}
 			{/* <MaskImage src='/ImageMask.svg' /> */}
-			<div className="md:w-1/3" style={{ aspectRatio: "1/1.5" }}>
+			<div className="md:w-1/3 aspect-[1/1.5]">
 				<MaskImage src="/AchievementBg.png" />
 			</div>
 			{/* Right text */}
@@ -111,8 +111,6 @@ const MaskImage: React.FC<MaskImageProps> = ({
 	const recWidth = "50px";
 	const recHeight = ["100px", "200px", "300px", "200px", "100px"];
 
-	// const maskImage = `url('${src}')`
-
 	const style: React.CSSProperties = {
 		maskImage: "url('/ImageMask.svg')",
 		maskSize: "cover",
@@ -127,10 +125,12 @@ const MaskImage: React.FC<MaskImageProps> = ({
 			width={300}
 			height={0}
 			className="object-cover w-full h-full"
-			src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/club.svg"
+			src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/club.png"
 			alt="Fintech club members"
+			fetchPriority="high"
 			style={style}
-			loading="lazy"
+			priority={true}
+			loading="eager"
 		/>
 	);
 };
