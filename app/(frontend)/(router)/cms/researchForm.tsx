@@ -6,8 +6,8 @@ import { Button } from "@nextui-org/react";
 import { useMutation } from "@tanstack/react-query";
 import { type ChangeEventHandler, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { getSignedURL } from "../../(backend)/api/research/actions";
-import { createResearchPaper } from "../../(backend)/api/research/researchPaper";
+import { getSignedURL } from "../../../(backend)/api/research/actions";
+import { createResearchPaper } from "../../../(backend)/api/research/researchPaper";
 
 interface FormInput {
 	title: string;
