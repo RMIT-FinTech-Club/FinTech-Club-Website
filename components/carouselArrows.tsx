@@ -10,6 +10,8 @@ export const PreArrow: React.FC<ArrowProps> = ({ buttonOnClick, ...props }) => {
 	return (
 		<div {...props} className={clsx("z-10", props.className)}>
 			<button
+				type="button"
+				title="Previous"
 				onClick={buttonOnClick}
 				className="flex justify-center w-10 h-10 rounded-full bg-ft-primary-yellow hover:bg-ft-primary-yellow-600"
 			>
@@ -26,6 +28,8 @@ export const NextArrow: React.FC<ArrowProps> = ({
 	return (
 		<div {...props} className={clsx("absolute z-10", props.className)}>
 			<button
+				type="button"
+				title="Next"
 				onClick={buttonOnClick}
 				className="flex justify-center w-10 h-10 rounded-full bg-ft-primary-yellow hover:bg-ft-primary-yellow-600"
 			>

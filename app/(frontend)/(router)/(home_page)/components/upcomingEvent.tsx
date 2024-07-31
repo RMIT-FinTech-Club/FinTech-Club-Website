@@ -1,13 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
-import axios from "axios";
 import "@styles/carousel-dynamic-height.css";
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
-// import UpCommingEvents from "@/app/(backend)/models/upCommingEvents";
+import { useQuery } from "@tanstack/react-query";
 
 const settings = {
 	className: "w-full center",
@@ -22,16 +21,6 @@ const settings = {
 	initialSlide: 0,
 } as Settings;
 
-async function getUpcomingEvents() {
-	const response = await fetch("/api/v1/events/upcoming");
-	
-	if (!response.ok) {
-		throw new Error('Failed to fetch data')
-	}
-
-	return response.json();
-}
-
 type UpComingEvents = {
 	imageUrl: string;
 	name: string;
@@ -43,22 +32,16 @@ type UpComingEvents = {
 };
 
 const UpcomingEvent = async () => {
-	const upcomingEvents: UpComingEvents[] = await getUpcomingEvents();
-	// const [upcomingEvents, setUpcomingEvents] = useState([]);
-	// const upcomingEvents_ = await getUpcomingEvents();
-
+	const { data: upcomingEvents } = useQuery<UpComingEvents[]>({
+		queryKey: ["upcoming-events"],
+		queryFn: async () => {
+			const response = await fetch("/api/v1/events/upcoming");
+			return response.json().then((data) => data.data);
+		},
+		refetchOnWindowFocus: false,
+		staleTime: 1000*60*60,
+	})
 	const sliderRef = useRef<Slider>(null);
-
-	// useEffect(() => {
-	// 	axios
-	// 		.get("/api/v1/events/upcoming")
-	// 		.then((response) => {
-	// 			setUpcomingEvents(response.data.data);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 		});
-	// }, []);
 
 	return (
 		<section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
@@ -80,7 +63,7 @@ const UpcomingEvent = async () => {
 					className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16"
 				/>
 				<Slider ref={sliderRef} {...settings}>
-					{upcomingEvents.map((event, index) => {
+					{upcomingEvents && upcomingEvents.map((event) => {
 						// Split date to get month and day
 						const dateMonth = (event["date"] as string).split(" ");
 
