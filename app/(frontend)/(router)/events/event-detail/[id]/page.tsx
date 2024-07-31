@@ -20,7 +20,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 		// console.log(eventId);
 		const configuration = {
 			method: "get",
-			url: `/api/v1/events/upcomming/${params.id}`,
+			url: `/api/v1/events/upcoming/${params.id}`,
 		};
 		axios(configuration)
 			.then((result) => {
@@ -37,7 +37,7 @@ const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 		// console.log(eventId);
 		const configuration = {
 			method: "get",
-			url: "/api/v1/events/upcomming",
+			url: "/api/v1/events/upcoming",
 		};
 		axios(configuration)
 			.then((result) => {

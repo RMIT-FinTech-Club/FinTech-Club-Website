@@ -102,15 +102,7 @@ type MaskImageProps = {
 	maskRepeat?: string;
 };
 
-const MaskImage: React.FC<MaskImageProps> = ({
-	src,
-	maskSize,
-	maskPosition,
-	maskRepeat,
-}) => {
-	const recWidth = "50px";
-	const recHeight = ["100px", "200px", "300px", "200px", "100px"];
-
+const MaskImage: React.FC<MaskImageProps> = () => {
 	const style: React.CSSProperties = {
 		maskImage: "url('/ImageMask.svg')",
 		maskSize: "cover",
@@ -122,8 +114,8 @@ const MaskImage: React.FC<MaskImageProps> = ({
 
 	return (
 		<Image
-			width={300}
-			height={0}
+			width={1000}
+			height={1000}
 			className="object-cover w-full h-full"
 			src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/club.png"
 			alt="Fintech club members"

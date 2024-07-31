@@ -1,24 +1,20 @@
 "use client";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import React, { useEffect, useRef, useState } from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
 import axios from "axios";
-import "@styles/carousel-dynamic-heigth.css";
+import "@styles/carousel-dynamic-height.css";
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
+// import UpCommingEvents from "@/app/(backend)/models/upCommingEvents";
 
 const settings = {
 	className: "w-full center",
-	// dots: true,
 	infinite: true,
 	autoplay: true,
-	// arrows: false,
 	centerMode: true,
 	autoSpeed: 1000,
-	dragagable: true,
 	speed: 500,
 	slidesToShow: 1,
 	slidesToScroll: 1,
@@ -26,22 +22,43 @@ const settings = {
 	initialSlide: 0,
 } as Settings;
 
-const UpcomingEvent = () => {
-	const [upcomingEvents, setUpcomingEvents] = useState([]);
+async function getUpcomingEvents() {
+	const response = await fetch("/api/v1/events/upcoming");
+	
+	if (!response.ok) {
+		throw new Error('Failed to fetch data')
+	}
+
+	return response.json();
+}
+
+type UpComingEvents = {
+	imageUrl: string;
+	name: string;
+	description: string;
+	location: string;
+	date: string;
+	time: string;
+	_id: string;
+};
+
+const UpcomingEvent = async () => {
+	const upcomingEvents: UpComingEvents[] = await getUpcomingEvents();
+	// const [upcomingEvents, setUpcomingEvents] = useState([]);
+	// const upcomingEvents_ = await getUpcomingEvents();
 
 	const sliderRef = useRef<Slider>(null);
 
-	useEffect(() => {
-		axios
-			.get("/api/v1/events/upcomming")
-			.then((response) => {
-				setUpcomingEvents(response.data.data);
-				console.log(response.data.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.get("/api/v1/events/upcoming")
+	// 		.then((response) => {
+	// 			setUpcomingEvents(response.data.data);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 		});
+	// }, []);
 
 	return (
 		<section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
