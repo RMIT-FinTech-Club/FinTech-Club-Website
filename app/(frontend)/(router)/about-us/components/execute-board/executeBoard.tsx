@@ -1,4 +1,3 @@
-"use client";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import React from "react";
 import "./styles.css";
@@ -78,6 +77,8 @@ function ExecutiveBoardCard({
 							alt="Card background"
 							className="object-cover rounded-2xl bg-transparent text-center team-card-image"
 							src={image}
+							width={1000}
+							height={1000}
 						/>
 					</div>
 				</CardHeader>

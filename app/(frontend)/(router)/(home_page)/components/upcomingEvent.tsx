@@ -39,7 +39,7 @@ const UpcomingEvent = async () => {
 			return response.json().then((data) => data.data);
 		},
 		refetchOnWindowFocus: false,
-		staleTime: 1000*60*60,
+		staleTime: 1000 * 60 * 60,
 	})
 	const sliderRef = useRef<Slider>(null);
 

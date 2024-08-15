@@ -16,7 +16,8 @@ type DepartmentInfo = {
 	description: string;
 	imageUrl: string;
 	background: string;
-	color: string;
+	bgColor: string;
+	textColor: string;
 };
 
 const departments: Record<Department, DepartmentInfo> = {
@@ -28,8 +29,8 @@ const departments: Record<Department, DepartmentInfo> = {
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept.svg",
 		background:
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept-bg.jpg",
-		color: "#73EEBF",
-
+		bgColor: "bg-[#73EEBF]",
+		textColor: "text-[#73EEBF]",
 	},
 	business: {
 		name: "BUSINESS DEPARTMENT",
@@ -39,7 +40,8 @@ const departments: Record<Department, DepartmentInfo> = {
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg",
 		background:
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept-bg.png",
-		color: "#6a3bed",
+		bgColor: "bg-[#6a3bed]",
+		textColor: "text-[#6a3bed]",
 	},
 	humanResources: {
 		name: "HR DEPARTMENT",
@@ -49,7 +51,8 @@ const departments: Record<Department, DepartmentInfo> = {
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept.svg",
 		background:
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept-bg.jpg",
-		color: "#29C0F2",
+		bgColor: "bg-[#29C0F2]",
+		textColor: "text-[#29C0F2]",
 	},
 	marketing: {
 		name: "MARKETING DEPARTMENT",
@@ -59,7 +62,8 @@ const departments: Record<Department, DepartmentInfo> = {
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept.svg",
 		background:
 			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept-bg.png",
-		color: "#E689EE",
+		bgColor: "bg-[#E689EE]",
+		textColor: "text-[#E689EE]",
 	},
 };
 
@@ -132,7 +136,7 @@ const Department = () => {
 			>
 				{/* These elements will be pushed down on mobile due to the absolute positioning of the buttons bar */}
 				<h4
-					className={`font-bold text-[${department.color}] text-wrap text-xl md:text-5xl sm:text-4xl`}
+					className={`font-bold ${department.textColor} text-wrap text-xl md:text-5xl sm:text-4xl`}
 				>
 					{department.name}
 				</h4>
@@ -150,7 +154,7 @@ const Department = () => {
 								key={dept}
 								onClick={() => setDepartment(departments[dept])}
 								variant={isActive ? "solid" : "light"}
-								className={`${isActive ? `text-black text-semibold bg-[${departments[dept].color}]` : 'text-white'}`}
+								className={`${isActive ? `text-black text-semibold ${departments[dept].bgColor}` : 'text-white'}`}
 							>
 								{dept.toUpperCase()}
 							</Button>
