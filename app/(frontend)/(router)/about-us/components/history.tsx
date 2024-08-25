@@ -67,19 +67,14 @@ export default function HistorySection() {
 		}
 	}, [emblaHorizontalApi]);
 
-	useEffect(() => {
-		const screenWidth = window.innerWidth;
-		console.log(screenWidth / 2 - 53);
-	}, [centerSlideIndex]);
-
 	return (
 		<>
-			<div className="mx-auto w-screen md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-10 justify-center items-center gap-4 max-md:px-24">
+			<div className="mx-auto w-screen md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-10 justify-center items-center gap-4">
 				<div className="md:inline-flex sm:hidden md:w-full md:h-1 bg-black flex items-center col-span-2">
 					<div className="md:inline-block sm:hidden md:w-6 md:h-6 bg-black rounded-full" />
 				</div>
 
-				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-8">
+				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-10 min-w-fit">
 					<div
 						className={`self-stretch text-center text-slate-700 text-2xl font-bold ${fontSans.style} tracking-tight`}
 					>
@@ -89,7 +84,7 @@ export default function HistorySection() {
 						<span
 							className={`text-slate-700 md:text-5xl text-2xl font-bold ${fontSans.style}`}
 						>
-							Discover the
+							Discover the 
 						</span>
 						<span
 							className={`text-zinc-800 md:text-5xl text-2xl font-bold ${fontSans.style}`}
@@ -117,13 +112,13 @@ export default function HistorySection() {
 
 			{/* desktop version */}
 			<div className="items-center w-screen md:mt-0 md:grid md:grid-cols-12 grid-cols-1 overflow-hidden my-auto px-12">
-				<IconArrowLeft stroke={5} className="cursor-pointer items-center col-span-1 justify-self-start" onClick={() => emblaHorizontalApi?.scrollPrev()}/>
+				<IconArrowLeft stroke={5} className="max-sm:hidden cursor-pointer items-center col-span-1 justify-self-start" onClick={() => emblaHorizontalApi?.scrollPrev()} />
 				<div
 					className={`mt-[93px] mb-[77px] md:col-span-10 md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${centerSlideIndex === 0
-							? "pr-96"
-							: centerSlideIndex === historyData.length - 1
-								? " md:pr-0"
-								: " md:pr-0"
+						? "pr-96"
+						: centerSlideIndex === historyData.length - 1
+							? " md:pr-0"
+							: " md:pr-0"
 						}`}
 					ref={emblaHorizontalRef}
 				>
@@ -133,8 +128,8 @@ export default function HistorySection() {
 								<div
 									key={data.year}
 									className={`flex shrink-0 md:ml-[50px] ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${index === centerSlideIndex
-											? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-48 h-48"
-											: "sm:inline-flex lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] w-[100px] md:h-[120px] h-[100px] opacity-30"
+										? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-48 h-48"
+										: "sm:inline-flex lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] w-[100px] md:h-[120px] h-[100px] opacity-30"
 										}`}
 									// On click for changing the year
 									onClick={() =>
@@ -143,8 +138,8 @@ export default function HistorySection() {
 								>
 									<div
 										className={`mx-auto font-extrabold ${index === centerSlideIndex
-												? "text-orange-300 md:text-4xl lg:text-5xl text-3xl"
-												: "sm:inline-flex text-slate-700 md:text-3xl lg:text-4xl"
+											? "text-orange-300 md:text-4xl lg:text-5xl text-3xl"
+											: "sm:inline-flex text-slate-700 md:text-3xl lg:text-4xl"
 											} ${fontSans.style}`}
 									>
 										{data.year}
@@ -154,7 +149,7 @@ export default function HistorySection() {
 						})}
 					</div>
 				</div>
-				<IconArrowRight stroke={5} className="items-center col-span-1 cursor-pointer justify-self-end" onClick={() => emblaHorizontalApi?.scrollNext()}/>
+				<IconArrowRight stroke={5} className="max-sm:hidden items-center col-span-1 cursor-pointer justify-self-end" onClick={() => emblaHorizontalApi?.scrollNext()} />
 			</div>
 
 			<div className="grid md:grid-cols-12 justify-between md:h-80 mb-40 items-center w-screen">
