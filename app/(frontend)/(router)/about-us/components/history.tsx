@@ -69,12 +69,12 @@ export default function HistorySection() {
 
 	return (
 		<>
-			<div className="mx-auto w-screen md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-10 justify-center items-center gap-4 max-md:px-24">
+			<div className="mx-auto w-screen md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-10 justify-center items-center gap-4">
 				<div className="md:inline-flex sm:hidden md:w-full md:h-1 bg-black flex items-center col-span-2">
 					<div className="md:inline-block sm:hidden md:w-6 md:h-6 bg-black rounded-full" />
 				</div>
 
-				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-10">
+				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-10 min-w-fit">
 					<div
 						className={`self-stretch text-center text-slate-700 text-2xl font-bold ${fontSans.style} tracking-tight`}
 					>
@@ -84,7 +84,7 @@ export default function HistorySection() {
 						<span
 							className={`text-slate-700 md:text-5xl text-2xl font-bold ${fontSans.style}`}
 						>
-							Discover the
+							Discover the 
 						</span>
 						<span
 							className={`text-zinc-800 md:text-5xl text-2xl font-bold ${fontSans.style}`}
