@@ -70,6 +70,7 @@ const UpcomingEvent = async () => {
 						return (
 							<CardEvent
 								key={event["_id"]}
+								eventId={event["_id"]}
 								imageUrl={event["imageUrl"]}
 								eventName="No name"
 								location={event["location"]}
