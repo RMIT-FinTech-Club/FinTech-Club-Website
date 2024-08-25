@@ -1,8 +1,8 @@
-import {connect} from "@/app/(backend)/db/dbConfig";
 import EventProject from "@/app/(backend)/models/eventProject";
 import { type NextRequest, NextResponse } from "next/server";
+import connectMongoDB from "@/app/(backend)/libs/mongodb";
 
-connect();
+connectMongoDB();
 
 export async function GET(
 	req: NextRequest,

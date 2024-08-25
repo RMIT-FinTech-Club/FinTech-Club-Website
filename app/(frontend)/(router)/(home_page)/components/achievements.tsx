@@ -19,7 +19,7 @@ const AchievementsSection = () => {
 				</div>
 				<div className="w-[700px] md:w-[500px] md:h-[0px] border-2 border-orange-300 md:mt-[25px] mt-[10px]" />
 			</div>
-			<div className="grid md:grid-cols-4 mx-atuo justify-around my-7 items-center px-auto gap-24">
+			<div className="grid md:grid-cols-4 mx-auto justify-around my-7 items-center px-auto gap-24">
 				<div className="bg-ft-primary-blue flex flex-col justify-evenly md:p-16">
 					<div className="mx-auto">
 						<IconUsers

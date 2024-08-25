@@ -1,24 +1,19 @@
 "use client";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
-import React, { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
-import axios from "axios";
-import "@styles/carousel-dynamic-heigth.css";
+import "@styles/carousel-dynamic-height.css";
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
+import { useQuery } from "@tanstack/react-query";
 
 const settings = {
 	className: "w-full center",
-	// dots: true,
 	infinite: true,
 	autoplay: true,
-	// arrows: false,
 	centerMode: true,
 	autoSpeed: 1000,
-	dragagable: true,
 	speed: 500,
 	slidesToShow: 1,
 	slidesToScroll: 1,
@@ -26,22 +21,27 @@ const settings = {
 	initialSlide: 0,
 } as Settings;
 
-const UpcomingEvent = () => {
-	const [upcomingEvents, setUpcomingEvents] = useState([]);
+type UpComingEvents = {
+	imageUrl: string;
+	name: string;
+	description: string;
+	location: string;
+	date: string;
+	time: string;
+	_id: string;
+};
 
+const UpcomingEvent = async () => {
+	const { data: upcomingEvents } = useQuery<UpComingEvents[]>({
+		queryKey: ["upcoming-events"],
+		queryFn: async () => {
+			const response = await fetch("/api/v1/events/upcoming");
+			return response.json().then((data) => data.data);
+		},
+		refetchOnWindowFocus: false,
+		staleTime: 1000 * 60 * 60,
+	})
 	const sliderRef = useRef<Slider>(null);
-
-	useEffect(() => {
-		axios
-			.get("/api/v1/events/upcomming")
-			.then((response) => {
-				setUpcomingEvents(response.data.data);
-				console.log(response.data.data);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
 
 	return (
 		<section className="flex flex-col px-side-margin-mobile md:px-side-margin gap-5 w-screen py-2 lg:py-12">
@@ -63,13 +63,14 @@ const UpcomingEvent = () => {
 					className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16"
 				/>
 				<Slider ref={sliderRef} {...settings}>
-					{upcomingEvents.map((event, index) => {
+					{upcomingEvents && upcomingEvents.map((event) => {
 						// Split date to get month and day
 						const dateMonth = (event["date"] as string).split(" ");
 
 						return (
 							<CardEvent
 								key={event["_id"]}
+								eventId={event["_id"]}
 								imageUrl={event["imageUrl"]}
 								eventName="No name"
 								location={event["location"]}

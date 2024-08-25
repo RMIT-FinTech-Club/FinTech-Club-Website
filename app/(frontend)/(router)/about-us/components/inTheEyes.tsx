@@ -1,4 +1,3 @@
-"use client";
 import { fontMono } from "@/config/fonts";
 
 export default function FinTechInTheEyes() {
@@ -41,7 +40,7 @@ export default function FinTechInTheEyes() {
 					President
 				</h2>
 				<p
-					className={`text-1xl md:text-2xl text-justify mt-4 md:mt-0 mb-0 md:mb-36 md:text-left ${fontMono.style}`}
+					className={`text-1xl md:text-2xl text-justify mt-4 md:text-left ${fontMono.style}`}
 				>
 					FinTech Club changed my life. Joining RMIT was challenging
 					as an introvert, making new friends difficult. College was
@@ -64,17 +63,6 @@ export default function FinTechInTheEyes() {
 					className=" md:block hidden h-[300px] w-full"
 				/>
 			</div>
-
-			{/* <img
-        alt="fintech mascot"
-        className="md:block md:col-span-2 hidden h-[300px] w-full "
-        src="https://ik.imagekit.io/wsdkzaaovq/Mascot.svg?updatedAt=1718591967593"
-      />
-      <img
-        alt="decoration"
-        src="https://ik.imagekit.io/wsdkzaaovq/Some%20Decoration.svg?updatedAt=1718591556722"
-        className="md:block md:col-span-2 hidden h-[300px] w-full relative bottom-0 right-0"
-      /> */}
 		</div>
 	);
 }
