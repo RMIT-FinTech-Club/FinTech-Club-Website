@@ -74,7 +74,7 @@ export default function HistorySection() {
 					<div className="md:inline-block sm:hidden md:w-6 md:h-6 bg-black rounded-full" />
 				</div>
 
-				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-8">
+				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-10">
 					<div
 						className={`self-stretch text-center text-slate-700 text-2xl font-bold ${fontSans.style} tracking-tight`}
 					>
