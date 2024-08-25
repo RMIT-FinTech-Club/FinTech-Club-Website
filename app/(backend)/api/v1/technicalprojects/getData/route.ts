@@ -1,4 +1,4 @@
-import { connect } from "@/db/dbConfig";
+import {connect} from "@/app/(backend)/db/dbConfig";
 import TechnicalProject from "@/app/(backend)/models/technicalProject";
 import { type NextRequest, NextResponse } from "next/server";
 
