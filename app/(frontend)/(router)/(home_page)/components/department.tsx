@@ -164,7 +164,7 @@ const Department = () => {
 			</div>
 
 			{/* Department right image */}
-			<div className="relative w-full h-full md:h-5/6 md:w-2/5 flex justify-center items-center">
+			<div className="relative w-full h-full md:h-5/6 md:w-2/5 flex justify-center items-center max-sm:mt-5">
 				<Image
 					className="object-cover md:h-full md:w-full"
 					src={department.imageUrl}

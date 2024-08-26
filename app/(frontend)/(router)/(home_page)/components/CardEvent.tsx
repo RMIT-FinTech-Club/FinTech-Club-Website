@@ -22,7 +22,6 @@ interface CardEventContent extends CardProps {
 
 const CardEvent = ({
 	eventId,
-	eventName,
 	imageUrl,
 	location,
 	title,
@@ -46,7 +45,9 @@ const CardEvent = ({
 					src={imageUrl}
 				/>
 			</CardBody>
-			<Link href={`/events/event-detail/${eventId}`}>
+			<Link
+				className="h-full"
+				href={`/events/event-detail/${eventId}`}>
 				<CardFooter className="w-full text-white gap-2 md:text-ft-primary-blue">
 					<div className="bg-ft-primary-blue w-auto rounded-lg px-4 flex justify-around items-center gap-2 md:gap-0 content-center md:flex-col md:items-center  md:bg-transparent md:text-ft-primary-blue">
 						<p className="text-sm font-bold">{timeOnDay}</p>
