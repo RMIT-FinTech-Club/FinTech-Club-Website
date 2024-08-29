@@ -1,112 +1,253 @@
-"use client";
-import { motion } from "framer-motion";
-import { fontMono } from "@/config/fonts";
-import { useEffect, useRef, useState } from "react";
-import "../../styles/join-us/countDown.css";
+'use client'
+import { Box, Center, Flex, HStack, Text } from "@chakra-ui/react";
+import { motion, useAnimationControls } from "framer-motion";
+import { memo, useEffect, useMemo, useState } from "react";
+import ReactCountdown from "react-countdown";
+import type { CountdownProps, CountdownRendererFn } from "react-countdown";
 
-export default function CountDown() {
-	const [days, setDays] = useState(0);
-	const [hours, setHours] = useState(0);
-	const [minutes, setMinutes] = useState(0);
-	const [seconds, setSeconds] = useState(0);
-
-	const interval = useRef<NodeJS.Timeout>();
-
-	const timerCount = () => {
-		const expiredDay = new Date(2024, 7, 21, 23, 59, 59);
-		interval.current = setInterval(() => {
-			const now = new Date();
-			const totalDays = expiredDay.getTime() - now.getTime();
-
-			const days = Math.floor(totalDays / (1000 * 60 * 60 * 24));
-			const hours = Math.floor(
-				(totalDays % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-			);
-			const minutes = Math.floor(
-				(totalDays % (1000 * 60 * 60)) / (1000 * 60),
-			);
-			const seconds = Math.floor((totalDays % (1000 * 60)) / 1000);
-
-			if (totalDays < 0) {
-				// stop count down
-				clearInterval(interval.current);
-			} else {
-				// update timer
-				setDays(days);
-				setHours(hours);
-				setMinutes(minutes);
-				setSeconds(seconds);
-			}
-		}, 1000);
-	};
-	useEffect(() => {
-		timerCount();
-		return () => {
-			clearInterval(interval.current);
-		};
-	}, [timerCount]);
+const StaticCard = ({
+	position,
+	unit
+}: {
+	position: "upper" | "lower";
+	unit: number | string;
+}) => {
+	if (position === "upper") {
+		return (
+			<Flex
+				pos="relative"
+				justifyContent="center"
+				w="100%"
+				h="50%"
+				overflow="hidden"
+				alignItems="flex-end"
+				borderTopRadius={18.51}
+				borderBottom="4.12px solid #F7D27F"
+				bgColor="#F9FAFB"
+			>
+				<Text
+					fontSize={"200px"}
+					fontWeight="normal"
+					transform="translateY(50%)"
+					color="#DBB968"
+				>
+					{unit}
+				</Text>
+			</Flex>
+		);
+	}
 
 	return (
-		<div className="countDown-container h-screen w-screen flex justify-center items-start">
-			<div className="w-full z-10 mt-16 absolute flex flex-col justify-center items-center">
-				<h1
-					className={`mb-7 md:mb-14 text-[#F9FAFB] text-2xl md:text-6xl font-bold ${fontMono.style}`}
-				>
-					Count down to form closed
-				</h1>
-				<div className="timer-container w-full md:w-4/5">
-					<div className="timer w-full flex flex-col md:flex-row  justify-between items-center text-center mb-7 md:mb-14">
-						<section
-							className={`text-[#F9FAFB] mb-12 md:mb-0 ${fontMono.style}`}
-						>
-							<p className="text-5xl md:text-8xl mb-5 font-black">
-								{days}
-							</p>
-							<p className="text-2xl md:text-5xl font-bold">
-								DAYS
-							</p>
-						</section>
-						<section
-							className={`text-[#F9FAFB] mb-12 md:mb-0 font-bold ${fontMono.style}`}
-						>
-							<p className="text-5xl md:text-8xl mb-5 font-black">
-								{hours}
-							</p>
-							<p className="text-2xl md:text-5xl font-bold">
-								HOURS
-							</p>
-						</section>
-						<section
-							className={`text-[#F9FAFB] mb-12 md:mb-0 font-bold ${fontMono.style}`}
-						>
-							<p className="text-5xl md:text-8xl mb-5 font-black">
-								{minutes}
-							</p>
-							<p className="text-2xl md:text-5xl font-bold">
-								MINUTES
-							</p>
-						</section>
-						<section
-							className={`text-[#F9FAFB] font-bold ${fontMono.style}`}
-						>
-							<p className="text-5xl md:text-8xl mb-5 font-black">
-								{seconds}
-							</p>
-							<p className="text-2xl md:text-5xl font-bold">
-								SECONDS
-							</p>
-						</section>
-					</div>
-				</div>
-				<motion.div
-					className="text-2xl md:text-5xl px-5 md:px-10 py-6 md:py-12 bg-[#0D1742] border-2 md:border-4  rounded-3xl border-white text-[#F9FAFB] cursor-pointer"
-					whileHover={{ scale: 1.2 }}
-					whileTap={{ scale: 0.9 }}
-					transition={{ type: "spring", stiffness: 400, damping: 17 }}
-				>
-					Join us here
-				</motion.div>
-			</div>
-		</div>
+		<Flex
+			pos="relative"
+			justifyContent="center"
+			w="100%"
+			h="50%"
+			overflow="hidden"
+			alignItems="flex-start"
+			bgColor="#F9FAFB"
+			borderBottomRadius={18.51}
+			borderTop="4.12px solid #F7D27F"
+		>
+			<Text
+				fontSize={"200px"}
+				fontWeight="semibold"
+				transform="translateY(-50%)"
+				color="#DBB968"
+			>
+				{unit}
+			</Text>
+		</Flex>
 	);
-}
+};
+
+const MotionFlex = motion(Flex);
+
+const UpperAnimatedCard = memo(
+	({
+		current,
+		previous
+	}: {
+		current: number | string;
+		previous: number | string;
+	}) => {
+		const [displayUnit, setDisplayUnit] = useState(previous);
+		const controls = useAnimationControls();
+
+		useEffect(() => {
+			controls.start({
+				rotateX: [0, -180],
+				transition: { duration: 0.9, ease: "easeInOut" }
+			});
+			setDisplayUnit(previous);
+		}, [previous]);
+
+		return (
+			<MotionFlex
+				id="upper-animated-card"
+				animate={controls}
+				justifyContent="center"
+				pos="absolute"
+				w="100%"
+				h="50%"
+				overflow="hidden"
+				sx={{ backfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
+				top={0}
+				alignItems="flex-end"
+				transformOrigin="50% 100%"
+				transform="rotateX(0deg)"
+				bgColor="#F9FAFB"
+				borderTopRadius={18.51}
+				borderBottom="4.12px solid #F7D27F"
+				onAnimationComplete={() => {
+					setDisplayUnit(current);
+					controls.set({ rotateX: 0 });
+				}}
+			>
+				<Text
+					fontSize={"200px"}
+					fontWeight="semibold"
+					transform="translateY(50%)"
+					color="#DBB968"
+				>
+					{displayUnit}
+				</Text>
+			</MotionFlex>
+		);
+	}
+);
+
+const BottomAnimatedCard = ({ unit }: { unit: number | string }) => {
+	const [displayUnit, setDisplayUnit] = useState(unit);
+	const controls = useAnimationControls();
+
+	useEffect(() => {
+		controls.start({
+			rotateX: [180, 0],
+			transition: { duration: 0.9, ease: "easeInOut" }
+		});
+		setDisplayUnit(unit);
+	}, [unit]);
+
+	return (
+		<MotionFlex
+			id="animated-card"
+			animate={controls}
+			justifyContent="center"
+			pos="absolute"
+			left={0}
+			w="100%"
+			h="50%"
+			overflow="hidden"
+			sx={{ backfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
+			top="50%"
+			alignItems="flex-start"
+			transformOrigin="50% 0%"
+			transform="rotateX(180deg)"
+			bgColor="#F9FAFB"
+			borderBottomRadius={18.51}
+			borderTop="4.12px solid #F7D27F"
+		>
+			<Text
+				fontSize={"200px"}
+				fontWeight="semibold"
+				transform="translateY(-50%)"
+				color="#DBB968"
+			>
+				{displayUnit}
+			</Text>
+		</MotionFlex>
+	);
+};
+
+const FlipContainer = ({
+	number,
+	title
+}: {
+	number: number;
+	title: "days" | "hours" | "mins" | "secs";
+}) => {
+	const { current, previous } = useMemo(() => {
+		const currentDigit = number;
+		const previousDigit = number + 1;
+
+		const current =
+			currentDigit < 10
+				? `0${currentDigit}`
+				: (title === "secs" || title === "mins") && currentDigit === 60
+					? "00"
+					: currentDigit;
+		const previous =
+			previousDigit < 10
+				? `0${previousDigit}`
+				: (title === "secs" || title === "mins") && previousDigit === 60
+					? "00"
+					: previousDigit;
+
+		return { current, previous };
+	}, [number]);
+
+	return (
+		<Box>
+			<Box
+				display="block"
+				pos="relative"
+				w="327.22px"
+				h="264.67px"
+				bgColor="#12161C"
+				rounded="18.51px"
+				sx={{ perspective: "800px", perspectiveOrigin: "50% 50%" }}
+			>
+				<StaticCard position="upper" unit={current} />
+				<StaticCard position="lower" unit={previous} />
+				<UpperAnimatedCard current={current} previous={previous} />
+				<BottomAnimatedCard unit={current} />
+			</Box>
+
+			{/* Text */}
+			<Center py={20}>
+				<Text
+					fontSize={"47.61px"}
+					fontWeight="light"
+					textTransform="uppercase"
+					color="white"
+				>
+					{title}
+				</Text>
+			</Center>
+		</Box>
+	);
+};
+
+const renderer: CountdownRendererFn = ({
+	hours,
+	minutes,
+	seconds,
+	completed,
+	days
+}:
+	{
+		days: number;
+		hours: number;
+		minutes: number;
+		seconds: number;
+		completed: boolean;
+	}
+
+) => {
+	if (completed) return null;
+	return (
+		<Center>
+			<HStack align="center" spacing={50}>
+				<FlipContainer number={days} title="days" />
+				<FlipContainer number={hours} title="hours" />
+				<FlipContainer number={minutes} title="mins" />
+				<FlipContainer number={seconds} title="secs" />
+			</HStack>
+		</Center>
+	);
+};
+
+export default function Countdown({ date }: Pick<CountdownProps, "date">) {
+	return <ReactCountdown date={date} renderer={renderer} />;
+};
