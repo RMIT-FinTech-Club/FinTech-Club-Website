@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useState } from "react";
-import "@styles/about-us/historyPage.css"
 
 const historyData = [
 	{

@@ -5,9 +5,14 @@ import RecruitmentProcess from "./recruitmentProcess";
 const JoinUs = () => {
 	return (
 		<>
-			<CountDown />
+			{/* <CountDown />
 			<RecruitmentProcess />
-			{/* <BondingActivities /> */}
+			<BondingActivities /> */}
+
+			<div className="flex justify-center items-center h-screen bg-[#DCB968]">
+				<CountDown date={new Date(2024, 10, 10)} />
+			</div>
+
 		</>
 	);
 };
