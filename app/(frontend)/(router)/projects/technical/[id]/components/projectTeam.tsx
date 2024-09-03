@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface TeamMember {
@@ -5,17 +6,6 @@ interface TeamMember {
 	memberRole: string;
 	imageUrl: string;
 }
-
-// const teamMembers: TeamMember[] = [
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' },
-//   { name: 'Duy Hung Do', role: 'SOFTWARE ENGINEER', imageUrl: 'https://img.freepik.com/free-photo/smooth-gray-background-with-high-quality_53876-124606.jpg' }
-// ];
 
 const ProjectTeam: React.FC<{ teamMembers: TeamMember[] }> = ({
 	teamMembers,
@@ -30,10 +20,12 @@ const ProjectTeam: React.FC<{ teamMembers: TeamMember[] }> = ({
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-8">
 				{teamMembers.map((member, index) => (
 					<div key={index} className="flex flex-col items-center">
-						<img
+						<Image
 							className="w-32 h-32 rounded-full object-cover transform transition-transform duration-300 p-[6px] border-[1px] border-ft-primary-yellow"
 							src={member.imageUrl}
 							alt={member.memberName}
+							width={1000}
+							height={1000}
 						/>
 						<div className="text-center mt-4">
 							<h3 className="text-lg font-semibold pb-2">

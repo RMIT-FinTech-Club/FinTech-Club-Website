@@ -1,4 +1,3 @@
-"use client";
 import {
 	IconBuildingCommunity,
 	IconClock,
@@ -6,74 +5,25 @@ import {
 	IconMapPin,
 } from "@tabler/icons-react";
 import type React from "react";
-import { useEffect, useState } from "react";
 import type { Event } from "./types";
-import { Skeleton, Image } from "@nextui-org/react";
+import Image from "next/image";
+import Link from "next/link";
 
 const EventCard: React.FC<{ event: Event }> = ({ event }) => {
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const [displayDate, setDisplayDate] = useState(false);
-	const [imageLoading, setImageLoading] = useState(false);
-
-	// Effect to handle window resizing
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(window.innerWidth);
-		};
-
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
-	// Adjust displayed text based on the window width
-	useEffect(() => {
-		if (windowWidth < 640) {
-			// Assuming 640px is the breakpoint for mobile
-			setDisplayDate(true);
-		} else {
-			setDisplayDate(false);
-		}
-	}, [windowWidth]);
-
 	// Define your theme colors
 	const primaryYellow = "#DCB968"; // Make sure this color is defined correctly
-	const primaryBlue = "#2C305F";
 
 	return (
 		<div className="grid grid-rows-1 grid-cols-12 gap-2 md:max-h-60 md:grid-rows-1 md:gap-4 border rounded-2xl shadow-md overflow-hidden max-w-4xl w-full mx-auto my-4">
 			{/* Event Image */}
-			{imageLoading ? (
-				<div className="row-span-1 col-span-12 md:col-span-4 w-full">
-					<img
-						src={event.imageUrl}
-						alt="Event"
-						className={
-							imageLoading
-								? "block w-full h-full object-cover"
-								: "hidden"
-						}
-						onLoad={() => setImageLoading(true)}
-					/>
-				</div>
-			) : (
-				<Skeleton
-					isLoaded={imageLoading}
-					className="row-span-1 col-span-12 md:col-span-4 w-full"
-				>
-					<div className="row-span-1 col-span-12 md:col-span-4 w-full">
-						<img
-							src={event.imageUrl}
-							alt="Event"
-							className={
-								imageLoading
-									? "block w-full h-full object-cover"
-									: "hidden"
-							}
-							onLoad={() => setImageLoading(true)}
-						/>
-					</div>
-				</Skeleton>
-			)}
+			<div className="row-span-1 col-span-12 md:col-span-4 w-full">
+				<Image
+					src={event.imageUrl}
+					alt="Event"
+					width={1000}
+					height={1000}
+				/>
+			</div>
 
 			{/* Event Info */}
 			<div className="date row-span-1 col-span-3 flex flex-col justify-between p-2 md:p-4 py-auto space-y-2 text-center align-middle mb-2">
@@ -134,12 +84,12 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
 						backgroundSize: "100% 12px",
 					}}
 				/>
-				<a
+				<Link
 					href={`/events/event-detail/${event._id}`}
 					className="text-ft-primary-yellow rotate-90 text-lg font-semibold z-10 uppercase"
 				>
 					Explore More
-				</a>
+				</Link>
 			</div>
 		</div>
 	);
