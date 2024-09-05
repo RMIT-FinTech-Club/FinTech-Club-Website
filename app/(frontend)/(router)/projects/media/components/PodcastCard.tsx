@@ -75,7 +75,6 @@ async function getAudioDuration(audioFileUrl: string) {
 	try {
 		let result = "";
 		const duration = await getBlobDuration(audioFileUrl);
-		console.log(`duration: ${duration}`);
 
 		if (duration < 60) {
 			result = `${duration} SECS`;
