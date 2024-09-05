@@ -6,6 +6,7 @@ import TechStack from "./components/techStack";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import Image from "next/image";
 // import { TechnicalProject } from "../components/TechnicalProject";
 
 interface TeamMember {
@@ -50,13 +51,13 @@ const TechnicalProjectPage: React.FC<{ params: { id: string } }> = ({
 		axios(configuration)
 			.then((result) => {
 				setProjectData(result.data.data);
-				// console.log(result.data.data);
 				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, [params.id]);
+
 	return isLoading ? (
 		<section className="flex flex-col items-center h-screen w-full justify-center">
 			<ClipLoader color="#2C305F" size={60} />
@@ -74,10 +75,12 @@ const TechnicalProjectPage: React.FC<{ params: { id: string } }> = ({
 				Our Demo
 			</h1>
 			<div className="w-[16vw] h-0.5 bg-ft-primary-yellow m-auto" />
-			<img
+			<Image
 				src={projectData?.demoSrc}
 				alt="event-img"
 				className="mx-auto w-[70vw] h-auto rounded-2xl"
+				width={1000}
+				height={1000}
 			/>
 
 			<ProjectTeam teamMembers={projectData?.teamMembers} />

@@ -1,14 +1,15 @@
 "use client";
-import { FaCirclePlay, FaRegCirclePlay } from "react-icons/fa6";
+import { FaCirclePlay } from "react-icons/fa6";
 import getBlobDuration from "get-blob-duration";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Skeleton } from "@nextui-org/react";
 
 const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 	data,
 	espsode,
 }) => {
-	console.log(JSON.stringify(data));
 	const [duration, setDuration] = useState<string>();
 	useEffect(() => {
 		getAudioDuration(data.audioFileUrl).then((duration) => {
@@ -19,10 +20,13 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 		return (
 			<div className="w-[80%] sm:w-1/2 md:w-1/3 lg:w-1/4 min-w-[360px] aspect-[1/1] shadow-lg rounded-xl relative overflow-hidden group">
 				<div className="absolute top-0 left-0 w-full h-full bg-black opacity-20 transition-all duration-300 group-hover:opacity-0" />
-				<img
+				<Image
 					src={data.thumnailFileUrl}
 					alt="Avatar"
 					className="w-full h-full object-cover rounded-lg"
+					style={{ aspectRatio: "1/1" }}
+					width={1000}
+					height={1000}
 				/>
 				<div className="absolute h-auto bottom-0 w-full p-4 bg-gradient-to-t from-[#000] to-transparent text-white text-base md:text-lg lg:text-xl font-light transition-all duration-300">
 					<div className="h-100 w-100 flex flex-row justify-between">
@@ -32,7 +36,7 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 									EP <span>{espsode}</span>
 								</p>
 								<p className="leading-normal text-sm font-semibold text-white">
-									{duration}
+									{Math.round(Number(duration.split(" ")[0]))} {duration.split(" ")[1]}
 								</p>
 							</div>
 							<h1 className="leading-normal text-[19px] font-extrabold text-white">
@@ -63,7 +67,7 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 			</div>
 		);
 	} else {
-		return <></>;
+		return <Skeleton className="w-full h-full" />;
 	}
 };
 
@@ -71,7 +75,6 @@ async function getAudioDuration(audioFileUrl: string) {
 	try {
 		let result = "";
 		const duration = await getBlobDuration(audioFileUrl);
-		console.log(`duration: ${duration}`);
 
 		if (duration < 60) {
 			result = `${duration} SECS`;

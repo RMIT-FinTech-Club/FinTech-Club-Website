@@ -15,8 +15,6 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import SpeedSelector from "./audioSpeedSelector";
-// import PodcastTitle from "./podcastTitle";
-import HeaderPodcastPage from "./headerPodcastPage";
 
 const PodcastMainFunction: React.FC<{
 	audioFileUrl: string;
@@ -26,9 +24,6 @@ const PodcastMainFunction: React.FC<{
 
 	const [isVolumeOn, setIsVolumeOn] = useState<boolean>(true);
 	const [currentVolume, setCurrentVolume] = useState<number>(100);
-
-	const [showIcons, setShowIcons] = useState(false);
-	const [showFollowUs, setShowFollowUs] = useState(false);
 
 	const [currentProgress, setCurrentProgress] = useState<number>(0);
 	const [duration, setDuration] = useState<number>(0);

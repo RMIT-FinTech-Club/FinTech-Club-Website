@@ -1,8 +1,6 @@
-"use client";
 import type React from "react";
-import { Skeleton } from "@nextui-org/react";
-import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const TechnicalTag: React.FC<{ tagName: string }> = ({ tagName }) => {
 	return (
@@ -27,17 +25,17 @@ const TechnicalProjectCard: React.FC<{
 	projectImg,
 	isImageLast
 }) => {
-		const [isLoaded, setIsLoaded] = useState(false);
 		return (
 			<div className="grid md:grid-cols-12 justify-between box-border p-2 rounded-xl md:gap-x-12 gap-7">
-				<Skeleton isLoaded={isLoaded} className={`rounded-xl md:col-span-4 ${isImageLast ? "md:order-last" : ""}`}>
-					<img
+				<div className={`rounded-xl md:col-span-4 ${isImageLast ? "md:order-last" : ""}`}>
+					<Image
 						className="rounded-xl aspect-square object-cover"
 						src={projectImg}
 						alt="project image"
-						onLoad={() => setIsLoaded(true)}
+						width={1000}
+						height={1000}
 					/>
-				</Skeleton>
+				</div>
 				<div className="flex flex-col lg:w-[40vw] md:w-[60vw] sm:w-full min-w-[320px] relative md:gap-2 gap-4 md:col-span-8">
 					<div className="flex gap-2 max-sm:justify-center">
 						{projectTags.map((tag, id) => (
@@ -49,7 +47,10 @@ const TechnicalProjectCard: React.FC<{
 					</div>
 					<p className="w-full text-justify">{projectDescription}</p>
 					<div className="w-full flex justify-end">
-						<button className="text-white text-[1rem] font-semibold bg-ft-primary-blue hover:bg-ft-primary-blue-600 w-40 max-sm:w-full p-3 rounded-lg">
+						<button
+							className="text-white text-[1rem] font-semibold bg-ft-primary-blue hover:bg-ft-primary-blue-600 w-40 max-sm:w-full p-3 rounded-lg"
+							type="button"
+						>
 							<span className="block w-full h-full hover:scale-110">
 								<Link href={`/projects/technical/${projectId}`}>
 									Read more

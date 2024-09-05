@@ -1,6 +1,8 @@
 "use client";
 import { IconArrowsMaximize } from "@tabler/icons-react";
 import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -37,11 +39,11 @@ const EventCard = () => {
 		</section>
 	) : (
 		<>
-			<div className="w-full my-16">
-				<h1 className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mt-8 uppercase text-[#2b305e]">
+			<div className="w-full md:my-16 max-md:my-8">
+				<h1 className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center md:mt-8 uppercase text-[#2b305e]">
 					Forums and Competitions
 				</h1>
-				<p className="font-poppins text-base sm:text-lg md:text-xl lg:text-2xl text-justify mt-4 w-4/5 mx-auto font-light">
+				<p className="font-poppins sm:text-lg md:text-xl lg:text-2xl text-center mt-4 mx-auto font-light md:px-56 max-md:px-3">
 					Our club envisions becoming a dynamic hub for organizing
 					forums and competitions that inspire innovation and
 					collaboration. We aim to create a vibrant community where
@@ -51,17 +53,20 @@ const EventCard = () => {
 					lasting connections among members.
 				</p>
 				<div className="w-1/5 h-1 bg-black my-8 mx-auto" />
-				<div className="grid lg:grid-cols-2 lg:grid-flow-row mt-12 gap-14 md:px-40 px-12">
-					{eventProjectsData.map((event: EventProject) => (
-						<a
-							href={`#`}
-							className="relative w-full lg:max-w-[400px] justify-self-center m-auto items-center text-center bg-ft-background h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000"
+				<div className="grid lg:grid-cols-2 lg:grid-flow-row mt-12 md:gap-20 max-md:gap-6 md:px-40 px-12 ">
+					{eventProjectsData.map((event: EventProject, index: number) => (
+						<Link
+							// href={`/projects/event/${event._id}`}
+							href={"#"}
+							className={`relative w-full lg:max-w-[400px] ${index % 2 === 0 ? "justify-self-end" : "justify-self-start"} text-center bg-ft-background h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000`}
 						>
 							<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#DCB968] hover:bg-gradient-to-b hover:from-[#ffe098] hover:to-black to-black opacity-40 transition-all duration-300 group-hover:opacity-0 rounded-2xl" />
-							<img
+							<Image
 								src={event.eventThumbnail}
 								alt="Avatar"
 								className="w-full h-full object-cover rounded-lg"
+								width={1000}
+								height={1000}
 							/>
 							<div className="absolute h-auto bottom-3 row-start-2 row-span-1 md:px-10 px-4 grid md:grid-cols-12 grid-cols-4 z-10">
 								<div className="w-fit h-fit md:col-span-2 col-span-1 bg-black hover:bg-black/90 rounded-2xl p-2 transition-all duration-3000 justify-center my-auto">
@@ -80,7 +85,7 @@ const EventCard = () => {
 									</div>
 								</div>
 							</div>
-						</a>
+						</Link>
 					))}
 				</div>
 			</div>

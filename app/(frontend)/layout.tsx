@@ -67,7 +67,7 @@ export default function RootLayout({
 						theme="light"
 						transition={Flip}
 					/>
-					<div className="relative items-center flex flex-col h-screen">
+					<div className="relative flex flex-col h-screen">
 						{<Navbar />}
 						<main className="flex-grow overflow-x-clip">
 							{children}

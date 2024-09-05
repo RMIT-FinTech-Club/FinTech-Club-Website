@@ -1,11 +1,6 @@
-"use client";
 import { PreArrow, NextArrow } from "@/components/carouselArrows";
 import React from "react";
 import Slider from "react-slick";
-
-interface RecapGalleryProps {
-	eventRecapURLs: string[];
-}
 
 const EventCard: React.FC<{ url: string }> = ({ url }) => {
 	return (

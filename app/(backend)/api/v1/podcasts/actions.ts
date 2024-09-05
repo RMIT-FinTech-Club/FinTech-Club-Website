@@ -29,15 +29,17 @@ export async function uploadFileData(
 	fileBuffer: any,
 	fileName: string,
 	mimetype: string,
+	folderPath: string = ''
 ) {
 	try {
+		const keyPath = folderPath ? `${folderPath}/${fileName}` : fileName; // Construct the full S3 key path
 		const uploadParams = {
 			Bucket: bucketName,
 			Body: fileBuffer,
-			Key: fileName,
+			Key: keyPath,
 			ContentType: mimetype,
 		};
-		console.log(`uploadParams: ${JSON.stringify(uploadParams)}`);
+
 		const result = s3Client.send(new PutObjectCommand(uploadParams));
 		return result;
 	} catch (e: any) {
@@ -59,9 +61,9 @@ export function randomName(bytes = 32) {
 
 export function checkFile(file: any) {
 	let validatedStatus = true;
-	console.log(
-		`allowed Image type: ${IMAGETYPE}\n allowed image size: ${IMAGE_MAX_SIZE}\n allowed Audio type: ${AUDIOTYPE}\n allowed audio size: ${AUDIO_MAX_SIZE}\n file type: ${file.type}\n file size: ${file.size}`,
-	);
+	// console.log(
+	// 	`allowed Image type: ${IMAGETYPE}\n allowed image size: ${IMAGE_MAX_SIZE}\n allowed Audio type: ${AUDIOTYPE}\n allowed audio size: ${AUDIO_MAX_SIZE}\n file type: ${file.type}\n file size: ${file.size}`,
+	// );
 	if (
 		!(
 			(IMAGETYPE.includes(file.type) && file.size < IMAGE_MAX_SIZE) ||

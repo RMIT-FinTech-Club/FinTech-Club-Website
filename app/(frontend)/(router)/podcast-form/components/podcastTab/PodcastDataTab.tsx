@@ -8,7 +8,7 @@ const inputStyle = "w-full p-2 border-1 border-ft-primary-blue-600 rounded-md";
 const PodcastDataTab: React.FC<{ isShow: boolean }> = ({ isShow }) => {
 	const { podcastDetail, setPodcastDetail, authorFiles } =
 		useContext(PodcastDataContext);
-	const { isDisabled, setIsDisabled } = useContext(DisabledButtonContext);
+	// const { isDisabled, setIsDisabled } = useContext(DisabledButtonContext);
 	useEffect(() => {
 		if (isShow) {
 			let authorUploadStatus = true;
@@ -29,9 +29,9 @@ const PodcastDataTab: React.FC<{ isShow: boolean }> = ({ isShow }) => {
 				podcastDetail.language.length > 0 &&
 				authorUploadStatus
 			) {
-				setIsDisabled(false);
+				// setIsDisabled(false);
 			} else {
-				setIsDisabled(true);
+				// setIsDisabled(true);
 			}
 		}
 	}, [podcastDetail, authorFiles, isShow]);

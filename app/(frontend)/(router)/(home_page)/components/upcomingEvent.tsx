@@ -4,7 +4,6 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import CardEvent from "./CardEvent";
-import "@styles/carousel-dynamic-height.css";
 import { NextArrow, PreArrow } from "@/components/carouselArrows";
 import { useQuery } from "@tanstack/react-query";
 

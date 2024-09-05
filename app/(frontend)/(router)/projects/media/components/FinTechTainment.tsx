@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 const FinTechTainment: React.FC = () => {
 	const [podcastData, setPodcastData] = useState<object[]>([]);
 	const fetchingStatus = useRef<Boolean>(false);
-	//   console.log(`podcastData: ${podcastData} `)
+	
 	useEffect(() => {
 		try {
 			if (!fetchingStatus.current) {
@@ -21,8 +21,8 @@ const FinTechTainment: React.FC = () => {
 	});
 
 	return (
-		<div className="min-h-screen flex flex-col justify-center items-center">
-			<h1 className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mt-8 uppercase text-[#2b305e]">
+		<div className="flex flex-col justify-center items-center my-24">
+			<h1 className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center uppercase text-[#2b305e]">
 				FinTechTainment
 			</h1>
 			<p className="font-poppins text-base sm:text-lg md:text-xl lg:text-2xl text-justify mt-4 w-4/5 mx-auto font-light">
