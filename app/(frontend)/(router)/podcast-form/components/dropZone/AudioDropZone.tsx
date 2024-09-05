@@ -54,14 +54,14 @@ const AudioDropZone: React.FC<{}> = () => {
 			{audioFile instanceof File && (
 				<div
 					className="w-full h-full bg-ft-primary-blue-600 cursor-default flex justify-center items-center"
-					onClick={(e) => {
-						e.stopPropagation();
-					}}
+					// onClick={(e) => {
+					// 	e.stopPropagation();
+					// }}
 				>
 					<audio
-						onClick={(e) => {
-							e.stopPropagation();
-						}}
+						// onClick={(e) => {
+						// 	e.stopPropagation();
+						// }}
 						ref={previewAudioRef}
 						src=""
 						className="w-2/3 "

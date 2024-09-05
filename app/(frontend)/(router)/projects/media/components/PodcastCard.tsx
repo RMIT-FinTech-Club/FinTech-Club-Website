@@ -10,7 +10,6 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 	data,
 	espsode,
 }) => {
-	console.log(JSON.stringify(data));
 	const [duration, setDuration] = useState<string>();
 	useEffect(() => {
 		getAudioDuration(data.audioFileUrl).then((duration) => {
@@ -37,7 +36,7 @@ const PodcastCard: React.FC<{ data: any; espsode: number }> = ({
 									EP <span>{espsode}</span>
 								</p>
 								<p className="leading-normal text-sm font-semibold text-white">
-									{duration}
+									{Math.round(Number(duration.split(" ")[0]))} {duration.split(" ")[1]}
 								</p>
 							</div>
 							<h1 className="leading-normal text-[19px] font-extrabold text-white">
