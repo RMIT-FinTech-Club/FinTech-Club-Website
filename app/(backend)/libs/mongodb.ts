@@ -13,7 +13,7 @@ const connectMongoDB = async () => {
     }
 
     try {
-        await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI!, {
+        await mongoose.connect('mongodb+srv://<db_username>:<db_password>@rmitfintech.wkr5dko.mongodb.net/?retryWrites=true&w=majority&appName=RMITFintech'!, {
             dbName: "fintech",
         });
         console.log("Connected to MongoDB");
