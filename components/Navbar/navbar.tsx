@@ -21,25 +21,30 @@ import {
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import { set } from "mongoose";
+import './Navbar.css'
 
 const isOpenAtom = atom(false);
 
 const Navbar = () => {
-	const [isScrolled, setIsScrolled] = useState(false);
+	const sidebarRef = useRef()
 	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
-
 	const navBarRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
+		let lastScrollTop = 0
+	
 		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 0);
-		};
-
-		window.addEventListener("scroll", handleScroll);
+			const isScrollingDown = document.body.scrollTop > lastScrollTop
+			const isOpening = (sidebarRef.current.style.right === '0%')
+			navBarRef.current?.classList.toggle('closed', (isScrollingDown && !isOpening))
+			lastScrollTop = document.body.scrollTop
+		}
+	
+		document.body.addEventListener("scroll", handleScroll)
 		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
+			document.body.removeEventListener("scroll", handleScroll)
+		}
+	}, [])
 
 	const ulVariants = {
 		open: {
@@ -74,20 +79,23 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			className="sticky top-0 py-2 z-50 flex w-full transition-colors duration-300 bg-ft-primary-blue shadow-md"
+			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
 				<div className="logo relative w-14 h-14">
-					<img
-						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png"
-						alt="FinTech Club Logo"
-						className="absolute top-0 left-1/2 transform -translate-x-1/2"
-					/>
+					<Link href='/'>
+						<img
+							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png"
+							alt="FinTech Club Logo"
+							className="absolute top-0 left-1/2 transform -translate-x-1/2"
+						/>
+					</Link>
 				</div>
 				<div className="md:hidden h-fit flex justify-center items-center">
 					<AnimatedHamburger />
 				</div>
 				<motion.ul
+					ref={sidebarRef}
 					variants={ulVariants}
 					className={
 						"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"
@@ -255,7 +263,7 @@ const AnimatedHamburger = ({
 		<motion.button
 			ref={containerBarScope}
 			style={containerStyles}
-			onClick={() => setIsOpen(!isOpen)}
+			onClick={() => {setIsOpen(!isOpen)}}
 		>
 			<motion.div
 				ref={topBarScope}
