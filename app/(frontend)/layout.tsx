@@ -1,6 +1,7 @@
 import "@styles/globals.css";
 import Footer from "@/components/footer";
 import Navbar from "@/components/Navbar/navbar";
+import Content from "@/components/content";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import { Link } from "@nextui-org/link";
@@ -14,6 +15,7 @@ import "slick-carousel/slick/slick.css";
 import "@styles/carousel.css";
 import { Flip, ToastContainer } from "react-toastify";
 import { Providers } from "../providers";
+import { useEffect } from "react";
 
 export const metadata: Metadata = {
 	title: {
@@ -69,9 +71,7 @@ export default function RootLayout({
 					/>
 					<div className="relative flex flex-col h-screen">
 						{<Navbar />}
-						<main className="flex-grow overflow-x-clip">
-							{children}
-						</main>
+						{<Content child={children} />}
 						{<Footer />}
 					</div>
 				</Providers>

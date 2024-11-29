@@ -22,17 +22,22 @@ import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import { set } from "mongoose";
 import './Navbar.css'
+import { contentWitdth } from '../content'
 
 const isOpenAtom = atom(false);
+export let headerHeight: number
 
 const Navbar = () => {
-	const sidebarRef = useRef()
-	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
+	const sidebarRef = useRef<HTMLDivElement>(null);
 	const navBarRef = useRef<HTMLDivElement>(null);
+	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
+	const [headerWitdth, setHeaderWitdth] = useState(0)
 
 	useEffect(() => {
 		let lastScrollTop = 0
-	
+		headerHeight = navBarRef.current?.offsetHeight
+		setHeaderWitdth(contentWitdth)
+
 		const handleScroll = () => {
 			const isScrollingDown = document.body.scrollTop > lastScrollTop
 			const isOpening = (sidebarRef.current.style.right === '0%')
@@ -79,6 +84,7 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
+			style={{width: (contentWitdth && headerWitdth)}}
 			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
