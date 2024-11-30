@@ -35,16 +35,18 @@ const Navbar = () => {
 
 	useEffect(() => {
 		let lastScrollTop = 0
-		headerHeight = navBarRef.current?.offsetHeight
+		if (navBarRef.current) {
+			headerHeight = navBarRef.current.offsetHeight;
+		}
 		setHeaderWitdth(contentWitdth)
 
 		const handleScroll = () => {
 			const isScrollingDown = document.body.scrollTop > lastScrollTop
-			const isOpening = (sidebarRef.current.style.right === '0%')
-			navBarRef.current?.classList.toggle('closed', (isScrollingDown && !isOpening))
+			const isSidebarOpen = window.getComputedStyle(sidebarRef.current!).right === "0px";
+			navBarRef.current?.classList.toggle('closed', (isScrollingDown && !isSidebarOpen))
 			lastScrollTop = document.body.scrollTop
 		}
-	
+
 		document.body.addEventListener("scroll", handleScroll)
 		return () => {
 			document.body.removeEventListener("scroll", handleScroll)
@@ -84,7 +86,7 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			style={{width: (contentWitdth && headerWitdth)}}
+			style={{ width: (contentWitdth && headerWitdth) }}
 			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
@@ -269,7 +271,7 @@ const AnimatedHamburger = ({
 		<motion.button
 			ref={containerBarScope}
 			style={containerStyles}
-			onClick={() => {setIsOpen(!isOpen)}}
+			onClick={() => { setIsOpen(!isOpen) }}
 		>
 			<motion.div
 				ref={topBarScope}
