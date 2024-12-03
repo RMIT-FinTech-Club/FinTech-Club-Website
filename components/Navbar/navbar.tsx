@@ -31,18 +31,16 @@ const Navbar = () => {
 	const sidebarRef = useRef<HTMLDivElement>(null);
 	const navBarRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
-	const [headerWitdth, setHeaderWitdth] = useState(0)
+	const [headerWitdth, setHeaderWitdth] = useState(0);
 
 	useEffect(() => {
 		let lastScrollTop = 0
-		if (navBarRef.current) {
-			headerHeight = navBarRef.current.offsetHeight;
-		}
+		if (navBarRef.current) headerHeight = navBarRef.current.offsetHeight
 		setHeaderWitdth(contentWitdth)
 
 		const handleScroll = () => {
 			const isScrollingDown = document.body.scrollTop > lastScrollTop
-			const isSidebarOpen = window.getComputedStyle(sidebarRef.current!).right === "0px";
+			const isSidebarOpen = window.getComputedStyle(sidebarRef.current!).right === "0px"
 			navBarRef.current?.classList.toggle('closed', (isScrollingDown && !isSidebarOpen))
 			lastScrollTop = document.body.scrollTop
 		}
@@ -86,7 +84,7 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			style={{ width: (contentWitdth && headerWitdth) }}
+			style={{ maxWidth: (contentWitdth && headerWitdth) }}
 			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
@@ -105,9 +103,7 @@ const Navbar = () => {
 				<motion.ul
 					ref={sidebarRef}
 					variants={ulVariants}
-					className={
-						"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"
-					}
+					className={"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"}
 					style={{ top: navBarRef.current?.offsetHeight }} // Right aligning the sidebar links
 				>
 					{siteConfig.navItems.map((item) => (
@@ -271,7 +267,7 @@ const AnimatedHamburger = ({
 		<motion.button
 			ref={containerBarScope}
 			style={containerStyles}
-			onClick={() => { setIsOpen(!isOpen) }}
+			onClick={() => setIsOpen(!isOpen)}
 		>
 			<motion.div
 				ref={topBarScope}
