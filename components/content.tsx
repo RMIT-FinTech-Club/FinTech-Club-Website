@@ -1,22 +1,16 @@
 "use client";
-import { headerHeight } from "./Navbar/navbar";
+import { headerHeight } from "@/components/navbar";
 import { useEffect, useRef, useState, ReactNode } from "react";
 
-export let contentWitdth: number;
-type ContentProps = {
-    children: ReactNode; // Định nghĩa kiểu cho children
-};
+type ContentProps = { children: ReactNode };
 
 function Content({ children }: ContentProps) {
     const mainRef = useRef<HTMLDivElement>(null);
-    const [contentMarginTop, setContentMarginTop] = useState(0)
+    const [contentMarginTop, setContentMarginTop] = useState(0);
 
     useEffect(() => {
-        setContentMarginTop(headerHeight)
-        if (mainRef.current) {
-            contentWitdth = mainRef.current?.offsetWidth
-        }
-    }, [])
+        setContentMarginTop(headerHeight);
+    }, []);
 
     return (
         <main ref={mainRef} style={{ marginTop: headerHeight ? contentMarginTop - 1 : 0 }} className="flex-grow overflow-x-clip">

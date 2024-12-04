@@ -21,35 +21,30 @@ import {
 import clsx from "clsx";
 import { atom, useAtom } from "jotai";
 import { set } from "mongoose";
-import './Navbar.css'
-import { contentWitdth } from '../content'
 
 const isOpenAtom = atom(false);
-export let headerHeight: number
+export let headerHeight: number;
+let isSidebarOpen = false;
 
 const Navbar = () => {
-	const sidebarRef = useRef<HTMLDivElement>(null);
 	const navBarRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
-	const [headerWitdth, setHeaderWitdth] = useState(0);
 
 	useEffect(() => {
-		let lastScrollTop = 0
-		if (navBarRef.current) headerHeight = navBarRef.current.offsetHeight
-		setHeaderWitdth(contentWitdth)
+		let lastScrollTop = 0;
+		if (navBarRef.current) headerHeight = navBarRef.current.offsetHeight;
 
 		const handleScroll = () => {
-			const isScrollingDown = document.body.scrollTop > lastScrollTop
-			const isSidebarOpen = window.getComputedStyle(sidebarRef.current!).right === "0px"
-			navBarRef.current?.classList.toggle('closed', (isScrollingDown && !isSidebarOpen))
-			lastScrollTop = document.body.scrollTop
-		}
+			const isScrollingDown = document.body.scrollTop > lastScrollTop;
+			navBarRef.current?.classList.toggle('header_closed', (isScrollingDown && !isSidebarOpen));
+			lastScrollTop = document.body.scrollTop;
+		};
 
-		document.body.addEventListener("scroll", handleScroll)
+		document.body.addEventListener("scroll", handleScroll);
 		return () => {
-			document.body.removeEventListener("scroll", handleScroll)
-		}
-	}, [])
+			document.body.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	const ulVariants = {
 		open: {
@@ -84,7 +79,7 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			style={{ maxWidth: (contentWitdth && headerWitdth) }}
+			style={{ maxWidth: document.body.clientWidth }}
 			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
@@ -101,7 +96,6 @@ const Navbar = () => {
 					<AnimatedHamburger />
 				</div>
 				<motion.ul
-					ref={sidebarRef}
 					variants={ulVariants}
 					className={"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"}
 					style={{ top: navBarRef.current?.offsetHeight }} // Right aligning the sidebar links
@@ -267,7 +261,10 @@ const AnimatedHamburger = ({
 		<motion.button
 			ref={containerBarScope}
 			style={containerStyles}
-			onClick={() => setIsOpen(!isOpen)}
+			onClick={() => {
+				setIsOpen(!isOpen)
+				isSidebarOpen = !isSidebarOpen
+			}}
 		>
 			<motion.div
 				ref={topBarScope}
