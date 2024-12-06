@@ -1,0 +1,48 @@
+@keyframes moveAndGlow {
+    0% {
+        filter: brightness(1.5);
+        transform: translateX(0);
+    }
+
+    50% {
+        filter: brightness(1);
+        transform: translateX(1vw);
+    }
+
+    100% {
+        filter: brightness(1.5);
+        transform: translateX(0);
+    }
+}
+
+.wrapper {
+    position: relative;
+    padding: 3vh 1vh 1vh 1vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1vw;
+}
+
+.form_img {
+    width: 25vw;
+    aspect-ratio: 1;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 1vw;
+    border: 0.2vw solid white;
+}
+
+.logo {
+    position: absolute;
+    width: 8vw;
+    aspect-ratio: 1;
+    top: -1vw;
+    right: -3vw;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: moveAndGlow 4s infinite;
+}

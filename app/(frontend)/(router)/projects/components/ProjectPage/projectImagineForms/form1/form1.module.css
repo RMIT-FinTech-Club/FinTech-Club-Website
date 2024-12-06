@@ -1,0 +1,61 @@
+@keyframes shaking {
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(5deg);
+    }
+
+    75% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.wrapper {
+    width: 60%;
+    aspect-ratio: 1;
+    position: relative;
+}
+
+.form_img {
+    position: absolute;
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.form_img:nth-child(1) {
+    top: 0;
+    left: 0;
+}
+
+.form_img:nth-child(2) {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.form_img:nth-child(3) {
+    top: 0;
+    right: 0;
+}
+
+.form_img:nth-child(3) div {
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 1;
+    bottom: -4vw;
+    right: -4vw;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: shaking 8s infinite;
+}

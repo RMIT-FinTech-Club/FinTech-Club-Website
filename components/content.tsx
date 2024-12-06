@@ -13,7 +13,7 @@ function Content({ children }: ContentProps) {
     }, []);
 
     return (
-        <main ref={mainRef} style={{ marginTop: headerHeight ? contentMarginTop - 1 : 0 }} className="flex-grow overflow-x-clip">
+        <main ref={mainRef} style={{ borderTop: headerHeight ? `${contentMarginTop - 1}px solid #2C305F` : 0 }} className="flex-grow overflow-x-clip">
             {children}
         </main>
     )

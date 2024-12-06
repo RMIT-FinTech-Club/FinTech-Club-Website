@@ -1,0 +1,138 @@
+@keyframes glowing {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(2);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
+
+@keyframes moveUpDown {
+    0% {
+        transform: translateY(-4vh);
+    }
+
+    25% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(4vh);
+    }
+
+    75% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-4vh);
+    }
+}
+
+@keyframes moveAndSpin {
+    0% {
+        transform: translateX(0) rotate(-100deg);
+    }
+
+    50% {
+        transform: translateX(-6vw) rotate(100deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(-100deg);
+    }
+}
+
+.wrapper {
+    position: relative;
+    width: 40vw;
+    aspect-ratio: 100/73;
+}
+
+.decor_object {
+    position: absolute;
+    z-index: 0;
+}
+
+.decor_block {
+    width: 60%;
+    height: 60%;
+    border-radius: 1vw;
+}
+
+.decor_block:nth-child(1) {
+    bottom: 0;
+    left: 0;
+    background-color: #97ABD6;
+}
+
+.decor_block:nth-child(2) {
+    top: 0;
+    right: 0;
+    background-color: #F8DA92;
+}
+
+.decor_circle {
+    top: 50%;
+    right: -2.5vw;
+    width: 1.5vw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--gold);
+    animation: moveUpDown 5s infinite;
+}
+
+.form_img_before,
+.form_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+}
+
+.form_img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 1vw;
+    border: 0.2vw solid white;
+    z-index: 10;
+}
+
+.form_img_before div {
+    bottom: -1.5vw;
+    right: -3vw;
+    width: 5vw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--mid-deep-blue);
+    animation: moveAndSpin 20s infinite;
+}
+
+.decor_inner {
+    bottom: -40%;
+    right: -40%;
+    width: 1.5vw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--mid-deep-blue);
+}
+
+.decor_img {
+    width: 4vw;
+    aspect-ratio: 1;
+    left: -3vw;
+    bottom: -3vw;
+    background-image: url(./IMG/image_form3_decor_1.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: glowing 3s infinite;
+}

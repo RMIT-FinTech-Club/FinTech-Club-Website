@@ -1,4 +1,4 @@
-import ProjectPage from "./components/ProjectPage";
+import ProjectPage from "./components/ProjectPage/index";
 
 const Projects = () => {
 	return (
