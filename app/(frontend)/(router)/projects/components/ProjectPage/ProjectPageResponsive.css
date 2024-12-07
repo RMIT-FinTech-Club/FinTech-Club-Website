@@ -216,6 +216,12 @@
         padding: 5vw 0;
     }
 
+    .project-wrap:last-child {
+        width: 90%;
+        border-radius: 3vw;
+        margin: 4vh auto;
+    }
+
     .project-child-wrap {
         width: 100%;
         display: flex;

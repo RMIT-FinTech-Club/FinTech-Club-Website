@@ -1,4 +1,3 @@
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +12,9 @@ const Footer: React.FC = () => {
 					<div className="flex flex-row lg:flex-col gap-4 lg:gap-6 justify-center items-center h-full">
 						<Link href="https://www.facebook.com/rmitfintechclub/" legacyBehavior>
 							<a target="_blank" className="transform hover:scale-110 transition duration-200 cursor-pointer">
-								<Image src="/footer/facebook.svg" alt="Facebook" width={17} height={28} className="hover:text-[#DBB968]" />
+								<svg width={17} height={28} className="hover:text-[#DBB968]" viewBox="0 0 18 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M16.8807 1.44092H12.5218C10.595 1.44092 8.74715 2.2127 7.38472 3.58649C6.02229 4.96027 5.25688 6.82352 5.25688 8.76635V13.1616H0.897949V19.022H5.25688V30.7426H11.0688V19.022H15.4277L16.8807 13.1616H11.0688V8.76635C11.0688 8.37778 11.2219 8.00513 11.4944 7.73038C11.7669 7.45562 12.1364 7.30126 12.5218 7.30126H16.8807V1.44092Z" stroke="white" stroke-width="1.3319" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
 							</a>
 						</Link>
 						<Link href="https://www.instagram.com/rmitfintechclub/" legacyBehavior>
@@ -52,7 +53,7 @@ const Footer: React.FC = () => {
 					</div>
 				</div>
 
-				
+
 				<div className="flex justify-center lg:justify-start order-first lg:order-none flex-grow items-stretch">
 					<Image
 						src="/footer/fintech-logo.svg"
@@ -68,7 +69,7 @@ const Footer: React.FC = () => {
 					/>
 				</div>
 
-			
+
 				<div className="flex flex-col items-center lg:items-start space-y-6 text-center lg:text-left max-w-max mx-auto lg:mx-0">
 					<h5 className="text-ft-primary-yellow-500 font-bold text-lg">ABOUT US</h5>
 					<p className="text-base w-3/4 lg:w-full text-center lg:text-left">
@@ -77,12 +78,12 @@ const Footer: React.FC = () => {
 
 					<h5 className="text-ft-primary-yellow-500 font-bold text-lg mt-6">Contact Us</h5>
 					<div className="flex flex-col items-center lg:items-start space-y-2 text-base">
-						
+
 						<div className="flex items-center space-x-2">
 							<Image src="/footer/location.svg" alt="Location" width={28} height={28} />
 							<span className="leading-tight">702 Đ. Nguyễn Văn Linh, Tân Hưng, Quận 7, Hồ Chí Minh</span>
 						</div>
-						
+
 						<div className="flex items-center space-x-2">
 							<Image src="/footer/email.svg" alt="Email" width={28} height={28} />
 							<a href="mailto:fintechclub@rmit.edu.com" className="text-white hover:underline leading-tight">
@@ -105,7 +106,7 @@ const Footer: React.FC = () => {
 				</div>
 			</div>
 
-			
+
 			<div className="container mx-auto text-center mt-8 border-t border-gray-500 pt-4">
 				<p className="text-sm">
 					Copyright ©2023 All Rights Reserved.
