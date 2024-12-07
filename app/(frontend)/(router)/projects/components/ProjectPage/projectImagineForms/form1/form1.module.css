@@ -59,3 +59,39 @@
     background-repeat: no-repeat;
     animation: shaking 8s infinite;
 }
+
+@media screen and (min-aspect-ratio: 1) {
+    .wrapper {
+        width: 60%;
+    }
+
+    .form_img {
+        position: absolute;
+        width: 30%;
+        height: 80%;
+        border-radius: 10px;
+    }
+
+    .form_img:nth-child(3) div {
+        bottom: -4vw;
+        right: -4vw;
+    }
+}
+
+@media screen and (max-aspect-ratio: 1) {
+    .wrapper {
+        width: 80%;
+    }
+
+    .form_img {
+        position: absolute;
+        width: 30%;
+        height: 80%;
+        border-radius: 10px;
+    }
+
+    .form_img:nth-child(3) div {
+        bottom: -10vw;
+        right: -10vw;
+    }
+}

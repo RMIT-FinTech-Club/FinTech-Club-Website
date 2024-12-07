@@ -28,10 +28,8 @@
 
 .wrapper {
     position: relative;
-    width: 30vw;
     aspect-ratio: 100/68;
     background-color: #0D1742;
-    border-radius: 1vw;
 }
 
 .form_img {
@@ -44,8 +42,6 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 1vw;
-    border: 0.2vw solid white;
     z-index: 10;
 }
 
@@ -76,4 +72,58 @@
     background-size: contain;
     background-repeat: no-repeat;
     animation: goDark 3s infinite;
+}
+
+@media screen and (min-aspect-ratio: 1) {
+    .wrapper {
+        width: 30vw;
+    }
+
+    .wrapper,
+    .form_img {
+        border-radius: 1vw;
+    }
+
+    .form_img {
+        border: 0.2vw solid white;
+    }
+
+    .decor:nth-child(1) {
+        width: 4vw;
+        left: -3vw;
+        bottom: -3vw;
+    }
+    
+    .decor:nth-child(2) {
+        width: 4vw;
+        right: -3vw;
+        top: -3vw;
+    }
+}
+
+@media screen and (max-aspect-ratio: 1) {
+    .wrapper {
+        width: 75%;
+    }
+
+    .wrapper,
+    .form_img {
+        border-radius: 3vw;
+    }
+
+    .form_img {
+        border: 0.8vw solid white;
+    }
+
+    .decor:nth-child(1) {
+        width: 9vw;
+        left: -8vw;
+        bottom: -8vw;
+    }
+    
+    .decor:nth-child(2) {
+        width: 9vw;
+        right: -8vw;
+        top: -8vw;
+    }
 }

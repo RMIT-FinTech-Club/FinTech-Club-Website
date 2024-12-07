@@ -76,6 +76,56 @@
         padding: 0.4vw 3vw;
         border-radius: 4px;
     }
+
+    .project-wrap {
+        flex-wrap: nowrap;
+        flex-direction: row;
+        padding: 5vw 0;
+    }
+
+    .project-wrap:last-child {
+        width: 90%;
+        margin: 0 auto 5vw auto;
+        border-radius: 1vw;
+    }
+
+    .project-wrap:nth-child(odd) {
+        flex-direction: row-reverse
+    }
+
+    .project-child-wrap {
+        width: 50%;
+        display: flex;
+    }
+
+    .project-wrap:nth-child(even) .project-child-wrap:last-child {
+        padding-right: 5vw;
+    }
+
+    .project-wrap:nth-child(odd) .project-child-wrap:last-child {
+        padding-left: 5vw;
+    }
+
+    .project-content-index {
+        font-size: 2vw;
+        line-height: 2vw;
+        margin-bottom: 2vh;
+    }
+
+    .project-title {
+        font-size: 3vw;
+        letter-spacing: 0.2vw;
+    }
+
+    .project-title span {
+        margin-left: 1vw;
+    }
+
+    .project-text {
+        font-size: 1vw;
+        line-height: 2vw;
+        margin: 2vh 0;
+    }
 }
 
 @media screen and (max-aspect-ratio: 1) {
@@ -115,7 +165,7 @@
     }
 
     .introduce-img {
-        bottom: -1.1vh;
+        bottom: -2vh;
         left: -5vw;
     }
 
@@ -158,5 +208,47 @@
         font-size: 4vw;
         padding: 2.5vw 13vw;
         border-radius: 1.5vw;
+    }
+
+    .project-wrap {
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding: 5vw 0;
+    }
+
+    .project-child-wrap {
+        width: 100%;
+        display: flex;
+    }
+
+    .project-child-wrap.content {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .project-content-index {
+        font-size: 4vw;
+        margin-bottom: 2vh;
+    }
+
+    .project-title {
+        font-size: 7vw;
+        letter-spacing: 0.3vw;
+    }
+
+    .project-title span {
+        margin-left: 2vw;
+    }
+
+    .project-text {
+        width: 90%;
+        text-align: center;
+        font-size: 3vw;
+        line-height: 5vw;
+        margin: 2vh 0;
+    }
+
+    .project-child-wrap.image {
+        margin: 5vh 0;
     }
 }

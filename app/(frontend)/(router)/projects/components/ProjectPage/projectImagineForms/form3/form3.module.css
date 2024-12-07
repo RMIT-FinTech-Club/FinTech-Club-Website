@@ -50,7 +50,6 @@
 
 .wrapper {
     position: relative;
-    width: 40vw;
     aspect-ratio: 100/73;
 }
 
@@ -62,7 +61,6 @@
 .decor_block {
     width: 60%;
     height: 60%;
-    border-radius: 1vw;
 }
 
 .decor_block:nth-child(1) {
@@ -75,16 +73,6 @@
     top: 0;
     right: 0;
     background-color: #F8DA92;
-}
-
-.decor_circle {
-    top: 50%;
-    right: -2.5vw;
-    width: 1.5vw;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: var(--gold);
-    animation: moveUpDown 5s infinite;
 }
 
 .form_img_before,
@@ -101,38 +89,94 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 1vw;
-    border: 0.2vw solid white;
     z-index: 10;
 }
 
 .form_img_before div {
-    bottom: -1.5vw;
-    right: -3vw;
-    width: 5vw;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: var(--mid-deep-blue);
-    animation: moveAndSpin 20s infinite;
-}
-
-.decor_inner {
-    bottom: -40%;
-    right: -40%;
-    width: 1.5vw;
     aspect-ratio: 1;
     border-radius: 50%;
     background-color: var(--mid-deep-blue);
 }
 
 .decor_img {
-    width: 4vw;
     aspect-ratio: 1;
-    left: -3vw;
-    bottom: -3vw;
     background-image: url(./IMG/image_form3_decor_1.png);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     animation: glowing 3s infinite;
+}
+
+@media screen and (min-aspect-ratio: 1) {
+    .wrapper {
+        width: 40vw;
+    }
+
+    .form_img,
+    .decor_block {
+        border-radius: 1vw;
+    }
+
+    .form_img {
+        border: 0.2vw solid white;
+    }
+
+    .decor_inner {
+        bottom: -40%;
+        right: -40%;
+        width: 1.5vw;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--mid-deep-blue);
+    }
+
+    .form_img_before div {
+        bottom: -1.5vw;
+        right: -3vw;
+        width: 5vw;
+        animation: moveAndSpin 20s infinite;
+    }
+
+    .decor_circle {
+        top: 50%;
+        right: -2.5vw;
+        width: 1.5vw;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--gold);
+        animation: moveUpDown 5s infinite;
+    }
+
+    .decor_img {
+        width: 4vw;
+        left: -3vw;
+        bottom: -3vw;
+    }
+}
+
+@media screen and (max-aspect-ratio: 1) {
+    .wrapper {
+        width: 80%;
+    }
+    
+    .form_img,
+    .decor_block {
+        border-radius: 3vw;
+    }
+
+    .form_img_before div {
+        bottom: -3vw;
+        right: -6vw;
+        width: 12vw;
+    }
+
+    .form_img {
+        border: 0.8vw solid white;
+    }
+
+    .decor_img {
+        width: 9vw;
+        left: -6vw;
+        bottom: -6vw;
+    }
 }
