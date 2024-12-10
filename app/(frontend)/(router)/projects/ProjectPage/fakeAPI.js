@@ -1,7 +1,7 @@
-import ImageForm1 from '@/app/(frontend)/(router)/projects/components/ProjectPage/projectImagineForms/form1'
-import ImageForm2 from '@/app/(frontend)/(router)/projects/components/ProjectPage/projectImagineForms/form2'
-import ImageForm3 from '@/app/(frontend)/(router)/projects/components/ProjectPage/projectImagineForms/form3'
-import ImageForm4 from '@/app/(frontend)/(router)/projects/components/ProjectPage/projectImagineForms/form4'
+import ImageForm1 from '@/app/(frontend)/(router)/projects/ProjectPage/projectImagineForms/form1'
+import ImageForm2 from '@/app/(frontend)/(router)/projects/ProjectPage/projectImagineForms/form2'
+import ImageForm3 from '@/app/(frontend)/(router)/projects/ProjectPage/projectImagineForms/form3'
+import ImageForm4 from '@/app/(frontend)/(router)/projects/ProjectPage/projectImagineForms/form4'
 
 const projectAPI = [
     {

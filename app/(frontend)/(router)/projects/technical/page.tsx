@@ -1,12 +1,16 @@
+'use client'
 import React from "react";
 import Header from "./components/Header";
-import ProjectList from "./components/ProjectList";
+import ProjectCard from "./components/projectCard";
+import fakeAPI from "./fakeAPI";
 
 const Home = () => {
 	return (
 		<div className="bg-ft-background w-screen">
 			<Header />
-			<ProjectList />
+			{fakeAPI.cards.map((card, index) => (
+				<ProjectCard key={index} card={card} index={index} />
+			))}
 		</div>
 	);
 };

@@ -2,7 +2,7 @@
 import './ProjectPage.css';
 import './ProjectPageResponsive.css';
 import projectAPI from './fakeAPI'
-import ProjectContent from '@/app/(frontend)/(router)/projects/components/ProjectPage/projectContent'
+import ProjectContent from './projectContent'
 
 function ProjectPage() {
     return (

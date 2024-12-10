@@ -11,7 +11,17 @@ const config: Config = {
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
     ],
     theme: {
-        extend: tailwindExtendedThemeConfig
+        extend: tailwindExtendedThemeConfig,
+        colors: {
+            transparent: 'transparent',
+            current: 'currentColor',
+            'white': '#ffffff',
+            'gold': '#DBB968',
+            'deepBlue': '#0D1742',
+            'midDeepBlue': '#2B305E',
+            'gray': '#727272',
+            'lightPurple': '#F0EDFF'
+        },
     },
     darkMode: "class",
     plugins: [
