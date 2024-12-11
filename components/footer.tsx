@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="bg-[#142850] text-white py-14 relative rounded-t-[80px] ">
+		<footer className="bg-[#142850] text-white py-14 relative rounded-t-[80px]">
 			<div className="container mx-auto flex flex-col lg:flex-row justify-center items-center px-4 space-y-6 lg:space-y-0 lg:space-x-4">
 
 				{/* Social Media Icons Section */}
@@ -69,9 +69,8 @@ const Footer: React.FC = () => {
 					/>
 				</div>
 
-
-				<div className="flex flex-col items-center lg:items-start space-y-6 text-center lg:text-left max-w-max mx-auto lg:mx-0">
-					<h5 className="text-ft-primary-yellow-500 font-bold text-lg">ABOUT US</h5>
+				<div className="flex flex-col items-center lg:items-start text-center lg:pr-[2vw] lg:text-left mx-auto lg:mx-0 lg:w-1/2 max-w-max">
+					<h5 className="text-ft-primary-yellow-500 font-bold text-lg lg:mb-[2vh]">ABOUT US</h5>
 					<p className="text-base w-3/4 lg:w-full text-center lg:text-left">
 						RMIT FinTech Club is the first ever student-led Financial Technology club in Vietnam, founded in 2020. Founded on the mission to bring Business & Technology.
 					</p>
@@ -79,8 +78,8 @@ const Footer: React.FC = () => {
 					<h5 className="text-ft-primary-yellow-500 font-bold text-lg mt-6">Contact Us</h5>
 					<div className="flex flex-col items-center lg:items-start space-y-2 text-base">
 
-						<div className="flex items-center space-x-2">
-							<Image src="/footer/location.svg" alt="Location" width={28} height={28} />
+						<div className="flex items-center space-x-2 lg:my-[2vh]">
+							<Image src="/footer/location.svg" alt="Location" width={28} height={28} className="relative bottom-[8px] lg:bottom-0" />
 							<span className="leading-tight">702 Đ. Nguyễn Văn Linh, Tân Hưng, Quận 7, Hồ Chí Minh</span>
 						</div>
 
@@ -109,7 +108,7 @@ const Footer: React.FC = () => {
 
 			<div className="container mx-auto text-center mt-8 border-t border-gray-500 pt-4">
 				<p className="text-sm">
-					Copyright ©2023 All Rights Reserved.
+					Copyright ©2024 All Rights Reserved.
 				</p>
 			</div>
 

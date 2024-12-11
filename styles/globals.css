@@ -3,32 +3,32 @@
 @tailwind utilities;
 
 @layer base {
+  html,
+  body {
+    font-family: "Poppins", system-ui, sans-serif;
+  }
 
-    html, body {
-        font-family: 'Poppins', system-ui, sans-serif;
-    }
-
-    p {
-        @apply text-ft-body-1;
-    }
-    h1 {
-        @apply text-ft-heading-1;
-    }
-    h2 {
-        @apply text-ft-heading-2;
-    }
-    h3 {
-        @apply text-ft-heading-3;
-    }
-    h4 {
-        @apply text-ft-heading-4;
-    }
-    h5 {
-        @apply text-ft-heading-5;
-    }
-    h6 {
-        @apply text-ft-heading-6;
-    }
+  p {
+    @apply text-ft-body-1;
+  }
+  h1 {
+    @apply text-ft-heading-1;
+  }
+  h2 {
+    @apply text-ft-heading-2;
+  }
+  h3 {
+    @apply text-ft-heading-3;
+  }
+  h4 {
+    @apply text-ft-heading-4;
+  }
+  h5 {
+    @apply text-ft-heading-5;
+  }
+  h6 {
+    @apply text-ft-heading-6;
+  }
 }
 
 .decoration {
@@ -40,44 +40,44 @@
 }
 
 .header_closed {
-  transform: translateY(-100%)
+  transform: translateY(-100%);
 }
 
 .card:hover > .card-content {
-    bottom: 3%;
+  bottom: 3%;
+}
+@media screen and (max-width: 768px) {
+  .mascot {
+    display: none;
   }
-  @media screen and (max-width: 768px) {
-    .mascot {
-      display: none;
-    }
-    .bubble {
-      display: none;
-    }
-    .line {
-      display: none;
-    }
-    #yellow-line {
-      stroke-width: 40;
-    }
-    #white-line {
-      stroke-width: 50;
-    }
-    #left-bar {
-      width: 20%;
-    }
-    #HallOfFame-MasCot {
-      max-width: 100;
-    }
-    .explore {
-      display: none;
-    }
-    .date {
-      display: block
-    }
+  .bubble {
+    display: none;
   }
+  .line {
+    display: none;
+  }
+  #yellow-line {
+    stroke-width: 40;
+  }
+  #white-line {
+    stroke-width: 50;
+  }
+  #left-bar {
+    width: 20%;
+  }
+  #HallOfFame-MasCot {
+    max-width: 100;
+  }
+  .explore {
+    display: none;
+  }
+  .date {
+    display: block;
+  }
+}
 
-  @media screen and (max-width: 768px) {
-    .decoration {
-      display: absolute
-    }
+@media screen and (max-width: 768px) {
+  .decoration {
+    display: absolute;
   }
+}
