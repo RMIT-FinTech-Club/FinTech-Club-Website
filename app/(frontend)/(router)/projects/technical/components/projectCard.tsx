@@ -3,18 +3,20 @@ import Button from "./Button";
 
 interface ProjectCardProps {
     index: number;
-    card: {
-        tags: string[];
-        title: {
-            normal: string;
-            highlight: string;
-        };
-        content: string;
-        images: string[];
-        bgc?: string;
-        ImgForm: React.FC;
-        DecorForm: React.FC;
+    card: ProjectCardData;
+}
+
+export interface ProjectCardData {
+    tags: string[];
+    title: {
+        normal: string;
+        highlight: string;
     };
+    content: string;
+    images: string[];
+    bgc?: string;
+    ImgForm: React.ComponentType<any>;
+    DecorForm?: () => JSX.Element;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
@@ -23,7 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
 
     function createTags() {
         return (
-            <div className='flex flex-wrap'>
+            <div className='flex flex-wrap md:justify-start justify-center'>
                 {tags.map((tag, index) => {
                     let tagIconURL = '';
                     switch(tag) {
@@ -41,9 +43,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
                     }
 
                     return (
-                        <div className={`flex py-[0.2vw] px-[1vw] ${bgc ? 'bg-white' : 'bg-lightPurple'} rounded-[5px] mr-[1vw]`} key={index}>
-                            <div className='relative top-[0.3vw] bg-center bg-no-repeat bg-contain h-[1vw] aspect-square' style={{backgroundImage: `url('${tagIconURL}')`}}></div>
-                            <div className='text-[1vw] text-deepBlue ml-[0.5vw]'>{tag}</div>
+                        <div className={`flex md:py-[0.2vw] md:px-[1vw] md:mr-[1vw] py-[0.4vw] px-[3vw] mr-[2.5vw] ${bgc ? 'bg-white' : 'bg-lightPurple'} rounded-[5px]`} key={index}>
+                            <div className='relative md:top-[0.3vw] md:h-[1vw] top-[0.6vw] h-[3vw] bg-center bg-no-repeat bg-contain aspect-square' style={{backgroundImage: `url('${tagIconURL}')`}}></div>
+                            <div className='md:text-[1vw] md:ml-[0.5vw] text-[3vw] ml-[1vw] text-deepBlue'>{tag}</div>
                         </div>
                     )
                 })}
@@ -52,15 +54,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
     }
 
     return (
-        <section className={`flex bg-[${bgc || 'white'}] overflow-x-hidden relative p-[5vw] ${index % 2 ? 'flex-row-reverse' : ''}`}>
-            <div className={`${flexCenter} items-center w-1/2 z-10`}>
+        <section className={`flex bg-[${bgc || '#FFF'}] overflow-x-hidden relative px-[5vw] md:py-[5vw] py-[10vw] flex-col ${index % 2 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+            <div className={`${flexCenter} items-center w-full md:w-1/2 z-10`}>
                 <ImgForm images={images} />
                 {DecorForm && <DecorForm />}
             </div>
-            <div className={`${flexCenter} items-start flex-col w-1/2 z-10`}>
-                {createTags()}
-                <div className='my-[2vh] text-deepBlue text-[3vw] leading-[3.6vw] font-bold tracking-[0.1vw] uppercase'>{title.normal} <span className='text-gold'>{title.highlight}</span></div>
-                <div className='my-[2vh] text-gray text-[1vw] leading-[1.4vw]'>{content}</div>
+            <div className={`${flexCenter} md:items-start items-center flex-col w-full md:w-1/2 z-10`}>
+                <div>{createTags()}</div>
+                <div className='my-[2vh] text-deepBlue text-[7vw] leading-[9vw] tracking-[0.2vw] md:text-[3vw] md:leading-[3.6vw] md:tracking-[0.1vw] font-bold uppercase'>{title.normal} <span className='text-gold'>{title.highlight}</span></div>
+                <div className='my-[2vh] text-gray text-[3vw] leading-[4vw] md:text-[1vw] md:leading-[1.4vw] md:text-left text-center'>{content}</div>
                 <Button classes='bg-gold my-[2vh]'>Read More</Button>
             </div>
         </section>

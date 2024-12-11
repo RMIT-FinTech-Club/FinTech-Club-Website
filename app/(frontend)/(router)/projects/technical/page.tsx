@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import ProjectCard from "./components/projectCard";
 import fakeAPI from "./fakeAPI";
 
-const Home = () => {
+const Home: React.FC = () => {
 	return (
 		<div className="bg-ft-background w-screen">
 			<Header />

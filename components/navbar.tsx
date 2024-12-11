@@ -79,8 +79,7 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			style={{ maxWidth: (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop|BlackBerry/i.test(navigator.userAgent)) ? '100vw' : document.body.clientWidth }}
-			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
+			className="fixed top-0 py-2 z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
 				<div className="logo relative w-14 h-14">
