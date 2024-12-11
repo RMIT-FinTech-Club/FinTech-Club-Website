@@ -14,19 +14,18 @@ export interface ProjectCardData {
     };
     content: string;
     images: string[];
-    bgc?: string;
     ImgForm: React.ComponentType<any>;
     DecorForm?: () => JSX.Element;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
     const flexCenter = 'flex justify-center'
-    const { tags, title, content, images, ImgForm, bgc, DecorForm } = card
+    const { tags, title, content, images, ImgForm, DecorForm } = card
 
     function createTags() {
         return (
             <div className='flex flex-wrap md:justify-start justify-center'>
-                {tags.map((tag, index) => {
+                {tags.map((tag, i) => {
                     let tagIconURL = '';
                     switch(tag) {
                         case 'Web Development':
@@ -43,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
                     }
 
                     return (
-                        <div className={`flex md:py-[0.2vw] md:px-[1vw] md:mr-[1vw] py-[0.4vw] px-[3vw] mr-[2.5vw] ${bgc ? 'bg-white' : 'bg-lightPurple'} rounded-[5px]`} key={index}>
+                        <div className={`flex md:py-[0.2vw] md:px-[1vw] md:mr-[1vw] py-[0.4vw] px-[3vw] mr-[2.5vw] ${index % 2 ? 'bg-white' : 'bg-lightPurple'} rounded-[5px]`} key={i}>
                             <div className='relative md:top-[0.3vw] md:h-[1vw] top-[0.6vw] h-[3vw] bg-center bg-no-repeat bg-contain aspect-square' style={{backgroundImage: `url('${tagIconURL}')`}}></div>
                             <div className='md:text-[1vw] md:ml-[0.5vw] text-[3vw] ml-[1vw] text-deepBlue'>{tag}</div>
                         </div>
@@ -54,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
     }
 
     return (
-        <section className={`flex bg-[${bgc || '#FFF'}] overflow-x-hidden relative px-[5vw] md:py-[5vw] py-[10vw] flex-col ${index % 2 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+        <section className={`flex ${index % 2 ? 'bg-lightPurple' : 'bg-white'} overflow-x-hidden relative px-[5vw] md:py-[5vw] py-[10vw] flex-col ${index % 2 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
             <div className={`${flexCenter} items-center w-full md:w-1/2 z-10`}>
                 <ImgForm images={images} />
                 {DecorForm && <DecorForm />}

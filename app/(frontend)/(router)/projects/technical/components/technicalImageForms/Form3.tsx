@@ -7,12 +7,12 @@ interface Form3Props {
 
 const Form3: React.FC<Form3Props> = ({ images = [] }) => {
     const imgClasses = 'absolute bg-center bg-no-repeat'
-    const smallImgClasses = 'w-[4vw] aspect-square bg-contain'
+    const smallImgClasses = 'md:w-[4vw] w-[8vw] aspect-square bg-contain'
 
     return (
-        <div className='w-[35vw] aspect-[44/30] relative bg-white my-[4vw] rounded-[10px]' >
-            <div className={`${imgClasses} ${smallImgClasses} bottom-[-3.5vw] left-[-3.5vw] glowing`} style={{ backgroundImage: `url('/projectPage/decor_1.png')`, animationDuration: '3s' }}></div>
-            <div className={`${imgClasses} ${smallImgClasses} top-[-2vw] right-[-2vw] glowing`} style={{ backgroundImage: `url('/projectPage/decor_3.png')`, animationDuration: '3s' }}></div>
+        <div className='md:w-[35vw] md:mb-[4vw] w-[80vw] mb-[10vw] aspect-[44/30] relative bg-white rounded-[10px]' >
+            <div className={`${imgClasses} ${smallImgClasses} md:bottom-[-3.5vw] md:left-[-3.5vw] bottom-[-6vw] left-[-7vw] glowing`} style={{ backgroundImage: `url('/projectPage/decor_1.png')`, animationDuration: '3s' }}></div>
+            <div className={`${imgClasses} ${smallImgClasses} md:top-[-2vw] md:right-[-2vw] top-[-4vw] right-[-4vw] glowing`} style={{ backgroundImage: `url('/projectPage/decor_3.png')`, animationDuration: '3s' }}></div>
             <div className={`${imgClasses} bg-cover top-0 right-1/2 w-[40%] h-full`} style={{ backgroundImage: `url(${images[0]})` }}></div>
             <div className={`${imgClasses} bg-cover top-0 left-1/2 w-[40%] h-1/2`} style={{ backgroundImage: `url(${images[1]})` }}></div>
             <div className={`${imgClasses} bg-cover bottom-0 left-1/2 w-[40%] h-1/2`} style={{ backgroundImage: `url(${images[2]})` }}></div>

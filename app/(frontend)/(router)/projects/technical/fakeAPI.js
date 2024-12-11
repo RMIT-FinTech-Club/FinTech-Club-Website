@@ -39,7 +39,6 @@ const fakeAPI = {
                 normal: 'RPBC',
                 highlight: 'Website'
             },
-            bgc: '#F0EDFF',
             ImgForm: Form3,
             content: 'Lorem ipsum dolor sit amet consectetur. Phasellus interdum eros eu morbi. Nullam semper non maecenas turpis mauris turpis. Lectus facilisis mattis tellus volutpat eu ut condimentum consectetur. Enim sed egestas velit amet egestas turpis cursus. Aliquam purus augue mi cras donec cras. Odio id risus sed nullam nunc quis platea consectetur.d nullam nunc quis platea consectetur.',
             images: [
