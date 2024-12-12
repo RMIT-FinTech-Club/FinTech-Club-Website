@@ -6,6 +6,7 @@ import ImageForm4 from '@/app/(frontend)/(router)/projects/ProjectPage/projectIm
 const projectAPI = [
     {
         name: 'Technical',
+        url: '/projects/technical',
         imgForm: ImageForm1,
         imgLinks: [
             'https://s3-alpha-sig.figma.com/img/5a8b/214e/a6b498b573193ac6714e8941407d3c4e?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KgEKFmReW4Wtf1aIBHeqhKOES75e~OM3Hu2AChuIhrcijkRtbleiJRLBwj5DdfLrFPt8dtCnLTnv818zpXZ~EgCMZEhbh9AWOg55clXbwX~GYKHH6wolOS4ex8T7EtgS0qJMc204B5SGSJvWL9Nkb0oRGvClY-XmQTKnxFwUx2yaGMAI4qUHQrJE400ynL~Asc0gChctdFgmpMggvTTttBXbnLBojAgGXCzqiAsaib2C7IVfWH9PHmfOlCXf8p4bOv~GC9v7D-cSJrmf2Rg4Jka6VnC8sRYQF3f0PVRCw5ufHZ4RxDEU1jVGj5tJ4aLi6CShC5Kr~UR9b~2Gb-nJtg__',
@@ -16,6 +17,7 @@ const projectAPI = [
     },
     {
         name: 'Academic',
+        url: '/projects/academic',
         imgForm: ImageForm2,
         bgc: '#F0EDFF',
         imgLinks: [
@@ -25,6 +27,7 @@ const projectAPI = [
     },
     {
         name: 'Media',
+        url: '/projects/media',
         imgForm: ImageForm3,
         imgLinks: [
             'https://s3-alpha-sig.figma.com/img/61a4/1059/66172d65e0410301884ebc6124363995?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ep3oSrdjKnkOTd6x4hzpLhHGniUpBevwXfMnh0Ja69VKjHBFvO3ZQsbPdSR8H5qJmuFIKb9qirxRyFqynbMfmPstnlzu9GJnXwe5cB0wp3c3ivqJB0oYUBsr0BYja1X~mg9JPwmUjgGdcXyZpDbNcsuFSJTCaZadmNb-TFsy8I6c2VuKCuwdq5mL~OHxj8j8RhfR-mZRCt4V-qfGsZ0MQIo7nZ48wE9Rf24J06k7Mv8yAEGTjJdJFX6JHM1juIKmVwXP9NBj3wWWhUspP~tpgi5MDqjImv86JwXE1JNVY-k2jMrR6~8vv9YYx5t~FEQIA4E8z8JZkxKAU5yazSf8IA__'
@@ -33,6 +36,7 @@ const projectAPI = [
     },
     {
         name: 'Event',
+        url: '/projects/event',
         imgForm: ImageForm4,
         bgc: '#FFEFCA',
         imgLinks: [

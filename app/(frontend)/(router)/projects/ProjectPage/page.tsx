@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Link from "next/link";
 
 import './ProjectPage.css';
 import './ProjectPageResponsive.css';
@@ -76,7 +77,9 @@ const ProjectPage: React.FC = () => {
                         <div className='project-child-wrap content'>
                             <h3 className='project-content-index'>Project {index + 1}</h3>
                             <ProjectContent name={project.name} content={project.content} />
-                            <button className='project-content-btn'>Join Us</button>
+                            <Link href={project.url}>
+                                <button className='project-content-btn'>Explore more</button>
+                            </Link>
                         </div>
                     </motion.div>
                 )
