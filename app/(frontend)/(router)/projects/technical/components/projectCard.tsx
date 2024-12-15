@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Button from "./Button";
+import Button from "../../components/Button";
 
 interface ProjectCardProps {
     index: number;
     card: ProjectCardData;
 }
 
-export interface ProjectCardData {
+interface ProjectCardData {
     tags: string[];
     title: {
         normal: string;
@@ -20,11 +20,11 @@ export interface ProjectCardData {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
-    const { tags, title, content, images, ImgForm, DecorForm } = card
+    const { tags, title, content, images, ImgForm, DecorForm } = card;
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '0px 0px -20% 0px' });
 
-    const flexCenter = 'flex justify-center'
+    const flexCenter = 'flex justify-center';
 
     function createTags() {
         return (
@@ -33,16 +33,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
                     let tagIconURL = '';
                     switch (tag) {
                         case 'Web Development':
-                            tagIconURL = '/projectPage/tag_1.png'
+                            tagIconURL = '/projectPage/tag_1.png';
                             break;
                         case 'Machine Learning':
-                            tagIconURL = '/projectPage/tag_2.png'
+                            tagIconURL = '/projectPage/tag_2.png';
                             break;
                         case 'UI/UX Design':
-                            tagIconURL = '/projectPage/tag_3.png'
+                            tagIconURL = '/projectPage/tag_3.png';
                             break;
                         default:
-                            console.error('Undefined tag')
+                            console.error('Undefined tag');
                     }
 
                     return (
@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ card, index }) => {
                             <div className='relative md:top-[0.3vw] md:h-[1vw] top-[0.6vw] h-[3vw] bg-center bg-no-repeat bg-contain aspect-square' style={{ backgroundImage: `url('${tagIconURL}')` }}></div>
                             <div className='md:text-[1vw] md:ml-[0.5vw] text-[3vw] ml-[1vw] text-deepBlue'>{tag}</div>
                         </div>
-                    )
+                    );
                 })}
             </div>
         )

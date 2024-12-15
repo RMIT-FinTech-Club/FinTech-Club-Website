@@ -1,6 +1,6 @@
 import type React from "react";
 import fakeAPI from '../fakeAPI'
-import Button from "./Button";
+import Button from "../../components/Button";
 import Form1 from "./technicalImageForms/Form1";
 import Decor1 from "./technicalDecorForms/Decor1";
 
