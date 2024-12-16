@@ -1,0 +1,129 @@
+@keyframes glowing {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(2);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
+
+@keyframes goDark {
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(0.7);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+}
+
+.wrapper {
+    position: relative;
+    aspect-ratio: 100/68;
+    background-color: #0D1742;
+}
+
+.form_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 120%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+
+.decor {
+    position: absolute;
+    z-index: 0;
+}
+
+.decor:nth-child(1) {
+    width: 4vw;
+    aspect-ratio: 1;
+    left: -3vw;
+    bottom: -3vw;
+    background-image: url(./IMG/image_form2_decor_1.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: glowing 3s infinite;
+}
+
+.decor:nth-child(2) {
+    width: 4vw;
+    aspect-ratio: 1;
+    right: -3vw;
+    top: -3vw;
+    background-image: url(./IMG/image_form2_decor_2.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: goDark 3s infinite;
+}
+
+@media screen and (min-aspect-ratio: 1) {
+    .wrapper {
+        width: 30vw;
+    }
+
+    .wrapper,
+    .form_img {
+        border-radius: 1vw;
+    }
+
+    .form_img {
+        border: 0.2vw solid white;
+    }
+
+    .decor:nth-child(1) {
+        width: 4vw;
+        left: -3vw;
+        bottom: -3vw;
+    }
+    
+    .decor:nth-child(2) {
+        width: 4vw;
+        right: -3vw;
+        top: -3vw;
+    }
+}
+
+@media screen and (max-aspect-ratio: 1) {
+    .wrapper {
+        width: 75%;
+    }
+
+    .wrapper,
+    .form_img {
+        border-radius: 3vw;
+    }
+
+    .form_img {
+        border: 0.8vw solid white;
+    }
+
+    .decor:nth-child(1) {
+        width: 9vw;
+        left: -8vw;
+        bottom: -8vw;
+    }
+    
+    .decor:nth-child(2) {
+        width: 9vw;
+        right: -8vw;
+        top: -8vw;
+    }
+}

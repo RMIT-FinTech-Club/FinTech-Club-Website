@@ -1,18 +1,15 @@
-import BondingActivities from "./components/bondingActivities";
-import CountDown from "./countDown";
-import RecruitmentProcess from "./recruitmentProcess";
+import CountdownPage from "./pages/CountdownPage";
+import WhyJoinFintechClubPage from "./pages/WhyJoinFintechClubPage";
+import StepsToRegisterPage from "./pages/StepsToRegisterPage";
+import WhatAreYouWaitingForPage from "./pages/WhatAreYouWaitingForPage";
 
 const JoinUs = () => {
 	return (
 		<>
-			{/* <CountDown />
-			<RecruitmentProcess />
-			<BondingActivities /> */}
-
-			<div className="flex justify-center items-center h-screen bg-[#DCB968]">
-				<CountDown date={new Date(2024, 10, 10)} />
-			</div>
-
+			<CountdownPage />
+			<WhyJoinFintechClubPage />
+			<StepsToRegisterPage />
+			<WhatAreYouWaitingForPage />
 		</>
 	);
 };

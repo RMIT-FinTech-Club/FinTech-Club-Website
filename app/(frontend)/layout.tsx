@@ -1,6 +1,7 @@
 import "@styles/globals.css";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import Content from "@/components/content";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import { Link } from "@nextui-org/link";
@@ -47,9 +48,12 @@ export default function RootLayout({
 			<head />
 			<body
 				className={clsx(
-					"min-h-screen bg-background font-sans antialiased overflow-x-hidden",
+					"min-h-screen bg-white font-sans antialiased overflow-x-hidden",
 					fontSans.className,
 				)}
+				// bg-background currently follow browser theme (light/dark)
+				// Result in black bg on certain devices => bad UI, bad contrast 
+				// display bg-white as a temporary fix rn
 			>
 				<Providers
 					themeProps={{ attribute: "class", defaultTheme: "light" }}
@@ -69,9 +73,7 @@ export default function RootLayout({
 					/>
 					<div className="relative flex flex-col h-screen">
 						{<Navbar />}
-						<main className="flex-grow overflow-x-clip">
-							{children}
-						</main>
+						<Content>{children}</Content>
 						{<Footer />}
 					</div>
 				</Providers>

@@ -23,21 +23,26 @@ import { atom, useAtom } from "jotai";
 import { set } from "mongoose";
 
 const isOpenAtom = atom(false);
+export let headerHeight: number;
+let isSidebarOpen = false;
 
 const Navbar = () => {
-	const [isScrolled, setIsScrolled] = useState(false);
+	const navBarRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
 
-	const navBarRef = useRef<HTMLDivElement>(null);
-
 	useEffect(() => {
+		let lastScrollTop = 0;
+		if (navBarRef.current) headerHeight = navBarRef.current.offsetHeight;
+
 		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 0);
+			const isScrollingDown = document.body.scrollTop > lastScrollTop;
+			navBarRef.current?.classList.toggle('header_closed', (isScrollingDown && !isSidebarOpen));
+			lastScrollTop = document.body.scrollTop;
 		};
 
-		window.addEventListener("scroll", handleScroll);
+		document.body.addEventListener("scroll", handleScroll);
 		return () => {
-			window.removeEventListener("scroll", handleScroll);
+			document.body.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
 
@@ -74,24 +79,25 @@ const Navbar = () => {
 			ref={navBarRef}
 			initial={false}
 			animate={isOpen ? "open" : "closed"}
-			className="sticky top-0 py-2 z-50 flex w-full transition-colors duration-300 bg-ft-primary-blue shadow-md"
+			style={{ maxWidth: (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop|BlackBerry/i.test(navigator.userAgent)) ? '100vw' : document.body.clientWidth }}
+			className="fixed top-0 py-2 z-50 flex w-full transition-colors transition-transform duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
 				<div className="logo relative w-14 h-14">
-					<img
-						src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png"
-						alt="FinTech Club Logo"
-						className="absolute top-0 left-1/2 transform -translate-x-1/2"
-					/>
+					<Link href='/'>
+						<img
+							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png"
+							alt="FinTech Club Logo"
+							className="absolute top-0 left-1/2 transform -translate-x-1/2"
+						/>
+					</Link>
 				</div>
 				<div className="md:hidden h-fit flex justify-center items-center">
 					<AnimatedHamburger />
 				</div>
 				<motion.ul
 					variants={ulVariants}
-					className={
-						"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"
-					}
+					className={"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"}
 					style={{ top: navBarRef.current?.offsetHeight }} // Right aligning the sidebar links
 				>
 					{siteConfig.navItems.map((item) => (
@@ -255,7 +261,10 @@ const AnimatedHamburger = ({
 		<motion.button
 			ref={containerBarScope}
 			style={containerStyles}
-			onClick={() => setIsOpen(!isOpen)}
+			onClick={() => {
+				setIsOpen(!isOpen)
+				isSidebarOpen = !isSidebarOpen
+			}}
 		>
 			<motion.div
 				ref={topBarScope}

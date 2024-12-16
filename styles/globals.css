@@ -39,6 +39,10 @@
   display: none;
 }
 
+.header_closed {
+  transform: translateY(-100%)
+}
+
 .card:hover > .card-content {
     bottom: 3%;
   }
