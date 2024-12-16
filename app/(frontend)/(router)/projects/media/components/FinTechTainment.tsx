@@ -10,7 +10,7 @@ const FinTechTainment: React.FC = () => {
 	useEffect(() => {
 		try {
 			if (!fetchingStatus.current) {
-				axios.get("/api/v1/podcasts").then((data: any) => {
+				axios.get("/api/v1/projects/mediaprojects").then((data: any) => {
 					setPodcastData([...data.data]);
 					fetchingStatus.current = true;
 				});

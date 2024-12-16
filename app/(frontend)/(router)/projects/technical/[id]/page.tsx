@@ -45,7 +45,7 @@ const TechnicalProjectPage: React.FC<{ params: { id: string } }> = ({
 	useEffect(() => {
 		const configuration = {
 			method: "get",
-			url: `/api/v1/technicalprojects/${params.id}`,
+			url: `/api/v1/projects/technicalprojects/${params.id}`,
 		};
 		// console.log(params.id);
 		axios(configuration)

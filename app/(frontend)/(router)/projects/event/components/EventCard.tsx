@@ -22,7 +22,7 @@ const EventCard = () => {
 	useEffect(() => {
 		const configuration = {
 			method: "get",
-			url: "/api/v1/eventprojects",
+			url: "/api/v1/projects/eventprojects",
 		};
 		axios(configuration)
 			.then((result) => {

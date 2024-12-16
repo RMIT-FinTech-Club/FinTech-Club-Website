@@ -37,7 +37,7 @@ export const config = {
     matcher: [
       '/cms',
       '/api/research',
-      '/api/v1/podcast',
+      '/api/v1/projects/mediaprojects',
       '/podcast-form'
     ]
 }
