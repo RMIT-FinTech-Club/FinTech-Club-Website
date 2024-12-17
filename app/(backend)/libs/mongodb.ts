@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
 const connectMongoDB = async () => {
-    // Check if we have a connection to the database or if it's currently
-    // connecting or disconnecting (in which case we don't want to initiate a new connection)
     if (mongoose.connection.readyState === 1) {
         return;
     }

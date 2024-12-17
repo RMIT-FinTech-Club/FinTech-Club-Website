@@ -42,7 +42,7 @@ export default function CountdownPage() {
                 COUNT DOWN TO FORM CLOSED
             </h1>
             <div className={`${isShortHeight ? 'mb-8' : ''}`}>
-                <Countdown date={new Date(2024, 10, 14)} />
+                <Countdown date={new Date(2024, 12, 14)} />
             </div>
 
 
