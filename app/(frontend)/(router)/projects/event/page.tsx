@@ -1,18 +1,7 @@
-"use client"
-import fakeAPI from "./components/fakeAPI";
-import EventHeader from "./components/EventHeader";
-import EventContent from "./components/EventContent";
-import EventSponsors from "./components/EventSponsors";
-import EventTeam from "./components/EventTeam";
-
+import EventProject from "@/components/projects/pages/event/EventProject"
 const Event = () => {
 	return (
-		<>
-			<EventHeader />
-			<EventContent sectionValue={fakeAPI.contentSection} />
-			<EventSponsors sectionValue={fakeAPI.sponsorSection} />
-			<EventTeam sectionValue={fakeAPI.teamSection} />
-		</>
+		<EventProject />
 	);
 };
 

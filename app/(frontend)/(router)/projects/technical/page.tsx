@@ -1,18 +1,10 @@
-'use client'
 import React from "react";
-import Header from "./components/Header";
-import ProjectCard from "./components/projectCard";
-import fakeAPI from "./fakeAPI";
+import TechnicalProject from "@/components/projects/pages/technical/TechnicalProject";
 
-const Home: React.FC = () => {
+const Technical:React.FC = () => {
 	return (
-		<div className="bg-ft-background w-screen">
-			<Header />
-			{fakeAPI.cards.map((card, index) => (
-				<ProjectCard key={index} card={card} index={index} />
-			))}
-		</div>
+        <TechnicalProject />
 	);
 };
 
-export default Home;
+export default Technical;
