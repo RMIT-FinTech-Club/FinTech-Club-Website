@@ -36,7 +36,7 @@ const Podcast = ({ params }: PodcastProps) => {
 		if (!fetchingStatus.current) {
 			fetchingStatus.current = true;
 			axios
-				.get(`/api/v1/podcasts/${id}`)
+				.get(`/api/v1/projects/media/${id}`)
 				.then((response) => {
 					console.log(`check data: ${JSON.stringify(response.data)}`);
 					setData(response.data);
