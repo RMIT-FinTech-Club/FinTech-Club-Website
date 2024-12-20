@@ -51,7 +51,7 @@ const WhatAreYouWaitingFor = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1, ease: "easeInOut" }}
             >
-                <img src="/joinUsPage/bear.svg" alt="Bear" className="w-full h-full object-contain" />
+                <img src="/joinUsPage/bear.svg" alt="Bear" className="w-full lg:w-[70%] mx-auto aspect-square object-contain" />
             </motion.div>
         </div>
     );
