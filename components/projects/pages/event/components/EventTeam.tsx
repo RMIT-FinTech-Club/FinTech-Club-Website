@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef, Dispatch, SetStateAction } from 'react';
 
 interface EventTeamProps {
     sectionValue: {
@@ -15,14 +15,15 @@ interface EventTeamProps {
 const EventTeam: React.FC<EventTeamProps> = ({ sectionValue }) => {
     const { team } = sectionValue;
 
-    const [currentMember, setCurrentMember] = useState(0);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-    const isDragging = useRef(false);
-    const timeWait = useRef(false);
-    const sliderReversed = useRef(false);
-    const startPosition = useRef<number>();
-    const currentPosition = useRef<number>();
-    const currentMemberRef = useRef(currentMember);
+    const [currentMember, setCurrentMember]: [number, Dispatch<SetStateAction<number>>] = useState(0);
+    const [isMobile, setIsMobile]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(window.innerWidth < 768);
+
+    const isDragging = useRef<boolean>(false);
+    const timeWait = useRef<boolean>(false);
+    const sliderReversed = useRef<boolean>(false);
+    const startPosition = useRef<number | undefined>(undefined);
+    const currentPosition = useRef<number | undefined>(undefined);
+    const currentMemberRef = useRef<number>(currentMember);
 
     useEffect(() => {
         currentMemberRef.current = currentMember;
