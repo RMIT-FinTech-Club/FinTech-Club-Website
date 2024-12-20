@@ -70,7 +70,7 @@ const PodcastFooter = () => {
 				formData.append("authorFiles[]", authorFiles[i]);
 			}
 			try {
-				await axios.post("/api/v1/projects/mediaprojects", formData);
+				await axios.post("/api/v1/projects/media", formData);
 				successNotify({ message: "Create podcast success!" });
 			} catch (error: any) {
 				console.error(error.message);
