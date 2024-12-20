@@ -1,14 +1,10 @@
 import React from "react";
-import FinTechTainment from "./components/FinTechTainment";
-import Header from "./components/Header";
+import MediaProject from "@/components/projects/pages/media/MediaProject"
 
-const Home = () => {
+const Media:React.FC = () => {
 	return (
-		<>
-			<Header />
-			<FinTechTainment />
-		</>
+		<MediaProject />
 	);
 };
 
-export default Home;
+export default Media;

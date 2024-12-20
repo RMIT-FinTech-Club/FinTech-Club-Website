@@ -1,12 +1,8 @@
-import ProjectGeneralPage from "./components/projectGeneralPage";
-import Header from "./components/Header";
+import AcademicProject from "@/components/projects/pages/academic/AcademicProject"
 
-const AcademicProject = () => {
+const Academic = () => {
 	return (
-		<>
-			<Header />
-			<ProjectGeneralPage />
-		</>
+		<AcademicProject />
 	);
 };
-export default AcademicProject;
+export default Academic;

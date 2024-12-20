@@ -1,12 +1,7 @@
-import EventCard from "./components/EventCard";
-import EventHeader from "./components/EventHeader";
-
+import EventProject from "@/components/projects/pages/event/EventProject"
 const Event = () => {
 	return (
-		<>
-			<EventHeader />
-			<EventCard />
-		</>
+		<EventProject />
 	);
 };
 
