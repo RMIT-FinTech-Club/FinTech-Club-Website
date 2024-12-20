@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from 'react';
 
 interface EventTeamProps {
@@ -16,7 +17,7 @@ const EventTeam: React.FC<EventTeamProps> = ({ sectionValue }) => {
     const { team } = sectionValue;
 
     const [currentMember, setCurrentMember]: [number, Dispatch<SetStateAction<number>>] = useState(0);
-    const [isMobile, setIsMobile]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(window.innerWidth < 768);
+    const [isMobile, setIsMobile]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
     const isDragging = useRef<boolean>(false);
     const timeWait = useRef<boolean>(false);
@@ -30,6 +31,7 @@ const EventTeam: React.FC<EventTeamProps> = ({ sectionValue }) => {
     }, [currentMember]);
 
     useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
         const handleResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener("resize", handleResize);
 
