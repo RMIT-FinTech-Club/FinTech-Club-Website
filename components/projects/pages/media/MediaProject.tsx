@@ -1,13 +1,17 @@
+"use client"
 import React from "react";
-import FinTechTainment from "./components/FinTechTainment";
+import fakeAPI from "../../fakeAPI/mediaAPI";
 import Header from "./components/Header";
+import ProjectCard from "./components/projectCard";
 
-const MediaProject:React.FC = () => {
+const MediaProject: React.FC = () => {
 	return (
-		<>
-			<Header />
-			<FinTechTainment />
-		</>
+		<div className="bg-ft-background w-screen">
+			<Header introduce={fakeAPI.introduce} />
+			{fakeAPI.cards.map((card, index) => (
+				<ProjectCard key={index} card={card} index={index} />
+			))}
+		</div>
 	);
 };
 
