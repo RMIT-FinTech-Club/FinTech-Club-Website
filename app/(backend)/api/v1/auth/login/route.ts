@@ -1,5 +1,5 @@
 import connectMongoDB from "@/app/(backend)/libs/mongodb";
-import User from "@/app/(backend)/models/user";
+import User from "@/app/(backend)/models/User";
 import bcryptjs from "bcryptjs";
 import { SignJWT } from "jose";
 // import jwt from "jsonwebtoken";
