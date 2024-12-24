@@ -1,5 +1,5 @@
 import connectMongoDB from "@/app/(backend)/libs/mongodb";
-// import ResearchPaper from "@/app/(backend)/models/researchPaper";
+import ResearchPaper from "@/app/(backend)/models/Research";
 import { NextResponse } from "next/server";
 
 connectMongoDB();

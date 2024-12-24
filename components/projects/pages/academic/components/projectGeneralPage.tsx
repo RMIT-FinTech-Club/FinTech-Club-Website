@@ -37,7 +37,7 @@ export default function ProjectGeneralPage() {
 	const [isLoading, setIsLoading] = useState(true);
 	async function getProjects() {
 		return axios
-			.get("/api/projects")
+			.get("/api/v1/projects")
 			.then((res) => res.data)
 			.catch((err) => {
 				throw new Error(
