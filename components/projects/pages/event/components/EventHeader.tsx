@@ -10,7 +10,7 @@ const EventHeader: React.FC = () => {
 				<div className='my-[3vh] md:mt-0 mt-[5vh] bg-[#FFEFCA] text-deepBlue text-[4.5vw] leading-[6vw] py-[2vw] px-[7vw] rounded-[4.75vw] md:text-[1.4vw] md:leading-[2vw] md:py-[0.4vw] md:px-[3vw] md:rounded-[1.4vw]'>Our Event Details</div>
 				<div className='my-[3vh] text-white text-[10vw] md:text-[6vw] font-bold tracking-[0.2vw] text-nowrap'>Event Details</div>
 				<div className='my-[3vh] text-white text-[4vw] leading-[7vw] text-center md:w-1/2 md:text-[1.5vw] md:leading-[2.2vw]'>Lorem ipsum dolor sit amet consectetur. In nisl amet consequat vehicula lectus egestas nibh et sed. Quisque ac convallis adipiscing.</div>
-				<button className="bg-gold font-semibold text-white transition duration-200 text-[5vw] my-[3vh] px-[15vw] py-[2vw] md:text-[1.8vw] md:px-[6vw] md:py-[0.5vw] rounded-[4px] hover:contrast-150">Join Us</button>
+				<button className="bg-gold font-semibold text-white transition duration-200 text-[5vw] my-[3vh] px-[15vw] py-[2vw] md:text-[1.8vw] md:px-[6vw] md:py-[0.5vw] rounded-[10px] hover:contrast-150">Join Us</button>
 			</div>
 		</section>
 	);
