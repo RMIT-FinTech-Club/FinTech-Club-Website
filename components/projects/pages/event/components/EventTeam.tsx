@@ -17,6 +17,7 @@ const EventTeam: React.FC<EventTeamProps> = ({ sectionValue }) => {
     const { team } = sectionValue;
 
     const [currentMember, setCurrentMember]: [number, Dispatch<SetStateAction<number>>] = useState(0);
+    const [movePosition, setMovePosition]: [number, Dispatch<SetStateAction<number>>] = useState(0);
     const [isMobile, setIsMobile]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(false);
 
     const isDragging = useRef<boolean>(false);
@@ -65,9 +66,11 @@ const EventTeam: React.FC<EventTeamProps> = ({ sectionValue }) => {
 
     const handleTouchMove = (e: React.TouchEvent) => {
         if (isDragging.current && startPosition.current !== undefined) currentPosition.current = e.touches[0].clientX;
+        if (currentPosition.current && startPosition.current) setMovePosition(startPosition.current - currentPosition.current);
     };
 
     const handleTouchEnd = () => {
+        setMovePosition(0);
         isDragging.current = false;
         timeWait.current = true;
 
@@ -102,8 +105,8 @@ const EventTeam: React.FC<EventTeamProps> = ({ sectionValue }) => {
                 {team.map((member, index) => (
                     <a key={index} href={member.link}>
                         <div
-                            style={{ backgroundColor: member.bgc, transform: isMobile ? `translateX(-${90 * currentMember}vw)` : "none" }}
-                            className="group relative flex justify-center items-end w-[90vw] md:w-[15vw] aspect-[3/4] overflow-hidden cursor-pointer transition-all duration-300 rounded-none md:rounded-[20px]"
+                            style={{ backgroundColor: member.bgc, transform: isMobile ? `translateX(calc(-${90 * currentMember}vw - ${movePosition * 1.5}px))` : "none" }}
+                            className="group relative flex justify-center items-end w-[90vw] md:w-[15vw] aspect-[3/4] overflow-hidden cursor-pointer transition-all rounded-none md:rounded-[20px]"
                         >
                             <div
                                 className="absolute left-1/2 translate-x-[-50%] top-[10%] w-[150%] aspect-[3/4] bg-cover bg-center bg-no-repeat md:group-hover:scale-[1.15] group-hover:scale-[1] transition-all duration-300"
