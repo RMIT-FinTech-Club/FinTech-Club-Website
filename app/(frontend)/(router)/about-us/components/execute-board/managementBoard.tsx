@@ -53,7 +53,7 @@ const ManagementBoard = () => {
 			<main>
 				<div className="grid grid-cols-1 max-lg:gap-8 gap-0 xl:grid-cols-4 lg:grid-cols-2 max-lg:mb-0">
 					{managementBoardCards.map((card, index) => (
-						<ManagementBoardCard
+						<MANAGEMENT_BOARD_CARD
 							key={index}
 							{...card}
 						/>
@@ -74,7 +74,7 @@ const ManagementBoard = () => {
 	);
 };
 
-function ManagementBoardCard({
+function MANAGEMENT_BOARD_CARD({
 	image,
 	name,
 	position,

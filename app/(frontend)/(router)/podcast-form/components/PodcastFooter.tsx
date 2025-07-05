@@ -29,7 +29,7 @@ const PodcastFooter = () => {
 		// console.log(
 		//   `title: ${title}\ndescription: ${description}\npublisher: ${publisher}\n publicationDate: ${publicationDate}\n language: ${language}\n authors: ${authors}\n\n\n`
 		// );
-		let verifiedStatus = true;
+		const verifiedStatus = true;
 		// if (!(authorFiles.length === authors.length)) {
 		// 	verifiedStatus = false;
 		// }

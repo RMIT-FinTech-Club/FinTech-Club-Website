@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import type React from "react";
 import ProjectDescription from "./components/projectDescription";
 import ProjectTeam from "./components/projectTeam";
 import TechStack from "./components/techStack";

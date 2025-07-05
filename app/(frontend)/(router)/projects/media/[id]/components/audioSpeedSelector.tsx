@@ -61,7 +61,7 @@ const SpeedSelector: React.FC<SpeedSelectorProps> = ({ onSpeedChange }) => {
 							// onSpeedChange(parseFloat(Array.from(selectedValue)[0]))
 						}}
 						onAction={(key) => {
-							const speed = parseFloat(key.toString());
+							const speed = Number.parseFloat(key.toString());
 							// console.log(speed)
 							onSpeedChange(speed);
 						}}

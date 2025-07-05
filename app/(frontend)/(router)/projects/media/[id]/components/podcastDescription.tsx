@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 const PodcastDescription: React.FC<{ description: string }> = ({
 	description,

@@ -1,5 +1,5 @@
 import { PreArrow, NextArrow } from "@/components/carouselArrows";
-import React from "react";
+import type React from "react";
 import Slider from "react-slick";
 
 const EventCard: React.FC<{ url: string }> = ({ url }) => {

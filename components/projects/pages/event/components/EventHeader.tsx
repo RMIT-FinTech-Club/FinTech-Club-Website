@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import Decor1 from "@/components/projects/projectDecorForms/Decor1";
 
 const EventHeader: React.FC = () => {

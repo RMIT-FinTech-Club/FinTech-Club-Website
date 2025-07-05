@@ -1,6 +1,6 @@
 "use client";
 import { headerHeight } from "@/components/navbar";
-import { useEffect, useRef, useState, ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type ContentProps = { children: ReactNode };
 

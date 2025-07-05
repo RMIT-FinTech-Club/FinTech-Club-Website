@@ -9,14 +9,14 @@ import clsx from "clsx";
 import axios from "axios";
 import Image from "next/image";
 
-interface authorData {
+interface AuthorData {
 	name: string;
 	profileImageUrl: string;
 }
 interface PodcastData {
 	title: string;
 	description: string;
-	authors: authorData[];
+	authors: AuthorData[];
 	thumnailFileUrl: string;
 	audioFileUrl: string;
 }
@@ -81,7 +81,7 @@ const Podcast = ({ params }: PodcastProps) => {
 						<p className="md:hidden text-white max-md:px-5 mx-auto text-center max-md:text-3xl">{data.title}</p>
 						<div>
 							<AuthorList
-								authorDetails={data.authors.map((authorData: authorData) => ({
+								authorDetails={data.authors.map((authorData: AuthorData) => ({
 									authorName: authorData.name,
 									authorAvatarURL: authorData.profileImageUrl,
 								}))}

@@ -44,7 +44,7 @@ const ExecuteBoard = () => {
 			<main className="mx-side-margin-mobile mt-0 md:mx-[64px]">
 				<div className="grid grid-cols-1 gap-8 xl:grid-cols-4 md:grid-cols-2 my-16 md:px-0 px-10">
 					{executiveBoardData.map((item: ExecutiveBoardCardProps) => (
-						<ExecutiveBoardCard {...item} />
+						<EXECUTIVE_BOARD_CARD {...item} />
 					))}
 				</div>
 				<div className="grid gap-2 md:grid-cols-1 md:gap-2 text-center pb-9">
@@ -62,7 +62,7 @@ const ExecuteBoard = () => {
 	);
 };
 
-function ExecutiveBoardCard({
+function EXECUTIVE_BOARD_CARD({
 	image,
 	name,
 	position,

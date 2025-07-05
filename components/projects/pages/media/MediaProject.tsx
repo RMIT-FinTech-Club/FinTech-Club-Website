@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import type React from "react";
 import fakeAPI from "../../fakeAPI/mediaAPI";
 import Header from "./components/Header";
 import ProjectCard from "./components/projectCard";

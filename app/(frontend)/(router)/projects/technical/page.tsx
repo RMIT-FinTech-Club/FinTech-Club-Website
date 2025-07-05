@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import TechnicalProject from "@/components/projects/pages/technical/TechnicalProject";
 
 const Technical:React.FC = () => {

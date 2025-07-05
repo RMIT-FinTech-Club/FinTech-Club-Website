@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { ChevronLeft, ChevronRight } from "tabler-icons-react";
 
 interface ArrowProps extends HTMLAttributes<HTMLDivElement> {

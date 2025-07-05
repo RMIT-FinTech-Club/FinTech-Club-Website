@@ -3,7 +3,7 @@ import {
 	Card,
 	CardBody,
 	CardFooter,
-	CardProps,
+	type CardProps,
 } from "@nextui-org/react";
 import clsx from "clsx";
 import Image from "next/image";

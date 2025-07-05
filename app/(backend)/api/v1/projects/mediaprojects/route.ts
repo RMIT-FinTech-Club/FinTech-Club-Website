@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 		const publisher = form.get("publisher") as string;
 		const publicationDate = form.get("publicationDate") as string;
 		const language = form.get("language") as string;
-		let authors = form.getAll("authors[]").map(author => JSON.parse(author as string)) as Array<Author>;
+		const authors = form.getAll("authors[]").map(author => JSON.parse(author as string)) as Array<Author>;
 		const authorFiles = form.getAll("authorFiles[]") as Array<File>;
 		const audioFile = form.get("audioFile") as File;
 		const thumnailFile = form.get("thumnailFile") as File;

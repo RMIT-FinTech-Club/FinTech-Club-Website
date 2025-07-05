@@ -75,7 +75,7 @@ export default function ProjectGeneralPage() {
 							<ProjectCardSkeletonLoading />
 						) : (
 							projects?.map((project: ResearchPaper) => (
-								<ProjectGeneralCard
+								<PROJECT_GENERAL_CARD
 									key={project._id}
 									project={project}
 								/>
@@ -83,7 +83,7 @@ export default function ProjectGeneralPage() {
 						)}
 					</div>
 					{/* projects filter  */}
-					<ProjectsFilter />
+					<PROJECTS_FILTER />
 				</div>
 			</div>
 		</>
@@ -94,7 +94,7 @@ export default function ProjectGeneralPage() {
 	);
 }
 
-function ProjectGeneralCard({ project }: { project: ResearchPaper }) {
+function PROJECT_GENERAL_CARD({ project }: { project: ResearchPaper }) {
 	return (
 		<>
 			<div className="grid md:grid-cols-2 bg-ft-background shadow-lg rounded-lg p-4 w-fit">
@@ -142,7 +142,7 @@ function ProjectGeneralCard({ project }: { project: ResearchPaper }) {
 	);
 }
 
-function ProjectsFilter() {
+function PROJECTS_FILTER() {
 	const [isOpen, setIsOpen] = useState(false);
 	type Filters = {
 		research: boolean;

@@ -1,6 +1,7 @@
 "use client";
 import clsx from "clsx";
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import type ClubMember from "./clubMember";
 import { Skeleton } from "@nextui-org/react";
 

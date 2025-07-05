@@ -1,5 +1,6 @@
 "use client"
-import React, { useRef } from 'react';
+import type React from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 import fakeAPI from './fakeAPI/mainAPI'

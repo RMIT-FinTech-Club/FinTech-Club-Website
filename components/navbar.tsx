@@ -2,18 +2,19 @@
 import { siteConfig } from "@/config/site";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
-import React, {
+import type React from "react";
+import {
 	useState,
-	useEffect,
+	useEffect,type 
 	ButtonHTMLAttributes,
 	use,
 	useRef,
-} from "react";
+} from "react"
 import { Menu, X, CaretDown } from "tabler-icons-react"; // Including Tabler icons for menu controls
 import {
 	MotionConfig,
 	Transition,
-	Variant,
+	type Variant,
 	Variants,
 	motion,
 	useAnimate,
@@ -148,7 +149,7 @@ const AnimatedHamburger = ({
 	stroke = 2,
 	size = 24,
 }: AnimatedHamburgerProps) => {
-	let [isOpen, setIsOpen] = useAtom(isOpenAtom);
+	const [isOpen, setIsOpen] = useAtom(isOpenAtom);
 
 	const [containerBarScope, animateContainerBar] = useAnimate();
 

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useRef, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
 
 interface EventTeamProps {
     sectionValue: {

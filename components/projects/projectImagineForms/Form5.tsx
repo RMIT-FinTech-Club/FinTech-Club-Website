@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import '@/styles/animations.css'
 
 interface ImageForm5Props {

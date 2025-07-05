@@ -6,7 +6,7 @@ connectMongoDB();
 
 export async function GET(req: NextRequest) {
 	try {
-		let query = {};
+		const query = {};
 
 		// Create response
 		const allEvents = await EventProject.find(query);

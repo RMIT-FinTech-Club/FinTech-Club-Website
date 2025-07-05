@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface ImageForm8Props {
     images: string[]
