@@ -10,43 +10,39 @@
 			"!**/.next"
 		]
 	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"a11y": {
+				"noAriaUnsupportedElements": "warn",
+				"useAltText": "warn",
+				"useAriaPropsForRole": "warn",
+				"useValidAriaProps": "warn",
+				"useValidAriaValues": "warn"
+			},
+			"complexity": {
+				"noBannedTypes": "error",
+				"noUselessTypeConstraint": "error"
+			},
 			"style": {
-				"useFilenamingConvention": {
-					"level": "error",
-					"options": {
-						"filenameCases": ["camelCase", "export"]
-					}
-				},
-				"useNamingConvention": {
-					"level": "error",
-					"options": {
-						"strictCase": false,
-						"conventions": [
-							{
-								"selector": {
-									"kind": "function",
-									"scope": "global"
-								},
-								"formats": ["CONSTANT_CASE"]
-							}
-						]
-					}
-				},
-				"noParameterAssign": "error",
-				"useAsConstAssertion": "error",
-				"useDefaultParameterLast": "error",
-				"useEnumInitializers": "error",
-				"useSelfClosingElements": "error",
-				"useSingleVarDeclarator": "error",
-				"noUnusedTemplateLiteral": "error",
-				"useNumberNamespace": "error",
-				"noInferrableTypes": "error",
-				"noUselessElse": "error"
+				"noNamespace": "error",
+				"useAsConstAssertion": "error"
+			},
+			"suspicious": {
+				"noCommentText": "error",
+				"noDuplicateJsxProps": "error",
+				"noExplicitAny": "error",
+				"noExtraNonNullAssertion": "error",
+				"noMisleadingInstantiator": "error",
+				"noUnsafeDeclarationMerging": "error"
 			}
 		}
 	},
