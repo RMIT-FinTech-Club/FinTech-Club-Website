@@ -4,6 +4,8 @@ import React from "react";
 import "./styles.css";
 import Link from "next/link";
 import { IconBrandLinkedin } from "@tabler/icons-react";
+import { motion, useInView } from "framer-motion";
+import { useRef} from "react";
 
 type ExecutiveBoardCardProps = {
   image: string;
@@ -60,9 +62,24 @@ const ExecuteBoard = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem] my-16">
-          {executiveBoardData.map((item: ExecutiveBoardCardProps, index) => (
-            <EXECUTIVE_BOARD_CARD key={index} {...item} />
-          ))}
+          {executiveBoardData.map((item, index) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref);
+
+            return (
+              <motion.div
+                key={index}
+                ref={ref}
+                animate={{
+                  y: isInView ? (index % 2 === 0 ? -20 : 20) : 0,
+                  opacity: isInView ? 1 : 0.7,
+                }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              >
+                <EXECUTIVE_BOARD_CARD {...item} />
+              </motion.div>
+            );
+          })}
         </div>
       </main>
     </section>
@@ -76,8 +93,8 @@ function EXECUTIVE_BOARD_CARD({
   linkedin,
 }: ExecutiveBoardCardProps) {
   return (
-    <Card className="relative rounded-2xl border-[4px] border-[#2C305F] border-solid overflow-hidden">
-      <CardHeader className="pb-0 pt-0 h-[11rem]">
+    <Card className="relative mt-[1.5rem] rounded-2xl border-[4px] border-[#2C305F] border-solid overflow-hidden">
+      <CardHeader className="pb-0 pt-0 h-[12rem]">
         <div className="z-0">
           <Image
             alt={`${name} profile`}
@@ -94,8 +111,8 @@ function EXECUTIVE_BOARD_CARD({
             </h6>
             <p className="leading-5 text-[#FFEFCA] text-[0.7rem]">{position}</p>
           </div>
-          <Link href={linkedin} target="_blank" rel="noopener noreferrer">
-            <IconBrandLinkedin size={40} color="#FFEFCA" strokeWidth={0.8} />
+          <Link href={linkedin} target="_blank" rel="noopener noreferrer" title="Visit LinkedIn">
+            <IconBrandLinkedin size={40} color="#FFEFCA" strokeWidth={0.8} className="transition duration-300 transform hover:scale-110 hover:brightness-150 hover:drop-shadow-[0_0_6px_#FFEFCA]"/>
           </Link>
         </div>
       </CardBody>
