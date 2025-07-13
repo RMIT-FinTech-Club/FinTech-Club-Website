@@ -57,7 +57,7 @@ const ExecuteBoard = () => {
       <div className="absolute bottom-[5rem] left-[15rem] w-[2rem] h-[2rem] bg-[#DBB968] rounded-full z-10"></div>
       <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
       
-      <main className="mx-[64px]">
+      <main className="mx-[4rem] 2xl:mx-[10rem]">
         <div className="grid">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
             Meet Our
@@ -68,7 +68,7 @@ const ExecuteBoard = () => {
             Club machine!
           </p>
         </div>
-        <div className=" pt-16 pb-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem]">
+        <div className=" pt-16 pb-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem] 2xl:gap-[5rem]">
           {executiveBoardData.map((item, index) => {
             const ref = useRef(null);
             const isInView = useInView(ref);
@@ -102,7 +102,7 @@ function EXECUTIVE_BOARD_CARD({
 }: ExecutiveBoardCardProps) {
   return (
     <Card className="relative mt-[1.5rem] rounded-2xl border-[4px] border-[#2C305F] border-solid overflow-hidden">
-      <CardHeader className="pb-0 pt-0 h-[12rem]">
+      <CardHeader className="pb-0 pt-0 h-[12rem] 2xl:h-[16rem]">
         <div className="z-0">
           <Image
             alt={`${name} profile`}
