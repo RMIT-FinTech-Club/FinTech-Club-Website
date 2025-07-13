@@ -28,3 +28,4 @@ const researchSchema = new Schema(
 const Research = mongoose.models?.Research || mongoose.model("Research", researchSchema);
 
 export default Research;
+

@@ -7,7 +7,7 @@ const connectMongoDB = async () => {
 
     if (mongoose.connection.readyState === 2 || mongoose.connection.readyState === 3) {
         console.log("Connection to MongoDB is currently in the process of connecting/disconnecting");
-        return;
+        return; 
     }
 
     try {
