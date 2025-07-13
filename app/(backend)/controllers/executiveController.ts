@@ -1,5 +1,4 @@
 import ExecutiveMember from "@/app/(backend)/models/executiveMember";
-import { Request, Response } from "express";
 
 // Add a new executive member
 export async function addExecutiveMember(data: any) {
@@ -45,25 +44,5 @@ export async function deleteExecutiveMember(id: string) {
     return { status: 200, message: "Executive member deleted" };
   } catch (error: any) {
     return { status: 400, message: error.message };
-  }
-}
-
-// Express.js: Get executive board members with optional generation filtering
-export async function getExecutiveBoardMembers(req: Request, res: Response) {
-  try {
-    let generation = req.query.generation;
-    let filter: any = {};
-    if (generation) {
-      const genNum = parseInt(generation as string, 10);
-      if (isNaN(genNum) || genNum < 1) {
-        return res.status(400).json({ message: "Invalid generation parameter" });
-      }
-      filter.generation = genNum;
-    }
-    // If no generation, do NOT set filter.generation
-    const members = await ExecutiveMember.find(filter).select("name position photo_url linkedin_url generation");
-    return res.status(200).json(members);
-  } catch (error) {
-    return res.status(500).json({ message: "Error fetching executive board members" });
   }
 } 
