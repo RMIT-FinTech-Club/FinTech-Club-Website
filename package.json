@@ -10,7 +10,8 @@
     "lint": "biome lint ./",
     "check": "biome check ./",
     "jest": "jest --coverage --passWithNoTests ./__test__",
-    "bunTest": "bun test --coverage --bail"
+    "bunTest": "bun test --coverage --bail",
+    "seed": "ts-node -P tsconfig.script.json \"app/(backend)/scripts/seedHof.ts\""
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.600.0",
@@ -30,6 +31,7 @@
     "bun": "^1.1.13",
     "clsx": "^2.1.0",
     "crypto": "^1.0.1",
+    "dotenv": "^17.2.0",
     "embla-carousel-react": "^8.0.2",
     "fintech-website": "file:",
     "form-data": "^4.0.0",
@@ -84,6 +86,7 @@
     "postcss-import": "^16.1.0",
     "tailwindcss": "^3.3.0",
     "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "trustedDependencies": [
