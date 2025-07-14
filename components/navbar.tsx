@@ -15,6 +15,7 @@ import {
 import { atom, useAtom } from "jotai";
 
 const isOpenAtom = atom(false);
+export let headerHeight: number;
 let isSidebarOpen = false;
 
 const Navbar = () => {
@@ -23,6 +24,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		let lastScrollTop = 0;
+
 		const handleScroll = () => {
 			const isScrollingDown = document.body.scrollTop > lastScrollTop;
 			navBarRef.current?.classList.toggle('header_closed', (isScrollingDown && !isSidebarOpen));
@@ -69,7 +71,7 @@ const Navbar = () => {
 			animate={isOpen ? "open" : "closed"}
 			className="fixed top-0 py-2 z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
 		>
-			<div className="flex justify-between items-center px-4 w-full bg-gold">
+			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
 				<div className="logo relative w-14 h-14">
 					<Link href='/'>
 						<img
