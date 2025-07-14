@@ -1,30 +1,20 @@
 "use client";
 import { siteConfig } from "@/config/site";
-import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import type React from "react";
 import {
-	useState,
 	useEffect,type 
 	ButtonHTMLAttributes,
-	use,
 	useRef,
 } from "react"
-import { Menu, X, CaretDown } from "tabler-icons-react"; // Including Tabler icons for menu controls
 import {
-	MotionConfig,
-	Transition,
 	type Variant,
-	Variants,
 	motion,
 	useAnimate,
 } from "framer-motion";
-import clsx from "clsx";
 import { atom, useAtom } from "jotai";
-import { set } from "mongoose";
 
 const isOpenAtom = atom(false);
-export let headerHeight: number;
 let isSidebarOpen = false;
 
 const Navbar = () => {
@@ -33,8 +23,6 @@ const Navbar = () => {
 
 	useEffect(() => {
 		let lastScrollTop = 0;
-		if (navBarRef.current) headerHeight = navBarRef.current.offsetHeight;
-
 		const handleScroll = () => {
 			const isScrollingDown = document.body.scrollTop > lastScrollTop;
 			navBarRef.current?.classList.toggle('header_closed', (isScrollingDown && !isSidebarOpen));
@@ -78,11 +66,10 @@ const Navbar = () => {
 	return (
 		<motion.nav
 			ref={navBarRef}
-			initial={false}
 			animate={isOpen ? "open" : "closed"}
 			className="fixed top-0 py-2 z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
 		>
-			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
+			<div className="flex justify-between items-center px-4 w-full bg-gold">
 				<div className="logo relative w-14 h-14">
 					<Link href='/'>
 						<img
@@ -129,12 +116,6 @@ const Navbar = () => {
 					))}
 				</ul>
 			</div>
-			{/* {isOpen && (
-				<Button
-					className="fixed inset-0 bg-black bg-opacity-50 z-40"
-					onClick={toggleSidebar}
-				/>
-			)} */}
 		</motion.nav>
 	);
 };
