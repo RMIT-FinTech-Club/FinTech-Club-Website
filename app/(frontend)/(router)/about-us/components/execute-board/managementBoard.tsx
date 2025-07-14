@@ -15,32 +15,32 @@ type ManagementBoardCardProps = {
 const managementBoardData = [
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/MinhNgoc-HoB-removebg-preview.png",
-    name: "TRUONG MINH NGOC",
+      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofBusiness-HaoLy.png",
+    name: "LY QUOC HAO",
     position: "Head of Business",
-    linkedin: "https://www.linkedin.com/in/truong-minh-ngoc/",
+    linkedin: "https://www.linkedin.com/in/hao-ly-86482a313/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/BaoNgoc-HoHR-removebg-preview.png",
-    name: "NGUYEN BAO NGOC",
+      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofHR-GiaHoa.png",
+    name: "NGUYEN HUA GIA HOA",
     position: "Head of Human Resources",
-    linkedin: "https://www.linkedin.com/in/helene-ngoc-nguyen/",
+    linkedin: "https://www.linkedin.com/in/hoa-nguyen-hua-gia/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/Hoang+Anh_Head_Marketing.png",
-    name: "NGUYEN TRAN HOANG ANH",
+      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofMarketing-Mint.png",
+    name: "PHAM HOANG MINH THU",
     position: "Head of Marketing",
-    linkedin: "https://www.linkedin.com/in/hoang-anh-nguyen-tran-30b67a232/",
+    linkedin: "#",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/DiemQui-HoT-removebg-preview.png",
-    name: "HUYNH LE DIEM QUI",
+      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofTechnology-TanNguyen.png",
+    name: "NGUYEN MANH TAN",
     position: "Head of Technology",
     linkedin:
-      "https://www.linkedin.com/in/qu%C3%AD-hu%E1%BB%B3nh-l%C3%AA-di%E1%BB%85m-a0473424a/",
+      "https://www.linkedin.com/in/manh-tan-nguyen-6373b3275/",
   },
 ];
 
