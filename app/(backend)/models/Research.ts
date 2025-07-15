@@ -13,12 +13,12 @@ const researchSchema = new Schema(
     thumbnailDescription: { type: String, required: true },
     sections: [sectionSchema],
     author: { type: String, required: true },
-    publicationDate: { type: Date, required: true },
     status: { 
       type: String, 
       enum: ['draft', 'published'],
       default: 'draft'
-    }
+    },
+    label: { type: String, required: true },
   },
   {
     timestamps: true,

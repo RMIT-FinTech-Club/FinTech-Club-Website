@@ -98,3 +98,17 @@ export async function deleteResearch(id: string) {
     );
   }
 }
+
+export async function filterResearchByLabel(label: string) {
+  try {
+    await connectMongoDB();
+    const researches = await Research.find({ label }).sort({ createdAt: -1 }); //newest first
+    return NextResponse.json(researches, { status: 200 });
+  }
+  catch (error){
+    return NextResponse.json(
+      { error: "Cannot filter research by label, so sad cho ban" },
+      { status: 500 }
+    );
+  }
+}
