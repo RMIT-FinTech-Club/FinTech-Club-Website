@@ -4,7 +4,6 @@ import connectMongoDB from "@/app/(backend)/libs/mongodb";
 import Article from "@/app/(backend)/models/article";
 import {filterArticleByLabel, getAllArticle} from "@/app/(backend)/controllers/articleController";
 
-
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
@@ -12,6 +11,15 @@ export async function GET(request: NextRequest) {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || "10", 10);
   const skip = (page - 1) * limit;
+  
+  const pageParam = searchParams.get("page");
+  const limitParam = searchParams.get("limit");
+
+
+  if ( !label && !pageParam && !limitParam) {
+    const lastestArticles = await Article.find({}).sort({publicationDate: -1 }).limit(5);
+    return NextResponse.json(lastestArticles, { status: 200 });
+  }
 
   if (page < 1 || limit < 1) {
     return NextResponse.json({ message: "Invalid pagination parameters" }, { status: 400 });
