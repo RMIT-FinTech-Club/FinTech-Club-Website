@@ -96,7 +96,7 @@ export async function deleteArticle(id: string) {
     );
   } catch (error) {
     return NextResponse.json(
-      { error: "Cannot delete Article" },
+      { error: "Cannot delete article" },
       { status: 500 }
     );
   }
@@ -111,7 +111,7 @@ export async function filterArticleByLabel(label: string) {
   }
   catch (error){
     return NextResponse.json(
-      { error: "Cannot filter Article by label" },
+      { error: "Cannot filter article by label" },
       { status: 500 }
     );
   }
