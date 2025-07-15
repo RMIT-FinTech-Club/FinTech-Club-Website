@@ -3,8 +3,8 @@ import { siteConfig } from "@/config/site";
 import Link from "next/link";
 import type React from "react";
 import {
-	useEffect,type 
-	ButtonHTMLAttributes,
+	useEffect, type
+		ButtonHTMLAttributes,
 	useRef,
 } from "react"
 import {
@@ -69,18 +69,12 @@ const Navbar = () => {
 		<motion.nav
 			ref={navBarRef}
 			animate={isOpen ? "open" : "closed"}
-			className="fixed top-0 py-2 z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
+			className="fixed top-0 h-[8vh] py-[1vh] z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
 		>
-			<div className="flex justify-between items-center max-w-6xl mx-auto px-4 w-full">
-				<div className="logo relative w-14 h-14">
-					<Link href='/'>
-						<img
-							src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/ft_logo.png"
-							alt="FinTech Club Logo"
-							className="absolute top-0 left-1/2 transform -translate-x-1/2"
-						/>
-					</Link>
-				</div>
+			<div className="flex justify-between items-center pr-[2vw] w-full">
+				<Link href='/' className="logo relative h-[6.4vh] px-[3vh] bg-[#E5E5E5] flex items-center rounded-r-[3vh] cursor-pointer">
+					<div className="h-[70%] aspect-square bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url('/FTC_MAIN_LOGO.svg')` }}></div>
+				</Link>
 				<div className="md:hidden h-fit flex justify-center items-center">
 					<AnimatedHamburger />
 				</div>
@@ -105,18 +99,26 @@ const Navbar = () => {
 						</motion.li>
 					))}
 				</motion.ul>
-				<ul className="hidden md:relative md:flex md:items-center md:space-x-10 py-4">
-					{siteConfig.navItems.map((item) => (
-						<li key={item.href}>
-							<Link
-								className="font-bold text-white hover:text-ft-secondary-yellow"
-								href={item.href}
-							>
-								{item.label}
-							</Link>
-						</li>
-					))}
-				</ul>
+				<div className="hidden md:relative md:flex">
+					<ul className="flex md:items-center space-x-[4vw]">
+						{siteConfig.navItems.map((item) => (
+							<li key={item.label}>
+								<Link
+									className="font-bold text-white hover:text-ft-secondary-yellow text-[2vh] cursor-pointer"
+									href={item.href}
+								>
+									{item.label}
+								</Link>
+							</li>
+						))}
+					</ul>
+					<Link
+						href="/join-us"
+						className="transition-all duration-200 hover:brightness-110 hover:scale-105 text-[2vh] leading-[2vh] py-[2vh] ml-[6vw] flex items-center justify-center px-[2vw] bg-gold text-white rounded-[1vh] cursor-pointer font-bold"
+					>
+						Join Us
+					</Link>
+				</div>
 			</div>
 		</motion.nav>
 	);
