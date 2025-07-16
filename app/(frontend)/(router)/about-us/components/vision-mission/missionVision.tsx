@@ -16,7 +16,7 @@ const VisionMission = () => {
 	};
 
 	return (
-		<div className="w-full max-w-[1920px] min-h-[1080px] flex flex-col-reverse justify-center items-center md:flex-row mx-auto">
+		<div className="w-full flex flex-col-reverse justify-center items-center md:flex-row">
 			<ContentContainer
 				title={mainContent.vision.title}
 				content={mainContent.vision.content}
