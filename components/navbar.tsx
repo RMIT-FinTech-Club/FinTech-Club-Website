@@ -114,7 +114,7 @@ const Navbar = () => {
 					</ul>
 					<Link
 						href="/join-us"
-						className="transition-all duration-200 hover:brightness-110 hover:scale-105 text-[2vh] leading-[2vh] py-[2vh] ml-[6vw] flex items-center justify-center px-[2vw] bg-gold text-white rounded-[1vh] cursor-pointer font-bold"
+						className="transition-all duration-200 hover:brightness-110 hover:scale-105 text-[2vh] leading-[2vh] py-[2vh] ml-[6vw] flex items-center justify-center px-[2vw] bg-yellowPrimary text-white rounded-[1vh] cursor-pointer font-bold"
 					>
 						Join Us
 					</Link>
