@@ -23,7 +23,7 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
 	return (
 		<div
 			className={clsx(
-				"relative md:h-[83vh] md:w-[43vw] text-center py-20 md:pb-56 pb-32 md:px-32 px-11",
+				"relative md:min-h-[45vh] md:max-w-[45vw] text-center py-20 px-32",
 				rounded,
 				bgColor,
 				shadowPosition,
