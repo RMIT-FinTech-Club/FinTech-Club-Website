@@ -51,7 +51,7 @@ const HerosectionVid: React.FC = () => {
 				transition={{
 					staggerChildren: 0.1,
 				}}
-				className="absolute bottom-16 right-0 left-0"
+				className="absolute bottom-0 right-0 left-0"
 			>
 				{/* <motion.h2
 					className="text-center w-full text-ft-text-bright"
