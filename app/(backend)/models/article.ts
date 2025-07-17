@@ -1,16 +1,33 @@
+import {create } from "domain";
 import mongoose, {Schema} from "mongoose";
+import { validate } from "uuid";
 
 const articleSchema = new Schema({
     title: { type: String, required: true },
-    overview: { type: String, require: true},
-    status: { 
-      type: String, 
-      enum: ['draft', 'published'],
-      default: 'draft'
+    summary: { type: String, required: true},
+    content: { type: String, required: true },
+    illustration_url: {
+      type: String,
+      
+      validate: {
+          validator: function (value: string) {
+            try {
+              new URL(value); // Throw when the value is not a valid URL
+              return true;
+            } catch (err) {
+              return false;
+            }
+          },
+      message: "illustration_url must be a valid URL"
     },
-    graphic_url: { type: String, required: true },
-    label: { type: String, required: true },
-    publicationDate: { type: Date, default: Date.now },
+    },
+    authors: { type: [String], required: true },
+    labels: { type: [String], required: true },
+    publicationDate: { type: Date, default: Date.now }
+    
+  },
+  {
+    timestamps: true,
   }
 );
 
