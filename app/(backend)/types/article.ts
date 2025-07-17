@@ -1,10 +1,13 @@
-
 export interface Article {
     _id?: string;
     title: string;
-    overview: string;
+    summary: string;
+    content: string;
     publicationDate: Date;
-    status?: 'draft' | 'published';
-    graphic_url: string;
-    label: string;
-} 
+    illustration_url: string;
+    authors: string[];
+    labels: string[];
+    createdAt?: Date;
+    updatedAt?: Date;
+    };
+    
