@@ -23,7 +23,7 @@ const articleSchema = new Schema({
     },
     authors: { type: [String], required: true },
     labels: { type: [String], required: true },
-    publicationDate: { type: Date, default: Date.now }
+    publicationDate: {type: Date, default: Date.now }
     
   },
   {
