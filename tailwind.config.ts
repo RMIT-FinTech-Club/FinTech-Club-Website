@@ -21,7 +21,7 @@ const config: Config = {
             'blueMidnight': '#0D1742',
             'blueSlate': '#5E5E92',
             'blueMist': '#F0EDFF',
-            'Blue Soft': '#97ABD6',
+            'blueSoft': '#97ABD6',
             'yellowPrimary': '#DCB968',
             'yellowEarth': '#A28436',
             'yellowSand': '#F7D27F',
