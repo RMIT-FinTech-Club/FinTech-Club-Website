@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import Article from "../models/article";
 import connectMongoDB from "../libs/mongodb";
 import type {Article as ArticleType } from "../types/article";
@@ -102,16 +103,45 @@ export async function deleteArticle(id: string) {
   }
 }
 
-// Function:  filter article by label
-export async function filterArticleByLabel(label: string) {
+// Function: filter article by label
+export async function filterArticleByLabel(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+
+  const labels = searchParams.get("labels");
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const limit = parseInt(searchParams.get("limit") || "5", 10);
+  const skip = (page - 1) * limit;
+
+// If no label, page, or limit is provided, return the latest 5 articles  
+  if ( !labels && !page && !limit) {
+    const lastestArticles = await Article.find({}).sort({publicationDate: -1 }).limit(5);
+    return NextResponse.json(lastestArticles, { status: 200 });
+  }
+// Validate pagination parameters
+  if (page < 1 || limit < 1) {
+    return NextResponse.json({ message: "Invalid pagination parameters" }, { status: 400 });
+  }
+
   try {
     await connectMongoDB();
-    const article = await Article.find({label}).sort({createdAt: -1 }); //newest first
-    return NextResponse.json(article, { status: 200 });
-  }
-  catch (error){
+    // Build query
+    const query: any = {};
+    // If label is provided, add it to the query
+    if (labels) {
+      query.labels = { $in: [new RegExp(`^${labels}$`, "i")] };
+    }
+
+    const totalArticles = await Article.countDocuments(query);
+    const totalPages = Math.ceil(totalArticles / limit);
+    //
+    const articles = await Article.find(query).sort({ createdAt: -1 }).skip(skip).limit(5);
+
+    return NextResponse.json({articles,}, { status: 200 });
+
+  } catch (error) {
+    console.error("Error in GET /article:", error);
     return NextResponse.json(
-      { error: "Cannot filter article by label" },
+      { error: "Cannot fetch articles" },
       { status: 500 }
     );
   }
