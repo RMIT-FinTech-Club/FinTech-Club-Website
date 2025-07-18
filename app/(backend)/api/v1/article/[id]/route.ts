@@ -8,10 +8,7 @@ export async function GET(
     return getArticleById(params.id);
 }
 
-export async function PUT(
-    request: NextRequest,
-    { params }: { params: { id: string } }
-) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     const data = await request.json();
     return updateArticle(params.id, data);
 }
