@@ -79,7 +79,7 @@ export async function updateArticle(id: string, data: Partial<ArticleType>) {
     });
     if (!article) {
       return NextResponse.json(
-        { error: "Research not found" },
+        { error: "Article not found" },
         { status: 404 }
       );
     }
@@ -89,7 +89,7 @@ export async function updateArticle(id: string, data: Partial<ArticleType>) {
     );
   } catch (error) {
     return NextResponse.json(
-      { error: "Cannot update article, qua buon cho ban" },
+      { error: "Cannot update article"},
       { status: 500 }
     );
   }
