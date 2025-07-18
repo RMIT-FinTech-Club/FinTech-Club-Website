@@ -12,8 +12,3 @@ export async function POST(request: NextRequest) {
   const article = await request.json();
   return createArticle(article);
 }
-
-export async function GET_ID(request: NextRequest, { params }: { params: { id: string }}) {
-  const { id } = params;
-  return getArticleById(id);
-}
