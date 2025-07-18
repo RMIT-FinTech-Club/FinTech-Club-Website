@@ -2,6 +2,8 @@ import {create } from "domain";
 import mongoose, {Schema} from "mongoose";
 import { validate } from "uuid";
 
+const labelCategories = ["Fintech", "Technology", "Blockchain", "AI","Customer Service", "Security", "Sustainability", "Innovation", "Digital Transformation", "Startups", "Healthcare", "Art", "Ethics", "5G", "IoT","Quantum","Energy","Voice","Cloud","Edge","Smart City", "Education","Wearable","Automotive","Metaverse","Policy"];
+
 const articleSchema = new Schema({
     title: { type: String, required: true },
     summary: { type: String, required: true},
@@ -22,10 +24,16 @@ const articleSchema = new Schema({
     },
     },
     authors: { type: [String], required: true },
-    labels: { type: [String], required: true },
+    labels: { type: [String], required: true,
+      validate:{
+        validator: function (value: string[]) {
+          return value.every(labels => labelCategories.includes(labels));
+        }, message: "One or more labels is not a valid label"
+      } 
+     },
     publicationDate: {type: Date, default: Date.now }
     
-  },
+  },  
   {
     timestamps: true,
   }
