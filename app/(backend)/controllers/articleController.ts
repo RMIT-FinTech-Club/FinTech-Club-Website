@@ -17,8 +17,8 @@ export async function getAllArticle() {
     );
   }
 }
-// Function: get article by id
-export async function getArticleById(id: string) {
+// Function: get article by id & return its related articles
+export async function getArticleById(id: string, nextRequest?: NextRequest) {
   try {
     await connectMongoDB();
     const article = await Article.findById(id);
@@ -28,7 +28,21 @@ export async function getArticleById(id: string) {
         { status: 404 }
       );
     }
-    return NextResponse.json(article, { status: 200 });
+    //Return the related articles based on main article's labels 
+    const relatedArticles = await Article.find({
+      labels: { $in: article.labels }, // Match articles with the same labels
+      _id: { $ne: article._id } // Exclude the main article itself
+    }).sort({publicationDAte: -1 }).limit(3);
+
+    const suggestedRelatedArticles = relatedArticles.map((relatedArticle) => ({
+      _id: relatedArticle._id,
+      title: relatedArticle.title,
+      publicationDate: relatedArticle.publicationDate,
+      labels: relatedArticle.labels,
+      illustration_url: relatedArticle.illustration_url,
+    }));
+
+    return NextResponse.json({article, suggestedRelatedArticles}, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: "Cannot fetch article" },
@@ -113,7 +127,7 @@ export async function filterArticleByLabel(request: NextRequest) {
   const skip = (page - 1) * limit;
 
 // If no label, page, or limit is provided, return the latest 5 articles  
-  if ( !labels && !page && !limit) {
+  if ( !labels && !page && !limit) {  
     const lastestArticles = await Article.find({}).sort({publicationDate: -1 }).limit(5);
     return NextResponse.json(lastestArticles, { status: 200 });
   }
