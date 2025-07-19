@@ -119,8 +119,8 @@ export const ClubMentors = () => {
                     <div className="relative">
                         <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4">
                         </div>
-                        <div className="absolute w-full h-auto object-cover mt-[-35rem] pl-6 overflow-hidden">
-                            <img src="https://ik.imagekit.io/wiiiaaa/FAA7F38A-BB74-4C8A-97B8-1F4A4D43AFD3-removebg-preview.png?updatedAt=1752916915781"></img>
+                        <div className="absolute w-full h-auto object-cover mt-[-35rem] pl-2 overflow-hidden">
+                            <img src="https://ik.imagekit.io/wiiiaaa/01C63826-59E9-4573-8695-9BC2EAC85C9D-removebg-preview-2.png?updatedAt=1752935938866"></img>
                         </div>
 
                         <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
