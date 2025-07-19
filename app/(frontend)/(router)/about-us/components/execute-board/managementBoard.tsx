@@ -32,7 +32,8 @@ const managementBoardData = [
       "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofMarketing-Mint.png",
     name: "PHAM HOANG MINH THU",
     position: "Head of Marketing",
-    linkedin: "#",
+    linkedin: 
+    "https://www.linkedin.com/in/pham-th%C6%B0-a136a1232?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   },
   {
     image:
