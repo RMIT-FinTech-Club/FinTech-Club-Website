@@ -16,7 +16,7 @@ const VisionMission = () => {
 	};
 
 	return (
-		<div className="w-full flex flex-col-reverse justify-center items-center md:flex-row">
+		<div className="w-full md:h-[1080px] flex flex-col-reverse justify-center items-center md:flex-row">
 			<ContentContainer
 				title={mainContent.vision.title}
 				content={mainContent.vision.content}
@@ -24,7 +24,7 @@ const VisionMission = () => {
 				textColor={"text-black"}
 				bgColor={"bg-ft-primary-yellow"}
 				rounded={"md:rounded-br-[60px] md:rounded-tr-[60px] md:rounded-tl-[60px]"}
-				shadowPosition={"shadow-[rgba(0,0,15,0.2)_-15px_15px_4px_0px]"}
+				shadowPosition={"shadow-[rgba(0,0,15,0.2)_-10px_5px_4px_0px]"}
 			/>
 			<ContentContainer
 				title={mainContent.mission.title}
@@ -33,7 +33,7 @@ const VisionMission = () => {
 				textColor={"text-white"}
 				bgColor={"bg-ft-primary-blue"}
 				rounded={"md:rounded-bl-[60px] md:rounded-tl-[60px] md:rounded-tr-[60px]"}
-				shadowPosition={"shadow-[rgba(0,0,15,0.2)_-15px_15px_4px_0px]"}
+				shadowPosition={"shadow-[rgba(0,0,15,0.2)_-10px_5px_4px_0px]"}
 			/>
 			<PuzzleContainer />
 		</div>
