@@ -1,23 +1,39 @@
 export const ClubMentors = () => {
     return (
         <div className="bg-[#F9FAFB]">
-
-            <div className="relative bg-[#F9FAFB] bg-cover bg-center pt-[4rem]">
-                <div className="text-center">
+            <div className="relative z-10">
+                <div className="absolute">
+                    <div className=" absolute rounded-lg pl-[1200px] pt-10 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
+                            <circle cx="89.9795" cy="90.0822" r="89.4415" transform="rotate(-90.3595 89.9795 90.0822)" fill="#2B305E" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="47" height="47" viewBox="0 0 47 47" fill="none">
+                            <circle cx="23.4875" cy="23.7152" r="21.5519" transform="rotate(-90.3595 23.4875 23.7152)" fill="#2B305E" stroke="white" stroke-width="3" />
+                        </svg>
+                    </div>
+                    <div className="pl-[1400px] ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="125" height="98" viewBox="0 0 125 98" fill="none">
+                            <circle cx="89.6762" cy="8.16568" r="89.4415" transform="rotate(-90.3595 89.6762 8.16568)" fill="#2B305E" />
+                        </svg>
+                    </div>
+                </div>
+                <div className="text-center pt-[4rem] ">
                     <span className="font-sans font-bold text-7xl text-[#2C305F] justify-center"> OUR CLUB </span>
                     <span className="font-sans font-bold text-7xl text-[#DBB968] "> MENTORS</span>
                 </div>
             </div>
 
 
-            <div className="grid grid-cols-3 gap-10">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10">
 
                 <div className="relative bg-[#F9FAFB] pr-16 p-[134px] flex flex-col place-items-center">
                     <div className="font-medium text-2xl text-[#2C305F]">
                         <span> DR BINH NGUYEN </span>
                     </div>
                     <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4"> </div>
-
+                    <div className="absolute w-full h-auto mt-[-5rem] pl-16 object-cover overflow-hidden">
+                        <img src="https://ik.imagekit.io/wiiiaaa/7612C59B-585B-44D1-9E1A-3840AB439753-removebg-preview.png?updatedAt=1752916915852"></img>
+                    </div>
                     <div className="relative">
                         <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="90" height="82" viewBox="0 0 90 82" fill="none">
@@ -31,9 +47,9 @@ export const ClubMentors = () => {
                         </div>
 
 
-                        <div className=" rounded-[50px] w-[470px] h-[86px] bg-[#DBB968] mt-6 ">
+                        <div className=" rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6 ">
                             <div className="relative">
-                                <div className=" absolute rounded-lg pl-[360px] pr-2 pt-1">
+                                <div className=" absolute rounded-lg pl-[300px] pr-2 pt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
                                         <path d="M12.8333 19.25C12.8333 17.5482 13.5094 15.9161 14.7127 14.7127C15.9161 13.5094 17.5482 12.8333 19.25 12.8333H57.75C59.4518 12.8333 61.0839 13.5094 62.2872 14.7127C63.4906 15.9161 64.1666 17.5482 64.1666 19.25V57.75C64.1666 59.4518 63.4906 61.0839 62.2872 62.2872C61.0839 63.4906 59.4518 64.1666 57.75 64.1666H19.25C17.5482 64.1666 15.9161 63.4906 14.7127 62.2872C13.5094 61.0839 12.8333 59.4518 12.8333 57.75V19.25Z" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M25.6667 35.2917V51.3334" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
@@ -42,7 +58,7 @@ export const ClubMentors = () => {
                                         <path d="M51.3333 51.3334V41.7084C51.3333 40.0065 50.6573 38.3744 49.4539 37.1711C48.2506 35.9677 46.6185 35.2917 44.9167 35.2917C43.2149 35.2917 41.5828 35.9677 40.3794 37.1711C39.176 38.3744 38.5 40.0065 38.5 41.7084" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <div className="  rounded-lg pl-[100px] pr-[110px] pt-5">SENIOR PROGRAM MANAGER OF BLOCKCHAIN ENABLED BUSINESS</div>
+                                <div className="  rounded-lg pl-[100px] pr-[110px] pt-4 text-sm  text-center">SENIOR PROGRAM MANAGER OF BLOCKCHAIN ENABLED BUSINESS</div>
 
                             </div>
 
@@ -60,6 +76,9 @@ export const ClubMentors = () => {
                         <span> DR HUY PHAM </span>
                     </div>
                     <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4"> </div>
+                    <div className="absolute w-full h-auto object-cover mt-[-5rem] pl-16 overflow-hidden">
+                        <img src="https://ik.imagekit.io/wiiiaaa/FAA7F38A-BB74-4C8A-97B8-1F4A4D43AFD3-removebg-preview.png?updatedAt=1752916915781"></img>
+                    </div>
                     <div className="relative">
                         <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="90" height="82" viewBox="0 0 90 82" fill="none">
@@ -72,9 +91,9 @@ export const ClubMentors = () => {
                             </svg>
                         </div>
 
-                        <div className="rounded-[50px] w-[470px] h-[86px] bg-[#DBB968] mt-6">
+                        <div className="rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6">
                             <div className="relative">
-                                <div className=" absolute rounded-lg pl-[360px] pr-2 pt-1">
+                                <div className=" absolute rounded-lg pl-[300px] pr-2 pt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
                                         <path d="M12.8333 19.25C12.8333 17.5482 13.5094 15.9161 14.7127 14.7127C15.9161 13.5094 17.5482 12.8333 19.25 12.8333H57.75C59.4518 12.8333 61.0839 13.5094 62.2872 14.7127C63.4906 15.9161 64.1666 17.5482 64.1666 19.25V57.75C64.1666 59.4518 63.4906 61.0839 62.2872 62.2872C61.0839 63.4906 59.4518 64.1666 57.75 64.1666H19.25C17.5482 64.1666 15.9161 63.4906 14.7127 62.2872C13.5094 61.0839 12.8333 59.4518 12.8333 57.75V19.25Z" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M25.6667 35.2917V51.3334" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
@@ -84,7 +103,7 @@ export const ClubMentors = () => {
                                     </svg>
                                 </div>
                             </div>
-                            <div className=" rounded-lg pl-[125px] pr-[120px] pt-7 ">SENIOR LECTURER IN FINANCE</div>
+                            <div className=" rounded-lg pl-[120px] pr-[120px] pt-6 text-center text-md   ">SENIOR LECTURER IN FINANCE</div>
                         </div>
                     </div>
                 </div>
@@ -97,8 +116,13 @@ export const ClubMentors = () => {
                     <div className="font-medium text-2xl text-[#2C305F]">
                         <span> DR HIEU THAI </span>
                     </div>
-                    <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4"> </div>
                     <div className="relative">
+                        <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4">
+                        </div>
+                        <div className="absolute w-full h-auto object-cover mt-[-35rem] pl-6 overflow-hidden">
+                            <img src="https://ik.imagekit.io/wiiiaaa/FAA7F38A-BB74-4C8A-97B8-1F4A4D43AFD3-removebg-preview.png?updatedAt=1752916915781"></img>
+                        </div>
+
                         <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="90" height="82" viewBox="0 0 90 82" fill="none">
                                 <ellipse cx="13.2273" cy="12.9967" rx="13.2273" ry="12.9967" transform="matrix(-1 0 0 1 55.9089 56.0066)" fill="#2B305E" />
@@ -111,9 +135,9 @@ export const ClubMentors = () => {
                         </div>
 
 
-                        <div className="rounded-[50px] w-[470px] h-[86px] bg-[#DBB968] mt-6">
+                        <div className="rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6">
                             <div className="relative">
-                                <div className=" absolute rounded-lg pl-[360px] pr-[100px] pt-1">
+                                <div className=" absolute rounded-lg pl-[300px] pr-[100px] pt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
                                         <path d="M12.8333 19.25C12.8333 17.5482 13.5094 15.9161 14.7127 14.7127C15.9161 13.5094 17.5482 12.8333 19.25 12.8333H57.75C59.4518 12.8333 61.0839 13.5094 62.2872 14.7127C63.4906 15.9161 64.1666 17.5482 64.1666 19.25V57.75C64.1666 59.4518 63.4906 61.0839 62.2872 62.2872C61.0839 63.4906 59.4518 64.1666 57.75 64.1666H19.25C17.5482 64.1666 15.9161 63.4906 14.7127 62.2872C13.5094 61.0839 12.8333 59.4518 12.8333 57.75V19.25Z" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M25.6667 35.2917V51.3334" stroke="#2C305F" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
@@ -123,12 +147,11 @@ export const ClubMentors = () => {
                                     </svg>
                                 </div>
                             </div>
-                            <div className="rounded-lg pl-[120px] pr-[110px] pt-5">LECTURER IN BLOCKCHAIN </div>
-                            <div className="rounded-lg pl-[120px] pr-[110px] indent-8">ENABLED BUSINESS</div>
+                            <div className="rounded-lg pl-[125px] pr-[110px] pt-3 text-center text-sm ">LECTURER IN BLOCKCHAIN ENABLED BUSINESS </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
