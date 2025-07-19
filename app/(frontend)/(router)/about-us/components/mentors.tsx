@@ -27,7 +27,7 @@ export const ClubMentors = () => {
             <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10">
 
                 <div className="relative bg-[#F9FAFB] pr-16 p-[134px] flex flex-col place-items-center">
-                    <div className="font-medium text-2xl text-[#2C305F]">
+                    <div className="font-bold text-2xl text-[#2C305F]">
                         <span> DR BINH NGUYEN </span>
                     </div>
                     <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4"> </div>
@@ -72,7 +72,7 @@ export const ClubMentors = () => {
 
 
                 <div className="relative bg-[#F9FAFB] pr-5 pl-5 p-[134px] flex flex-col place-items-center">
-                    <div className="font-medium text-2xl text-[#2C305F]">
+                    <div className="font-bold text-2xl text-[#2C305F]">
                         <span> DR HUY PHAM </span>
                     </div>
                     <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4"> </div>
@@ -113,7 +113,7 @@ export const ClubMentors = () => {
 
 
                 <div className="relative bg-[#F9FAFB] pl-16 p-[134px] flex flex-col place-items-center">
-                    <div className="font-medium text-2xl text-[#2C305F]">
+                    <div className="font-bold text-2xl text-[#2C305F]">
                         <span> DR HIEU THAI </span>
                     </div>
                     <div className="relative">
