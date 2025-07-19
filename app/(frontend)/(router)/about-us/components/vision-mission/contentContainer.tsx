@@ -32,7 +32,7 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
 			<h1 className={clsx("text-7xl my-8", headingColor)}> {title} </h1>
 			<div
 				className={clsx(
-					"text-2xl text-justify md:text-start relative md:text-xl mx-auto",
+					"text-2xl text-start relative md:text-xl mx-auto",
 				textColor,	
 				)}
 			>
