@@ -114,7 +114,7 @@ export const ClubMentors = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-lg pl-[120px] pr-[120px] pt-6 text-center text-md   ">SENIOR LECTURER IN FINANCE</div>
+                            <div className=" rounded-lg pl-[120px] pr-[120px] pt-6 text-center text-sm   ">SENIOR LECTURER IN FINANCE</div>
                         </div>
                     </div>
                 </div>
