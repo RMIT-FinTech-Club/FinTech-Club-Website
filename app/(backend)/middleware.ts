@@ -38,7 +38,6 @@ export const config = {
       '/cms',
       '/api/research',
       '/api/v1/projects/media',
-      '/podcast-form',
-      '/api/v1/managementBoard/:path*'
+      '/podcast-form'
     ]
 }
