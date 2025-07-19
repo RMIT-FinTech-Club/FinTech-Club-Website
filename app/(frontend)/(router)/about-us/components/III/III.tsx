@@ -2,7 +2,7 @@ function III(){
 
 
     return (
-            <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[60rem] max-w-[100vh]">
+            <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[60rem] max-w-[100vw]">
                 <h4 className = "absolute bg-[#2C305F] text-white p-[1rem] w-[60rem] h-[6rem] top-12 rounded-br-3xl text-center text-[4rem] shadow-2xl">WHAT WE TRULY BELIEVE IN</h4>
 
  <div className="absolute top-[15rem] left-[12rem] z-10 flex items-center gap-4 ">
