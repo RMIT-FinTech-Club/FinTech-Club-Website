@@ -121,7 +121,7 @@ export async function deleteArticle(id: string) {
 export async function filterArticleByLabel(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
-  const labels = searchParams.get("labels");
+  const labels = searchParams.getAll("labels");
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || "5", 10);
   const skip = (page - 1) * limit;
@@ -138,17 +138,23 @@ export async function filterArticleByLabel(request: NextRequest) {
 
   try {
     await connectMongoDB();
-    // Build query
+     // Build query
     const query: any = {};
-    // If label is provided, add it to the query
-    if (labels) {
-      query.labels = { $in: [new RegExp(`^${labels}$`, "i")] };
+    // 2 If labels are provided
+    if (labels.length ===1) {
+      query.labels = {
+        $in: labels.map(label => new RegExp(`^${label}$`, "i"))
+      };
+    }else {
+      query.labels = {
+        $all: labels.map(label => new RegExp(`^${label}$`, "i"))
+      };
     }
 
     const totalArticles = await Article.countDocuments(query);
     const totalPages = Math.ceil(totalArticles / limit);
     //
-    const articles = await Article.find(query).sort({ createdAt: -1 }).skip(skip).limit(5);
+    const articles = await Article.find(query ).sort({ createdAt: -1 }).skip(skip).limit(limit);
 
     return NextResponse.json({articles,}, { status: 200 });
 
