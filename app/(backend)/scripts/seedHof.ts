@@ -13,19 +13,22 @@ async function seed() {
   await HallOfFame.insertMany([
     {
       name: "Alice Nguyen",
-      achievement: "MVP",
+      achievement: "Led the club to win inter‑university hackathon.",
+      category: "Club MVP",
       photo_url: "https://example.com/photos/alice.jpg",
       semester: "2024A",
     },
     {
       name: "Bob Tran",
-      achievement: "Academic Ace",
+      achievement: "Top GPA in the department with outstanding research contributions.",
+      category: "Academic Ace",
       photo_url: "https://example.com/photos/bob.jpg",
       semester: "2024B",
     },
     {
       name: "Charlie Le",
-      achievement: "MVP",
+      achievement: "Delivered key features ahead of schedule, ensuring project success.",
+      category: "Project MVP",
       photo_url: "https://example.com/photos/charlie.jpg",
       semester: "2023C",
     },

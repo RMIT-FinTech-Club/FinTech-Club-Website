@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface HallOfFameDocument extends Document {
   name: string;
   achievement: string;
+  category: string;
   photo_url: string;
   semester: string;
   createdAt: Date;
@@ -12,7 +13,11 @@ export interface HallOfFameDocument extends Document {
 const hallOfFameSchema = new Schema(
     {
         name: { type: String, required: true},
-        achievement: { type: String, required: true},
+        achievement: { 
+            type: String, 
+            required: true,
+            maxlength: 500,
+        },
         photo_url: { 
             type: String, 
             required: true,
@@ -33,7 +38,20 @@ const hallOfFameSchema = new Schema(
                 message: 'Semester must be in format YYYY[A|B|C]'
             },
             index: true
-        }
+        },
+        category: {
+            type: String,
+            required: true,
+            enum: [
+                "Club MVP",
+                "Department MVP",
+                "Project MVP",
+                "Community Builder",
+                "Rookie of the Semester",
+                "Best Department",
+                "Academic Ace",
+            ],
+        },
     },
     {
         timestamps: true,

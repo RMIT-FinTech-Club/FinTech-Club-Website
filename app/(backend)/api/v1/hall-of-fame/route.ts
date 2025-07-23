@@ -3,20 +3,26 @@ import HallOfFame from "@/app/(backend)/models/hallOfFame";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-    await connectMongoDb();
+  await connectMongoDb();
 
-    try {
-        const honorees = await HallOfFame.find({});
-		return NextResponse.json({
-			status: 200,
-			honorees,
-		});
-    } catch (error) {
-        return NextResponse.json({
-			status: 500,
-			message: "Error fetching HoF honorees",
-		});
+  const { searchParams } = new URL(req.url);
+  const semester = searchParams.get("semester");
+  const category = searchParams.get("category");
+
+  const filter: Record<string, any> = {};
+  if (semester) filter.semester = semester;
+  if (category) filter.category = category;
+
+  try {
+    const honorees = await HallOfFame.find(filter).sort({ name: 1 });
+    if (honorees.length === 0) {
+      return NextResponse.json({ message: "No honorees found" }, { status: 404 });
     }
+    return NextResponse.json({ honorees }, { status: 200 });
+  } catch (err) {
+    console.error("Error fetching honorees:", err);
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -24,15 +30,15 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
 
-  const { name, achievement, photo_url, semester } = body;
+  const { name, achievement, category, photo_url, semester } = body;
 
-  if (!name || !achievement || !photo_url || !semester) {
+  if (!name || !achievement || !category || !photo_url || !semester) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
   try {
-    const honoree = await HallOfFame.create({ name, achievement, photo_url, semester });
-    return NextResponse.json({ status: 201, honoree });
+    const honoree = await HallOfFame.create({ name, achievement, category, photo_url, semester });
+    return NextResponse.json(honoree, { status: 201 });
   } catch (err) {
     console.error("Error creating honoree:", err);
     return NextResponse.json({ error: "Failed to create honoree" }, { status: 500 });
