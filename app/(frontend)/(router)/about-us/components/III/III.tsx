@@ -5,6 +5,7 @@ function III(){
             <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[60rem] max-w-[100vw]">
                 <h4 className = "absolute bg-[#2C305F] text-white p-[1rem] w-[60rem] h-[6rem] top-12 rounded-br-3xl text-center text-[4rem] shadow-2xl">WHAT WE TRULY BELIEVE IN</h4>
 
+<div className = "max-screen">
  <div className="absolute top-[15rem] left-[12rem] z-10 flex items-center gap-4 ">
         <p className=" text-[1rem] absolute top-[5rem] w-[33rem] -left-[2.2rem] text-right text-[1.2rem] leading-relaxed">
           We embrace the idea of thinking beyond traditional boundaries and challenging the norm. Innovation involves transforming creative concepts into something truly valuable
@@ -39,6 +40,7 @@ function III(){
 We hope to ignite a sense of purpose and motivation in everyone involved, making it a vibrant community.</p>
 
         </div>
+      </div>
       </div>
       
                <div className="absolute w-[29rem] h-[29rem] bg-[#FFEFCA] rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
