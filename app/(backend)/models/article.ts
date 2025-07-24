@@ -1,7 +1,4 @@
-import {create } from "domain";
 import mongoose, {Schema} from "mongoose";
-import { validate } from "uuid";
-
 const labelCategories = ["Fintech", "Technology", "Blockchain", "AI","Customer Service", "Security", "Sustainability", "Innovation", "Digital Transformation", "Startups", "Healthcare", "Art", "Ethics", "5G", "IoT","Quantum","Energy","Voice","Cloud","Edge","Smart City", "Education","Wearable","Automotive","Metaverse","Policy"];
 
 const articleSchema = new Schema({
@@ -40,7 +37,7 @@ const articleSchema = new Schema({
 );
 
 const Article = mongoose.models?.Article || mongoose.model("Article", articleSchema);
-
+ 
 export default Article;
 
 
