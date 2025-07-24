@@ -6,6 +6,7 @@ type PuzzleItemProps = {
 	circleColor: string;
 	borderRadius: string;
 	circlePosition: string;
+	shadowPosition: string;
 };
 
 const PuzzleItem: React.FC<PuzzleItemProps> = ({
@@ -13,6 +14,7 @@ const PuzzleItem: React.FC<PuzzleItemProps> = ({
 	circleColor,
 	borderRadius,
 	circlePosition,
+	shadowPosition,
 }) => {
 	return (
 		<div
@@ -20,6 +22,7 @@ const PuzzleItem: React.FC<PuzzleItemProps> = ({
 				"w-24 h-48 z-10 md:right-[100%] md:top-24 md:rotate-0",
 				bgColor,
 				borderRadius,
+				shadowPosition,
 			)}
 		>
 			<div
