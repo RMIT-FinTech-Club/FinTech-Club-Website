@@ -43,7 +43,7 @@ const departments: Record<Department, DepartmentInfo> = {
     Business: {
         name: "BUSINESS DEPARTMENT",
         description:
-            "The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, hold meetings to evaluate working processes, propose toolkits, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
+            "The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
         background: "https://ik.imagekit.io/wiiiaaa/Rectangle%20418-9.png?updatedAt=1753274688967",
     },
 };
@@ -105,12 +105,19 @@ const Department = () => {
                     <p className="ft-body-2 w-full mt-6 text-justify text-[#000] text-[18px] font-medium md:text-left">
                         {department.description}
                     </p>
+
                 </div>
 
+                {/*button explore */}
+                <div className="pl-20 pt-[650px] absolute">
+                    <button className="text-[#fff] bg-[#0D1742] rounded-xl w-[140px] h-[40px] font-semibold drop-shadow-lg text-[12px] ">
+                        Explore more
+                    </button>
+                </div>
 
                 {/* buttons */}
                 <div className="pt-[730px] pl-12 mt-6 gap-5 flex text-[12px] ">
-                    {(Object.keys(departments) as Department[]).map((dept) => {  
+                    {(Object.keys(departments) as Department[]).map((dept) => {
                         return (
                             <button
                                 className={`w-[140px] h-[67px] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
@@ -121,6 +128,8 @@ const Department = () => {
                         )
                     })}
                 </div>
+
+
             </div>
         </div>
 
