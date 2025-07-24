@@ -5,7 +5,7 @@ import connectMongoDB from "../libs/mongodb";
 import type {Article as ArticleType } from "../types/article";
 
 // Function: get all research
-export async function getAllArticle() {
+export async function getAllArticle(request: NextRequest) {
   try {
     await connectMongoDB();
     const article = await Article.find({}).sort({ createdAt: -1 });
@@ -32,7 +32,7 @@ export async function getArticleById(id: string, nextRequest?: NextRequest) {
     const relatedArticles = await Article.find({
       labels: { $in: article.labels }, // Match articles with the same labels
       _id: { $ne: article._id } // Exclude the main article itself
-    }).sort({publicationDAte: -1 }).limit(3);
+    }).sort({publicationDAte: -1 }).limit(5);
 
     const suggestedRelatedArticles = relatedArticles.map((relatedArticle) => ({
       _id: relatedArticle._id,
@@ -127,7 +127,7 @@ export async function filterArticleByLabel(request: NextRequest) {
   const skip = (page - 1) * limit;
 
 // If no label, page, or limit is provided, return the latest 5 articles  
-  if ( !labels && !page && !limit) {  
+  if ( labels.length === 0 && !request.nextUrl.searchParams.has("page") && !request.nextUrl.searchParams.has("limit")) {  
     const lastestArticles = await Article.find({}).sort({publicationDate: -1 }).limit(5);
     return NextResponse.json(lastestArticles, { status: 200 });
   }
@@ -154,9 +154,19 @@ export async function filterArticleByLabel(request: NextRequest) {
     const totalArticles = await Article.countDocuments(query);
     const totalPages = Math.ceil(totalArticles / limit);
     //
-    const articles = await Article.find(query ).sort({ createdAt: -1 }).skip(skip).limit(limit);
-
-    return NextResponse.json({articles,}, { status: 200 });
+    const articles = await Article.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit);
+    if(articles.length === 0){
+      return NextResponse.json({
+        message: "No articles with your selected lables"
+      }
+      )
+    }else{
+      return NextResponse.json(
+        {articles,},
+        {status: 200 }
+      );
+    }
+    
 
   } catch (error) {
     console.error("Error in GET /article:", error);

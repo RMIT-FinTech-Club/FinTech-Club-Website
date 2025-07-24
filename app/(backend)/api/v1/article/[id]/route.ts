@@ -1,10 +1,7 @@
 import type { NextRequest } from "next/server";
 import {getArticleById, updateArticle, deleteArticle} from "@/app/(backend)/controllers/articleController";
 
-export async function GET(
-    _request: NextRequest,
-    { params }: { params: { id: string } }
-) {
+export async function GET(_request: NextRequest,{ params }: { params: { id: string } }){
     return getArticleById(params.id);
 }
 
@@ -13,9 +10,6 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     return updateArticle(params.id, data);
 }
 
-export async function DELETE(
-    _request: NextRequest,
-    { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     return deleteArticle(params.id);
 } 
