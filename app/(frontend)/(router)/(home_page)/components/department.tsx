@@ -109,7 +109,7 @@ const Department = () => {
 
 
                 {/* buttons */}
-                <div className="pt-[730px] pl-20 mt-6 gap-5 flex text-[12px] ">
+                <div className="pt-[730px] pl-12 mt-6 gap-5 flex text-[12px] ">
                     {(Object.keys(departments) as Department[]).map((dept) => {  
                         return (
                             <button
