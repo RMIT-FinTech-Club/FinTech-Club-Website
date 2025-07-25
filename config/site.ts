@@ -19,11 +19,7 @@ export const siteConfig = {
         {
             label: "Events",
             href: "/events",
-        },
-        {
-            label: "Join us",
-            href: "/join-us",
-        },
+        }
     ],
     links: {
         github: "https://github.com/RMIT-FinTech-Club/FinTech-website",
