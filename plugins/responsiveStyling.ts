@@ -1,6 +1,11 @@
 import plugin from "tailwindcss/plugin";
 import { CSSRuleObject, KeyValuePair, ResolvableTo, ScreensConfig } from "tailwindcss/types/config";
 
+export const orientationPlugin = plugin(({ addVariant }) => {
+  addVariant("portrait", "@media (orientation: portrait)");
+  addVariant("landscape", "@media (orientation: landscape)");
+});
+
 type FontSizeType = KeyValuePair<
     string,
     | string
