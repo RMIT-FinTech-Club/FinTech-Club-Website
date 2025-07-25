@@ -39,16 +39,16 @@ const HeroSection = () => {
 						Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,  
 					</p>
 					<br />
-					<p>Our Core Activities</p>
+					<p className ="font-bold text-[#2C305F]">Our Core Activities</p>
 					<div className="justify-start items-center gap-6 flex mt-8">
 						<Button
-							className="bg-ft-primary-blue text-ft-text-bright"
+							className="bg-ft-primary-blue text-ft-text-bright w-[7rem]"
 							variant="solid"
 						>
 							<Link href="/about-us">Read More</Link>
 						</Button>
 						<Button
-							className="bg-ft-primary-blue text-ft-text-bright"
+							className="bg-ft-primary-blue text-ft-text-bright w-[7rem]"
 							variant="solid"
 						>
 							<Link href="/join-us">Join Us</Link>
