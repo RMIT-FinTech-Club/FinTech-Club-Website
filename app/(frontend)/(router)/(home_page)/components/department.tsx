@@ -99,10 +99,10 @@ const Department = () => {
                 {/* chữ */}
                 <div className="absolute justify-start text-wrap w-[650px] h-[200px] pl-20 pt-44 ">
                     <p className="mt-4 text-[#DCB968] font-bold text-[60px]  ">BE ONE OF US</p>
-                    <p className={`font-bold text-midDeepBlue mt-5 text-wrap text-[25px] md:text-5xl sm:text-4xl w-[1000px]`} >
+                    <p className={`font-bold text-blueMidnight mt-5 text-wrap text-[25px] md:text-5xl sm:text-4xl w-[1000px]`} >
                         {department.name}
                     </p>
-                    <p className="ft-body-2 w-full mt-6 text-justify text-[#000] text-[18px] font-medium md:text-left">
+                    <p className="ft-body-2 w-full mt-6 text-justify text-[#000] text-[16px] font-medium md:text-left">
                         {department.description}
                     </p>
 
@@ -116,11 +116,11 @@ const Department = () => {
                 </div>
 
                 {/* buttons */}
-                <div className="pt-[730px] pl-12 mt-6 gap-5 flex text-[12px] ">
+                <div className="pt-[730px] pl-20 mt-6 gap-5 flex text-[11px] ">
                     {(Object.keys(departments) as Department[]).map((dept) => {
                         return (
                             <button
-                                className={`w-[140px] h-[67px] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
+                                className={`w-[120px] h-[58px] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
                                 onClick={() => setDepartment(departments[dept])}
                             >
                                 {dept.toUpperCase()}
