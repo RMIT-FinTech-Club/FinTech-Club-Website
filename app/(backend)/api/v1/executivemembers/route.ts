@@ -1,9 +1,9 @@
-import connectMongoDb from "@/app/(backend)/libs/mongodb";
+import connectMongoDB from "@/app/(backend)/libs/mongodb";
 import { type NextRequest, NextResponse } from "next/server";
 import { getExecutiveMembers, addExecutiveMember } from "@/app/(backend)/controllers/executiveController";
 
 export async function GET(req: NextRequest) {
-  await connectMongoDb();
+  await connectMongoDB();
 
   const { searchParams } = new URL(req.url);
   const generation = searchParams.get("generation");
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  await connectMongoDb();
+  await connectMongoDB();
   const data = await req.json();
   const result = await addExecutiveMember(data);
   return NextResponse.json(result);
