@@ -56,10 +56,10 @@ const Department = () => {
 
 
     return (
-        <div className="relative w-full h-screen ">
+        <div className="relative w-screen h-[60rem] max-w-[100vw] bg-[#F9FAFB]">
             {/* nền xanh */}
             <div className="relative">
-                <div className="absolute bg-background bg-cover w-full h-screen ">
+                <div className="absolute bg-background bg-cover w-screen h-screen ">
                     <img src="https://ik.imagekit.io/wiiiaaa/Be%20One%20of%20Us.png?updatedAt=1753217247818"></img>
                 </div>
                 {/* nền trắng */}
@@ -71,9 +71,9 @@ const Department = () => {
                     <img src="https://ik.imagekit.io/wiiiaaa/Ma%CC%A3%CC%86t%20tru%CC%9Bo%CC%9B%CC%81c.png?updatedAt=1753273775125"></img>
                 </div>
                 {/* hình tròn góc phải*/}
-                <div className="absolute pl-[1300px] pb-[600px]">
-                    <img src="https://ik.imagekit.io/wiiiaaa/Some%20Decoration.png?updatedAt=1753281575885"></img>
-                </div>
+                <div className="absolute w-[8rem] h-[8rem] bg-[#DBB968] rounded-full top-[3rem] right-[4rem]"></div>
+                <div className="absolute w-[2rem] h-[2rem] bg-[#DBB968] rounded-full top-[8rem] right-[1rem]"></div>
+                <div className="absolute w-[8rem] h-[8rem] bg-[#2B305E] rounded-full top-[-7rem] right-[-2rem]"></div>
                 {/* hình dept */}
                 <section className="absolute flex flex-col place-items-end pl-[730px] pt-36">
                     <img
