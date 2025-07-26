@@ -6,6 +6,8 @@ import HistorySection from "./components/history";
 import FinTechInTheEyes from "./components/inTheEyes";
 import Members from "./components/members";
 import VisionMission from "./components/vision-mission/missionVision";
+import HallOfFame from "./components/hallOfFamePage";
+
 const AboutUs = () => {
 	return (
 		<>
@@ -14,6 +16,7 @@ const AboutUs = () => {
 			<FinTechInTheEyes />
 			<ExecuteBoard />
 			<ManagementBoard />
+			<HallOfFame />
 			{/* <Members /> */}
 			{/* <CoreValue /> */}
 		</>)
