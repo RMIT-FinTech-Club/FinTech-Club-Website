@@ -23,16 +23,16 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
 	return (
 		<div
 			className={clsx(
-				"relative md:min-h-[45vh] md:max-w-[45vw] text-center py-20 px-32",
+				"relative md:min-h-[35rem] md:max-w-[45vw] flex flex-col justify-center items-center py-15 px-20",
 				rounded,
 				bgColor,
 				shadowPosition,
 			)}
 		>
-			<h1 className={clsx("text-7xl my-8", headingColor)}> {title} </h1>
+			<h1 className={clsx("text-center text-7xl my-8", headingColor)}> {title} </h1>
 			<div
 				className={clsx(
-					"text-2xl text-start relative md:text-xl mx-auto",
+					"text-2xl text-justify relative max-w-[30rem] md:text-xl",
 				textColor,	
 				)}
 			>
