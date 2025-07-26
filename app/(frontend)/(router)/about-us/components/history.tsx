@@ -73,12 +73,12 @@ export default function HistorySection() {
     <section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
       <div className="relative w-full">
         <img
-          src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/assets/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
         />
         <img
-          src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/assets/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
         />
