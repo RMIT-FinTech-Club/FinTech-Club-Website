@@ -2,7 +2,7 @@ import { fontMono } from "@/config/fonts";
 
 export default function FinTechInTheEyes() {
 	return (
-		<div className="w-screen grid md:grid-cols-12 p-11 md:p-0">
+		<div className="w-screen bg-[#F9FAFB] grid md:grid-cols-12 p-11 md:p-0">
 			<img
 				src="https://ik.imagekit.io/mbrrji2rk/Picture1.png?updatedAt=1718879714203"
 				alt="president profile"
