@@ -50,7 +50,7 @@ const ManagementBoard = () => {
     // using hex color (invalid)
     <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
       <Image
-        src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/assets/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
+        src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
         className="absolute left-[-8rem] top-[-5rem] rotate-[35deg] scale-x-[-1] z-30"
         width={368}
