@@ -69,11 +69,11 @@ const Navbar = () => {
 		<motion.nav
 			ref={navBarRef}
 			animate={isOpen ? "open" : "closed"}
-			className="fixed top-0 h-[8vh] py-[1vh] z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
+			className="sticky top-0 h-[8vh] py-[1vh] z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center pr-[2vw] w-full">
 				<Link href='/' className="logo relative h-[6.4vh] px-[3vh] bg-[#E5E5E5] flex items-center rounded-r-[3vh] cursor-pointer">
-					<div className="h-[70%] aspect-square bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url('/FTC_MAIN_LOGO.svg')` }}></div>
+					<div className="h-[70%] aspect-square bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url('https://d2prwyp3rwi40.cloudfront.net/global/FTC-DefaultLogo-NoName.svg')` }}></div>
 				</Link>
 				<div className="md:hidden h-fit flex justify-center items-center">
 					<AnimatedHamburger />
@@ -114,7 +114,7 @@ const Navbar = () => {
 					</ul>
 					<Link
 						href="/join-us"
-						className="transition-all duration-200 hover:brightness-110 hover:scale-105 text-[2vh] leading-[2vh] py-[2vh] ml-[6vw] flex items-center justify-center px-[2vw] bg-gold text-white rounded-[1vh] cursor-pointer font-bold"
+						className="transition-all duration-200 hover:brightness-110 hover:scale-105 text-[2vh] leading-[2vh] py-[2vh] ml-[6vw] flex items-center justify-center px-[1vw] bg-[#DCB968] text-white rounded-[1vh] cursor-pointer font-bold"
 					>
 						Join Us
 					</Link>
