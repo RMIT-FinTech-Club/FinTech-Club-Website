@@ -15,28 +15,28 @@ type ExecutiveBoardCardProps = {
 const executiveBoardData = [
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/executive_board/President-TriTruong.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png",
     name: "Truong Quoc Tri",
     position: "President",
     linkedin: "https://www.linkedin.com/in/truong-quoc-tri/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/executive_board/EVP-KhuongDuy.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/EVP-KhuongDuy.png",
     name: "Le Nguyen Khuong Duy",
     position: "External Vice President",
     linkedin: "https://www.linkedin.com/in/marcio-lnkd/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/executive_board/IVP-KhueNguyen.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/IVP-KhueNguyen.png",
     name: "Nguyen Van Khue",
     position: "Internal Vice President",
     linkedin: "https://www.linkedin.com/in/vankhuenguyen/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/executive_board/CFO-ThienDan.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/CFO-ThienDan.png",
     name: "Nguyen Thien Dan",
     position: "Chief of Finance Officer",
     linkedin: "https://www.linkedin.com/in/dan-nguyen-2a2a01265/",
