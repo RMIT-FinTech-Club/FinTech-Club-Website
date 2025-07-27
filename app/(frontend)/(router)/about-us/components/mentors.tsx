@@ -2,28 +2,22 @@ export const ClubMentors = () => {
   return (
     <div className="bg-[#F9FAFB]">
       <div className="relative z-10">
-        <div className="text-center pt-[4rem] ">
-          <span className="font-sans font-bold text-7xl text-[#2C305F] justify-center">
-            {" "}
-            OUR CLUB{" "}
-          </span>
-          <span className="font-sans font-bold text-7xl text-[#DBB968] ">
+        <div className="text-center pt-[4rem] font-sans font-bold text-7xl text-[#2C305F]">
+          OUR CLUB{" "}
+          <span className="text-[#DBB968]">
             {" "}
             MENTORS
           </span>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10">
-        <div className="relative bg-[#F9FAFB] pr-16 p-[134px] flex flex-col place-items-center">
+      <div className="flex justify-around items-center pt-[6rem]">
+        <div className="bg-[#F9FAFB] flex flex-col place-items-center">
           <div className="font-bold text-2xl text-[#2C305F]">
-            <span> DR BINH NGUYEN </span>
+            <span>Assoc. Prof. BINH NGUYEN</span>
           </div>
-          <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4">
-            {" "}
-          </div>
-          <div className="absolute w-full h-auto mt-[-5rem] pl-16 object-cover overflow-hidden">
-            <img src="https://ik.imagekit.io/wiiiaaa/7612C59B-585B-44D1-9E1A-3840AB439753-removebg-preview.png?updatedAt=1752916915852"></img>
+          <div className="w-[25vw] h-auto object-cover overflow-hidden rounded-[50px] border-[#2C305F] border-5">
+            <img src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-BinhNguyen.png"></img>
           </div>
           <div className="relative">
             <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
@@ -138,15 +132,12 @@ export const ClubMentors = () => {
           </div>
         </div>
 
-        <div className="relative bg-[#F9FAFB] pr-5 pl-5 p-[134px] flex flex-col place-items-center">
+        <div className="bg-[#F9FAFB] flex flex-col place-items-center">
           <div className="font-bold text-2xl text-[#2C305F]">
-            <span> DR HUY PHAM </span>
+            <span>Dr. HUY PHAM</span>
           </div>
-          <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4">
-            {" "}
-          </div>
-          <div className="absolute w-full h-auto object-cover mt-[-5rem] pl-16 overflow-hidden">
-            <img src="https://ik.imagekit.io/wiiiaaa/FAA7F38A-BB74-4C8A-97B8-1F4A4D43AFD3-removebg-preview.png?updatedAt=1752916915781"></img>
+          <div className="w-[25vw] h-auto object-cover overflow-hidden rounded-[50px] border-[#2C305F] border-5">
+            <img src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-HuyPham.png"></img>
           </div>
           <div className="relative">
             <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
@@ -199,12 +190,12 @@ export const ClubMentors = () => {
               </svg>
             </div>
 
-            <div className="rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6">
+            <div className=" rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6 ">
               <div className="relative">
                 <div className=" absolute rounded-lg pl-[300px] pr-2 pt-1">
                   <div className="transition duration-300 transform hover:scale-110 hover:brightness-150 hover:drop-shadow-[0_0_6px_#FFEFCA]">
                     <a
-                      href="http://linkedin.com/in/huy-pham-5646bb49"
+                      href="http://linkedin.com/in/dr-binh-nguyen-thanh"
                       target="_blank"
                     >
                       <svg
@@ -253,24 +244,22 @@ export const ClubMentors = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className=" rounded-lg pl-[120px] pr-[120px] pt-6 text-center text-sm   ">
-                SENIOR LECTURER IN FINANCE
+                <div className="  rounded-lg pl-[100px] pr-[110px] pt-6 text-sm  text-center">
+                  SENIOR LECTURER OF FINANCE
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="relative bg-[#F9FAFB] pl-16 p-[134px] flex flex-col place-items-center">
+        <div className="bg-[#F9FAFB] flex flex-col place-items-center">
           <div className="font-bold text-2xl text-[#2C305F]">
-            <span> DR HIEU THAI </span>
+            <span>Dr. HIEU THAI</span>
+          </div>
+          <div className="w-[25vw] h-auto object-cover overflow-hidden rounded-[50px] border-[#2C305F] border-5">
+            <img src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-BinhNguyen.png"></img>
           </div>
           <div className="relative">
-            <div className="rounded-[50px] w-[387px] h-[434px] bg-white border-[#2C305F] border-5 mt-4"></div>
-            <div className="absolute w-full h-auto object-cover mt-[-35rem] pl-2 overflow-hidden">
-              <img src="https://ik.imagekit.io/wiiiaaa/01C63826-59E9-4573-8695-9BC2EAC85C9D-removebg-preview-2.png?updatedAt=1752935938866"></img>
-            </div>
-
             <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -321,13 +310,13 @@ export const ClubMentors = () => {
               </svg>
             </div>
 
-            <div className="rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6">
+            <div className=" rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6 ">
               <div className="relative">
-                <div className=" absolute rounded-lg pl-[300px] pr-[100px] pt-1">
+                <div className=" absolute rounded-lg pl-[300px] pr-2 pt-1">
                   <div className="transition duration-300 transform hover:scale-110 hover:brightness-150 hover:drop-shadow-[0_0_6px_#FFEFCA]">
                     <a
-                      href="http://linkedin.com/in/hieu-thai-0a29b6ab"
-                      target="blank"
+                      href="https://www.linkedin.com/in/hieu-thai-0a29b6ab/"
+                      target="_blank"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -375,9 +364,9 @@ export const ClubMentors = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="rounded-lg pl-[125px] pr-[110px] pt-3 text-center text-sm ">
-                LECTURER IN BLOCKCHAIN ENABLED BUSINESS{" "}
+                <div className="rounded-lg pl-[100px] pr-[110px] pt-6 text-sm text-center">
+                  LECTURER OF BLOCKCHAIN ENABLED BUSINESS
+                </div>
               </div>
             </div>
           </div>
