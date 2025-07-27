@@ -2,7 +2,7 @@ import { fontSans } from "@/config/fonts";
 
 export default function FinTechInTheEyes() {
   return (
-    <>
+    <div className="bg-[#F9FAFB]">
       <div className="relative w-full">
         <img
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
@@ -10,7 +10,7 @@ export default function FinTechInTheEyes() {
           className="absolute w-[368px] -top-[10rem] right-[-8rem] rotate-[-50deg] z-30"
         />
       </div>
-      <section className="max-w-screen flex justify-center items-center bg-[#F9FAFB]">
+      <section className="max-w-screen flex justify-center mr-[5vw] items-center">
         <div className="w-fit">
           <img
             src="https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png"
@@ -54,6 +54,14 @@ export default function FinTechInTheEyes() {
           </div>
         </div>
       </section>
-    </>
+	  <div className="relative w-full">
+       <div className="absolute bottom-[-6.5rem] right-[-3rem] w-[6rem] h-[6rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[-2rem] right-[-2rem] w-[6rem] h-[6rem] bg-[#C9D6EA] rounded-full z-20"></div>
+        <div className="absolute bottom-0 right-[3.65rem] w-[6rem] h-[6rem] bg-[#DBB968] rounded-full z-10"></div>
+        <div className="absolute bottom-[-12rem] right-[4rem] w-[7rem] h-[7rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[-2rem] right-[10rem] w-[1.75rem] h-[1.75rem] bg-[#DBB968] rounded-full z-10"></div>
+        <div className="absolute bottom-[-14.5rem] right-[9.5rem] w-[1.75rem] h-[1.75rem] bg-[#2C305F] rounded-full z-10"></div>
+      </div>
+    </div>
   );
 }
