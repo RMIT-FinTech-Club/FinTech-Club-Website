@@ -120,7 +120,7 @@ const Department = () => {
                     {(Object.keys(departments) as Department[]).map((dept) => {
                         return (
                             <button
-                                className={`w-[120px] h-[58px]  hover:bg-gradient-to-b hover:from-[#C9D6EA] hover:to-[#DBB968] bg-[#F0EDFF] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
+                                className={`w-[120px] h-[58px]  hover:bg-gradient-to-b hover:from-[#C9D6EA] hover:to-[#DBB968] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
                                 onClick={() => setDepartment(departments[dept])}
                             >
                                 {dept.toUpperCase()}
