@@ -99,7 +99,7 @@ const Department = () => {
                 {/* chữ */}
                 <div className="absolute justify-start text-wrap w-[650px] h-[200px] pl-20 pt-44 ">
                     <p className="mt-4 text-[#DCB968] font-bold text-[60px]  ">BE ONE OF US</p>
-                    <p className={`font-bold text-blueMidnight mt-5 text-wrap text-[25px] md:text-5xl sm:text-4xl w-[1000px]`} >
+                    <p className={`font-bold text-[#5E5E92] mt-5 text-wrap text-[25px] md:text-5xl sm:text-4xl w-[1000px]`} >
                         {department.name}
                     </p>
                     <p className="ft-body-2 w-full mt-6 text-justify text-[#000] text-[16px] font-medium md:text-left">
@@ -110,8 +110,8 @@ const Department = () => {
 
                 {/*button explore */}
                 <div className="pl-20 pt-[650px] absolute">
-                    <button className="text-[#fff] bg-[#0D1742] rounded-xl w-[140px] h-[40px] font-semibold drop-shadow-lg text-[12px] ">
-                        Explore more
+                    <button className="text-[#fff] bg-[#5E5E92] rounded-xl w-[140px] h-[40px] font-semibold drop-shadow-lg text-[12px] ">
+                        Explore More
                     </button>
                 </div>
 
@@ -120,7 +120,7 @@ const Department = () => {
                     {(Object.keys(departments) as Department[]).map((dept) => {
                         return (
                             <button
-                                className={`w-[120px] h-[58px] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
+                                className={`w-[120px] h-[58px]  hover:bg-gradient-to-b hover:from-[#C9D6EA] hover:to-[#DBB968] bg-[#F0EDFF] font-semibold drop-shadow-lg text-[#0D1742] bg-[#DBB968] rounded-xl`}
                                 onClick={() => setDepartment(departments[dept])}
                             >
                                 {dept.toUpperCase()}
