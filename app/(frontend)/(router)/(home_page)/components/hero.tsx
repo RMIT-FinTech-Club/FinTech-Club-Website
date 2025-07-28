@@ -6,7 +6,7 @@ import Image from "next/image";
 const bottomImages = [
 	{
 		id: "1",
-		src: "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/assets/Mascot+-+Mặt+trước.svg",
+		src: "https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+Mặt+trước.svg",
 		size: "hidden md:block w-full md:w-1/4",
 		alt: "Placeholder image",
 	},
