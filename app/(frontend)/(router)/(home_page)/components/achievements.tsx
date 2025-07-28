@@ -12,27 +12,27 @@ const achievementData = [
   {
     id: 1,
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemC-2024.png",
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemA-2021.png",
   },
   {
     id: 2,
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemB-2023.png",
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2021.png",
   },
   {
     id: 3,
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemA-2023.png",
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemA-2023.png",
   },
   {
     id: 4,
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemB-2021.png",
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png",
   },
   {
     id: 5,
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemA-2021.png",
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemC-2024.png",
   },
 ];
 
@@ -91,7 +91,7 @@ const Achievements = () => {
 
       <div className="flex justify-center gap-[2rem] mt-[4rem] ">
         <Image
-          src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemB-2023.png"
+          src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
           className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
         />
         <div>
@@ -142,7 +142,7 @@ const Achievements = () => {
           </div>
           <p className=""></p>
           <Image
-            src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemB-2023.png"
+            src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
             className="object-cover w-[36rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200 z-0"
           />
         </div>
