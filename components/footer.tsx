@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="bg-[#142850] text-white py-14 relative rounded-t-[80px]">
+		<footer className="bg-ft-primary-blue text-white py-14 relative rounded-t-[80px]">
 			<div className="container mx-auto flex flex-col lg:flex-row justify-center items-center px-4 space-y-6 lg:space-y-0 lg:space-x-4">
 
 				{/* Social Media Icons Section */}
@@ -106,9 +106,9 @@ const Footer: React.FC = () => {
 			</div>
 
 
-			<div className="container mx-auto text-center mt-8 border-t border-gray-500 pt-4">
+			<div className="container mx-auto text-center mt-[10vh] border-t border-gray-500 pt-4">
 				<p className="text-sm">
-					Copyright ©2024 All Rights Reserved.
+					Copyright ©2025 All Rights Reserved.
 				</p>
 			</div>
 
