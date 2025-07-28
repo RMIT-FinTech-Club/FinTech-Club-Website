@@ -114,10 +114,6 @@ export default function HistorySection() {
             <br />
             <span className=" pt-[2rem] text-[#97ABD6]">Story & History</span>
           </h1>
-          <p className="text-[#000] mt-4 max-w-2xl mx-auto text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            dolorem consequuntur saepe hic esse omnis.
-          </p>
         </div>
 
         {/* YEAR SECTION */}
@@ -176,7 +172,7 @@ export default function HistorySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-4xl mx-auto px-[3rem] pb-[2rem]"
+          className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
         >
           <h2
             className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}

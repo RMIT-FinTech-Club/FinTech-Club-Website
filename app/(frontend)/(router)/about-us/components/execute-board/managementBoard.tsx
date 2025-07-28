@@ -15,33 +15,31 @@ type ManagementBoardCardProps = {
 const managementBoardData = [
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofBusiness-HaoLy.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofBusiness-HaoLy.png",
     name: "LY QUOC HAO",
     position: "Head of Business",
     linkedin: "https://www.linkedin.com/in/hao-ly-86482a313/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofHR-GiaHoa.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofHR-GiaHoa.png",
     name: "NGUYEN HUA GIA HOA",
     position: "Head of Human Resources",
     linkedin: "https://www.linkedin.com/in/hoa-nguyen-hua-gia/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofMarketing-Mint.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofMarketing-Mint.png",
     name: "PHAM HOANG MINH THU",
     position: "Head of Marketing",
-    linkedin: 
-    "https://www.linkedin.com/in/pham-th%C6%B0-a136a1232?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+    linkedin: "https://www.linkedin.com/in/hoa-nguyen-hua-gia/",
   },
   {
     image:
-      "https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/management_board/HeadofTechnology-TanNguyen.png",
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofTechnology-TanNguyen.png",
     name: "NGUYEN MANH TAN",
     position: "Head of Technology",
-    linkedin:
-      "https://www.linkedin.com/in/manh-tan-nguyen-6373b3275/",
+    linkedin: "https://www.linkedin.com/in/manh-tan-nguyen-6373b3275/",
   },
 ];
 
@@ -70,7 +68,8 @@ const ManagementBoard = () => {
           </h2>
           <h1 className=" text-[#DCB968] text-[4.3rem]">Management Board</h1>
           <p className="leading-3 w-full text-[#000000]">
-            Meet the talented representatives behind the four pillars of RMIT Vietnam FinTech Club!
+            Meet the talented representatives behind the four pillars of RMIT
+            Vietnam FinTech Club!
           </p>
         </div>
         <div className=" pt-16 pb-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem] 2xl:gap-[5rem]">
