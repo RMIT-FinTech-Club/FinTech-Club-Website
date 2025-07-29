@@ -1,16 +1,6 @@
 "use client";
-
 import HonoreeCard from "./honoreeCard";
-
-interface Member {
-  name: string;
-  achievement: string;
-  photo_url: string;
-}
-
-interface HonoreeListProps {
-  members: Member[];
-}
+import type { HonoreeListProps } from "./types";
 
 export default function HonoreeList({ members }: HonoreeListProps) {
   return (

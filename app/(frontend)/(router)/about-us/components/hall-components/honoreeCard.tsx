@@ -1,12 +1,7 @@
 "use client";
+import type { HonoreeCardProps } from "./types";
 
-type HonoreeComponent = {
-    name: string;
-    achievement: string;
-    photo_url: string
-}
-
-export default function HonoreeCard({ name, achievement, photo_url }: HonoreeComponent) {
+export default function HonoreeCard({ name, achievement, photo_url }: HonoreeCardProps) {
 
   return (
     <div className="

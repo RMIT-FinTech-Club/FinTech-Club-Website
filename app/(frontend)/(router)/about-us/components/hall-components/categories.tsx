@@ -1,11 +1,7 @@
 import CategoryCard from "./categoryCard";
+import type { FilterProps } from "./types"; 
 
-type FilterProps = {
-    categories: string[];
-    semester: string;
-}
-
-export default function Categories({ categories, semester }: FilterProps) {
+export default function Categories({ categories, setSelectedCategory }: FilterProps) {
   return (
     <div className="flex justify-center w-full">
       <div className="lg:grid md:grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4 justify-items-center w-full">
@@ -16,7 +12,7 @@ export default function Categories({ categories, semester }: FilterProps) {
               key={cat}
               className={isLast ? "col-span-2" : ""}
             >
-              <CategoryCard category={cat} semester={semester}/>
+              <CategoryCard category={cat} setSelectedCategory={setSelectedCategory}/>
             </div>
           );
         })}

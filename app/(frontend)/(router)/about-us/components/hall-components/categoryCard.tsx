@@ -1,21 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
+import type { CategoryCardProps } from "./types";
 
-type CatComponent = {
-    category: string;
-    semester: string;
-}
-
-export default function CategoryCard({ category, semester }: CatComponent) {
+export default function CategoryCard({ category, setSelectedCategory }: CategoryCardProps) {
     const router = useRouter();
 
-  const handleClick = () => {
-    router.push(
-      `/hall-of-fame/category?semester=${encodeURIComponent(
-        semester
-      )}&category=${encodeURIComponent(category)}`
-    );
-  };
+//   const handleClick = () => {
+//     router.push(
+//       `/hall-of-fame/category?semester=${encodeURIComponent(
+//         semester
+//       )}&category=${encodeURIComponent(category)}`
+//     );
+//   };
 
   return (
     <div 
@@ -36,7 +32,7 @@ export default function CategoryCard({ category, semester }: CatComponent) {
     >
         <button
           key={category}
-          onClick={handleClick}
+          onClick={() => setSelectedCategory?.(category)}
           className="bg-[#2C305F] text-[#DCB968] font-semibold px-4 py-2 rounded-md hover:shadow-lg w-full xl:text-2xl lg:text-lg text-sm"
         >
           {category}

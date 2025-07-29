@@ -1,17 +1,15 @@
+import type { SemesterFilterProps } from "./types";
 
-type FilterProps = {
-    semesters: string[];
-    onSelect?: (semester: string) => void;
-}
-
-export default function HoFFilter({ semesters, onSelect }: FilterProps) {
+export default function HoFFilter({ semesters, onSelect, selectedLabel }: SemesterFilterProps) {
+  const getSemesterValue = (label: string): string => {
+    const letter = label.split(" ")[1]; // "Semester C" → "C"
+    const year = new Date().getFullYear();
+    return `${year}${letter}`;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = e.target.value;
-    const letter = selected.split(" ")[1];
-    const year = "2025";
-    const valueForData = `${year}${letter}`;
-    onSelect?.(valueForData);
+    const label = e.target.value;
+    onSelect?.(getSemesterValue(label)); // tell parent to update
   };
 
   return (
@@ -19,12 +17,13 @@ export default function HoFFilter({ semesters, onSelect }: FilterProps) {
         <select 
             name="semester" 
             id="semesters" 
+            value={selectedLabel}
             onChange={handleChange}
             className=" bg-[#DCB968] text-[#2C305F] font-semibold pr-8 px-4 py-2 rounded-md focus:outline-none appearance-none w-40 xl:text-lg"
         >
             {
-                semesters.map((sem, idx) => (
-                    <option key={idx} value={sem} id={sem}>{sem}</option>
+                semesters.map((label) => (
+                    <option key={label} value={label}>{label}</option>
                 ))
             }
         </select>
