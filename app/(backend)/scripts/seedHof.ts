@@ -33,7 +33,7 @@ async function seed() {
       semester: "2023C",
     },
   ]);
-
+ 
   console.log("✅ Hall of Fame test data inserted!");
   mongoose.disconnect();
 }

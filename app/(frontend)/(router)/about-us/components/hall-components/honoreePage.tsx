@@ -3,6 +3,7 @@ import HeaderTitle from "./headerTitle";
 import HonoreeList from "./honoreeList";
 import CategoryCard from "./categoryCard";
 import type { CategoryPageProps } from "./types";
+import { useMemo } from "react";
 
 const CategoryPage = ({
     members,
@@ -11,9 +12,9 @@ const CategoryPage = ({
     onBack
 } : CategoryPageProps) => {
 
-  const filteredMembers = members.filter(
-    (m) => m.semester === semester && m.category === category
-  );
+  const filteredMembers = useMemo(() => {
+    return members.filter(m => m.semester === semester && m.category === category);
+  }, [members, semester, category]);
 
   return (
     <section className="relative pt-10 overflow-hidden ">

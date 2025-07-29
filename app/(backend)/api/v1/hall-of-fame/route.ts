@@ -8,11 +8,13 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const semester = searchParams.get("semester");
   const category = searchParams.get("category");
+  const year = searchParams.get("year")
 
   const filter: Record<string, any> = {};
   if (semester) filter.semester = semester;
   if (category) filter.category = category;
-
+  if (year) filter.semester = { $regex: `^${year}` };
+  
   try {
     const honorees = await HallOfFame.find(filter).sort({ name: 1 });
     if (honorees.length === 0) {

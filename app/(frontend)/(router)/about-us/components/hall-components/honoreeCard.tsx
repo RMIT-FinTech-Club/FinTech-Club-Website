@@ -12,7 +12,7 @@ export default function HonoreeCard({ name, achievement, photo_url }: HonoreeCar
             xl:h-56 lg:h-52 md:h-48 h-44
     ">
         <div className="bg-[#2C305F] px-4 py-2 rounded-[36px] hover:shadow-lg w-full h-full">
-            <img src={photo_url}/>
+            <img src={photo_url} loading="lazy"/>
 
             <div className="
                     absolute
