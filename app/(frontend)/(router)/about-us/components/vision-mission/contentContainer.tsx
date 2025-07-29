@@ -8,6 +8,7 @@ type ContentContainerProps = {
 	textColor: string;
 	bgColor: string;
 	rounded: string;
+	shadowPosition: string;
 };
 
 const ContentContainer: React.FC<ContentContainerProps> = ({
@@ -17,20 +18,22 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
 	textColor,
 	bgColor,
 	rounded,
+	shadowPosition,
 }) => {
 	return (
 		<div
 			className={clsx(
-				"relative w-screen text-center pt-12 md:pb-56 pb-32 md:px-32 px-11 md:w-1/2 ",
+				"relative md:min-h-[31rem] md:max-w-[45vw] flex flex-col justify-center items-center py-15 px-20",
 				rounded,
 				bgColor,
+				shadowPosition,
 			)}
 		>
-			<h1 className={clsx("text-6xl my-8", headingColor)}> {title} </h1>
+			<h1 className={clsx("text-center text-6xl my-8", headingColor)}> {title} </h1>
 			<div
 				className={clsx(
-					"text-2xl text-justify relative md:text-xl mx-auto",
-					textColor,
+					"text-[1.25rem] leading-[1.75rem] text-justify relative max-w-[30rem]",
+				textColor,	
 				)}
 			>
 				{" "}
