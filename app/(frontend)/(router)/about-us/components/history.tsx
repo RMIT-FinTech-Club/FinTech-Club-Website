@@ -73,12 +73,12 @@ export default function HistorySection() {
     <section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
       <div className="relative w-full">
         <img
-          src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/assets/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
         />
         <img
-          src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/about_us/assets/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
         />
@@ -114,10 +114,6 @@ export default function HistorySection() {
             <br />
             <span className=" pt-[2rem] text-[#97ABD6]">Story & History</span>
           </h1>
-          <p className="text-[#000] mt-4 max-w-2xl mx-auto text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            dolorem consequuntur saepe hic esse omnis.
-          </p>
         </div>
 
         {/* YEAR SECTION */}
@@ -176,7 +172,7 @@ export default function HistorySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-4xl mx-auto px-[3rem] pb-[2rem]"
+          className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
         >
           <h2
             className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}
