@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Image } from "@nextui-org/image";
+import {Image} from "@heroui/react";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { Skeleton } from "@nextui-org/skeleton";
 import Link from "next/link";
