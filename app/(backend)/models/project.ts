@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const s3UrlRegex = /^https?:\/\/(?:[a-zA-Z0-9\-]+\.)*s3[.-][a-zA-Z0-9\-]+\.amazonaws\.com\/.+/;
+const cloudfrontUrlRegex = /^https?:\/\/(?:[a-zA-Z0-9\-]+\.)*cloudfront\.net\/.+/;
 const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const projectSchema = new Schema(
@@ -20,8 +20,8 @@ const projectSchema = new Schema(
       type: String,
       required: true,
       validate: {
-        validator: (v: string) => s3UrlRegex.test(v),
-        message: "Invalid AWS S3 image URL format",
+        validator: (v: string) => cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront image URL format",
       },
     },
     category_specific: { type: Schema.Types.Mixed },
@@ -51,11 +51,30 @@ const projectSchema = new Schema(
         message: "Invalid slug format (use lowercase, numbers, dashes)",
       },
     },
-  },
-  {
-    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: Date.now },
   }
 );
+
+projectSchema.pre('save', function(next) {
+  this.updated_at = new Date();
+  next();
+});
+
+projectSchema.pre('findOneAndUpdate', function(next) {
+  this.set({ updated_at: new Date() });
+  next();
+});
+
+projectSchema.pre('updateOne', function(next) {
+  this.set({ updated_at: new Date() });
+  next();
+});
+
+projectSchema.pre('updateMany', function(next) {
+  this.set({ updated_at: new Date() });
+  next();
+});
 
 projectSchema.index({ _id: 1 });
 projectSchema.index({ slug: 1 }, { unique: true });
@@ -97,18 +116,18 @@ const TechnicalSchema = new Schema({
       validate: {
         validator: function (this: any, v: string[]): boolean {
           if (this.parent().status === "completed") {
-            return v.every((url: string) => s3UrlRegex.test(url));
+            return v.every((url: string) => cloudfrontUrlRegex.test(url));
           }
           return true;
         },
-        message: "Invalid AWS S3 URL in gallery",
+        message: "Invalid CloudFront URL in gallery",
       },
     },
     product_link: {
       type: String,
       validate: {
-        validator: (v: string) => !v || s3UrlRegex.test(v),
-        message: "Invalid AWS S3 product link URL",
+        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront product link URL",
       },
     },
   },
@@ -136,8 +155,8 @@ const MediaSchema = new Schema({
     library_link: {
       type: String,
       validate: {
-        validator: (v: string) => !v || s3UrlRegex.test(v),
-        message: "Invalid AWS S3 library link URL",
+        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront library link URL",
       },
     },
   },
@@ -156,8 +175,8 @@ const EventSchema = new Schema({
           type: String,
           required: true,
           validate: {
-            validator: (v: string) => s3UrlRegex.test(v),
-            message: "Invalid AWS S3 avatar URL",
+            validator: (v: string) => cloudfrontUrlRegex.test(v),
+            message: "Invalid CloudFront avatar URL",
           },
         },
         position: { type: String, required: true },
@@ -167,8 +186,8 @@ const EventSchema = new Schema({
     sponsor_brands: {
       type: [String],
       validate: {
-        validator: (v: string[]) => !v || v.every((url: string) => s3UrlRegex.test(url)),
-        message: "Invalid AWS S3 sponsor brand URL",
+        validator: (v: string[]) => !v || v.every((url: string) => cloudfrontUrlRegex.test(url)),
+        message: "Invalid CloudFront sponsor brand URL",
       },
     },
     team_leader: [
@@ -188,18 +207,18 @@ const EventSchema = new Schema({
       validate: {
         validator: function (this: any, v: string[]): boolean {
           if (this.parent().status === "completed") {
-            return v.every((url: string) => s3UrlRegex.test(url));
+            return v.every((url: string) => cloudfrontUrlRegex.test(url));
           }
           return true;
         },
-        message: "Invalid AWS S3 URL in event gallery",
+        message: "Invalid CloudFront URL in event gallery",
       },
     },
     event_details_link: {
       type: String,
       validate: {
-        validator: (v: string) => !v || s3UrlRegex.test(v),
-        message: "Invalid AWS S3 event details link URL",
+        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront event details link URL",
       },
     },
   },
@@ -234,18 +253,18 @@ const CommunitySchema = new Schema({
       validate: {
         validator: function (this: any, v: string[]): boolean {
           if (this.parent().status === "completed") {
-            return v.every((url: string) => s3UrlRegex.test(url));
+            return v.every((url: string) => cloudfrontUrlRegex.test(url));
           }
           return true;
         },
-        message: "Invalid AWS S3 URL in gallery",
+        message: "Invalid CloudFront URL in gallery",
       },
     },
     event_details_link: {
       type: String,
       validate: {
-        validator: (v: string) => !v || s3UrlRegex.test(v),
-        message: "Invalid AWS S3 event details link URL",
+        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront event details link URL",
       },
     },
   },
@@ -267,18 +286,18 @@ const CareerSchema = new Schema({
       validate: {
         validator: function (this: any, v: string[]): boolean {
           if (this.parent().status === "completed") {
-            return v.every((url: string) => s3UrlRegex.test(url));
+            return v.every((url: string) => cloudfrontUrlRegex.test(url));
           }
           return true;
         },
-        message: "Invalid AWS S3 URL in gallery",
+        message: "Invalid CloudFront URL in gallery",
       },
     },
     event_details_link: {
       type: String,
       validate: {
-        validator: (v: string) => !v || s3UrlRegex.test(v),
-        message: "Invalid AWS S3 event details link URL",
+        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront event details link URL",
       },
     },
   },
@@ -298,8 +317,8 @@ const CompetitionSchema = new Schema({
           type: String,
           required: true,
           validate: {
-            validator: (v: string) => s3UrlRegex.test(v),
-            message: "Invalid AWS S3 avatar URL",
+            validator: (v: string) => cloudfrontUrlRegex.test(v),
+            message: "Invalid CloudFront avatar URL",
           },
         },
         position: { type: String, required: true },
@@ -313,8 +332,8 @@ const CompetitionSchema = new Schema({
           type: String,
           required: true,
           validate: {
-            validator: (v: string) => s3UrlRegex.test(v),
-            message: "Invalid AWS S3 avatar URL",
+            validator: (v: string) => cloudfrontUrlRegex.test(v),
+            message: "Invalid CloudFront avatar URL",
           },
         },
         position: { type: String, required: true },
@@ -324,8 +343,8 @@ const CompetitionSchema = new Schema({
     sponsor_brands: {
       type: [String],
       validate: {
-        validator: (v: string[]) => !v || v.every((url: string) => s3UrlRegex.test(url)),
-        message: "Invalid AWS S3 sponsor brand URL",
+        validator: (v: string[]) => !v || v.every((url: string) => cloudfrontUrlRegex.test(url)),
+        message: "Invalid CloudFront sponsor brand URL",
       },
     },
     timeline: [
@@ -350,25 +369,27 @@ const CompetitionSchema = new Schema({
       validate: {
         validator: function (this: any, v: string[]): boolean {
           if (this.parent().status === "completed") {
-            return v.every((url: string) => s3UrlRegex.test(url));
+            return v.every((url: string) => cloudfrontUrlRegex.test(url));
           }
           return true;
         },
-        message: "Invalid AWS S3 URL in gallery",
+        message: "Invalid CloudFront URL in gallery",
       },
     },
     competition_details_link: {
       type: String,
       validate: {
-        validator: (v: string) => !v || s3UrlRegex.test(v),
-        message: "Invalid AWS S3 competition details link URL",
+        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront competition details link URL",
       },
     },
   },
 });
 
+// Create base model and discriminators
 const Project = mongoose.models?.Project || mongoose.model("Project", projectSchema);
 
+// Register discriminators for each category
 Project.discriminator("technical", TechnicalSchema);
 Project.discriminator("media", MediaSchema);
 Project.discriminator("event", EventSchema);
