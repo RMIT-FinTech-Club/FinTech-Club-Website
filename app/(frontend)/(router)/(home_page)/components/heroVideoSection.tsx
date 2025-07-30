@@ -34,6 +34,7 @@ const HerosectionVid: React.FC = () => {
 				muted
 				loop
 				playsInline
+				preload="none"
 				id="hero-section-bg-vid"
 				className={clsx(
 					"w-full h-full", // Full screen

@@ -6,6 +6,12 @@ import Image from "next/image";
 const HeroSection = () => {
   return (
     <div className="w-screen lg:py-12 flex-col justify-start items-center p-side-margin-mobile md:p-20 gap-6 md:gap-12 flex">
+      <div className="absolute bottom-[-12.5rem] right-[37rem] w-[3.5rem] h-[3.5rem] bg-[#2C305F] rounded-full z-10"></div>
+      <div className="absolute bottom-[-7rem] right-[39rem] w-[3.5rem] h-[3.5rem] bg-[#C9D6EA] rounded-full z-20"></div>
+      <div className="absolute bottom-[-8.25rem] right-[42rem] w-[3.5rem] h-[3.5rem] bg-[#DBB968] rounded-full z-10"></div>
+      <div className="absolute bottom-[-8rem] right-[36rem] w-[3.5rem] h-[3.5rem] bg-[#2C305F] rounded-full z-10"></div>
+      <div className="absolute bottom-[-10rem] right-[46rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
+      <div className="absolute bottom-[-15rem] right-[37rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
       <div className=" justify-start items-center gap-6 md:gap-[60px] flex flex-col md:flex-row ">
         <div className="w-full md:w-[45vw] h-full">
           <h5 className="font-bold">What is</h5>
@@ -64,19 +70,19 @@ const HeroSection = () => {
                 Workshops
               </div>
               <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
-                Bonding
-              </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
-                Tours
-              </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
-                Media
+                Competitions
               </div>
               <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
                 Networking
               </div>
               <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
-                Development
+                Training
+              </div>
+              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+                Media
+              </div>
+              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+                Bonding
               </div>
             </div>
           </div>
