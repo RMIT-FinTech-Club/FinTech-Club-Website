@@ -5,7 +5,6 @@ import HerosectionVid from "./components/heroVideoSection";
 import IntroSection from "./components/intro";
 import UpcomingEvent from "./components/upcomingEvent";
 import Achievements from "./components/achievements";
-import Member from "./components/member";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Loading from "./loading";
 const Home = () => {
@@ -18,7 +17,6 @@ const Home = () => {
 				<IntroSection />
 				<Achievements />
 				<Department />
-				<Member />
 				<Suspense fallback={<Loading />}>
 				<UpcomingEvent />
 				</Suspense>
