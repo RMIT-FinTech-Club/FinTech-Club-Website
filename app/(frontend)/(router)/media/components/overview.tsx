@@ -3,8 +3,14 @@ import { Button } from "@heroui/react";
 function Overview() {
   return (
     <div className="bg-[#2C305F] bg-gradient-to-t from-[#2C305F] to-[#5E5E92]">
+      <div className="absolute bottom-[-9rem] right-[5rem] w-[4rem] h-[4rem] bg-[#F0EDFF] rounded-full z-10"></div>
+      <div className="absolute bottom-[1rem] right-[-1rem] w-[4rem] h-[4rem] bg-[#A28436] rounded-full z-10"></div>
+      <div className="absolute bottom-[-6rem] right-[-1rem] w-[8rem] h-[8rem] bg-[#DCB968] rounded-full z-20"></div>
+      <div className="absolute bottom-[0rem] right-[6.5rem] w-[2.5rem] h-[2.5rem] bg-[#F0EDFF] rounded-full z-10"></div>
+      <div className="absolute bottom-[-2rem] right-[12rem] w-[2.5rem] h-[2.5rem] bg-gradient-to-t from-[#999] to-[#FFF] rounded-full z-10"></div>
+
       {/* Main content container */}
-      <section className="pt-[3rem] pb-[3rem] flex justify-center gap-[3rem] items-center">
+      <section className="pt-[3rem] pb-[6rem] flex justify-center gap-[3rem] items-center">
         {/* Left side - Content */}
         <div>
           <h1 className=" text-[4rem] font-bold text-[#EBEBEB]">
@@ -66,7 +72,7 @@ function Overview() {
       </section>
 
       {/* Second section */}
-      <section className="pt-[3rem] pb-[5rem] flex justify-center gap-[5rem] items-start">
+      <section className="pt-[6rem] pb-[5rem] flex justify-center gap-[5rem] items-start">
         {/* Right side - Content */}
         <div className="relative">
           <div className="absolute left-1/2 bottom-[0rem] w-[100vw] h-[4px] bg-[#DCB968] z-20"></div>
