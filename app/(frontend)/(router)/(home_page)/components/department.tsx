@@ -18,7 +18,7 @@ const departments: Record<Department, DepartmentInfo> = {
     name: "TECHNOLOGY DEPARTMENT",
     button: "Technology",
     description:
-      "With an unquenchable thirst for coding, fixing bugs, the Technology Department represents the second pillar of our organization. We are responsible for the development of the club’s technical projects, including the SnapID Computer Vision Project, RBPC Website, and currently the FinTech Club Website Project. Beyond practical coding projects, we also provide internal training & sharing sessions, public workshops, mentoring initiatives, and memorable bonding activities for Tech Dept. members. Our members receive the full package of skill improvement, industry connections, and a belonging environment.",
+      "The Technology Department is an innovation hub for tech enthusiasts, driving practical FinTech solutions through development sprints, collaborative workshops, and industry partnerships. This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game blending strategy with Vietnamese culture, an AI Financial Coach based on the 6 Jar Money Management system, and a feature-rich upgrade of the FinTech Club Website. Beyond practical coding projects, we also foster growth through mentorship, internal training, and a supportive community that empowers every member to thrive.",
     background:
       "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Technology.png",
   },
@@ -26,7 +26,7 @@ const departments: Record<Department, DepartmentInfo> = {
     name: "BUSINESS DEPARTMENT",
     button: "Business",
     description:
-      "The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
+      "The Business Department is a dynamic space for curious minds to grow through peer-to-peer learning, hands-on projects, and real-world exposure. This semester, we are leading two key initiatives: the Bi-weekly Article Series, which explores business and FinTech topics with academic depth and relevance, and Breaking the Curve, a workshop series that helps students excel academically through interactive sessions, expert insights, and practical learning. By engaging in writing, research, and discussions, members develop both analytical thinking and industry-ready skills while contributing to the club’s knowledge-sharing culture.",
     background:
       "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Business.png",
   },
@@ -34,7 +34,7 @@ const departments: Record<Department, DepartmentInfo> = {
     name: "MARKETING DEPARTMENT",
     button: "Marketing",
     description:
-      "With a creative and expressive mindset, the Marketing Department is accountable for maintaining and spreading the digital presence of the club’s story and mission. Through various media projects, collaborative teams, adventurous campaigns, the Marketing Dept. never failed to disappoint in generating the most engaging and visually appealing content to hook the eyes of curious FinTech Club followers! So, you want to express yourself, unleash your creativity, unbound your imagination? Join the Marketing Dept. to help us bolster our club presence, and fulfill your creative interests!",
+      "The Marketing Department is a creative hub that drives the club’s digital presence through strategic campaigns and internal training. This semester, we’re launching an Internal Training Series to upskill members in content creation, from writing and photography to editing. We’re also powering major campaigns for FTC x Charity and Hack-A-Venture, crafting branding, visual identities, and promotional materials across social media. Additionally, our revamped TikTok Project aims to spotlight member stories through engaging short-form videos, fostering connection and inspiration within the FinTech Club community.",
     background:
       "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Marketing.png",
   },
@@ -43,7 +43,7 @@ const departments: Record<Department, DepartmentInfo> = {
     name: "HUMAN RESOURCES DEPARTMENT",
     button: "Human Resources",
     description:
-      "What is a club, without its people? Where would the club’s fun and desirability be, without its culture? That is where the Human Resources Department comes in. HR is in charge of organizing the club’s internal bonding activities, the FinTech Olympics, Newbies Orientation Day, End of Semester Award Ceremony, and the FinTech Field Trip – in addition to ensuring member well-being, safety and connection via the HR Committee. The HR Department consists of some of the kindest, most caring, most enthusiastic members in FTC. So, if you want to be a part of this lovely community, join the HR Dept.!",
+      "The Human Resources Department plays a pivotal role in shaping FinTech Club’s culture and fostering a welcoming, supportive environment for all members. This semester, we’re bringing the community together through heartfelt initiatives like the Charity Project for Tu Hanh Pagoda, high-energy bonding at the FinTech Olympics, and the adventurous End of Semester Trip. We also support personal growth with our Internal CV Review Workshop, and add a spark of fun with the festive FTC Halloween celebration. HR is where connections are built, memories are made, and every member feels at home.",
     background:
       "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Human+Resources.png",
   },
@@ -51,22 +51,29 @@ const departments: Record<Department, DepartmentInfo> = {
 
 const Department = () => {
   const [department, setDepartment] = useState<DepartmentInfo>(
-    departments.HumanResources
+    departments.Technology
   );
 
   return (
-    <div className="relative w-screen bg-[#F9FAFB] flex flex-row">
-        {/*con gấu */}
-        <div className="absolute w-[12rem] h-auto top-[-2rem] left-[-4.25rem] rotate-[109deg]">
-          <img src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"></img>
-        </div>
-        <div className="h-full w-[70vw] bg-[#F9FAFB]">
-        <section className="flex flex-col items-start pl-20 pt-[8.5rem] max-w-[50vw]">
-          <p className="text-[#DCB968] font-bold text-5xl">BE ONE OF US</p>
-          <p className={`font-bold mt-6 text-[#5E5E92] text-wrap text-4xl`}>
+    <div className="relative w-screen h-[50rem] flex flex-row">
+      {/*con gấu */}
+      <div className="absolute w-[12rem] h-auto top-[-2rem] left-[-4.25rem] rotate-[109deg] z-30">
+        <img src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"></img>
+      </div>
+
+      <div className="h-full w-[70vw] bg-[#F9FAFB] border-b-[1rem] border-[#DAB868]">
+        <section className="relative flex flex-col items-start pl-20 pt-[8.5rem] max-w-[45vw]">
+          <div className="absolute w-[3rem] h-auto top-[4.5rem] right-[7rem]">
+            <img src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"></img>
+          </div>
+          <div className="absolute w-[6rem] h-auto top-[6rem] right-[-1rem]">
+            <img src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"></img>
+          </div>
+          <p className="text-[#DCB968] font-bold text-6xl">BE ONE OF US</p>
+          <p className={`font-bold mt-6 text-[#5E5E92] text-wrap text-5xl`}>
             {department.name}
           </p>
-          <p className="mt-4 text-[1rem] leading-6 text-justify font-normal">
+          <p className="mt-4 text-base text-justify font-normal">
             {department.description}
           </p>
           <button className="text-[#F0EDFF] bg-[#5E5E92] rounded-xl w-fit px-6 py-2 mt-4 font-semibold drop-shadow-lg text-[1rem]">
@@ -82,7 +89,7 @@ const Department = () => {
                 >
                   <Button
                     onPress={() => setDepartment(department)}
-                    className="w-[7.5rem] h-[4rem] rounded-[10px] text-[#0B0B3B] text-wrap font-semibold text-base bg-[#F0EDFF] group-hover:[background:linear-gradient(to_bottom,_#C9D6EA_0%,_#DBB968_58%)] transition-all duration-300"
+                    className="w-[6.7rem] h-[4rem] rounded-[10px] text-[#0B0B3B] text-wrap font-semibold text-[0.85rem] bg-[#F0EDFF] group-hover:[background:linear-gradient(to_bottom,_#C9D6EA_0%,_#DBB968_58%)] transition-all duration-300"
                   >
                     {department.button.toUpperCase()}
                   </Button>
@@ -91,8 +98,21 @@ const Department = () => {
             })}
           </div>
         </section>
+      </div>
+
+      <div className="h-full w-[29vw] bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-br-[18vw] relative z-0">
+        <div className="h-[49rem] w-[27.5vw] bg-[#2C305F] rounded-br-[17vw] absolute top-0 left-0 z-10"></div>
+      </div>
+
+      <div className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-t-[10vw]">
+        <div className="h-[40rem] w-[33vw] absolute m-[1rem] z-20">
+          <img
+            src={department.background}
+            alt={`${department.name} background`}
+            className="h-full w-full object-fill rounded-t-[9vw]"
+          />
         </div>
-      <div className="h-full w-[30vw] bg-[#2C305F]"></div>
+      </div>
     </div>
   );
 };
