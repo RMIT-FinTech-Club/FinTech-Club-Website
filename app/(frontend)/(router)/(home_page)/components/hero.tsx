@@ -5,15 +5,15 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <div className="w-screen lg:py-12 flex-col justify-start items-center p-side-margin-mobile md:p-20 gap-6 md:gap-12 flex">
-      <div className="absolute bottom-[-12.5rem] right-[37rem] w-[3.5rem] h-[3.5rem] bg-[#2C305F] rounded-full z-10"></div>
-      <div className="absolute bottom-[-7rem] right-[39rem] w-[3.5rem] h-[3.5rem] bg-[#C9D6EA] rounded-full z-20"></div>
-      <div className="absolute bottom-[-8.25rem] right-[42rem] w-[3.5rem] h-[3.5rem] bg-[#DBB968] rounded-full z-10"></div>
-      <div className="absolute bottom-[-8rem] right-[36rem] w-[3.5rem] h-[3.5rem] bg-[#2C305F] rounded-full z-10"></div>
-      <div className="absolute bottom-[-10rem] right-[46rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
-      <div className="absolute bottom-[-15rem] right-[37rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
+    <div className="w-screen bg-[#F9FAFB] lg:py-12 flex-col justify-start items-center p-side-margin-mobile md:p-20 gap-6 md:gap-12 flex">
       <div className=" justify-start items-center gap-6 md:gap-[60px] flex flex-col md:flex-row ">
-        <div className="w-full md:w-[45vw] h-full">
+        <div className="w-full md:w-[45vw] h-full relative">
+          <div className="absolute top-[2.5rem] right-[-1.5rem] w-[3rem] h-[3rem] bg-[#2C305F] rounded-full z-10"></div>
+      <div className="absolute top-[-2.25rem] right-[-0.25rem] w-[3rem] h-[3rem] bg-[#C9D6EA] rounded-full z-20"></div>
+      <div className="absolute top-[-1.5rem] right-[2.5rem] w-[3rem] h-[3rem] bg-[#DBB968] rounded-full z-10"></div>
+      <div className="absolute top-[-1.5rem] right-[-2.5rem] w-[3rem] h-[3rem] bg-[#2C305F] rounded-full z-10"></div>
+      <div className="absolute top-[2.25rem] right-[6rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
+      <div className="absolute top-[7.25rem] right-[-1.5rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
           <h5 className="font-bold">What is</h5>
           <h4 className="text-[#000A64] font-[1000] uppercase mt-[0.75rem] mb-[1.25rem]">
             <span className="text-[#DCB968]">Fin</span>Tech Club ?
@@ -55,33 +55,39 @@ const HeroSection = () => {
             height={1000}
             priority={true}
           />
-          <div className="mt-8 flex flex-col items-center justify-center">
+          <div className="mt-4 flex flex-col justify-center w-full">
             <p className="text-[#2C305F] text-[1.5rem] font-bold">
               Our Core Activities
             </p>
-            <div className="grid grid-cols-4 gap-[10px] mt-4">
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+            <div className="flex flex-row mt-2 justify-between items-center">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Projects
               </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Events
               </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Workshops
               </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+            </div>
+
+            <div className="flex flex-row mt-2 justify-center gap-4 items-center">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Competitions
               </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
-                Networking
-              </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Training
               </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+            </div>
+
+            <div className="flex flex-row mt-2 justify-between items-center">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+                Networking
+              </div>
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Media
               </div>
-              <div className="bg-[#97ABD6] p-2 mx-auto text-center w-[9.5vw] border border-[#DBB968]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
                 Bonding
               </div>
             </div>
