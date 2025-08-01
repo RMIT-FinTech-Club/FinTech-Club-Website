@@ -1,6 +1,53 @@
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
 function III() {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.3, // how much needs to be visible
+    triggerOnce: false, // allow re-trigger on scroll
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [inView, controls]);
+
+  const fromLeft = {
+    hidden: {
+      opacity: 0,
+      x: -100,
+      transition: { duration: 0.6, ease: "easeInOut" },
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const fromRight = {
+    hidden: {
+      opacity: 0,
+      x: 100,
+      transition: { duration: 0.6, ease: "easeInOut" },
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[52rem]">
+    <section
+      ref={ref}
+      className="relative bg-[#F9FAFB] bg-cover bg-center pt-[52rem]"
+    >
       <h4 className="absolute bg-[#2C305F] text-white p-[1rem] w-[60rem] h-[6rem] top-12 rounded-br-3xl text-center shadow-2xl">
         WHAT WE TRULY BELIEVE IN
       </h4>
@@ -9,34 +56,69 @@ function III() {
       <div className="absolute -translate-y-[41.5rem] z-10">
         <div className="grid grid-cols-[1fr,auto,1fr] grid-rows-3 w-[100vw] h-fit">
           {/* Row 1 */}
-          <div className="relative flex items-center justify-center flex-1 py-[1.65rem]">
-            <h2 className="text-[#5E5E92] text-[4rem] relative"></h2>
+          <h2 className="text-[4rem]"> </h2>
+          <div className="flex items-center justify-center w-fit py-[1.65rem]">
+            <h2 className="text-[#2C305F] text-[6rem]">I</h2>
           </div>
-          <div className="relative flex items-center justify-center w-fit py-[1.65rem]">
-            <h2 className="text-[#2C305F] text-[6rem] relative">I</h2>
+          <div className="flex items-center justify-start flex-1 py-[1.65rem] overflow-hidden">
+            <motion.h2
+              className="text-[#5E5E92] text-[4rem]"
+              variants={fromLeft}
+              initial="hidden"
+              animate={controls}
+            >
+              NNOVATIVE
+            </motion.h2>
           </div>
-          <div className="relative flex items-center justify-start flex-1 py-[1.65rem]">
-            <h2 className="text-[#5E5E92] text-[4rem] relative">NNOVATIVE</h2>
-          </div>
+
           {/* Row 2 */}
-          <div className="relative flex items-center justify-end flex-1 py-[1.65rem]">
-            <h2 className="text-[#5E5E92] text-[4rem] relative">INCUBAT</h2>
+          <div className="flex items-center justify-end flex-1 py-[1.65rem] overflow-hidden">
+            <motion.h2
+              className="text-[#5E5E92] text-[4rem]"
+              variants={fromRight}
+              initial="hidden"
+              animate={controls}
+            >
+              INCUBAT
+            </motion.h2>
           </div>
-          <div className="relative flex items-center justify-center w-fit py-[1.65rem]">
-            <h2 className="text-[#2C305F] text-[6rem] relative">I</h2>
+          <div className="flex items-center justify-center w-fit py-[1.65rem]">
+            <h2 className="text-[#2C305F] text-[6rem]">I</h2>
           </div>
-          <div className="relative flex items-center justify-start flex-1 py-[1.65rem]">
-            <h2 className="text-[#5E5E92] text-[4rem] relative">ON</h2>
+          <div className="flex items-center justify-start flex-1 py-[1.65rem] overflow-hidden">
+            <motion.h2
+              className="text-[#5E5E92] text-[4rem]"
+              variants={fromLeft}
+              initial="hidden"
+              animate={controls}
+            >
+              ON
+            </motion.h2>
           </div>
+
           {/* Row 3 */}
-          <div className="relative flex items-center justify-end flex-1 py-[1.65rem]">
-            <h2 className="text-[#5E5E92] text-[4rem] relative">INSP</h2>
+          <div className="flex items-center justify-end flex-1 py-[1.65rem] overflow-hidden">
+            <motion.h2
+              className="text-[#5E5E92] text-[4rem]"
+              variants={fromRight}
+              initial="hidden"
+              animate={controls}
+            >
+              INSP
+            </motion.h2>
           </div>
-          <div className="relative flex items-center justify-center w-fit py-[1.65rem]">
-            <h2 className="text-[#2C305F] text-[6rem] relative">I</h2>
+          <div className="flex items-center justify-center w-fit py-[1.65rem]">
+            <h2 className="text-[#2C305F] text-[6rem]">I</h2>
           </div>
-          <div className="relative flex items-center justify-start flex-1 py-[1.65rem]">
-            <h2 className="text-[#5E5E92] text-[4rem] relative">RING</h2>
+          <div className="flex items-center justify-start flex-1 py-[1.65rem] overflow-hidden">
+            <motion.h2
+              className="text-[#5E5E92] text-[4rem]"
+              variants={fromLeft}
+              initial="hidden"
+              animate={controls}
+            >
+              RING
+            </motion.h2>
           </div>
 =======
 
@@ -59,39 +141,59 @@ function III() {
       <div className="absolute -translate-y-[42rem] z-20">
         <div className="grid grid-cols-[1fr,auto,1fr] grid-rows-3 w-[100vw] h-fit">
           {/* Row 1 */}
-          <div className="relative flex items-center justify-end flex-1 mt-4">
-            <p className="text-[#0D1742] text-[1.25rem] max-w-[32rem] relative text-right mr-8">
+          <div className="relative flex items-center justify-end flex-1 mt-4 overflow-hidden">
+            <motion.p
+              className="text-[#0D1742] text-[1.25rem] max-w-[32rem] relative text-right mr-8"
+              variants={fromRight}
+              initial="hidden"
+              animate={controls}
+            >
               We embrace the idea of thinking beyond traditional boundaries and
               challenging the norm. Innovation involves transforming creative
               concepts into something truly valuable
-            </p>
+            </motion.p>
           </div>
           <div className="relative flex items-center justify-center w-fit"></div>
           <div className="relative flex items-center justify-start flex-1"></div>
           {/* Row 2 */}
           <div className="relative flex items-center justify-end flex-1"></div>
           <div className="relative flex items-center justify-center w-fit"></div>
-          <div className="relative flex items-center justify-start flex-1">
+          <motion.div
+            className="relative flex items-center justify-start flex-1"
+            variants={fromLeft}
+            initial="hidden"
+            animate={controls}
+          >
             <p className="text-[#0D1742] text-[1.25rem] max-w-[24rem] relative text-left ml-32">
               Nurturing the next generation of thinkers, pioneers, distributors,
               leaders, innovators, providing practical experience and
               opportunity.
             </p>
-          </div>
+          </motion.div>
           {/* Row 3 */}
-          <div className="relative flex items-center justify-end flex-1">
+          <motion.div
+            className="relative flex items-center justify-end flex-1"
+            variants={fromRight}
+            initial="hidden"
+            animate={controls}
+          >
             <p className="text-[#0D1742] text-[1.25rem] max-w-[24rem] relative text-right mr-44">
               We believe in building a club where members are inspired by their
               work and contributions.
             </p>
-          </div>
+          </motion.div>
           <div className="relative flex items-center justify-center w-fit"></div>
-          <div className="relative flex items-center justify-start flex-1">
+          <motion.div
+            className="relative flex items-center justify-start flex-1"
+            variants={fromLeft}
+            initial="hidden"
+            animate={controls}
+          >
             <p className="text-[#0D1742] text-[1.25rem] max-w-[24rem] relative text-left ml-48">
               We hope to ignite a sense of purpose and motivation in everyone
               involved, making it a vibrant community.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
