@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3 } from "@/app/(backend)/libs/s3";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest ) {
   const { fileName, fileType } = await req.json();
 
   try {
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
   }catch (error) {
     return NextResponse.json({ 
-      error: "Failed to create signed URL" },{ 
-      status: 500 });
+      error: "Failed to create signed URL" },
+    { status: 500 });
   }
 }
