@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3 } from "@/app/(backend)/libs/s3";
 
 export async function POST(req: NextRequest ) {
-  const { fileName, fileType } = await req.json();
+  const { fileName, fileType, folderName } = await req.json();
 
   try {
-    const { uploadUrl, key } = await uploadToS3(fileName, fileType);
+    const { uploadUrl, key} = await uploadToS3(fileName, fileType, folderName);
     return NextResponse.json({uploadUrl, key});
 
   }catch (error) {
