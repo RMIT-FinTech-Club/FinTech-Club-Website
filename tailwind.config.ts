@@ -12,6 +12,10 @@ const config: Config = {
     ],
     theme: {
         extend: tailwindExtendedThemeConfig,
+        backgroundImage: {
+        'fintech-gradient': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75))',
+        'gradient-over-image': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75)), url("https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ClubDay.png")',
+        },
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
