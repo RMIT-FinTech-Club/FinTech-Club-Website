@@ -1,5 +1,6 @@
 import Project from "../../models/project";
 import { Types } from "mongoose";
+import { invalidateCacheByPattern } from "../../libs/redis";
 
 const cloudfrontUrlRegex = /^https?:\/\/(?:[a-zA-Z0-9\-]+\.)*cloudfront\.net\/.+/;
 const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -107,6 +108,10 @@ export async function createProject(data: any) {
   
   const project = new Project(data);
   await project.save();
+  
+  // Invalidate project cache
+  await invalidateCacheByPattern("projects:*");
+  
   return project;
 }
 
@@ -137,6 +142,10 @@ export async function updateProject(idOrSlug: string, updateData: any) {
   });
   
   if (!project) throw new Error("Project not found");
+  
+  // Invalidate project cache
+  await invalidateCacheByPattern("projects:*");
+  
   return project;
 }
 
@@ -158,6 +167,9 @@ export async function deleteProject(idOrSlug: string) {
        .map(filePath => deleteFileFromS3(filePath));
     
     await Promise.allSettled(deletePromises);
+    
+    // Invalidate project cache
+    await invalidateCacheByPattern("projects:*");
     
     return project;
   } catch (error) {
