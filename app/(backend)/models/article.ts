@@ -1,10 +1,19 @@
 import mongoose, {Schema} from "mongoose";
+import { validate } from "uuid";
 const labelCategories = ["Fintech", "Technology", "Blockchain", "AI","Customer Service", "Security", "Sustainability", "Innovation", "Digital Transformation", "Startups", "Healthcare", "Art", "Ethics", "5G", "IoT","Quantum","Energy","Voice","Cloud","Edge","Smart City", "Education","Wearable","Automotive","Metaverse","Policy"];
 
 const articleSchema = new Schema({
     title: { type: String, required: true },
     summary: { type: String, required: true},
-    content: { type: String, required: true },
+    content_url: { type: String, required: true, 
+      validate: function (value: string) {
+        try {
+              new URL(value); // Throw when the value is not a valid URL
+              return true;
+            } catch (err) {
+              return false;
+            }
+     }},
     illustration_url: {
       type: String,
       
