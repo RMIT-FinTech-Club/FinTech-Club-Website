@@ -10,37 +10,95 @@ import {
 } from "./projectUpdateController";
 
 export async function getLargeScaledOngoingProjects() {
-  const query = {
+  const projects = await Project.find({
     type: "large-scaled",
     status: "ongoing"
-  };
-
-  const projects = await Project.find(query)
+  })
     .select('title description type status category labels image_url slug meta_title meta_description')
     .sort({ created_at: -1 })
     .limit(50)
     .lean();
 
-  const transformedProjects = projects.map(project => ({
-    title: project.title,
-    description: project.description,
-    type: project.type,
-    status: project.status,
-    category: project.category,
-    labels: project.labels,
-    image_url: project.image_url,
-    slug: project.slug,
-    meta_title: project.meta_title,
-    meta_description: project.meta_description
-  }));
-
   return {
     message: "Large-scaled ongoing projects retrieved successfully",
     success: true,
-    data: transformedProjects,
-    count: transformedProjects.length,
+    data: projects.map(p => ({
+      title: p.title,
+      description: p.description,
+      type: p.type,
+      status: p.status,
+      category: p.category,
+      labels: p.labels,
+      image_url: p.image_url,
+      slug: p.slug,
+      meta_title: p.meta_title,
+      meta_description: p.meta_description
+    })),
+    count: projects.length,
     cached: false
   };
+}
+
+export async function getDepartmentProjects(department: string) {
+  try {
+    const [result] = await Project.aggregate([
+      { $match: { type: "department", status: "ongoing", department } },
+      { $sort: { created_at: -1 } },
+      { $limit: 50 },
+      {
+        $group: {
+          _id: "$department",
+          department: { $first: "$department" },
+          department_photo_url: { $first: "$department_photo_url" },
+          department_description: { $first: "$department_description" },
+          projects: {
+            $push: {
+              title: "$title",
+              description: "$description",
+              type: "$type",
+              status: "$status",
+              department: "$department",
+              category: "$category",
+              labels: "$labels",
+              image_url: "$image_url",
+              slug: "$slug",
+              meta_title: "$meta_title",
+              meta_description: "$meta_description"
+            }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      { $project: { _id: 0, department: 1, department_photo_url: 1, department_description: 1, projects: 1, count: 1 } }
+    ]);
+
+    return {
+      message: "Department projects retrieved successfully",
+      success: true,
+      data: result || {
+        department,
+        department_photo_url: "",
+        department_description: "",
+        projects: []
+      },
+      count: result?.count || 0,
+      cached: false
+    };
+
+  } catch (error) {
+    console.error("MongoDB aggregation error:", error);
+    
+    if (error instanceof Error) {
+      if (error.message.includes("ECONNREFUSED") || error.message.includes("ENOTFOUND")) {
+        throw new Error("MongoDB connection failed - database unavailable");
+      }
+      if (error.message.includes("timeout")) {
+        throw new Error("MongoDB query timeout - database overloaded");
+      }
+    }
+    
+    throw new Error("Failed to retrieve department projects from database");
+  }
 }
 
 export const createProject = createProjectUpdate;

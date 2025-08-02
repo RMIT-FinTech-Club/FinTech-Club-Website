@@ -32,6 +32,22 @@ const projectSchema = new Schema(
       },
       index: true,
     },
+    department_photo_url: {
+      type: String,
+      required: function (this: any): boolean {
+        return this.type === "department";
+      },
+      validate: {
+        validator: (v: string) => cloudfrontUrlRegex.test(v),
+        message: "Invalid CloudFront department photo URL format",
+      },
+    },
+    department_description: {
+      type: String,
+      required: function (this: any): boolean {
+        return this.type === "department";
+      },
+    },
     year: {
       type: Number,
       required: function (this: any): boolean {
@@ -386,10 +402,8 @@ const CompetitionSchema = new Schema({
   },
 });
 
-// Create base model and discriminators
 const Project = mongoose.models?.Project || mongoose.model("Project", projectSchema);
 
-// Register discriminators for each category
 Project.discriminator("technical", TechnicalSchema);
 Project.discriminator("media", MediaSchema);
 Project.discriminator("event", EventSchema);

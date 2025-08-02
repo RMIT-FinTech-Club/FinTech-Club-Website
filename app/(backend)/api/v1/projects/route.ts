@@ -5,85 +5,113 @@ import {
   generateCacheKey, 
   getCacheHeaders 
 } from "@/app/(backend)/libs/redis";
-import { getLargeScaledOngoingProjects } from "@/app/(backend)/controllers/project/projectController";
+import { getLargeScaledOngoingProjects, getDepartmentProjects } from "@/app/(backend)/controllers/project/projectController";
 
 connectMongoDB();
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
+  const type = searchParams.get("type");
+  const status = searchParams.get("status");
+  const year = searchParams.get("year");
+  const department = searchParams.get("department");
 
   try {
-    const type = searchParams.get("type");
-    const status = searchParams.get("status");
-    const year = searchParams.get("year");
-    const department = searchParams.get("department");
-
+    // Validate required parameters
     if (!type || !status) {
-      return NextResponse.json(
-        {
-          error: "Missing required query parameters: type and status",
-          success: false,
-          message: "Both 'type' and 'status' parameters are required"
-        },
-        { status: 400 }
-      );
-    }
-
-    if (type !== "large-scaled") {
-      return NextResponse.json(
-        {
-          error: "Invalid 'type' parameter. Only 'large-scaled' is supported",
-          success: false,
-          message: "The 'type' parameter must be 'large-scaled'"
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({
+        error: "Missing required query parameters: type and status",
+        success: false,
+        message: "Both 'type' and 'status' parameters are required"
+      }, { status: 400 });
     }
 
     if (status !== "ongoing") {
-      return NextResponse.json(
-        {
-          error: "Invalid 'status' parameter. Only 'ongoing' is supported",
-          success: false,
-          message: "The 'status' parameter must be 'ongoing'"
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({
+        error: "Invalid 'status' parameter. Only 'ongoing' is supported",
+        success: false,
+        message: "The 'status' parameter must be 'ongoing'"
+      }, { status: 400 });
     }
 
-    if (year || department) {
-      console.log(`ℹ️ Ignoring unsupported parameters: year=${year}, department=${department}`);
+    if (year) console.log(`Ignoring unsupported parameter: year=${year}`);
+
+    // Handle different project types
+    const handlers = {
+      "large-scaled": async () => {
+        if (department) console.log(`Ignoring unsupported parameter: department=${department}`);
+        const cacheKey = generateCacheKey("projects", "large-scaled", "ongoing");
+        return await withCaching(cacheKey, getLargeScaledOngoingProjects);
+      },
+      "department": async () => {
+        if (!department) {
+          return NextResponse.json({
+            error: "Missing required parameter: department",
+            success: false,
+            message: "The 'department' parameter is required when type=department"
+          }, { status: 400 });
+        }
+
+        const validDepartments = ["Business", "Technology", "Marketing", "Human Resources"];
+        if (!validDepartments.includes(department)) {
+          return NextResponse.json({
+            error: "Invalid 'department' parameter",
+            success: false,
+            message: `Department must be one of: ${validDepartments.join(", ")}`
+          }, { status: 400 });
+        }
+
+        const cacheKey = generateCacheKey("projects", "department", "ongoing", department);
+        return await withCaching(cacheKey, () => getDepartmentProjects(department));
+      }
+    };
+
+    const handler = handlers[type as keyof typeof handlers];
+    if (!handler) {
+      return NextResponse.json({
+        error: "Invalid 'type' parameter",
+        success: false,
+        message: "The 'type' parameter must be 'large-scaled' or 'department'"
+      }, { status: 400 });
     }
 
-    const cacheKey = generateCacheKey("projects", "large-scaled", "ongoing");
+    const result = await handler();
     
-    const { data, cached, responseTime } = await withCaching(
-      cacheKey,
-      async () => {
-        // Call controller to get data
-        return await getLargeScaledOngoingProjects();
-      }
-    );
+    // If handler returned a response (error case), return it
+    if (result instanceof NextResponse) return result;
 
-    return NextResponse.json(
-      data,
-      { 
-        status: 200,
-        headers: getCacheHeaders(cached, responseTime)
-      }
-    );
+    const { data, cached, responseTime } = result;
+    return NextResponse.json(data, { 
+      status: 200,
+      headers: getCacheHeaders(cached, responseTime)
+    });
 
   } catch (error) {
     console.error("Error in projects API route:", error);
 
-    return NextResponse.json(
-      {
-        error: "Internal server error",
-        success: false,
-        message: "Failed to process request"
-      },
-      { status: 500 }
-    );
+    if (error instanceof Error) {
+      if (error.message.includes("MongoDB") || error.message.includes("database")) {
+        return NextResponse.json({
+          error: "Database connection error",
+          success: false,
+          message: "Failed to connect to database"
+        }, { status: 503 });
+      }
+      
+      if (error.message.includes("AWS") || error.message.includes("S3")) {
+        return NextResponse.json({
+          error: "Media service error",
+          success: false,
+          message: "Failed to access media resources"
+        }, { status: 503 });
+      }
+    }
+
+    return NextResponse.json({
+      error: "Internal server error",
+      success: false,
+      message: "Failed to process request"
+    }, { status: 500 });
   }
 }
 
