@@ -178,7 +178,7 @@ export async function getPodcastByLabel(request: NextRequest) {
   }
 }
 
-/*
+/* [In-Progress] : Separate pagination feature
 export async function pagination(request: NextRequest){
     const {searchParams} = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1", 10);
@@ -189,4 +189,7 @@ export async function pagination(request: NextRequest){
   if (page < 1 || limit < 1) {
     return NextResponse.json({ message: "Invalid pagination parameters" }, { status: 400 });
   }
+  
+}
   */
+  
