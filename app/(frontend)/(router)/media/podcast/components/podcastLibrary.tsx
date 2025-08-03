@@ -7,9 +7,10 @@ import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import LabelSort from "./labelSort";
+import { motion } from "framer-motion";
 
 export default function PodcastLibrary() {
-  const pRef = useRef<HTMLParagraphElement>(null); // TypeScript fix
+  const pRef = useRef<HTMLParagraphElement>(null); 
 
   const handleLabelSelect = (label: string) => {
     console.log("Selected label:", label);
@@ -18,7 +19,7 @@ export default function PodcastLibrary() {
 
   const handleBreadcrumbClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     console.info("You clicked a breadcrumb.");
-    n
+    
   };
 
   return (
@@ -34,9 +35,13 @@ export default function PodcastLibrary() {
             eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
             in culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <button className="bg-white text-bluePrimary px-4 py-2 top-[10rem] rounded-md hover:bg-yellowCream ">
+          <motion.button
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 1.1 }}
+            className="bg-white text-bluePrimary px-4 py-2 rounded-md hover:bg-yellowCream"
+          >
             Back to Media
-          </button>
+          </motion.button>
         </div>
       </div>
       <Breadcrumbs
@@ -48,8 +53,8 @@ export default function PodcastLibrary() {
         <MuiLink
           underline="hover"
           sx={{
-            color: "#2C305F", // bluePrimary
-            "&:hover": { color: "#FFEFCA" }, // yellowCream
+            color: "#2C305F", 
+            "&:hover": { color: "#FFEFCA" }, 
           }}
           component={Link}
           href="/media"
@@ -60,8 +65,8 @@ export default function PodcastLibrary() {
                 <MuiLink
           underline="hover"
           sx={{
-            color: "#2C305F", // bluePrimary
-            "&:hover": { color: "#FFEFCA" }, // yellowCream
+            color: "#2C305F", 
+            "&:hover": { color: "#FFEFCA" }, 
           }}
           component={Link}
           href="/media/podcast"
@@ -73,7 +78,7 @@ export default function PodcastLibrary() {
           Podcast Library
         </Typography>
       </Breadcrumbs>
-      <div className="p-6">
+      <div className="relative p-6 left-24 text-xl">
         <LabelSort onSelect={handleLabelSelect} />
       </div>
     </section>
