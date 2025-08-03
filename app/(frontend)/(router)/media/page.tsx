@@ -9,9 +9,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const Media = () => {
   return (
     <>
-      <Overview />
-      <Podcast />
-      <Article />
       <SpecificArticle />
       <SpecificPodcast />
     </>
