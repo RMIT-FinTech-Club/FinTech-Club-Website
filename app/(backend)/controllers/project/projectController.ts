@@ -101,6 +101,30 @@ export async function getDepartmentProjects(department: string) {
   }
 }
 
+export async function getProjectDetails(idOrSlug: string) {
+  try {
+    const project = await getProjectByIdOrSlugUpdate(idOrSlug);
+    return project;
+
+  } catch (error) {
+    console.error("Error retrieving project details:", error);
+    
+    if (error instanceof Error) {
+      if (error.message.includes("not found") || error.message.includes("Project not found")) {
+        throw new Error("Project not found");
+      }
+      if (error.message.includes("ECONNREFUSED") || error.message.includes("ENOTFOUND")) {
+        throw new Error("MongoDB connection failed - database unavailable");
+      }
+      if (error.message.includes("timeout")) {
+        throw new Error("MongoDB query timeout - database overloaded");
+      }
+    }
+    
+    throw new Error("Failed to retrieve project details from database");
+  }
+}
+
 export const createProject = createProjectUpdate;
 export const getProjectByIdOrSlug = getProjectByIdOrSlugUpdate;
 export const updateProject = updateProjectUpdate;
