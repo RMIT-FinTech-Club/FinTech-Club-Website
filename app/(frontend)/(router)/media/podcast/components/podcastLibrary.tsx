@@ -7,7 +7,9 @@ import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import LabelSort from "./labelSort";
+import PodcastCard from "./podcastCard"; 
 import { motion } from "framer-motion";
+import PaginationRounded from "./pagination";
 
 export default function PodcastLibrary() {
   const pRef = useRef<HTMLParagraphElement>(null); 
@@ -80,6 +82,51 @@ export default function PodcastLibrary() {
       </Breadcrumbs>
       <div className="relative p-6 left-24 text-xl">
         <LabelSort onSelect={handleLabelSelect} />
+      </div>
+      <div className="p-6">
+        <PodcastCard
+          imageSrc="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png"
+          imageAlt="Podcast"
+          labels={["Finance", "Tech"]}
+          title="Podcast Title"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          date="January 1st, 2025"
+        />
+        <PodcastCard
+          imageSrc="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png"
+          imageAlt="Podcast"
+          labels={["Finance", "Tech"]}
+          title="Podcast Title"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          date="January 1st, 2025"
+        />
+        <PodcastCard
+          imageSrc="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png"
+          imageAlt="Podcast"
+          labels={["Finance", "Tech"]}
+          title="Podcast Title"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          date="January 1st, 2025"
+        />
+        <PodcastCard
+          imageSrc="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png"
+          imageAlt="Podcast"
+          labels={["Finance", "Tech"]}
+          title="Podcast Title"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          date="January 1st, 2025"
+        />
+        <PodcastCard
+          imageSrc="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png"
+          imageAlt="Podcast"
+          labels={["Finance", "Tech"]}
+          title="Podcast Title"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          date="January 1st, 2025"
+        />
+      </div>
+      <div className = "flex justify-center mt-8">
+      <PaginationRounded />
       </div>
     </section>
   );
