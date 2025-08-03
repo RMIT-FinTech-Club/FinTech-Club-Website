@@ -1,16 +1,16 @@
 import React, { Suspense } from "react";
-import Overview from "./components/overview";
-import Podcast from "./components/podcastLibrary";
-import Article from "./components/articleLibrary";
-import SpecificArticle from "./components/specificArticle";
-import SpecificPodcast from "./components/specificPodcast";
+import Overview from "./overview/components/overview";
+import Podcast from "./podcast/components/podcastLibrary";
+import Article from "./article/components/articleLibrary";
+import SpecificArticle from "./article/components/specific/specificArticle";
+import SpecificPodcast from "./podcast/components/specific/specificPodcast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Media = () => {
     return (
         <>
-          {/* <Overview/>  
-          <Podcast />   
+          <Overview/>  
+          {/* <Podcast />   
           <Article />   
           <SpecificArticle />
           <SpecificPodcast /> */}
