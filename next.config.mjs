@@ -6,7 +6,7 @@ const nextConfig = {
           hostname: "**",
         },
       ],
-        domains: ['fintech-club-website.s3.ap-southeast-2.amazonaws.com'],
+        domains: ['d2prwyp3rwi40.cloudfront.net'],
       },
 }
 
