@@ -2,7 +2,6 @@
 <mask id="path-1-inside-1_6194_376" fill="white">
 <path d="M250 125C250 194.036 194.036 250 125 250C55.9644 250 0 194.036 0 125C0 55.9644 55.9644 0 125 0C194.036 0 250 55.9644 250 125Z"/>
 </mask>
-<path d="M250 125C250 194.036 194.036 250 125 250C55.9644 250 0 194.036 0 125C0 55.9644 55.9644 0 125 0C194.036 0 250 55.9644 250 125Z" fill="#5E5E92"/>
 <path d="M250 125C250 194.036 194.036 250 125 250C55.9644 250 0 194.036 0 125C0 55.9644 55.9644 0 125 0C194.036 0 250 55.9644 250 125Z" stroke="url(#paint0_linear_6194_376)" stroke-width="20" stroke-linecap="round" stroke-dasharray="20 20" mask="url(#path-1-inside-1_6194_376)"/>
 <path d="M250 125C250 194.036 194.036 250 125 250C55.9644 250 0 194.036 0 125C0 55.9644 55.9644 0 125 0C194.036 0 250 55.9644 250 125Z" stroke="url(#paint1_radial_6194_376)" stroke-opacity="0.2" stroke-width="20" stroke-linecap="round" stroke-dasharray="20 20" mask="url(#path-1-inside-1_6194_376)"/>
 <defs>
