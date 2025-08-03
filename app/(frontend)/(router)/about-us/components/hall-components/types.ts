@@ -1,6 +1,6 @@
 export interface HallOfFameMember {
   name: string;
-  achievement: string;
+  achievement?: string;
   category: string;
   semester: string;
   photo_url: string;
@@ -38,8 +38,9 @@ export type SemesterFilterProps = {
 // For each honoree display card
 export type HonoreeCardProps = {
   name: string;
-  achievement: string;
+  achievement?: string;
   photo_url: string;
+  hideAchievement: boolean;
 };
 
 // For the list of honorees shown under a category/semester

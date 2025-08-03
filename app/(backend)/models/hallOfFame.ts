@@ -15,7 +15,6 @@ const hallOfFameSchema = new Schema(
         name: { type: String, required: true},
         achievement: { 
             type: String, 
-            required: true,
             maxlength: 500,
         },
         photo_url: { 

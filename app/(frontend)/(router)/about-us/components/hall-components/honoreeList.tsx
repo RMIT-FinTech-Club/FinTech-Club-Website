@@ -2,6 +2,8 @@
 import HonoreeCard from "./honoreeCard";
 import type { HonoreeListProps } from "./types";
 
+const categoriesWithoutAchievement = ["Community Builder", "Rookie of the Semester", "Best Department", "Club MVP"];
+
 export default function HonoreeList({ members }: HonoreeListProps) {
   return (
     <div
@@ -21,6 +23,7 @@ export default function HonoreeList({ members }: HonoreeListProps) {
           name={one.name}
           achievement={one.achievement}
           photo_url={one.photo_url}
+          hideAchievement={categoriesWithoutAchievement.includes(one.category)}
         />
       ))}
     </div>

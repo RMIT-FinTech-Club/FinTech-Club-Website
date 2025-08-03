@@ -1,7 +1,7 @@
 "use client";
 import type { HonoreeCardProps } from "./types";
 
-export default function HonoreeCard({ name, achievement, photo_url }: HonoreeCardProps) {
+export default function HonoreeCard({ name, achievement, photo_url, hideAchievement }: HonoreeCardProps) {
 
   return (
     <div className="
@@ -55,7 +55,7 @@ export default function HonoreeCard({ name, achievement, photo_url }: HonoreeCar
                 >
                     <div className="w-side-margin">
                         <p className="text-xs md:text-sm lg:text-sm xl:text-sm uppercase font-extrabold text-[#DBB968]">{name}</p>
-                        <p className="text-xs md:text-sm lg:text-sm xl:text-sm uppercase font-semibold text-white">MVP of My Heart</p>
+                        <p className="text-xs md:text-sm lg:text-sm xl:text-sm uppercase font-semibold text-white">{!hideAchievement && achievement}</p>
                     </div>
                 </div>
             </div>
