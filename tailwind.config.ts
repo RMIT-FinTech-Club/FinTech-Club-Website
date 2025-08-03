@@ -13,8 +13,9 @@ const config: Config = {
     theme: {
         extend: tailwindExtendedThemeConfig,
         backgroundImage: {
-        'fintech-gradient': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75))',
+        'fintech-gradient': 'linear-gradient(to top, rgba(220, 185, 104, 0.9),  rgba(71, 74, 110, 0.8)), url("https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ClubDay.png")',
         'gradient-over-image': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75)), url("https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ClubDay.png")',
+        'gradient-no-image': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75)))',
         },
         colors: {
             transparent: 'transparent',
