@@ -175,9 +175,14 @@ function SpecificPodcast() {
               </div>
             ))}
             <div className="pt-5">
-              <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold">
-                <a href="app/(frontend)/(router)/media/article/components/articleLibrary.tsx">Back to Podcast Library</a>
-              </button>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+              >
+                <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold">
+                  <a href="app/(frontend)/(router)/media/article/components/articleLibrary.tsx">Back to Podcast Library</a>
+                </button>
+              </motion.div>
             </div>
           </div>
 
@@ -249,9 +254,14 @@ function SpecificPodcast() {
                     <div className=" text-base inline-block p-1 bg-blueSoft text-[#2C305F] rounded-lg text-[24px] font-medium hover:underline "> Author: {item.author}</div>
                   </div>
                   <div className="pt-5">
-                    <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold border-t-[#5E5E92]">
-                      <a href="app/(frontend)/(router)/media/article/components/articleLibrary.tsx">Back to Podcast Library</a>
-                    </button>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.8 }}
+                    >
+                      <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold border-t-[#5E5E92]">
+                        <a href="app/(frontend)/(router)/media/article/components/articleLibrary.tsx">Back to Podcast Library</a>
+                      </button>
+                    </motion.div>
                   </div>
 
                 </div>

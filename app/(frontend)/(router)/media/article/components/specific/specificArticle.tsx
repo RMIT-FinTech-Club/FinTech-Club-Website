@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Temporaryelement {
   id: number;
@@ -183,9 +183,14 @@ const SpecificArticle = () => {
               </div>
             ))}
             <div className="pt-5">
-              <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold">
-                <a href="">Back to Article Library</a>
-              </button>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+              >
+                <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold">
+                  <a href="">Back to Article Library</a>
+                </button>
+              </motion.div>
             </div>
           </div>
 
@@ -243,9 +248,14 @@ const SpecificArticle = () => {
                 <a href="" className=""> pdf here </a>
               </div>
               <div className="pt-5 flex justify-center">
-                <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold">
-                  <a href="app/(frontend)/(router)/media/article/components/articleLibrary.tsx">Back to Article Library</a>
-                </button>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.8 }}
+                >
+                  <button className="w-[315px] h-[60px] bg-[#F0EDFF] text-[#2C305F] rounded-lg text-[24px] font-semibold">
+                    <a href="app/(frontend)/(router)/media/article/components/articleLibrary.tsx">Back to Article Library</a>
+                  </button>
+                </motion.div>
               </div>
 
             </div>
