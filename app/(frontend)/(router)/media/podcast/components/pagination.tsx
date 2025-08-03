@@ -2,11 +2,16 @@ import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-export default function PaginationRounded() {
-  const [page, setPage] = React.useState(1); // Track current page
+interface PaginationRoundedProps {
+  page: number;
+  onPageChange: (value: number) => void;
+  count: number;
+}
 
+export default function PaginationRounded({ page, onPageChange, count }: PaginationRoundedProps) {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value); // Update page on change
+    console.log(`Page changed to: ${value}`);
+    onPageChange(value); // Update page via parent callback
   };
 
   return (
@@ -20,8 +25,8 @@ export default function PaginationRounded() {
         onChange={handleChange} 
         variant="outlined"
         shape="rounded"
-        siblingCount={0} // Show 2 siblings on each side (e.g., 1, 2, 3, 4, 5 for page 3)
-        boundaryCount={1} // Show 2 boundary pages (e.g., 1, 2 for start, 9, 10 for end)
+        siblingCount={0} // Show 0 siblings on each side (e.g., 1, 2, 3, 4, 5 for page 3)
+        boundaryCount={1} // Show 1 boundary pages (e.g., 1, 2 for start, 9, 10 for end)
         sx={{
           "& .MuiPaginationItem-root": {
             color: "#2C305F", 
