@@ -274,6 +274,7 @@ const SpecificArticle = () => {
                 </div>
               </div>
               {/* related part */}
+
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col font-bold text-[#A28436] pt-10 text-[48px] gap-4  " >
                   <h5> Related Articles </h5>
@@ -294,6 +295,11 @@ const SpecificArticle = () => {
                   <div className="bg-[#DBB968] h-1/3 rounded-b-lg p-2"> jjdhkfkmd </div>
                 </div>
               </div>
+
+              <div className="">
+                <img src="Bear-half-body-left-side.svg"></img>
+              </div>
+
             </div>
           </div>
         </div>

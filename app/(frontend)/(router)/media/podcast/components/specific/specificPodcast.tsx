@@ -235,6 +235,9 @@ function SpecificPodcast() {
           </div>
 
           {/* main part */}
+          <div className="absolute pl-[80vw] pt-96 ">
+              <img src="bear-right-side.svg"></img>
+            </div>
           <div className="flex">
             <div className="max-w-[850px]">
               {article.map(item => (
@@ -288,7 +291,6 @@ function SpecificPodcast() {
                 <div className=" w-1/3 bg-blueMist rounded-xl overflow-hidden "> img </div>
                 <div className="bg-[#DBB968] w-2/3 p-2 "> title date {/*article.title*/} </div>
               </div>
-
             </div>
           </div>
         </div>
