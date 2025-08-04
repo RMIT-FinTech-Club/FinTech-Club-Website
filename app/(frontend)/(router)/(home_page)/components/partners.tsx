@@ -4,7 +4,7 @@ import PartnersDiv from "@/components/home/PartnersDiv"
 
 function Partners() {
 	return (
-		<div className="h-[100dvh] relative flex items-center">
+		<div className="w-[100vw] h-[100dvh] relative flex items-center">
 			<PartnersCircle />
 			<PartnersDiv />
 		</div>
