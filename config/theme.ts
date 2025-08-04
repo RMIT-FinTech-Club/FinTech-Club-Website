@@ -59,6 +59,7 @@ export const nextuiThemeConfig = {
                     danger: "#BB2649",
 
                     // Not sure what's this for but imma keep it
+                    // Buddy i dont know if we are even using this file but imma keep it
                     supporting: {
                         pink: "#EDCDC2",
                         lightpink: "#D4CACD",
