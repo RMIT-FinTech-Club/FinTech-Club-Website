@@ -109,7 +109,7 @@ const MaskImage: React.FC<MaskImageProps> = () => {
       width={1000}
       height={1000}
       className="object-cover w-full"
-      src="https://d2prwyp3rwi40.cloudfront.net/home/assets/KeyMetrics-Edited.png"
+      src="https://d2prwyp3rwi40.cloudfront.net/home/assets/KeyMetrics-EditedVersion.png"
       alt="FinTech Club Key Metrics"
       fetchPriority="high"
       priority={true}
