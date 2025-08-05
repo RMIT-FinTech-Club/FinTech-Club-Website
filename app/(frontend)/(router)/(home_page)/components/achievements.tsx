@@ -68,7 +68,7 @@ const Achievements = () => {
         <h2 className="text-[2.5rem] font-bold text-[#2C305F] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Achievement
         </h2>
-        <h3 className="text-[4rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+        <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Best Club of Semester
         </h3>
         <p className="text-[2.5rem] font-bold text-[#5E5E92] pt-[1rem] pl-[48rem]">
@@ -95,7 +95,7 @@ const Achievements = () => {
           className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
         />
         <div>
-          <h3 className="text-[4rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+          <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
             Innovation Award
           </h3>
           <p className="text-[2.5rem] font-bold text-[#5E5E92] leading-[5rem]">
@@ -105,14 +105,14 @@ const Achievements = () => {
       </div>
 
       <div className="pl-[5rem] mt-[2rem]">
-        <h3 className="pt-[2rem] text-[4rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+        <h3 className="pt-[2rem] text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Publicity Award
         </h3>
         <p className="mt-0 text-[2.5rem] font-bold text-[#5E5E92] leading-[5rem]">
           2024
         </p>
         <div className="flex flex-col md:flex-row gap-[7rem] relative">
-          <div className="absolute z-10 left-[39rem] top-[-2.3rem] rotate-[-5deg]">
+          <div className="absolute z-10 left-[37rem] top-[-6.3rem] rotate-[-5deg]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="70"
@@ -126,7 +126,7 @@ const Achievements = () => {
               />
             </svg>
           </div>
-          <div className="absolute z-10 left-[44rem] top-[1.5rem] rotate-[-5deg]">
+          <div className="absolute z-10 left-[42rem] top-[-2.5rem] rotate-[-5deg]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -143,7 +143,7 @@ const Achievements = () => {
           <p className=""></p>
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
-            className="object-cover w-[36rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200 z-0"
+            className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
           />
         </div>
       </div>
@@ -197,7 +197,7 @@ const CARD_STACK = ({
     <motion.img
       src={image}
       alt={`Achievement ${id}`}
-      className="mt-[25rem] object-cover w-[36rem] hover:cursor-grab active:cursor-grabbing rounded-lg"
+      className="mt-[25rem] object-cover w-[32rem] hover:cursor-grab active:cursor-grabbing rounded-lg"
       style={{
         position: "absolute",
         x: isFront ? x : -offset * 30, // Overlap from right to left
