@@ -211,7 +211,7 @@ const hospitalityPartners: PartnerLogo[] = [
 const charityPartners: PartnerLogo[] = [
   {
     id: 1,
-    url: "https://d2prwyp3rwi40.cloudfront.net/home/partners/charity/Assist.png",
+    url: "https://d2prwyp3rwi40.cloudfront.net/home/partners/charity/Assist-New.png",
     alt: "Assist",
   },
   {
@@ -239,14 +239,13 @@ const otherPartners: PartnerLogo[] = [
   },
 ];
 
-
 export default function PartnersDiv({ items }: PartnersDivProps) {
   const activeItem = items[3];
 
   return (
     <div className="mr-[8.5vw] ml-auto">
-      <h5 className="ml-[1.5rem] mb-[1.5rem] font-bold">Partners</h5>
-      <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[90vh] rounded-[2vw] p-[1vw]">
+      <h5 className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] font-bold">Partners</h5>
+      <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[88vh] rounded-[2vw] p-[1vw]">
         <div className="w-full h-full rounded-[1vw] bg-white flex justify-center items-center">
           {/* Display content based on the active item */}
           {activeItem.id === 4 && (
@@ -307,72 +306,84 @@ export default function PartnersDiv({ items }: PartnersDivProps) {
           )}
 
           {activeItem.id === 3 && (
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
+            <div className="w-full h-full flex flex-col">
+              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
                 Academic
               </h6>
-              <div className="flex flex-row justify-center gap-8 px-[4rem] py-[1rem] pb-0 max-h-[65vh]">
-                {academicPartners.map((partner) => (
-                  <Image
-                    key={partner.id}
-                    src={partner.url}
-                    alt={partner.alt}
-                    className="h-[7rem] w-auto object-contain"
-                  />
-                ))}
+
+              <div className="flex-1 flex items-center justify-center">
+                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
+                  {academicPartners.map((partner) => (
+                    <Image
+                      key={partner.id}
+                      src={partner.url}
+                      alt={partner.alt}
+                      className="h-[7rem] w-auto object-contain"
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )}
 
           {activeItem.id === 2 && (
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
+            <div className="w-full h-full flex flex-col">
+              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
                 Hospitality
               </h6>
-              <div className="flex flex-row justify-center gap-8 px-[4rem] py-[1rem] pb-0 max-h-[65vh]">
-                {hospitalityPartners.map((partner) => (
-                  <Image
-                    key={partner.id}
-                    src={partner.url}
-                    alt={partner.alt}
-                    className="h-[7rem] w-auto object-contain"
-                  />
-                ))}
+
+              <div className="flex-1 flex items-center justify-center">
+                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
+                  {hospitalityPartners.map((partner) => (
+                    <Image
+                      key={partner.id}
+                      src={partner.url}
+                      alt={partner.alt}
+                      className="h-[10rem] w-auto object-contain"
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )}
 
           {activeItem.id === 6 && (
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
+            <div className="w-full h-full flex flex-col">
+              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
                 Charity Organizations
               </h6>
-              <div className="flex flex-row justify-center gap-8 px-[4rem] py-[1rem] pb-0 max-h-[65vh]">
-                {charityPartners.map((partner) => (
-                  <Image
-                    key={partner.id}
-                    src={partner.url}
-                    alt={partner.alt}
-                    className="h-[7rem] w-auto object-contain"
-                  />
-                ))}
+
+              <div className="flex-1 flex items-center justify-center">
+                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
+                  {charityPartners.map((partner) => (
+                    <Image
+                      key={partner.id}
+                      src={partner.url}
+                      alt={partner.alt}
+                      className="h-[10rem] w-auto object-contain"
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )}
           {(activeItem.id === 7 || activeItem.id === 1) && (
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
+            <div className="w-full h-full flex flex-col">
+              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
                 Other Partners
               </h6>
-              <div className="flex flex-row justify-center gap-8 px-[4rem] py-[1rem] pb-0 max-h-[65vh]">
-                {otherPartners.map((partner) => (
-                  <Image
-                    key={partner.id}
-                    src={partner.url}
-                    alt={partner.alt}
-                    className="h-[7rem] w-auto object-contain"
-                  />
-                ))}
+
+              <div className="flex-1 flex items-center justify-center">
+                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
+                  {otherPartners.map((partner) => (
+                    <Image
+                      key={partner.id}
+                      src={partner.url}
+                      alt={partner.alt}
+                      className="h-[12rem] w-auto object-contain"
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )}

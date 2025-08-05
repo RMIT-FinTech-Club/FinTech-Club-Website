@@ -18,7 +18,7 @@ export default function PartnersCircle({
   animating,
 }: PartnersCircleProps) {
   return (
-    <div className="absolute h-[80vh] w-[40vw] border-[0.2vw] border-[#000] rounded-[50%] top-[50%] translate-y-[-50%] left-[-20vw]">
+    <div className="absolute h-[80vh] w-[40vw] border-[0.2vw] border-[#000] rounded-[50%] top-[50%] translate-y-[-52%] left-[-20vw]">
       {items.map((item, index) => (
         <div
           key={item.id}

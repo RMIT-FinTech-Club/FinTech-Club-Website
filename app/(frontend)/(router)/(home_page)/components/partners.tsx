@@ -69,7 +69,7 @@ export default function Partners() {
   };
 
   return (
-    <div className="w-[100vw] h-[40rem] bg-[#F9FAFB] relative flex items-center">
+    <div className="w-[100vw] h-fit min-h-[35vh] bg-[#F9FAFB] py-16 relative flex items-center">
       <PartnersCircle
         items={items}
         handleClick={handleClick}
