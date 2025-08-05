@@ -53,7 +53,7 @@ const ManagementBoard = () => {
     return (
       <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
         <main className="mx-[64px] 2xl:mx-[10rem]">
-          <div className="grid text-right">
+          <div className="content grid text-right">
             <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
               Meet Our
             </h2>
