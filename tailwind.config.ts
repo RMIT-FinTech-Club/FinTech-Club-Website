@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import { heroui } from "@heroui/react";
 import {
-  nextuiThemeConfig,
+  uiThemeConfig,
   responsiveStylingConfig,
   tailwindExtendedThemeConfig,
 } from "./config/theme";
@@ -46,7 +46,7 @@ const config: Config = {
   },
   darkMode: "class",
   plugins: [
-    heroui(nextuiThemeConfig),
+    heroui(uiThemeConfig),
     responsiveStyling(responsiveStylingConfig),
     orientationPlugin,
   ],
