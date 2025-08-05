@@ -7,15 +7,15 @@ export default function Hero() {
       <section className="h-[95vh]">
         <div className="w-full h-full flex gap-4 items-center">
           {/* Left Column */}
-          <div className="w-[56%] h-full bg-[#4A407D] rounded-br-large flex flex-col justify-center px-32 text-white">
+          <div className="w-[56%] h-full bg-ft-primary-blue-400 rounded-br-large flex flex-col justify-center px-32 text-ft-primary-blue-100">
             <div className="flex gap-3 mb-6">
-              <Chip className="bg-[#D8B35A]">Label 1</Chip>
-              <Chip className="bg-[#D8B35A]">Another Label</Chip>
+              <Chip className="bg-ft-primary-blue-100">Label 1</Chip>
+              <Chip className="bg-ft-primary-blue-100">Another Label</Chip>
             </div>
 
             <div className="flex items-center gap-4 mb-6">
               <h1 className="text-4xl lg:text-5xl font-bold">Project Title</h1>
-              <Chip className="bg-[#D8B35A]">Ongoing</Chip>
+              <Chip className="bg-ft-primary-yellow-200">Ongoing</Chip>
             </div>
 
             <p className="text-white/90 text-lg mb-8 leading-relaxed text-justify">
@@ -31,7 +31,7 @@ export default function Hero() {
             <Button
               as={Link}
               href="/projects"
-              className="bg-[#F3F2F9] hover:bg-[#F3F2F9]/90 text-black rounded-lg px-6 w-fit text-md"
+              className="bg-ft-primary-blue-100 hover:bg-ft-primary-blue-100/90 text-black rounded-lg px-6 w-fit text-md"
             >
               Back to Projects
             </Button>
@@ -41,7 +41,7 @@ export default function Hero() {
           <div className="flex flex-col justify-between h-full flex-1 gap-4">
             <div className="h-[75%] bg-foreground-500 rounded-bl-large"></div>
 
-            <div className="flex-1 bg-foreground-500 rounded-tl-large rounded-bl-large"></div>
+            <div className="flex-1 bg-ft-primary-yellow-500 rounded-tl-large rounded-bl-large"></div>
           </div>
         </div>
       </section>
