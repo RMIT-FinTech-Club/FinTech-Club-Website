@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import { heroui } from "@heroui/react";
 import {
   uiThemeConfig,
-  responsiveStylingConfig,
+  stylingConfig,
   tailwindExtendedThemeConfig,
 } from "./config/theme";
 import responsiveStyling, {
@@ -47,7 +47,7 @@ const config: Config = {
   darkMode: "class",
   plugins: [
     heroui(uiThemeConfig),
-    responsiveStyling(responsiveStylingConfig),
+    responsiveStyling(stylingConfig),
     orientationPlugin,
   ],
 };

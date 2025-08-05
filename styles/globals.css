@@ -8,25 +8,27 @@
     font-family: "Poppins", system-ui, sans-serif;
   }
 
-  p {
+  /* p {
     @apply text-ft-body-1;
-  }
-  h1 {
+  } */
+
+  /* Scope custom typography to content areas only, not UI components */
+  .content h1 {
     @apply text-ft-heading-1;
   }
-  h2 {
+  .content h2 {
     @apply text-ft-heading-2;
   }
-  h3 {
+  .content h3 {
     @apply text-ft-heading-3;
   }
-  h4 {
+  .content h4 {
     @apply text-ft-heading-4;
   }
-  h5 {
+  .content h5 {
     @apply text-ft-heading-5;
   }
-  h6 {
+  .content h6 {
     @apply text-ft-heading-6;
   }
 }
@@ -46,6 +48,7 @@
 .card:hover > .card-content {
   bottom: 3%;
 }
+
 @media screen and (max-width: 768px) {
   .mascot {
     display: none;
