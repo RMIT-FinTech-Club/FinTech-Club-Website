@@ -12,7 +12,7 @@ const IntroSection = () => {
 
   return (
     <section className="flex flex-col bg-[#F9FAFB] md:flex-row items-center gap-6 w-full p-6 md:p-14">
-	  {/* Left text */}
+      {/* Left text */}
       <div
         ref={ref}
         className="grid grid-rows-2 md:w-1/3 justify-center gap-y-16"
@@ -103,13 +103,13 @@ type MaskImageProps = {
   maskRepeat?: string;
 };
 
-const MaskImage: React.FC<MaskImageProps> = () => {
+const MaskImage: React.FC<MaskImageProps> = ({ src }) => {
   return (
     <Image
       width={1000}
       height={1000}
       className="object-cover w-full"
-      src="https://d2prwyp3rwi40.cloudfront.net/home/assets/KeyMetrics-Edited.png"
+      src={src}
       alt="FinTech Club Key Metrics"
       fetchPriority="high"
       priority={true}

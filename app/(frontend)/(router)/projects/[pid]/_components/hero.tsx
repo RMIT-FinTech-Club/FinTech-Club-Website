@@ -9,8 +9,8 @@ export default function Hero() {
           {/* Left Column */}
           <div className="w-[56%] h-full bg-[#4A407D] rounded-br-large flex flex-col justify-center px-32 text-white">
             <div className="flex gap-3 mb-6">
-              <Chip>Label 1</Chip>
-              <Chip>Another Label</Chip>
+              <Chip className="bg-[#D8B35A]">Label 1</Chip>
+              <Chip className="bg-[#D8B35A]">Another Label</Chip>
             </div>
 
             <div className="flex items-center gap-4 mb-6">

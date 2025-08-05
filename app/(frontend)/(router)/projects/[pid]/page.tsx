@@ -13,6 +13,7 @@ import {
 import { Accordion, AccordionItem } from "@heroui/react";
 import Image from "next/image";
 import Hero from "./_components/hero";
+import TeamStructure from "./_components/team-structure";
 
 export default function ProjectDetail() {
   const [openAccordion, setOpenAccordion] = useState<string>("development");
@@ -100,73 +101,7 @@ export default function ProjectDetail() {
       </section>
 
       {/* Team Structure Section */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            Team Structure
-          </h2>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="max-w-[400px]">
-              <CardHeader className="flex gap-3">
-                {/* <Image
-                  alt="heroui logo"
-                  height={40}
-                  radius="sm"
-                  src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                  width={40}
-                /> */}
-                <div className="flex flex-col">
-                  <p className="text-md">HeroUI</p>
-                  <p className="text-small text-default-500">heroui.com</p>
-                </div>
-              </CardHeader>
-              <Divider />
-              <CardBody>
-                <p>
-                  Make beautiful websites regardless of your design experience.
-                </p>
-              </CardBody>
-              <Divider />
-              <CardFooter>
-                <Link
-                  isExternal
-                  showAnchorIcon
-                  href="https://github.com/heroui-inc/heroui"
-                >
-                  Visit source code on GitHub.
-                </Link>
-              </CardFooter>
-            </Card>
-
-            {/* Accordion */}
-            <div className="space-y-4">
-              <Accordion selectionMode="multiple">
-                <AccordionItem
-                  key="1"
-                  aria-label="Accordion 1"
-                  title="Accordion 1"
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </AccordionItem>
-                <AccordionItem
-                  key="2"
-                  aria-label="Accordion 2"
-                  title="Accordion 2"
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </AccordionItem>
-                <AccordionItem
-                  key="3"
-                  aria-label="Accordion 3"
-                  title="Accordion 3"
-                >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </AccordionItem>
-              </Accordion>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TeamStructure />
 
       {/* Timeline Section */}
       <section className="bg-white py-16">
