@@ -63,7 +63,7 @@ const ExecuteBoard = () => {
             Meet Our
           </h2>
           <h1 className=" text-[#2C305F] text-[4.3rem]">Executive Board</h1>
-          <p className="leading-3 w-full text-[#000000]">
+          <p className="leading-8 w-full text-[#000000]">
             Meet the fierce, brilliant, and passionate minds behind the FinTech
             Club machine!
           </p>

@@ -66,7 +66,7 @@ export const ClubMentors = () => {
               </svg>
             </div>
 
-            <div className=" rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6 ">
+            <div className="rounded-[50px] w-[400px] h-[86px] bg-[#DBB968] mt-6 ">
               <div className="relative">
                 <div className=" absolute rounded-lg pl-[300px] pr-2 pt-1">
                   <div className="transition duration-300 transform hover:scale-110 hover:brightness-150 hover:drop-shadow-[0_0_6px_#FFEFCA]">

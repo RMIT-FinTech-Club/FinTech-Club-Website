@@ -10,7 +10,7 @@ export default function FinTechInTheEyes() {
           className="absolute w-[368px] -top-[10rem] right-[-8rem] rotate-[-50deg] z-30"
         />
       </div>
-      <section className="content max-w-screen flex justify-center mr-[5vw] items-center">
+      <section className="max-w-screen flex justify-center mr-[5vw] items-center">
         <div className="w-fit">
           <img
             src="https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png"
