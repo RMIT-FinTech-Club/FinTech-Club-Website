@@ -404,11 +404,24 @@ const CompetitionSchema = new Schema({
 
 const Project = mongoose.models?.Project || mongoose.model("Project", projectSchema);
 
-Project.discriminator("technical", TechnicalSchema);
-Project.discriminator("media", MediaSchema);
-Project.discriminator("event", EventSchema);
-Project.discriminator("community", CommunitySchema);
-Project.discriminator("career", CareerSchema);
-Project.discriminator("competition", CompetitionSchema);
+// Only create discriminators if they don't already exist
+if (!Project.discriminators?.technical) {
+  Project.discriminator("technical", TechnicalSchema);
+}
+if (!Project.discriminators?.media) {
+  Project.discriminator("media", MediaSchema);
+}
+if (!Project.discriminators?.event) {
+  Project.discriminator("event", EventSchema);
+}
+if (!Project.discriminators?.community) {
+  Project.discriminator("community", CommunitySchema);
+}
+if (!Project.discriminators?.career) {
+  Project.discriminator("career", CareerSchema);
+}
+if (!Project.discriminators?.competition) {
+  Project.discriminator("competition", CompetitionSchema);
+}
 
 export default Project;

@@ -1,13 +1,17 @@
-import Project from "../../models/project";
+import { NextResponse } from "next/server";
+import Project from "../models/project";
 import { Types } from "mongoose";
-import { invalidateCacheByPattern } from "../../libs/redis";
+import { invalidateCacheByPattern } from "../libs/redis";
+import { deleteFromS3 } from "../libs/aws_s3";
 
+// Validation helpers
 const cloudfrontUrlRegex = /^https?:\/\/(?:[a-zA-Z0-9\-]+\.)*cloudfront\.net\/.+/;
 const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const isCloudFrontUrl = (url: string) => cloudfrontUrlRegex.test(url);
 const isValidSlug = (slug: string) => slugRegex.test(slug);
 
+// S3 helpers
 const getFilePathFromUrl = (url: string): string | null => {
   try {
     const urlObj = new URL(url);
@@ -19,9 +23,10 @@ const getFilePathFromUrl = (url: string): string | null => {
 
 const deleteFileFromS3 = async (filePath: string): Promise<void> => {
   try {
-    console.log(`File deleted from S3: ${filePath}`);
+    await deleteFromS3(filePath);
   } catch (error) {
     console.error(`Failed to delete file from S3: ${filePath}`, error);
+    throw new Error(`S3 deletion failed: ${filePath}`);
   }
 };
 
@@ -98,6 +103,105 @@ const validateUrls = (data: any) => {
   }
 };
 
+export async function getLargeScaledOngoingProjects() {
+  try {
+    console.log("Querying for large-scaled ongoing projects...");
+    
+    const projects = await Project.find({
+      type: "large-scaled",
+      status: "ongoing"
+    })
+      .select('title description type status category labels image_url slug meta_title meta_description')
+      .sort({ created_at: -1 })
+      .limit(50)
+      .lean();
+
+    console.log(`Found ${projects.length} large-scaled ongoing projects`);
+    
+    return {
+      message: "Large-scaled ongoing projects retrieved successfully",
+      success: true,
+      data: projects.map(p => ({
+        title: p.title,
+        description: p.description,
+        type: p.type,
+        status: p.status,
+        category: p.category,
+        labels: p.labels,
+        image_url: p.image_url,
+        slug: p.slug,
+        meta_title: p.meta_title,
+        meta_description: p.meta_description
+      }))
+    };
+  } catch (error) {
+    console.error("Error in getLargeScaledOngoingProjects:", error);
+    throw error;
+  }
+}
+
+export async function getDepartmentProjects(department: string) {
+  try {
+    const [result] = await Project.aggregate([
+      { $match: { type: "department", status: "ongoing", department } },
+      { $sort: { created_at: -1 } },
+      { $limit: 50 },
+      {
+        $group: {
+          _id: "$department",
+          department: { $first: "$department" },
+          department_photo_url: { $first: "$department_photo_url" },
+          department_description: { $first: "$department_description" },
+          projects: {
+            $push: {
+              title: "$title",
+              description: "$description",
+              type: "$type",
+              status: "$status",
+              department: "$department",
+              category: "$category",
+              labels: "$labels",
+              image_url: "$image_url",
+              slug: "$slug",
+              meta_title: "$meta_title",
+              meta_description: "$meta_description"
+            }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      { $project: { _id: 0, department: 1, department_photo_url: 1, department_description: 1, projects: 1, count: 1 } }
+    ]);
+
+    return {
+      message: "Department projects retrieved successfully",
+      success: true,
+      data: result || {
+        department,
+        department_photo_url: "",
+        department_description: "",
+        projects: []
+      },
+      count: result?.count || 0,
+      cached: false
+    };
+
+  } catch (error) {
+    console.error("MongoDB aggregation error:", error);
+    throw new Error("Failed to retrieve department projects from database");
+  }
+}
+
+export async function getProjectDetails(idOrSlug: string) {
+  try {
+    const project = await getProjectByIdOrSlug(idOrSlug);
+    return project;
+  } catch (error) {
+    console.error("Error retrieving project details:", error);
+    throw new Error("Failed to retrieve project details from database");
+  }
+}
+
 export async function createProject(data: any) {
   if (!isValidSlug(data.slug)) throw new Error("Invalid slug format");
   
@@ -160,11 +264,11 @@ export async function deleteProject(idOrSlug: string) {
     
     await Project.findOneAndDelete(query);
     
-         // Clean up S3 files
-     const deletePromises = fileUrls
-       .map(url => getFilePathFromUrl(url))
-       .filter((filePath): filePath is string => filePath !== null)
-       .map(filePath => deleteFileFromS3(filePath));
+    // Clean up S3 files
+    const deletePromises = fileUrls
+      .map(url => getFilePathFromUrl(url))
+      .filter((filePath): filePath is string => filePath !== null)
+      .map(filePath => deleteFileFromS3(filePath));
     
     await Promise.allSettled(deletePromises);
     
@@ -175,5 +279,4 @@ export async function deleteProject(idOrSlug: string) {
   } catch (error) {
     throw new Error(`Failed to delete project: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
-}
-
+} 

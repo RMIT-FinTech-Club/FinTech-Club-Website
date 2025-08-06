@@ -53,7 +53,7 @@ export const invalidateCacheByPattern = async (pattern: string): Promise<void> =
     const keys = await redis.keys(pattern);
     if (keys.length > 0) {
       await redis.del(...keys);
-      console.log(`🗑️ Invalidated ${keys.length} cache keys matching pattern: ${pattern}`);
+      console.log(`Invalidated ${keys.length} cache keys matching pattern: ${pattern}`);
     }
   } catch (error) {
     console.error('Failed to invalidate cache:', error);
@@ -90,7 +90,6 @@ export const getCacheHeaders = (cacheHit: boolean, responseTime: number, ttl: nu
     'Cache-Control': `public, max-age=${ttl}`,
     'X-Cache': cacheHit ? 'HIT' : 'MISS',
     'X-Response-Time': `${responseTime}ms`,
-    'Content-Encoding': 'gzip'
   };
 };
 
@@ -101,7 +100,7 @@ export const withCaching = async <T>(
 ): Promise<{ data: T; cached: boolean; responseTime: number }> => {
   const timer = startTime();
   
-  // Try to get from cache first
+  // try to get from cache first
   const cachedData = await getFromCache(cacheKey);
   if (cachedData) {
     const responseTime = getResponseTime(timer);
