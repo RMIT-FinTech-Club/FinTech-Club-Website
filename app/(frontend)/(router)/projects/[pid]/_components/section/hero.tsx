@@ -1,4 +1,5 @@
 import { Button, Chip } from "@heroui/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
@@ -39,7 +40,15 @@ export default function Hero() {
 
           {/* Right Column */}
           <div className="flex flex-col justify-between h-full flex-1 gap-4">
-            <div className="h-[75%] bg-foreground-500 rounded-bl-large"></div>
+            <div className="h-[75%]">
+              <Image
+                src="/placeholder.svg"
+                alt="Bear Mascot Illustration"
+                width={500}
+                height={500}
+                className="w-full h-full object-contai rounded-bl-large"
+              />
+            </div>
 
             <div className="flex-1 bg-ft-primary-yellow-500 rounded-tl-large rounded-bl-large"></div>
           </div>
