@@ -7,13 +7,13 @@ const HeroSection = () => {
   return (
     <div className="w-screen bg-[#F9FAFB] lg:py-12 flex-col justify-start items-center p-side-margin-mobile md:p-20 gap-6 md:gap-12 flex">
       <div className=" justify-start items-center gap-6 md:gap-[60px] flex flex-col md:flex-row ">
-        <div className="w-full md:w-[45vw] h-full relative">
+        <div className="content w-full md:w-[45vw] h-full relative">
           <div className="absolute top-[2.5rem] right-[-1.5rem] w-[3rem] h-[3rem] bg-[#2C305F] rounded-full z-10"></div>
-      <div className="absolute top-[-2.25rem] right-[-0.25rem] w-[3rem] h-[3rem] bg-[#C9D6EA] rounded-full z-20"></div>
-      <div className="absolute top-[-1.5rem] right-[2.5rem] w-[3rem] h-[3rem] bg-[#DBB968] rounded-full z-10"></div>
-      <div className="absolute top-[-1.5rem] right-[-2.5rem] w-[3rem] h-[3rem] bg-[#2C305F] rounded-full z-10"></div>
-      <div className="absolute top-[2.25rem] right-[6rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
-      <div className="absolute top-[7.25rem] right-[-1.5rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
+          <div className="absolute top-[-2.25rem] right-[-0.25rem] w-[3rem] h-[3rem] bg-[#C9D6EA] rounded-full z-20"></div>
+          <div className="absolute top-[-1.5rem] right-[2.5rem] w-[3rem] h-[3rem] bg-[#DBB968] rounded-full z-10"></div>
+          <div className="absolute top-[-1.5rem] right-[-2.5rem] w-[3rem] h-[3rem] bg-[#2C305F] rounded-full z-10"></div>
+          <div className="absolute top-[2.25rem] right-[6rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
+          <div className="absolute top-[7.25rem] right-[-1.5rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
           <h5 className="font-bold">What is</h5>
           <h4 className="text-[#000A64] font-[1000] uppercase mt-[0.75rem] mb-[1.25rem]">
             <span className="text-[#DCB968]">Fin</span>Tech Club ?

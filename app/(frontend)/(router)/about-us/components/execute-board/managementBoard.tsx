@@ -53,7 +53,7 @@ const ManagementBoard = () => {
     return (
       <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
         <main className="mx-[64px] 2xl:mx-[10rem]">
-          <div className="grid text-right">
+          <div className="content grid text-right">
             <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
               Meet Our
             </h2>
@@ -92,12 +92,12 @@ const ManagementBoard = () => {
       <div className="absolute bottom-[3rem] right-[2.4rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
 
       <main className="mx-[64px] 2xl:mx-[10rem]">
-        <div className="grid text-right">
+        <div className="content grid text-right">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
             Meet Our
           </h2>
           <h1 className=" text-[#DCB968] text-[4.3rem]">Management Board</h1>
-          <p className="leading-3 w-full text-[#000000]">
+          <p className="leading-8 w-full text-[#000000]">
             Meet the talented representatives behind the four pillars of RMIT
             Vietnam FinTech Club!
           </p>
