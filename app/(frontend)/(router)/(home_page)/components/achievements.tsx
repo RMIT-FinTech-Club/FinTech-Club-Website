@@ -68,7 +68,7 @@ const Achievements = () => {
         <h2 className="text-[2.5rem] font-bold text-[#2C305F] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Achievement
         </h2>
-        <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+        <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[6rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Best Club of Semester
         </h3>
         <p className="text-[2.5rem] font-bold text-[#5E5E92] pt-[1rem] pl-[48rem]">

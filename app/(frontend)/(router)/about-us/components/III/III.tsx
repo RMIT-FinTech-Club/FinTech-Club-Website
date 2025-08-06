@@ -46,22 +46,22 @@ function III() {
   return (
     <section
       ref={ref}
-      className="relative bg-[#F9FAFB] bg-cover bg-center pt-[52rem]"
+      className="content relative bg-[#F9FAFB] bg-cover bg-center pt-[52rem]"
     >
-      <h4 className="absolute bg-[#2C305F] text-white p-[1rem] w-[60rem] h-[6rem] top-12 rounded-br-3xl text-center shadow-2xl">
+      <h1 className="absolute bg-[#2C305F] text-[6rem] text-white p-[1rem] w-[60rem] h-[6rem] top-12 rounded-br-3xl text-center shadow-2xl">
         WHAT WE TRULY BELIEVE IN
-      </h4>
+      </h1>
 
-      <div className="absolute -translate-y-[41.5rem] z-10">
+      <div className="absolute -translate-y-[41.5rem] z-20">
         <div className="grid grid-cols-[1fr,auto,1fr] grid-rows-3 w-[100vw] h-fit">
           {/* Row 1 */}
           <h2 className="text-[4rem]"> </h2>
-          <div className="flex items-center justify-center w-fit py-[1.65rem]">
-            <h2 className="text-[#2C305F] text-[6rem]">I</h2>
+          <div className="flex items-center justify-center w-fit py-[1.7rem]">
+            <h1 className="text-[#2C305F] !text-[5rem]">I</h1>
           </div>
-          <div className="flex items-center justify-start flex-1 py-[1.65rem] overflow-hidden">
+          <div className="flex items-center justify-start flex-1 overflow-hidden">
             <motion.h2
-              className="text-[#5E5E92] text-[4rem]"
+              className="text-[#5E5E92] font-extrabold text-[4rem]"
               variants={fromLeft}
               initial="hidden"
               animate={controls}
@@ -71,7 +71,7 @@ function III() {
           </div>
 
           {/* Row 2 */}
-          <div className="flex items-center justify-end flex-1 py-[1.65rem] overflow-hidden">
+          <div className="flex items-center justify-end flex-1 py-[1.9rem] overflow-hidden">
             <motion.h2
               className="text-[#5E5E92] text-[4rem]"
               variants={fromRight}
@@ -81,10 +81,10 @@ function III() {
               INCUBAT
             </motion.h2>
           </div>
-          <div className="flex items-center justify-center w-fit py-[1.65rem]">
-            <h2 className="text-[#2C305F] text-[6rem]">I</h2>
+          <div className="flex items-center justify-center w-fit py-[1.9rem]">
+            <h1 className="text-[#2C305F] !text-[5rem]">I</h1>
           </div>
-          <div className="flex items-center justify-start flex-1 py-[1.65rem] overflow-hidden">
+          <div className="flex items-center justify-start flex-1 py-[1.9rem] overflow-hidden">
             <motion.h2
               className="text-[#5E5E92] text-[4rem]"
               variants={fromLeft}
@@ -96,7 +96,7 @@ function III() {
           </div>
 
           {/* Row 3 */}
-          <div className="flex items-center justify-end flex-1 py-[1.65rem] overflow-hidden">
+          <div className="flex items-center justify-end flex-1 py-[1.9rem] overflow-hidden">
             <motion.h2
               className="text-[#5E5E92] text-[4rem]"
               variants={fromRight}
@@ -106,10 +106,10 @@ function III() {
               INSP
             </motion.h2>
           </div>
-          <div className="flex items-center justify-center w-fit py-[1.65rem]">
-            <h2 className="text-[#2C305F] text-[6rem]">I</h2>
+          <div className="flex items-center justify-center w-fit py-[1.9rem]">
+            <h1 className="text-[#2C305F] !text-[5rem]">I</h1>
           </div>
-          <div className="flex items-center justify-start flex-1 py-[1.65rem] overflow-hidden">
+          <div className="flex items-center justify-start flex-1 py-[1.9rem] overflow-hidden">
             <motion.h2
               className="text-[#5E5E92] text-[4rem]"
               variants={fromLeft}
@@ -122,7 +122,7 @@ function III() {
         </div>
       </div>
 
-      <div className="absolute -translate-y-[42rem] z-20">
+      <div className="absolute -translate-y-[42rem] z-10">
         <div className="grid grid-cols-[1fr,auto,1fr] grid-rows-3 w-[100vw] h-fit">
           {/* Row 1 */}
           <div className="relative flex items-center justify-end flex-1 mt-4 overflow-hidden">

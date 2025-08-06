@@ -3,11 +3,11 @@ import { Button } from "@heroui/react";
 function Overview() {
   return (
     <div className="bg-[#2C305F] bg-gradient-to-t from-[#2C305F] to-[#5E5E92]">
-      <div className="absolute bottom-[-9rem] right-[5rem] w-[4rem] h-[4rem] bg-[#F0EDFF] rounded-full z-10"></div>
-      <div className="absolute bottom-[1rem] right-[-1rem] w-[4rem] h-[4rem] bg-[#A28436] rounded-full z-10"></div>
-      <div className="absolute bottom-[-6rem] right-[-1rem] w-[8rem] h-[8rem] bg-[#DCB968] rounded-full z-20"></div>
-      <div className="absolute bottom-[0rem] right-[6.5rem] w-[2.5rem] h-[2.5rem] bg-[#F0EDFF] rounded-full z-10"></div>
-      <div className="absolute bottom-[-2rem] right-[12rem] w-[2.5rem] h-[2.5rem] bg-gradient-to-t from-[#999] to-[#FFF] rounded-full z-10"></div>
+      <div className="absolute bottom-[-11rem] right-[5rem] w-[4rem] h-[4rem] bg-[#F0EDFF] rounded-full z-10"></div>
+      <div className="absolute bottom-[-1rem] right-[-1rem] w-[4rem] h-[4rem] bg-[#A28436] rounded-full z-10"></div>
+      <div className="absolute bottom-[-8rem] right-[-1rem] w-[8rem] h-[8rem] bg-[#DCB968] rounded-full z-20"></div>
+      <div className="absolute bottom-[-2rem] right-[6.5rem] w-[2.5rem] h-[2.5rem] bg-[#F0EDFF] rounded-full z-10"></div>
+      <div className="absolute bottom-[-4rem] right-[12rem] w-[2.5rem] h-[2.5rem] bg-gradient-to-t from-[#999] to-[#FFF] rounded-full z-10"></div>
 
       {/* Main content container */}
       <section className="pt-[3rem] pb-[6rem] flex justify-center gap-[3rem] items-center">
@@ -102,7 +102,7 @@ function Overview() {
           <img
             src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
             alt="Bear mascot"
-            className="absolute w-[17rem] bottom-[0rem] right-[-9rem] rotate-[40deg] z-0"
+            className="absolute w-[17rem] bottom-[-0.5rem] right-[-9rem] rotate-[40deg] z-0"
           />
           <div className="absolute z-40 right-[-2rem] top-[8rem]">
             <svg
