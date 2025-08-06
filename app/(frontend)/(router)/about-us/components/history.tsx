@@ -103,17 +103,18 @@ export default function HistorySection() {
 
         {/* Header */}
         <div>
-          <h3
-            className={`text-xl text-[#2C305F] font-medium ${fontSans.style}`}
+          <h5
+            className={`text-[1.5rem] text-[#2C305F] font-semibold ${fontSans.style}`}
           >
             BACK TO TIME
-          </h3>
-          <h1 className={`leading-[4rem] text-[3rem] font-bold mt-2`}>
+          </h5>
+          <h3 className={`leading-[3rem] text-[3rem] font-bold mt-2`}>
             <span className="text-[#2C305F]">Discover the </span>
             <span className="text-[#DCB968]">FINTECH CLUB </span>
-            <br />
-            <span className=" pt-[2rem] text-[#97ABD6]">Story & History</span>
-          </h1>
+          </h3>
+          <h3 className="leading-[3rem] text-[3rem] font-bold mt-4 text-[#97ABD6]">
+            Story & History
+          </h3>
         </div>
 
         {/* YEAR SECTION */}
@@ -174,11 +175,11 @@ export default function HistorySection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
         >
-          <h2
+          <h4
             className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}
           >
             {historyData[centerSlideIndex].title}
-          </h2>
+          </h4>
           <p
             className={`text-justify text-[#000] text-lg px-[3.5rem] ${fontSans.style}`}
           >

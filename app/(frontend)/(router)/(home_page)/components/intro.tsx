@@ -11,7 +11,7 @@ const IntroSection = () => {
   });
 
   return (
-    <section className="flex flex-col bg-[#F9FAFB] md:flex-row items-center gap-6 w-full p-6 md:p-14">
+    <section className="content flex flex-col bg-[#F9FAFB] md:flex-row items-center gap-6 w-full p-6 md:p-14">
       {/* Left text */}
       <div
         ref={ref}
@@ -54,7 +54,7 @@ const IntroSection = () => {
       {/* Image */}
       {/* <MaskImage src='/ImageMask.svg' /> */}
       <div className="md:w-1/3 aspect-[1/1.5] content-center">
-        <MaskImage src="/AchievementBg.png" />
+        <MaskImage src="https://d2prwyp3rwi40.cloudfront.net/home/assets/KeyMetrics-EditedVersion.png" />
       </div>
       {/* Right text */}
       <div className="grid grid-rows-2 md:w-1/3 justify-center gap-y-16">

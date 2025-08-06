@@ -58,12 +58,12 @@ const ExecuteBoard = () => {
       <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
       
       <main className="mx-[4rem] 2xl:mx-[10rem]">
-        <div className="grid">
+        <div className="content grid">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
             Meet Our
           </h2>
           <h1 className=" text-[#2C305F] text-[4.3rem]">Executive Board</h1>
-          <p className="leading-3 w-full text-[#000000]">
+          <p className="leading-8 w-full text-[#000000]">
             Meet the fierce, brilliant, and passionate minds behind the FinTech
             Club machine!
           </p>
