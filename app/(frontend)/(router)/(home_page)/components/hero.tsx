@@ -14,8 +14,8 @@ const HeroSection = () => {
           <div className="absolute top-[-1.5rem] right-[-2.5rem] w-[3rem] h-[3rem] bg-[#2C305F] rounded-full z-10"></div>
           <div className="absolute top-[2.25rem] right-[6rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
           <div className="absolute top-[7.25rem] right-[-1.5rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
-          <h5 className="font-bold">What is</h5>
-          <h4 className="text-[#000A64] font-[1000] uppercase mt-[0.75rem] mb-[1.25rem]">
+          <h5 className="!font-bold">What is</h5>
+          <h4 className="text-[#000A64] !font-black uppercase mt-[0.75rem] mb-[1.25rem]">
             <span className="text-[#DCB968]">Fin</span>Tech Club ?
           </h4>
 
@@ -60,34 +60,34 @@ const HeroSection = () => {
               Our Core Activities
             </p>
             <div className="flex flex-row mt-2 justify-between items-center">
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Projects
               </div>
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Events
               </div>
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Workshops
               </div>
             </div>
 
             <div className="flex flex-row mt-2 justify-center gap-4 items-center">
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Competitions
               </div>
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Training
               </div>
             </div>
 
             <div className="flex flex-row mt-2 justify-between items-center">
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Networking
               </div>
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Media
               </div>
-              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0 rounded-[2rem]">
+              <div className="bg-[#F8DA92] p-3 text-center w-[11vw] border-0">
                 Bonding
               </div>
             </div>

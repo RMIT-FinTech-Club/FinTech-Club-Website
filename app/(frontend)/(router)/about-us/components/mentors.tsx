@@ -2,12 +2,12 @@ export const ClubMentors = () => {
   return (
     <div className="bg-[#F9FAFB]">
       <div className="relative z-10">
-        <div className="text-center pt-[4rem] font-sans font-bold text-7xl text-[#2C305F]">
+        <div className="text-center pt-[4rem] font-sans font-bold text-6xl text-[#2C305F]">
           OUR CLUB <span className="text-[#DBB968]"> MENTORS</span>
         </div>
       </div>
 
-      <div className="flex justify-around items-center pt-[6rem]">
+      <div className="flex justify-around items-center pt-[2rem]">
         <div className="bg-[#F9FAFB] flex flex-col place-items-center">
           <div className="font-bold text-2xl text-[#2C305F]">
             <span>Assoc. Prof. BINH NGUYEN</span>

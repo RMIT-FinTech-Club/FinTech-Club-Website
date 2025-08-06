@@ -111,8 +111,9 @@ export default function HistorySection() {
           <h3 className={`leading-[3rem] text-[3rem] font-bold mt-2`}>
             <span className="text-[#2C305F]">Discover the </span>
             <span className="text-[#DCB968]">FINTECH CLUB </span>
-            <br />
-            <span className=" pt-[2rem] text-[#97ABD6]">Story & History</span>
+          </h3>
+          <h3 className="leading-[3rem] text-[3rem] font-bold mt-4 text-[#97ABD6]">
+            Story & History
           </h3>
         </div>
 
