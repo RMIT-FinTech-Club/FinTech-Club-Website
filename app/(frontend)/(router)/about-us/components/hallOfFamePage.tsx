@@ -7,6 +7,7 @@ import HonoreePage from "./hall-components/honoreePage";
 import HallPage from "./hall-components/hallPage";
 import { useSemester } from './hall-components/hooks/useSemester';
 import ErrorFallback from "./hall-components/ErrorFallback";
+import HallRevealSection from "./hall-components/HallRevealSection";
 
 export default function HallOfFamePage() {
   const categories = ["Department MVP", "Academic Ace", "Project MVP", "Community Builder", "Rookie of the Semester", "Best Department", "Club MVP"]
@@ -39,6 +40,7 @@ export default function HallOfFamePage() {
 
     fetchMembers();
   }, []);
+  
 
   return (
   <>
@@ -55,11 +57,13 @@ export default function HallOfFamePage() {
           onBack={() => setSelectedCategory(null)}
         />
       ) : (
-        <HallPage
-          categories={categories}
-          semesters={semesters}
-          onCategorySelect={setSelectedCategory}
-        />
+        <HallRevealSection>
+          <HallPage
+            categories={categories}
+            semesters={semesters}
+            onCategorySelect={setSelectedCategory}
+          />
+        </HallRevealSection>
       )
     )}
   </>
