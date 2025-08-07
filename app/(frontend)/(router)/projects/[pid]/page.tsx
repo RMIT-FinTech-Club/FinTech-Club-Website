@@ -1,13 +1,14 @@
 "use client";
 
 import { Card, CardBody } from "@heroui/react";
-import Hero from "./_components/section/hero";
-import TeamStructure from "./_components/section/team-structure";
-import Goal from "./_components/section/goal";
-import Timeline from "./_components/section/timeline";
-import Gallery from "./_components/section/gallery";
-import ProductCta from "./_components/section/product-cta";
-import Scope from "./_components/section/scope";
+import Hero from "./_components/hero";
+import TeamStructure from "./_components/team-structure";
+import Goal from "./_components/goal";
+import Timeline from "./_components/technical/timeline";
+import Gallery from "./_components/gallery";
+import ProductCta from "./_components/technical/product-cta";
+import Scope from "./_components/scope";
+import ProductCarousel from "./_components/media/product-carousel";
 
 export default function ProjectDetail() {
   return (
@@ -31,6 +32,8 @@ export default function ProjectDetail() {
       <Gallery />
 
       <ProductCta />
+
+      <ProductCarousel />
     </div>
   );
 }

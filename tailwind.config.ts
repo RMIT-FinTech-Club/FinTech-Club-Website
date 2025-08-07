@@ -49,6 +49,7 @@ const config: Config = {
     heroui(uiThemeConfig),
     responsiveStyling(stylingConfig),
     orientationPlugin,
+    require("tailwindcss-animate"),
   ],
 };
 
