@@ -111,17 +111,20 @@ export default function HoFFilter({ semesters, onSelect, selectedLabel
                             {label}
                           </span>
                         </Select.ItemText>
+
                         <Select.ItemIndicator className="absolute right-3 top-1/2 -translate-y-1/2">
                           <CheckIcon />
                         </Select.ItemIndicator>
                       </Select.Item>
                     ))}
+                    
                   </Select.Viewport>
                 </motion.div>
               </Select.Content>
             </Select.Portal>
           )}
         </AnimatePresence>
+
       </div>
     </Select.Root>
   );

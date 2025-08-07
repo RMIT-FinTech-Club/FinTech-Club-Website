@@ -12,15 +12,15 @@ export default function HallRevealSection({ children }: { children: React.ReactN
 
   useEffect(() => {
     if (isInView) {
-      // Step 1: Grow center line
+      // Grow center line
       dotToLineControls.start("grow").then(() => {
-        // Step 2: Fade out line
+        // Fade out line
         dotToLineControls.start("disappear");
-        // Step 3: Start panel animations
+        // Start panel animations
         panelControls.start("visible");
       });
 
-      // Step 4: Cleanup
+      // Cleanup
       const timeout = setTimeout(() => setRevealDone(true), 2000);
       return () => clearTimeout(timeout);
     }
@@ -66,10 +66,10 @@ export default function HallRevealSection({ children }: { children: React.ReactN
 
   return (
     <div ref={ref} className="relative overflow-hidden min-h-screen bg-[#F9FAFB]">
-      {/* ✅ Content always visible underneath */}
+      {/* Content always visible underneath */}
       <div className="relative z-0">{children}</div>
 
-      {/* ✅ Animated overlay that moves away */}
+      {/* Animated overlay that moves away */}
       {!revealDone && (
         <div className="absolute inset-0 z-50 pointer-events-none flex items-center justify-center">
           {/* Left Panel */}
