@@ -13,7 +13,7 @@ const HallDisplay = ({
   const { semester, semesterLabel, setSemester } = useSemester();
 
   return (
-      <section className="relative py-10 overflow-hidden ">
+      <section className="relative py-10 overflow-hidden bg-[#F9FAFB]">
         <div className='flex flex-row justify-center'>
           {/* <div>
             <img src="/bear_sideway.svg" alt="Mascot" className="absolute left-0 top-1/3 z-10 h-2/6 sm:h-3/6 md:h-4/6 lg:h-full xl:h-full md:-translate-y-1/3 lg:-translate-y-1/3" />

@@ -17,7 +17,7 @@ const CategoryPage = ({
   }, [members, semester, category]);
 
   return (
-    <section className="relative pt-10 overflow-hidden ">
+    <section className="relative pt-10 overflow-hidden bg-[#F9FAFB]">
       <div className='flex flex-row justify-center'>
         {/* <div>
           <img src="/bear_sideway.svg" alt="Mascot" className="absolute left-0 top-1/3 z-10 h-2/6 sm:h-2/6 md:h-3/6 lg:h-4/6 xl:h-full md:-translate-y-1/3 lg:-translate-y-1/3" />
@@ -70,7 +70,7 @@ const CategoryPage = ({
         {/* <img src='/bubblesTop.svg' alt='decorTop' className="absolute top-0 right-0"/>
         <img src='/bubblesBottom.svg' alt='decorBottom' className="absolute bottom-0 right-0"/> */}
         {/* > lg (1024px and up) */}
-        <div className="hidden xl:block lg:block md:block">
+        {/* <div className="hidden xl:block lg:block md:block">
           <img
             src="/bubblesTop.svg"
             alt="decorTop"
@@ -81,10 +81,10 @@ const CategoryPage = ({
             alt="decorBottom"
             className="absolute bottom-0 right-0 h-[25%]"
           />
-        </div>
+        </div> */}
 
         {/* < md (smaller than 768px) */}
-        <div className="hidden sm:block">
+        {/* <div className="hidden sm:block">
           <img
             src="/bubblesTop.svg"
             alt="decorTop"
@@ -95,7 +95,7 @@ const CategoryPage = ({
             alt="decorBottom"
             className="absolute bottom-0 right-0 h-0"
           />
-        </div>
+        </div> */}
 
       </div>
     </section>

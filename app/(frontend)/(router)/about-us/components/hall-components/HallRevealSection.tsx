@@ -8,21 +8,24 @@ export default function HallRevealSection({ children }: { children: React.ReactN
 
   const panelControls = useAnimation();
   const dotToLineControls = useAnimation();
+  
   const [revealDone, setRevealDone] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      // Grow center line
+    const alreadyPlayed = sessionStorage.getItem("hallRevealPlayed");
+
+    if (isInView && !alreadyPlayed) {
       dotToLineControls.start("grow").then(() => {
-        // Fade out line
         dotToLineControls.start("disappear");
-        // Start panel animations
         panelControls.start("visible");
       });
 
-      // Cleanup
+      sessionStorage.setItem("hallRevealPlayed", "true");
+
       const timeout = setTimeout(() => setRevealDone(true), 2000);
       return () => clearTimeout(timeout);
+    } else if (alreadyPlayed) {
+      setRevealDone(true); // immediately hide overlay
     }
   }, [isInView]);
 
@@ -65,7 +68,7 @@ export default function HallRevealSection({ children }: { children: React.ReactN
   };
 
   return (
-    <div ref={ref} className="relative overflow-hidden min-h-screen bg-[#F9FAFB]">
+    <div ref={ref} className="relative overflow-hidden bg-[#F9FAFB]">
       {/* Content always visible underneath */}
       <div className="relative z-0">{children}</div>
 
