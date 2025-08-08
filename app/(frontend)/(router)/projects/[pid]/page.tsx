@@ -9,6 +9,7 @@ import Gallery from "./_components/gallery";
 import ProductCta from "./_components/technical/product-cta";
 import Scope from "./_components/scope";
 import ProductCarousel from "./_components/media/product-carousel";
+import KeyActivities from "./_components/event/key-activities";
 
 export default function ProjectDetail() {
   return (
@@ -34,6 +35,8 @@ export default function ProjectDetail() {
       <ProductCta />
 
       <ProductCarousel />
+
+      <KeyActivities />
     </div>
   );
 }

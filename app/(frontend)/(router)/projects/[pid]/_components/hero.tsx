@@ -29,13 +29,23 @@ export default function Hero() {
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
-            <Button
-              as={Link}
-              href="/projects"
-              className="bg-ft-primary-blue-100 hover:bg-ft-primary-blue-100/90 text-black rounded-lg px-6 w-fit text-md"
-            >
-              Back to Projects
-            </Button>
+            <div className="flex gap-4">
+              <Button
+                as={Link}
+                href="/projects"
+                className="bg-ft-primary-yellow-300 hover:bg-ft-primary-yellow-100/90 text-ft-primary-blue-500 rounded-lg px-6 w-fit text-md font-semibold"
+              >
+                Explore more
+              </Button>
+
+              <Button
+                as={Link}
+                href="/projects"
+                className="bg-ft-primary-blue-100 hover:bg-ft-primary-blue-100/90 text-ft-primary-blue-500 rounded-lg px-6 w-fit text-md font-semibold"
+              >
+                Back to Projects
+              </Button>
+            </div>
           </div>
 
           {/* Right Column */}
