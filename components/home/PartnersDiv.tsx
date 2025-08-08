@@ -243,7 +243,7 @@ export default function PartnersDiv({ items }: PartnersDivProps) {
   const activeItem = items[3];
 
   return (
-    <div className="mr-[8.5vw] ml-auto">
+    <div className="content mr-[8.5vw] ml-auto">
       <h5 className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] font-bold">Partners</h5>
       <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[88vh] rounded-[2vw] p-[1vw]">
         <div className="w-full h-full rounded-[1vw] bg-white flex justify-center items-center">
