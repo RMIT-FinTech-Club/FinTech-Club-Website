@@ -7,7 +7,6 @@ import {
 } from "@/app/(backend)/libs/redis";
 import { getProjectDetails, updateProject, deleteProject } from "@/app/(backend)/controllers/projectController";
 import { checkAdminAuth } from "@/app/(backend)/middleware/auth";
-import { uploadToS3 } from "@/app/(backend)/libs/aws_s3";
 
 export async function GET(
   req: NextRequest,
@@ -45,16 +44,7 @@ export async function PUT(
   try {
     await connectMongoDB();
     const { id } = params;
-    const formData = await req.formData();
-    const data = Object.fromEntries(formData.entries());
-    
-    // Handle image upload
-    const imageFile = formData.get("image") as File;
-    if (imageFile && imageFile.size > 0) {
-      const buffer = Buffer.from(await imageFile.arrayBuffer());
-      data.image_url = await uploadToS3(buffer, imageFile.name);
-    }
-
+    const data = await req.json();
     const project = await updateProject(id, data);
     return NextResponse.json({ status: 200, project });
   } catch (error) {

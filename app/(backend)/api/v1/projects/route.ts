@@ -7,7 +7,6 @@ import {
 } from "@/app/(backend)/libs/redis";
 import { getLargeScaledOngoingProjects, getDepartmentProjects, createProject, getProjectByIdOrSlug } from "@/app/(backend)/controllers/projectController";
 import { checkAdminAuth } from "@/app/(backend)/middleware/auth";
-import { uploadToS3 } from "@/app/(backend)/libs/aws_s3";
 
 export async function GET(req: NextRequest) {
   await connectMongoDB();
@@ -86,16 +85,7 @@ export async function POST(req: NextRequest) {
 
   try {
     await connectMongoDB();
-    const formData = await req.formData();
-    const data = Object.fromEntries(formData.entries());
-    
-    // Handle image upload
-    const imageFile = formData.get("image") as File;
-    if (imageFile && imageFile.size > 0) {
-      const buffer = Buffer.from(await imageFile.arrayBuffer());
-      data.image_url = await uploadToS3(buffer, imageFile.name);
-    }
-
+    const data = await req.json();
     const project = await createProject(data);
     return NextResponse.json({ status: 201, project });
   } catch (error) {
@@ -104,20 +94,4 @@ export async function POST(req: NextRequest) {
       message: "Error creating project"
     });
   }
-}
-
-export async function PUT() {
-  return NextResponse.json({
-    error: "Method not allowed",
-    success: false,
-    message: "PUT method is not supported for this endpoint"
-  }, { status: 405 });
-}
-
-export async function DELETE() {
-  return NextResponse.json({
-    error: "Method not allowed",
-    success: false,
-    message: "DELETE method is not supported for this endpoint"
-  }, { status: 405 });
 } 
