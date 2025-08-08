@@ -3884,6 +3884,12 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
+  react-visibility-sensor@5.1.1:
+    resolution: {integrity: sha512-cTUHqIK+zDYpeK19rzW6zF9YfT4486TIgizZW53wEZ+/GPBbK7cNS0EHyJVyHYacwFEvvHLEKfgJndbemWhB/w==}
+    peerDependencies:
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
@@ -8465,9 +8471,11 @@ snapshots:
       react-slick: 0.30.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-spinners: 0.13.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-toastify: 10.0.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-visibility-sensor: 5.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       slick-carousel: 1.8.1(jquery@3.7.1)
       styled-jsx: 5.1.7(@babel/core@7.28.0)(babel-plugin-macros@3.1.0)(react@18.3.1)
       tabler-icons-react: 1.56.0(react@18.3.1)
+      tailwind-merge: 3.3.1
       tailwind-variants: 0.2.1(tailwindcss@3.4.17)
       tailwindcss-animate: 1.0.7(tailwindcss@3.4.17)
       uuid: 9.0.1
@@ -9613,6 +9621,12 @@ snapshots:
   react-toastify@10.0.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       clsx: 2.1.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  react-visibility-sensor@5.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
