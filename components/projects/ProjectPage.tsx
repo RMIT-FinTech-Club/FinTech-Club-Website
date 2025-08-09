@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 
 import fakeAPI from './fakeAPI/mainAPI'
 import Button from '@/components/button';
+import PastProject from '@/components/projects/pages/pastproject/pastproject';
 
 const ProjectPage: React.FC = () => {
     return (
@@ -42,7 +43,7 @@ const ProjectPage: React.FC = () => {
                         className={`${index % 2 == 0 ? 'md:flex-row ' : 'md:flex-row-reverse'} ${index == fakeAPI.length - 1 ? 'w-[90%] md:mb-[5vw] mx-[auto] md:rounded-[1vw] mb-[5vh] rounded-[3vw]' : 'w-full'} relative flex-wrap flex md:flex-nowrap md:py-[5vw] py-[10vh]`}
                         ref={ref}
                         initial={{ opacity: 0, transform: 'translateY(10%)' }}
-                        animate={isInView ? { opacity: 1, transform: 'translateY(0)'} : {}}
+                        animate={isInView ? { opacity: 1, transform: 'translateY(0)' } : {}}
                         transition={{ duration: 1, ease: "easeInOut" }}
                     >
                         {index === 0 && (
@@ -64,8 +65,13 @@ const ProjectPage: React.FC = () => {
                     </motion.div>
                 )
             })}
+
+            < PastProject />
+
+
         </div>
     )
+
 }
 
 export default ProjectPage;
