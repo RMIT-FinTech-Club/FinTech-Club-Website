@@ -1,15 +1,32 @@
 import { PartnerItem } from "@/app/(frontend)/(router)/(home_page)/components/partners";
 import { Image } from "@heroui/react";
 
-interface PartnersDivProps {
-  items: PartnerItem[];
-}
-
-type PartnerLogo = {
+interface PartnerLogo {
   id: number;
   url: string;
   alt: string;
-};
+}
+
+interface PartnersDivProps {
+  items: PartnerItem[];
+  activeItemId?: number;
+}
+
+const DecorativeSVG = ({ className }: { className: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="30"
+    viewBox="0 0 158 170"
+    fill="none"
+    className={className}
+  >
+    <path
+      d="M109.947 114.433L153.358 93.6823L154.111 93.2659C155.229 92.5574 156.138 91.5529 156.745 90.3549C157.353 89.1569 157.637 87.8083 157.57 86.4469C157.502 85.0854 157.085 83.76 156.36 82.6058C155.636 81.4516 154.63 80.5101 153.446 79.8773L110.323 56.761L103.743 7.4808L103.587 6.6406C103.262 5.31202 102.602 4.0894 101.673 3.0979C100.744 2.1064 99.5806 1.38168 98.3014 0.99792C97.0222 0.614161 95.6734 0.585176 94.393 0.913908C93.1126 1.24264 91.9467 1.91729 91.0146 2.86879L57.0972 37.4625L9.72125 27.7465L8.90419 27.6253C7.5802 27.5057 6.25586 27.7501 5.06705 28.3333C3.87823 28.9166 2.86772 29.8178 2.13921 30.9444C1.41069 32.0711 0.990361 33.3826 0.921367 34.7445C0.852378 36.1063 1.13721 37.4695 1.74663 38.6942L23.8802 83.2145L1.06692 126.517L0.702629 127.315C0.217939 128.571 0.0680532 129.943 0.268231 131.291C0.468409 132.64 1.0115 133.916 1.84217 134.991C2.67284 136.066 3.7614 136.9 4.99694 137.409C6.2325 137.918 7.57089 138.084 8.87575 137.889L56.4669 130.799L89.8606 167.233C90.8273 168.288 92.057 169.05 93.4102 169.432C94.7635 169.814 96.1864 169.8 97.5178 169.393C98.8493 168.985 100.036 168.2 100.944 167.127C101.852 166.053 102.444 164.733 102.655 163.317L109.947 114.433Z"
+      fill="#F7D27F"
+    />
+  </svg>
+);
 
 const blockchainPartners: PartnerLogo[] = [
   {
@@ -239,154 +256,131 @@ const otherPartners: PartnerLogo[] = [
   },
 ];
 
-export default function PartnersDiv({ items }: PartnersDivProps) {
-  const activeItem = items[3];
+const partnerConfig: Record<
+  number,
+  {
+    title: string;
+    partners: PartnerLogo[];
+    gridCols: string;
+    imageHeight: string;
+    centerLast?: boolean;
+  }
+> = {
+  4: {
+    title: "Blockchain & Cryptocurrency",
+    partners: blockchainPartners,
+    gridCols: "grid-cols-5",
+    imageHeight: "h-[4.75rem]",
+  },
+  5: {
+    title: "Fintech & Innovation",
+    partners: fintechPartners,
+    gridCols: "grid-cols-4",
+    imageHeight: "h-[4.75rem]",
+    centerLast: true,
+  },
+  3: {
+    title: "Academic",
+    partners: academicPartners,
+    gridCols: "flex-row",
+    imageHeight: "h-[7rem]",
+  },
+  2: {
+    title: "Hospitality",
+    partners: hospitalityPartners,
+    gridCols: "flex-row",
+    imageHeight: "h-[10rem]",
+  },
+  6: {
+    title: "Charity Organizations",
+    partners: charityPartners,
+    gridCols: "flex-row",
+    imageHeight: "h-[10rem]",
+  },
+  7: {
+    title: "Other Partners",
+    partners: otherPartners,
+    gridCols: "flex-row",
+    imageHeight: "h-[12rem]",
+  },
+  1: {
+    title: "Other Partners",
+    partners: otherPartners,
+    gridCols: "flex-row",
+    imageHeight: "h-[12rem]",
+  },
+};
+
+export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
+  const activeItem = items.find((item) => item.id === activeItemId) || items[3];
+  const config = partnerConfig[activeItem.id];
+
+  if (!config) {
+    return <div>Invalid partner category</div>;
+  }
+
+  const { title, partners, gridCols, imageHeight, centerLast } = config;
 
   return (
     <div className="content mr-[8.5vw] ml-auto">
-      <h4 className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] font-extrabold">Partners</h4>
+      <h4
+        className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] !font-extrabold drop-shadow-[0_4px_4px_rgba(255,204,102,0.6)]"
+        aria-label="Our Partners"
+      >
+        Partners
+      </h4>
       <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[88vh] rounded-[2vw] p-[1vw]">
         <div className="w-full h-full rounded-[1vw] bg-white flex justify-center items-center">
-          {/* Display content based on the active item */}
-          {activeItem.id === 4 && (
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
-                Blockchain & Cryptocurrency
-              </h6>
-              <div className="grid grid-cols-5 gap-4 px-[4rem] py-[1rem] pb-0 place-items-center max-h-[65vh]">
-                {blockchainPartners.map((partner) => (
+          <div className="w-full h-full flex flex-col items-center justify-start relative">
+            <DecorativeSVG className="absolute z-30 left-[1rem] top-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
+            <DecorativeSVG className="absolute z-30 left-[1rem] bottom-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
+            <DecorativeSVG className="absolute z-30 right-[1rem] top-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
+            <DecorativeSVG className="absolute z-30 right-[1rem] bottom-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
+            <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
+              {title}
+            </h6>
+            <div
+              className={`flex-1 flex items-center justify-center max-h-[65vh] px-[4rem] py-[1rem] pb-0 ${
+                gridCols.includes("grid")
+                  ? `grid ${gridCols} gap-4 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:${gridCols}`
+                  : "flex flex-row gap-12 flex-wrap"
+              }`}
+            >
+              {partners.map((partner, index) => {
+                if (
+                  centerLast &&
+                  index === partners.length - 1 &&
+                  partners.length % 4 === 1
+                ) {
+                  return (
+                    <div
+                      key={partner.id}
+                      className="col-span-4 flex justify-center"
+                    >
+                      <Image
+                        src={partner.url}
+                        alt={partner.alt}
+                        className={`${imageHeight} w-auto object-contain`}
+                        loading="lazy"
+                        onError={() => {
+                          // Optionally, you can handle fallback logic here if @heroui/react Image supports a fallback prop.
+                        }}
+                      />
+                    </div>
+                  );
+                }
+                return (
                   <Image
                     key={partner.id}
                     src={partner.url}
                     alt={partner.alt}
-                    className="h-[4.75rem] w-auto object-contain"
+                    className={`${imageHeight} w-auto object-contain`}
+                    loading="lazy"
                   />
-                ))}
-              </div>
+                );
+              })}
             </div>
-          )}
-
-          {activeItem.id === 5 && (
-            <div className="w-full h-full flex flex-col items-center justify-start">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
-                Fintech & Innovation
-              </h6>
-
-              <div className="grid grid-cols-4 gap-4 px-[4rem] py-[1rem] pb-0 place-items-center max-h-[65vh]">
-                {fintechPartners.map((partner, index) => {
-                  const isLastItem = index === fintechPartners.length - 1;
-                  const remainder = fintechPartners.length % 4;
-
-                  if (remainder === 1 && isLastItem) {
-                    return (
-                      <div
-                        key={partner.id}
-                        className="col-span-4 flex justify-center"
-                      >
-                        <Image
-                          src={partner.url}
-                          alt={partner.alt}
-                          className="h-[4.75rem] w-auto object-contain"
-                        />
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <Image
-                      key={partner.id}
-                      src={partner.url}
-                      alt={partner.alt}
-                      className="h-[4.75rem] w-auto object-contain"
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {activeItem.id === 3 && (
-            <div className="w-full h-full flex flex-col">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
-                Academic
-              </h6>
-
-              <div className="flex-1 flex items-center justify-center">
-                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
-                  {academicPartners.map((partner) => (
-                    <Image
-                      key={partner.id}
-                      src={partner.url}
-                      alt={partner.alt}
-                      className="h-[7rem] w-auto object-contain"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeItem.id === 2 && (
-            <div className="w-full h-full flex flex-col">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
-                Hospitality
-              </h6>
-
-              <div className="flex-1 flex items-center justify-center">
-                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
-                  {hospitalityPartners.map((partner) => (
-                    <Image
-                      key={partner.id}
-                      src={partner.url}
-                      alt={partner.alt}
-                      className="h-[10rem] w-auto object-contain"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeItem.id === 6 && (
-            <div className="w-full h-full flex flex-col">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
-                Charity Organizations
-              </h6>
-
-              <div className="flex-1 flex items-center justify-center">
-                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
-                  {charityPartners.map((partner) => (
-                    <Image
-                      key={partner.id}
-                      src={partner.url}
-                      alt={partner.alt}
-                      className="h-[10rem] w-auto object-contain"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-          {(activeItem.id === 7 || activeItem.id === 1) && (
-            <div className="w-full h-full flex flex-col">
-              <h6 className="text-[#DCB968] bg-[#2C305F] w-fit mx-auto text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
-                Other Partners
-              </h6>
-
-              <div className="flex-1 flex items-center justify-center">
-                <div className="flex flex-row justify-center items-center gap-12 px-[4rem] max-h-[65vh]">
-                  {otherPartners.map((partner) => (
-                    <Image
-                      key={partner.id}
-                      src={partner.url}
-                      alt={partner.alt}
-                      className="h-[12rem] w-auto object-contain"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

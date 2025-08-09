@@ -90,7 +90,7 @@ export default function Partners() {
           />
         </svg>
       </div>
-      <div className="absolute z-30 left-[42rem] top-[7.5rem] rotate-[-5deg]">
+      <div className="absolute z-30 left-[42rem] top-[.5rem] rotate-[-5deg]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="30"
