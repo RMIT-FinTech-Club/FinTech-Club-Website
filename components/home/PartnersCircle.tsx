@@ -10,16 +10,24 @@ type PartnerItem = {
   bg: string;
 };
 
-// Initial state: 7 partners with alternating background colors
-const initialItems: PartnerItem[] = [
-  { id: 1, icon: "/home/partner_icon_6.svg", bg: "bg-blueSlate" },
-  { id: 2, icon: "/home/partner_icon_1.svg", bg: "bg-bluePrimary" },
-  { id: 3, icon: "/home/partner_icon_2.svg", bg: "bg-blueSlate" },
-  { id: 4, icon: "/home/partner_icon_3.svg", bg: "bg-bluePrimary" },
-  { id: 5, icon: "/home/partner_icon_4.svg", bg: "bg-blueSlate" },
-  { id: 6, icon: "/home/partner_icon_5.svg", bg: "bg-bluePrimary" },
-  { id: 7, icon: "/home/partner_icon_6.svg", bg: "bg-blueSlate" },
-];
+// Initial state: 7 partners
+const baseItems = [
+  { id: 1, icon: "/home/partner_icon_6.svg" },
+  { id: 2, icon: "/home/partner_icon_1.svg" },
+  { id: 3, icon: "/home/partner_icon_2.svg" },
+  { id: 4, icon: "/home/partner_icon_3.svg" },
+  { id: 5, icon: "/home/partner_icon_4.svg" },
+  { id: 6, icon: "/home/partner_icon_5.svg" },
+  { id: 7, icon: "/home/partner_icon_6.svg" },
+] as const;
+
+// Create the initial state by mapping over baseItems
+// Assign alternating background colors:
+// Even indices → bg-blueSlate, odd indices → bg-bluePrimary
+const initialItems: PartnerItem[] = baseItems.map((it, i) => ({
+  ...it,
+  bg: i % 2 === 0 ? "bg-blueSlate" : "bg-bluePrimary",
+}));
 
 function PartnersCircle() {
   const [items, setItems] = useState(initialItems); // Current displayed items
