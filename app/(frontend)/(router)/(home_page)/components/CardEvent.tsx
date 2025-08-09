@@ -1,10 +1,5 @@
 import { Button } from "@nextui-org/button";
-import {
-	Card,
-	CardBody,
-	CardFooter,
-	type CardProps,
-} from "@nextui-org/react";
+import { Card, CardBody, CardFooter, type CardProps } from "@nextui-org/react";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,9 +40,7 @@ const CardEvent = ({
 					src={imageUrl}
 				/>
 			</CardBody>
-			<Link
-				className="h-full"
-				href={`/events/event-detail/${eventId}`}>
+			<Link className="h-full" href={`/events/event-detail/${eventId}`}>
 				<CardFooter className="w-full text-white gap-2 md:text-ft-primary-blue">
 					<div className="bg-ft-primary-blue w-auto rounded-lg px-4 flex justify-around items-center gap-2 md:gap-0 content-center md:flex-col md:items-center  md:bg-transparent md:text-ft-primary-blue">
 						<p className="text-sm font-bold">{timeOnDay}</p>
@@ -71,13 +64,12 @@ const CardEvent = ({
 					</div>
 				</CardBody>
 				<CardFooter className="md:hidden">
-					<Button
-						className="w-full bg-ft-primary-blue text-xl text-white font-bold">
+					<Button className="w-full bg-ft-primary-blue text-xl text-white font-bold">
 						View details
 					</Button>
 				</CardFooter>
 			</Link>
-		</Card >
+		</Card>
 	);
 };
 export default CardEvent;

@@ -2,16 +2,8 @@
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 import type React from "react";
-import {
-	useEffect, type
-		ButtonHTMLAttributes,
-	useRef,
-} from "react"
-import {
-	type Variant,
-	motion,
-	useAnimate,
-} from "framer-motion";
+import { useEffect, type ButtonHTMLAttributes, useRef } from "react";
+import { type Variant, motion, useAnimate } from "framer-motion";
 import { atom, useAtom } from "jotai";
 
 const isOpenAtom = atom(false);
@@ -27,7 +19,10 @@ const Navbar = () => {
 
 		const handleScroll = () => {
 			const isScrollingDown = document.body.scrollTop > lastScrollTop;
-			navBarRef.current?.classList.toggle('header_closed', (isScrollingDown && !isSidebarOpen));
+			navBarRef.current?.classList.toggle(
+				"header_closed",
+				isScrollingDown && !isSidebarOpen,
+			);
 			lastScrollTop = document.body.scrollTop;
 		};
 
@@ -72,15 +67,25 @@ const Navbar = () => {
 			className="sticky top-0 h-[8vh] py-[1vh] z-50 flex w-full transition-[colors, transform] duration-300 bg-ft-primary-blue shadow-md"
 		>
 			<div className="flex justify-between items-center pr-[2vw] w-full">
-				<Link href='/' className="logo relative h-[6.4vh] px-[3vh] bg-[#E5E5E5] flex items-center rounded-r-[3vh] cursor-pointer">
-					<div className="h-[70%] aspect-square bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url('https://d2prwyp3rwi40.cloudfront.net/global/FTC-DefaultLogo-NoName.svg')` }}></div>
+				<Link
+					href="/"
+					className="logo relative h-[6.4vh] px-[3vh] bg-[#E5E5E5] flex items-center rounded-r-[3vh] cursor-pointer"
+				>
+					<div
+						className="h-[70%] aspect-square bg-center bg-contain bg-no-repeat"
+						style={{
+							backgroundImage: `url('https://d2prwyp3rwi40.cloudfront.net/global/FTC-DefaultLogo-NoName.svg')`,
+						}}
+					></div>
 				</Link>
 				<div className="md:hidden h-fit flex justify-center items-center">
 					<AnimatedHamburger />
 				</div>
 				<motion.ul
 					variants={ulVariants}
-					className={"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"}
+					className={
+						"fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"
+					}
 					style={{ top: navBarRef.current?.offsetHeight }} // Right aligning the sidebar links
 				>
 					{siteConfig.navItems.map((item) => (
@@ -247,8 +252,8 @@ const AnimatedHamburger = ({
 			ref={containerBarScope}
 			style={containerStyles}
 			onClick={() => {
-				setIsOpen(!isOpen)
-				isSidebarOpen = !isSidebarOpen
+				setIsOpen(!isOpen);
+				isSidebarOpen = !isSidebarOpen;
 			}}
 		>
 			<motion.div

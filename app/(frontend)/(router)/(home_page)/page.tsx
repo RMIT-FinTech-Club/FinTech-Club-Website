@@ -22,7 +22,7 @@ const Home = () => {
 				<Department />
 				<Member />
 				<Suspense fallback={<Loading />}>
-				<UpcomingEvent />
+					<UpcomingEvent />
 				</Suspense>
 			</div>
 		</>

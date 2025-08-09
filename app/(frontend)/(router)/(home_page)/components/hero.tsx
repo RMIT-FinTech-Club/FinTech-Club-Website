@@ -29,17 +29,27 @@ const HeroSection = () => {
 		<div className="w-screen lg:py-12 flex-col justify-start items-center p-side-margin-mobile md:p-20 gap-6 md:gap-12 flex">
 			<div className=" justify-start items-center gap-6 md:gap-[60px] flex flex-col md:flex-row ">
 				<div className="w-full md:w-1/2 h-full">
-					<h4 className = "font-bold">What is</h4>
+					<h4 className="font-bold">What is</h4>
 					<br />
 					<h4 className="text-[#DCB968] font-[1000] uppercase">
-						FinTech Club{" "}?
+						FinTech Club ?
 					</h4>
 					<br />
 					<p className="leading-relaxed">
-						Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,  
+						Contrary to popular belief, Lorem Ipsum is not simply
+						random text. It has roots in a piece of classical Latin
+						literature from 45 BC, making it over 2000 years old.
+						Richard McClintock, a Latin professor at Hampden-Sydney
+						College in Virginia,  Contrary to popular belief, Lorem
+						Ipsum is not simply random text. It has roots in a piece
+						of classical Latin literature from 45 BC, making it over
+						2000 years old. Richard McClintock, a Latin professor at
+						Hampden-Sydney College in Virginia, 
 					</p>
 					<br />
-					<p className ="font-bold text-[#2C305F]">Our Core Activities</p>
+					<p className="font-bold text-[#2C305F]">
+						Our Core Activities
+					</p>
 					<div className="justify-start items-center gap-6 flex mt-8">
 						<Button
 							className="bg-ft-primary-blue text-ft-text-bright w-[7rem]"

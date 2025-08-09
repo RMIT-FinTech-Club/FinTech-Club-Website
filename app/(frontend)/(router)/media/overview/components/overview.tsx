@@ -1,9 +1,5 @@
 function Overview() {
-  return (
-    <section>
-
-    </section>
-  )
-  }
+	return <section></section>;
+}
 
 export default Overview;

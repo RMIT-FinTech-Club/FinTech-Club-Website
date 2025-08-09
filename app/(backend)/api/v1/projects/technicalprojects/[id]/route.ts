@@ -2,7 +2,7 @@ import TechnicalProject from "@/app/(backend)/models/technicalProject";
 import { type NextRequest, NextResponse } from "next/server";
 import connectMongoDB from "@/app/(backend)/libs/mongodb";
 
-connectMongoDB()
+connectMongoDB();
 
 export async function GET(
 	req: NextRequest,

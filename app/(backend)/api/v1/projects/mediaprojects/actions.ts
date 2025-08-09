@@ -29,7 +29,7 @@ export async function uploadFileData(
 	fileBuffer: any,
 	fileName: string,
 	mimetype: string,
-	folderPath = ''
+	folderPath = "",
 ) {
 	try {
 		const keyPath = folderPath ? `${folderPath}/${fileName}` : fileName; // Construct the full S3 key path

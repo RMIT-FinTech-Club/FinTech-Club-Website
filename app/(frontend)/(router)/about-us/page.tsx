@@ -15,12 +15,13 @@ const AboutUs = () => {
 			<VisionMission />
 			<III />
 			<FinTechInTheEyes />
-			<ClubMentors/>
+			<ClubMentors />
 			<ExecuteBoard />
 			<ManagementBoard />
 			{/* <Members /> */}
 			{/* <CoreValue /> */}
-		</>)
+		</>
+	);
 };
 
 export default AboutUs;

@@ -39,7 +39,7 @@ const UpcomingEvent = async () => {
 		},
 		refetchOnWindowFocus: false,
 		staleTime: 1000 * 60 * 60,
-	})
+	});
 	const sliderRef = useRef<Slider>(null);
 
 	return (
@@ -62,25 +62,28 @@ const UpcomingEvent = async () => {
 					className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16"
 				/>
 				<Slider ref={sliderRef} {...settings}>
-					{upcomingEvents && upcomingEvents.map((event) => {
-						// Split date to get month and day
-						const dateMonth = (event["date"] as string).split(" ");
+					{upcomingEvents &&
+						upcomingEvents.map((event) => {
+							// Split date to get month and day
+							const dateMonth = (event["date"] as string).split(
+								" ",
+							);
 
-						return (
-							<CardEvent
-								key={event["_id"]}
-								eventId={event["_id"]}
-								imageUrl={event["imageUrl"]}
-								eventName="No name"
-								location={event["location"]}
-								title={event["name"]}
-								detail={event["description"]}
-								timeOnHour={event["time"]}
-								timeOnDay={dateMonth[0]}
-								timeOnMonth={dateMonth[1]}
-							/>
-						);
-					})}
+							return (
+								<CardEvent
+									key={event["_id"]}
+									eventId={event["_id"]}
+									imageUrl={event["imageUrl"]}
+									eventName="No name"
+									location={event["location"]}
+									title={event["name"]}
+									detail={event["description"]}
+									timeOnHour={event["time"]}
+									timeOnDay={dateMonth[0]}
+									timeOnMonth={dateMonth[1]}
+								/>
+							);
+						})}
 				</Slider>
 				<NextArrow
 					buttonOnClick={() => {

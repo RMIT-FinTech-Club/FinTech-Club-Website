@@ -5,11 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-type Department =
-	| "technology"
-	| "business"
-	| "humanResources"
-	| "marketing";
+type Department = "technology" | "business" | "humanResources" | "marketing";
 
 type DepartmentInfo = {
 	name: string;
@@ -131,9 +127,7 @@ const Department = () => {
 			</div>
 
 			{/* Department content */}
-			<div
-				className="flex flex-1 flex-col md:items-start items-center p-8 bg-opacity-50 z-10 md:mt-0"
-			>
+			<div className="flex flex-1 flex-col md:items-start items-center p-8 bg-opacity-50 z-10 md:mt-0">
 				{/* These elements will be pushed down on mobile due to the absolute positioning of the buttons bar */}
 				<h4
 					className={`font-bold ${department.textColor} text-wrap text-xl md:text-5xl sm:text-4xl`}
@@ -148,17 +142,18 @@ const Department = () => {
 				{/* Desktop buttons */}
 				<div className=" hidden sm:flex mt-6 gap-4">
 					{(Object.keys(departments) as Department[]).map((dept) => {
-						const isActive = departments[dept].name === department.name;
+						const isActive =
+							departments[dept].name === department.name;
 						return (
 							<Button
 								key={dept}
 								onClick={() => setDepartment(departments[dept])}
 								variant={isActive ? "solid" : "light"}
-								className={`${isActive ? `text-black text-semibold ${departments[dept].bgColor}` : 'text-white'}`}
+								className={`${isActive ? `text-black text-semibold ${departments[dept].bgColor}` : "text-white"}`}
 							>
 								{dept.toUpperCase()}
 							</Button>
-						)
+						);
 					})}
 				</div>
 			</div>

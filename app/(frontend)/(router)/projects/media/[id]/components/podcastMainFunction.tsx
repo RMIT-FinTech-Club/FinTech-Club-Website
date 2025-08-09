@@ -115,9 +115,7 @@ const PodcastMainFunction: React.FC<{
 		<div className="my-4 w-full">
 			<audio ref={audioRef} controls={false} />
 			<div className="lg:flex lg:flex-col">
-				<p className="hidden lg:block text-white w-1/2">
-					{title}
-				</p>
+				<p className="hidden lg:block text-white w-1/2">{title}</p>
 				<Slider
 					minValue={0}
 					value={currentProgress}

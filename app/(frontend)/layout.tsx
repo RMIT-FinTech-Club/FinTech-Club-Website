@@ -50,9 +50,9 @@ export default function RootLayout({
 					"min-h-screen bg-white font-sans antialiased overflow-x-hidden",
 					fontSans.className,
 				)}
-			// bg-background currently follow browser theme (light/dark)
-			// Result in black bg on certain devices => bad UI, bad contrast 
-			// display bg-white as a temporary fix rn
+				// bg-background currently follow browser theme (light/dark)
+				// Result in black bg on certain devices => bad UI, bad contrast
+				// display bg-white as a temporary fix rn
 			>
 				<Providers
 					themeProps={{ attribute: "class", defaultTheme: "light" }}

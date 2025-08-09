@@ -44,7 +44,9 @@ export async function POST(req: NextRequest) {
 		const publisher = form.get("publisher") as string;
 		const publicationDate = form.get("publicationDate") as string;
 		const language = form.get("language") as string;
-		const authors = form.getAll("authors[]").map(author => JSON.parse(author as string)) as Array<Author>;
+		const authors = form
+			.getAll("authors[]")
+			.map((author) => JSON.parse(author as string)) as Array<Author>;
 		const authorFiles = form.getAll("authorFiles[]") as Array<File>;
 		const audioFile = form.get("audioFile") as File;
 		const thumnailFile = form.get("thumnailFile") as File;
@@ -87,7 +89,7 @@ export async function POST(req: NextRequest) {
 					await getBuffer(audioFile),
 					audioFileName,
 					audioFile.type,
-					"Projects/Media"
+					"Projects/Media",
 				);
 			}
 			if (thumnailFile instanceof File) {
@@ -95,13 +97,12 @@ export async function POST(req: NextRequest) {
 					await getBuffer(thumnailFile),
 					thumnailFileName,
 					thumnailFile.type,
-					"Projects/Media"
+					"Projects/Media",
 				);
 			}
 
 			uploadObject.thumnailFileUrl = `https://d2prwyp3rwi40.cloudfront.net/Projects/Media/${thumnailFileName}`;
 			uploadObject.audioFileUrl = `https://d2prwyp3rwi40.cloudfront.net/Projects/Media/${audioFileName}`;
-
 
 			for (let i = 0; i < authorFiles.length; ++i) {
 				const authorFileName = randomName();
@@ -111,7 +112,7 @@ export async function POST(req: NextRequest) {
 						await getBuffer(authorFiles[i]),
 						authorFileName,
 						authorFiles[i].type,
-						"Projects/Media"
+						"Projects/Media",
 					);
 				}
 				uploadObject.authors[i].profileImageUrl =
