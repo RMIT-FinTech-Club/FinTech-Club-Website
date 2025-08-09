@@ -12,4 +12,5 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     return deleteArticle(params.id);
+    
 } 

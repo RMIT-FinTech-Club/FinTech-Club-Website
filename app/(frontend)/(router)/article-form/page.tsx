@@ -28,7 +28,7 @@ export default function ArticleUploader() {
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
 
-  // handle UPLOAD PDF and IMAGE
+  // handle UPLOAD PDF
   const handlePDFUpload = async () => {
     if (!pdfFile || !pdfFile.type.startsWith("application/pdf")) {
       alert("Please select a valid PDF file.");
@@ -36,7 +36,7 @@ export default function ArticleUploader() {
     }
     setIsUploadingPDF(true);
     try {
-      const url = await uploadFile(pdfFile, "article/products/");
+      const url = await uploadFile(pdfFile, "products/");
       setContentUrl(url);
     } catch (err) {
       alert("Failed to upload PDF");
@@ -45,6 +45,7 @@ export default function ArticleUploader() {
     }
   };
 
+//Handle UPLOAD IMAGE
   const handleImageUpload = async () => {
     if (!imageFile || !imageFile.type.startsWith("image/")) {
       alert("Please select a valid image.");
@@ -52,7 +53,7 @@ export default function ArticleUploader() {
     }
     setIsUploadingImage(true);
     try {
-      const url = await uploadFile(imageFile,"article/graphics/");
+      const url = await uploadFile(imageFile,"graphics/");
       setIllustrationUrl(url);
     } catch (err) {
       alert("Failed to upload image");
@@ -60,13 +61,13 @@ export default function ArticleUploader() {
       setIsUploadingImage(false);
     }
   };
-// Submit New Article
+
+// Handle Submit
   const handleSubmit = async () => {
     if (!title || !summary || !contentUrl || !illustrationUrl || !authors.length || !labels.length) {
       alert("Please fill all required fields.");
       return;
     }
-
     const body = {
       title,
       summary,
