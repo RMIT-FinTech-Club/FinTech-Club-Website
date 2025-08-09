@@ -40,7 +40,7 @@ const Achievements = () => {
   const [cards, setCards] = useState<CardStackProps[]>(achievementData);
 
   return (
-    <section className="bg-[#F9FAFB] w-[100vw] pt-[4rem] pb-[5rem]  relative">
+    <section className="bg-[#F9FAFB] w-[100vw] pt-[4rem] relative">
       <img
         src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
