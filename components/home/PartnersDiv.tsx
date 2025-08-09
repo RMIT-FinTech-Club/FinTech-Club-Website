@@ -244,7 +244,7 @@ export default function PartnersDiv({ items }: PartnersDivProps) {
 
   return (
     <div className="content mr-[8.5vw] ml-auto">
-      <h5 className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] font-bold">Partners</h5>
+      <h4 className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] font-extrabold">Partners</h4>
       <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[88vh] rounded-[2vw] p-[1vw]">
         <div className="w-full h-full rounded-[1vw] bg-white flex justify-center items-center">
           {/* Display content based on the active item */}
