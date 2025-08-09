@@ -1,0 +1,106 @@
+@keyframes card_1_next {
+    from {
+        opacity: 0;
+        left: 15vw;
+        transform: perspective(100vw) translateZ(0) rotateY(90deg) translateX(5vw);
+    }
+    to {
+        opacity: 1;
+        left: 15vw;
+        transform: perspective(100vw) translateZ(0) rotateY(30deg) translateX(5vw);
+    }
+}
+
+@keyframes card_2_next {
+    from {
+        left: 15vw;
+        transform: perspective(100vw) translateZ(0) rotateY(30deg) translateX(5vw);
+        filter: brightness(0.7);
+        z-index: 1;
+    }
+    to {
+        left: 50%;
+        transform: perspective(100vw) translateZ(5vw) rotateY(0deg) translateX(-50%);
+        filter: brightness(1);
+        z-index: 20;
+    }
+}
+
+@keyframes card_3_next {
+    from {
+        left: 50%;
+        transform: perspective(100vw) translateZ(5vw) rotateY(0deg) translateX(-50%);
+        filter: brightness(1);
+        z-index: 10;
+    }
+    to {
+        left: 60vw;
+        transform: perspective(100vw) translateZ(0) rotateY(-30deg) translateX(-5vw);
+        filter: brightness(0.7);
+        z-index: 1;
+    }
+}
+
+@keyframes card_4_next {
+    from {
+        opacity: 1;
+        left: 60vw;
+        transform: perspective(100vw) translateZ(0) rotateY(-30deg) translateX(-5vw);
+    }
+    to {
+        opacity: 0;
+        left: 60vw;
+        transform: perspective(100vw) translateZ(0) rotateY(-90deg) translateX(-5vw);
+    }
+}
+
+.card {
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+}
+
+.card:not(.card_3) {
+    filter: brightness(0.7);
+    z-index: 1;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.card:not(.card_3):hover {
+    filter: brightness(0.8);
+}
+
+.card_1 {
+    opacity: 0;
+    animation: card_1_next ease 3s forwards;
+    left: 15vw;
+    transform: perspective(100vw) translateZ(0) rotateY(90deg) translateX(5vw);
+}
+
+.card_2 {
+    animation: card_2_next ease 3s forwards;
+    left: 15vw;
+    transform: perspective(100vw) translateZ(0) rotateY(30deg) translateX(5vw);
+}
+
+.card_3 {
+    animation: card_3_next ease 3s forwards;
+    left: 50%;
+    transform: perspective(100vw) translateZ(5vw) rotateY(0deg) translateX(-50%);
+    filter: brightness(1);
+    z-index: 10;
+}
+
+.card_4 {
+    animation: card_4_next ease 3s forwards;
+    left: 60vw;
+    transform: perspective(100vw) translateZ(0) rotateY(-30deg) translateX(-5vw);
+}
+
+.card_5 {
+    opacity: 0;
+    left: 60vw;
+    transform: perspective(100vw) translateZ(0) rotateY(-90deg) translateX(-5vw);
+}
