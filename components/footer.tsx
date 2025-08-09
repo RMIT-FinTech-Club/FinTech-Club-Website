@@ -122,7 +122,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col items-center lg:items-start text-center lg:pr-[2vw] lg:text-left mx-auto lg:mx-0 lg:w-[40%] max-w-max">
-          <h5 className="text-ft-primary-yellow-500 font-bold text-lg lg:mb-[2vh]">
+          <h5 className="text-ft-primary-yellow font-bold text-lg lg:mb-[2vh]">
             ABOUT US
           </h5>
           <p className="text-base w-full text-justify">
@@ -135,7 +135,7 @@ const Footer: React.FC = () => {
             industry.
           </p>
 
-          <h5 className="text-ft-primary-yellow-500 font-bold text-lg my-4">
+          <h5 className="text-ft-primary-yellow font-bold text-lg my-4">
             CONTACT US
           </h5>
           <div className="flex flex-col items-center lg:items-start space-y-2 text-base">
@@ -174,7 +174,7 @@ const Footer: React.FC = () => {
 
         {/* Important Links Section */}
         <div className="flex flex-col text-center lg:text-left space-y-4 max-w-max z-10">
-          <h5 className="text-ft-primary-yellow-500 font-bold text-lg">
+          <h5 className="text-ft-primary-yellow font-bold text-lg">
             IMPORTANT LINKS
           </h5>
           <ul className="space-y-2">
@@ -215,6 +215,14 @@ const Footer: React.FC = () => {
       <div className="container mx-auto text-center mt-[10vh] border-t border-gray-500 pt-4">
         <p className="text-sm">Copyright ©2025 All Rights Reserved.</p>
       </div>
+
+      <Image
+        src="/footer/Bear1.png"
+        alt="Bear Mascot"
+        width={200}
+        height={200}
+        className="absolute bottom-0 right-[-3rem] w-[30vw] h-auto"
+      />
     </footer>
   );
 };

@@ -323,12 +323,12 @@ export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
 
   return (
     <div className="content mr-[8.5vw] ml-auto">
-      <h4
+      <h1
         className="ml-[1.5rem] mb-[1.5rem] text-[#0D1742] !font-extrabold drop-shadow-[0_4px_4px_rgba(255,204,102,0.6)]"
         aria-label="Our Partners"
       >
         Partners
-      </h4>
+      </h1>
       <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[88vh] rounded-[2vw] p-[1vw]">
         <div className="w-full h-full rounded-[1vw] bg-white flex justify-center items-center">
           <div className="w-full h-full flex flex-col items-center justify-start relative">
