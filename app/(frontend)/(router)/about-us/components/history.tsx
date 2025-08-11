@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { fontSans } from "@/config/fonts";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
@@ -72,15 +73,25 @@ export default function HistorySection() {
   return (
     <section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
       <div className="relative w-full">
-        <img
+        <Image
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
+          width={400}
+          height={400}
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
         />
-        <img
+        <Image
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
+          width={400}
+          height={400}
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
         />
         <div className="absolute top-[4rem] left-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
         <div className="absolute top-[4rem] right-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>

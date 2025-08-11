@@ -1,5 +1,5 @@
 "use client";
-import { Image } from "@heroui/react";
+import Image from "next/image";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
@@ -40,12 +40,14 @@ const Achievements = () => {
   const [cards, setCards] = useState<CardStackProps[]>(achievementData);
 
   return (
-    <section className="bg-[#F9FAFB] w-[100vw] pt-[4rem] relative">
-      <img
+    <section className="bg-[#F9FAFB] w-[100vw] pt-[4rem] pb-[2rem] relative">
+      <Image
         src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
         className="absolute right-[-10rem] top-[17rem] rotate-[-25deg] z-30"
         width={400}
+        height={400}
+        loading="lazy"
       />
 
       <div className="absolute top-[-2rem] right-[8rem] w-[4.5rem] h-[4.5rem] bg-[#5E5E92] rounded-full z-10"></div>
@@ -93,6 +95,12 @@ const Achievements = () => {
         <Image
           src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
           className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
+          width={200}
+          height={150}
+          alt="Innovation Award"
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
         />
         <div>
           <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
@@ -140,10 +148,15 @@ const Achievements = () => {
               />
             </svg>
           </div>
-          <p className=""></p>
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
             className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
+            width={200}
+            height={150}
+            alt="Publicity Award"
+            fetchPriority="high"
+            loading="eager"
+            priority={true}
           />
         </div>
       </div>

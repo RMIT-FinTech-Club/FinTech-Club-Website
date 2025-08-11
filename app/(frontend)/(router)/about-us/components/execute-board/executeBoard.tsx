@@ -1,4 +1,5 @@
-import { Card, CardBody, CardHeader, Image } from "@heroui/react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
+import Image from "next/image";
 import React, { useRef } from "react";
 import "./styles.css";
 import Link from "next/link";
@@ -108,6 +109,11 @@ function EXECUTIVE_BOARD_CARD({
             alt={`${name} profile`}
             src={image}
             className="object-cover w-full h-full translate-y-[13%]"
+            width={400}
+            height={400}
+            fetchPriority="high"
+            loading="eager"
+            priority={true}
           />
         </div>
       </CardHeader>

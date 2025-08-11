@@ -1,5 +1,5 @@
 import { PartnerItem } from "@/app/(frontend)/(router)/(home_page)/components/partners";
-import { Image } from "@heroui/react";
+import Image from "next/image";
 
 interface PartnerLogo {
   id: number;
@@ -361,10 +361,11 @@ export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
                         src={partner.url}
                         alt={partner.alt}
                         className={`${imageHeight} w-auto object-contain`}
-                        loading="lazy"
-                        onError={() => {
-                          // Optionally, you can handle fallback logic here if @heroui/react Image supports a fallback prop.
-                        }}
+                        width={400}
+                        height={400}
+                        fetchPriority="high"
+                        loading="eager"
+                        priority={true}
                       />
                     </div>
                   );
@@ -375,7 +376,11 @@ export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
                     src={partner.url}
                     alt={partner.alt}
                     className={`${imageHeight} w-auto object-contain`}
-                    loading="lazy"
+                    width={400}
+                    height={400}
+                    fetchPriority="high"
+                    loading="eager"
+                    priority={true}
                   />
                 );
               })}

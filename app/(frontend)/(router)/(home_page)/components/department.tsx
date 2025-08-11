@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "@heroui/react";
 import "slick-carousel/slick/slick.css";
@@ -57,17 +58,35 @@ const Department = () => {
   return (
     <div className="relative w-screen h-[50rem] flex flex-row">
       {/*con gấu */}
-      <div className="absolute w-[12rem] h-auto top-[-2rem] left-[-4.25rem] rotate-[109deg] z-30">
-        <img src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"></img>
+      <div className="absolute w-[14rem] h-auto top-[-4rem] left-[-5.25rem] rotate-[109deg] z-30">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          alt="Bear mascot"
+          width={400}
+          height={400}
+          loading="lazy"
+        />
       </div>
 
       <div className="h-full w-[70vw] bg-[#F9FAFB] border-b-[1rem] border-[#DAB868]">
         <section className="relative flex flex-col items-start pl-20 pt-[8.5rem] max-w-[45vw]">
           <div className="absolute w-[3rem] h-auto top-[4.5rem] right-[7rem]">
-            <img src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"></img>
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"
+              alt="Yellow Star"
+              width={400}
+              height={400}
+              loading="lazy"
+            />
           </div>
           <div className="absolute w-[6rem] h-auto top-[6rem] right-[-1rem]">
-            <img src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"></img>
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"
+              alt="Yellow Star"
+              width={400}
+              height={400}
+              loading="lazy"
+            />
           </div>
           <p className="text-[#DCB968] font-bold text-6xl">BE ONE OF US</p>
           <p className={`font-bold mt-6 text-[#5E5E92] text-wrap text-5xl`}>
@@ -106,10 +125,15 @@ const Department = () => {
 
       <div className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-t-[10vw]">
         <div className="h-[40rem] w-[33vw] absolute m-[1rem] z-20">
-          <img
+          <Image
             src={department.background}
             alt={`${department.name} background`}
             className="h-full w-full object-fill rounded-t-[9vw]"
+            width={400}
+            height={400}
+            fetchPriority="high"
+            loading="eager"
+            priority={true}
           />
         </div>
       </div>

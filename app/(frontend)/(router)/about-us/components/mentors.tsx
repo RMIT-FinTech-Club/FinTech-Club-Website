@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const ClubMentors = () => {
   return (
     <div className="bg-[#F9FAFB]">
@@ -13,7 +15,16 @@ export const ClubMentors = () => {
             <span>Assoc. Prof. BINH NGUYEN</span>
           </div>
           <div className="w-[25vw] h-auto object-cover overflow-hidden rounded-[50px] border-[#2C305F] border-5">
-            <img src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-BinhNguyen.png"></img>
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-BinhNguyen.png"
+              alt="Mentor Binh Nguyen"
+              className="w-full h-auto object-cover"
+              width={400}
+              height={400}
+              fetchPriority="high"
+              loading="eager"
+              priority={true}
+            />
           </div>
           <div className="relative">
             <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
@@ -133,7 +144,16 @@ export const ClubMentors = () => {
             <span>Dr. HUY PHAM</span>
           </div>
           <div className="w-[25vw] h-auto object-cover overflow-hidden rounded-[50px] border-[#2C305F] border-5">
-            <img src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-HuyPham.png"></img>
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-HuyPham.png"
+              alt="Mentor Huy Pham"
+              className="w-full h-auto object-cover"
+              width={400}
+              height={400}
+              fetchPriority="high"
+              loading="eager"
+              priority={true}
+            />
           </div>
           <div className="relative">
             <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
@@ -253,7 +273,16 @@ export const ClubMentors = () => {
             <span>Dr. HIEU THAI</span>
           </div>
           <div className="w-[25vw] h-auto object-cover overflow-hidden rounded-[50px] border-[#2C305F] border-5">
-            <img src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-BinhNguyen.png"></img>
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/about_us/mentors/Mentor-BinhNguyen.png"
+              alt="Mentor Hieu Thai"
+              className="w-full h-auto object-cover"
+              width={400}
+              height={400}
+              fetchPriority="high"
+              loading="eager"
+              priority={true}
+            />
           </div>
           <div className="relative">
             <div className="absolute rounded-lg pl-[10px] pr-[250px] ">
