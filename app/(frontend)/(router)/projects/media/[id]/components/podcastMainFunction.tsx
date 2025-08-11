@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Slider } from "@nextui-org/react";
+import { Button, Slider } from "@heroui/react";
 import {
 	IconDotsVertical,
 	IconDownload,
