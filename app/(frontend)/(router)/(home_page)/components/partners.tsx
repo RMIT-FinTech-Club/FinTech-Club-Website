@@ -11,16 +11,24 @@ export type PartnerItem = {
   bg: string;
 };
 
-// Initial state: 7 partners with alternating background colors
-const initialItems: PartnerItem[] = [
-  { id: 1, icon: "/home/other_partners.svg", bg: "bg-blueSlate" },
-  { id: 2, icon: "/home/hospitality.svg", bg: "bg-bluePrimary" },
-  { id: 3, icon: "/home/academic.svg", bg: "bg-blueSlate" },
-  { id: 4, icon: "/home/blockchain.svg", bg: "bg-bluePrimary" },
-  { id: 5, icon: "/home/fintech.svg", bg: "bg-blueSlate" },
-  { id: 6, icon: "/home/charity.svg", bg: "bg-bluePrimary" },
-  { id: 7, icon: "/home/other_partners.svg", bg: "bg-blueSlate" },
-];
+// Initial state: 7 partners
+const baseItems = [
+  { id: 1, icon: "/home/other_partners.svg" },
+  { id: 2, icon: "/home/hospitality.svg" },
+  { id: 3, icon: "/home/academic.svg" },
+  { id: 4, icon: "/home/blockchain.svg" },
+  { id: 5, icon: "/home/fintech.svg" },
+  { id: 6, icon: "/home/charity.svg" },
+  { id: 7, icon: "/home/other_partners.svg" },
+] as const;
+
+// Create the initial state by mapping over baseItems
+// Assign alternating background colors:
+// Even indices → bg-blueSlate, odd indices → bg-bluePrimary
+const initialItems: PartnerItem[] = baseItems.map((it, i) => ({
+  ...it,
+  bg: i % 2 === 0 ? "bg-blueSlate" : "bg-bluePrimary",
+}));
 
 export default function Partners() {
   const [items, setItems] = useState(initialItems);

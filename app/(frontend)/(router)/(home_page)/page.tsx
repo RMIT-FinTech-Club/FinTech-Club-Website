@@ -9,22 +9,22 @@ import Partners from "./components/partners";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Loading from "./loading";
 const Home = () => {
-	return (
-		<>
-			<div className="flex min-h-screen flex-col justify-center items-center">
-				<SpeedInsights />
-				<HerosectionVid />
-				<HeroSection />
-				<IntroSection />
-				<Achievements />
-				<Partners />
-				<Department />
-				{/* <Suspense fallback={<Loading />}>
-				<UpcomingEvent />
-				</Suspense> */}
-			</div>
-		</>
-	);
+  return (
+    <>
+      <div className="flex min-h-screen flex-col justify-center items-center">
+        <SpeedInsights />
+        <HerosectionVid />
+        <HeroSection />
+        <IntroSection />
+        <Achievements />
+        <Partners />
+        <Department />
+        <Suspense fallback={<Loading />}>
+          <UpcomingEvent />
+        </Suspense>
+      </div>
+    </>
+  );
 };
 
 export default Home;
