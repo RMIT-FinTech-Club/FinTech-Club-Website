@@ -1,5 +1,5 @@
 "use client";
-import { Button, Pagination } from "@nextui-org/react";
+import { Button, Pagination } from "@heroui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 const MemberView = () => {

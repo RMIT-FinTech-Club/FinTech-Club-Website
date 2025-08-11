@@ -31,6 +31,7 @@ const HerosectionVid: React.FC = () => {
 				muted
 				loop
 				playsInline
+				preload="none"
 				id="hero-section-bg-vid"
 				className={clsx(
 					"w-full h-full", // Full screen
@@ -38,7 +39,7 @@ const HerosectionVid: React.FC = () => {
 					"object-cover", // Cover
 				)}
 			>
-				<source src="/hero-section-bg-vid.mp4" type="video/mp4" />
+				<source src="https://d2prwyp3rwi40.cloudfront.net/home/assets/HeroSectionVideo.mp4" type="video/mp4" />
 			</video>
 
 			{/* Text */}
@@ -48,16 +49,8 @@ const HerosectionVid: React.FC = () => {
 				transition={{
 					staggerChildren: 0.1,
 				}}
-				className="absolute bottom-16 right-0 left-0"
+				className="absolute bottom-0 right-0 left-0"
 			>
-				{/* <motion.h2
-					className="text-center w-full text-ft-text-bright"
-					variants={textAppearVariants}
-				>
-					Welcome to FinTech
-				</motion.h2> */}
-				<br />
-
 				<motion.p
 					className="text-center w-full text-ft-text-bright"
 					variants={textAppearVariants}

@@ -40,36 +40,34 @@ const executiveBoardData = [
 ];
 
 const ExecuteBoard = () => {
-	return (
-		// using hex color (invalid)
-		<section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[4rem]">
-			<div className="absolute top-[4.3rem] right-[1.8rem] w-[4rem] h-[4rem] bg-[#C9D6EA] rounded-full"></div>
-			<div className="absolute top-[11rem] right-[5rem] w-[2.5rem] h-[2.5rem] bg-[#DBB968] rounded-full"></div>
-			<div className="absolute bottom-[-1rem] right-[-2.4rem] w-[6rem] h-[6rem] bg-[#DBB968] rounded-full z-20"></div>
-			<div className="absolute bottom-[-2rem] right-[1.8rem] w-[3.7rem] h-[3.7rem] bg-[#2C305F] rounded-full z-10"></div>
-			<div className="absolute bottom-[-6rem] left-[1rem] w-[8rem] h-[8rem] bg-[#2C305F] rounded-full z-10"></div>
-			<div className="absolute bottom-[2rem] left-[8.5rem] w-[2.8rem] h-[2.8rem] bg-[#C9D6EA] rounded-full z-10"></div>
-			<div className="absolute bottom-[-1.8rem] left-[12rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
-			<div className="absolute bottom-[5rem] left-[15rem] w-[2rem] h-[2rem] bg-[#DBB968] rounded-full z-10"></div>
-			<div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
-
-			<main className="mx-[4rem] 2xl:mx-[10rem]">
-				<div className="grid">
-					<h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
-						Meet Our
-					</h2>
-					<h1 className=" text-[#2C305F] text-[4.3rem]">
-						Executive Board
-					</h1>
-					<p className="leading-3 w-full text-[#000000]">
-						Meet the fierce, brilliant, and passionate minds behind
-						the FinTech Club machine!
-					</p>
-				</div>
-				<div className=" pt-16 pb-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem] 2xl:gap-[5rem]">
-					{executiveBoardData.map((item, index) => {
-						const ref = useRef(null);
-						const isInView = useInView(ref);
+  return (
+    // using hex color (invalid)
+    <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[4rem]">
+      <div className="absolute top-[4.3rem] right-[1.8rem] w-[4rem] h-[4rem] bg-[#C9D6EA] rounded-full"></div>
+      <div className="absolute top-[11rem] right-[5rem] w-[2.5rem] h-[2.5rem] bg-[#DBB968] rounded-full"></div>
+      <div className="absolute bottom-[-1rem] right-[-2.4rem] w-[6rem] h-[6rem] bg-[#DBB968] rounded-full z-20"></div>
+      <div className="absolute bottom-[-2rem] right-[1.8rem] w-[3.7rem] h-[3.7rem] bg-[#2C305F] rounded-full z-10"></div>
+      <div className="absolute bottom-[-6rem] left-[1rem] w-[8rem] h-[8rem] bg-[#2C305F] rounded-full z-10"></div>
+      <div className="absolute bottom-[2rem] left-[8.5rem] w-[2.8rem] h-[2.8rem] bg-[#C9D6EA] rounded-full z-10"></div>
+      <div className="absolute bottom-[-1.8rem] left-[12rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
+      <div className="absolute bottom-[5rem] left-[15rem] w-[2rem] h-[2rem] bg-[#DBB968] rounded-full z-10"></div>
+      <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
+      
+      <main className="mx-[4rem] 2xl:mx-[10rem]">
+        <div className="content grid">
+          <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
+            Meet Our
+          </h2>
+          <h1 className=" text-[#2C305F] text-[4.3rem]">Executive Board</h1>
+          <p className="leading-8 w-full text-[#000000]">
+            Meet the fierce, brilliant, and passionate minds behind the FinTech
+            Club machine!
+          </p>
+        </div>
+        <div className=" pt-16 pb-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem] 2xl:gap-[5rem]">
+          {executiveBoardData.map((item, index) => {
+            const ref = useRef(null);
+            const isInView = useInView(ref);
 
 						return (
 							// effect

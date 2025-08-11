@@ -2,7 +2,7 @@
 import { fontSans } from "@/config/fonts";
 import failedNotify from "@/utils/failedNotify";
 import successNotify from "@/utils/successNotify";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import { useMutation } from "@tanstack/react-query";
 import { type ChangeEventHandler, useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -94,8 +94,8 @@ export default function PodcastForm() {
 			},
 		});
 
-		mutation.mutate({ ...data });
-	};
+    mutation.mutate({ ...data });
+  };
 
 	const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 		e.preventDefault();

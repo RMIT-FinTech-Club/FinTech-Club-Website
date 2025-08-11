@@ -101,22 +101,21 @@ export default function HistorySection() {
 				<div className="absolute bottom-[9rem] right-[4rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
 				<div className="absolute bottom-[6rem] right-[15rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
 
-				{/* Header */}
-				<div>
-					<h3
-						className={`text-xl text-[#2C305F] font-medium ${fontSans.style}`}
-					>
-						BACK TO TIME
-					</h3>
-					<h1 className={`leading-[4rem] text-[3rem] font-bold mt-2`}>
-						<span className="text-[#2C305F]">Discover the </span>
-						<span className="text-[#DCB968]">FINTECH CLUB </span>
-						<br />
-						<span className=" pt-[2rem] text-[#97ABD6]">
-							Story & History
-						</span>
-					</h1>
-				</div>
+        {/* Header */}
+        <div>
+          <h5
+            className={`text-[1.5rem] text-[#2C305F] font-semibold ${fontSans.style}`}
+          >
+            BACK TO TIME
+          </h5>
+          <h3 className={`leading-[3rem] text-[3rem] font-bold mt-2`}>
+            <span className="text-[#2C305F]">Discover the </span>
+            <span className="text-[#DCB968]">FINTECH CLUB </span>
+          </h3>
+          <h3 className="leading-[3rem] text-[3rem] font-bold mt-4 text-[#97ABD6]">
+            Story & History
+          </h3>
+        </div>
 
 				{/* YEAR SECTION */}
 				<div className="flex justify-center items-center gap-[4rem] my-[3.5rem]">
@@ -174,26 +173,26 @@ export default function HistorySection() {
 					)}
 				</div>
 
-				{/* Content Section */}
-				<motion.div
-					key={centerSlideIndex}
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6, ease: "easeOut" }}
-					className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
-				>
-					<h2
-						className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}
-					>
-						{historyData[centerSlideIndex].title}
-					</h2>
-					<p
-						className={`text-justify text-[#000] text-lg px-[3.5rem] ${fontSans.style}`}
-					>
-						{historyData[centerSlideIndex].content}
-					</p>
-				</motion.div>
-			</div>
-		</section>
-	);
+        {/* Content Section */}
+        <motion.div
+          key={centerSlideIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
+        >
+          <h4
+            className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}
+          >
+            {historyData[centerSlideIndex].title}
+          </h4>
+          <p
+            className={`text-justify text-[#000] text-lg px-[3.5rem] ${fontSans.style}`}
+          >
+            {historyData[centerSlideIndex].content}
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

@@ -1,5 +1,4 @@
-import { Card } from "@nextui-org/react";
-import { Skeleton } from "@nextui-org/skeleton";
+import {Card, Skeleton} from "@heroui/react";
 import clsx from "clsx";
 
 export default function Loading() {

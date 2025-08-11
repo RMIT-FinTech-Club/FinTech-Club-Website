@@ -7,10 +7,10 @@ import SpecificPodcast from "./podcast/components/specific/specificPodcast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Media = () => {
-	return (
-		<>
-			{/* <Overview/>  
-          <Podcast />   
+    return (
+        <>
+          <Overview/>  
+          {/* <Podcast />   
           <Article />   
           <SpecificArticle />
           <SpecificPodcast /> */}
