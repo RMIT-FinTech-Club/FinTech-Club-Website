@@ -2,7 +2,7 @@ import { addManagementBoard } from "@/app/(backend)/controllers/managementBoard"
 import connectMongoDb from "@/app/(backend)/libs/mongodb";
 import ManagementBoard from "@/app/(backend)/models/managementBoard";
 import { type NextRequest, NextResponse } from "next/server";
-import { requireAdmin } from "@/app/(backend)/middleware";
+import { requireAdmin } from "@/app/(backend)/middleware/middleware";
 
 export async function GET(req: NextRequest) {
     await connectMongoDb();

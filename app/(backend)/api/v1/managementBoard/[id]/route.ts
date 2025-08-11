@@ -2,7 +2,7 @@
 import connectMongoDb from "@/app/(backend)/libs/mongodb";
 import { type NextRequest, NextResponse } from "next/server";
 import { updateManagementBoard, deleteManagementBoard } from "@/app/(backend)/controllers/managementBoard";
-import { requireAdmin } from "@/app/(backend)/middleware";
+import { requireAdmin } from "@/app/(backend)/middleware/middleware";
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     // Require admin for PUT
