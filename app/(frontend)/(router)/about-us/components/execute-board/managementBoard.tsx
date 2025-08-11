@@ -1,4 +1,5 @@
-import { Card, CardBody, CardHeader, Image } from "@heroui/react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { IconBrandLinkedin } from "@tabler/icons-react";
 import { motion, useInView } from "framer-motion";
@@ -16,35 +17,37 @@ type ManagementBoardMember = {
 const ManagementBoard = () => {
   const [members, setMembers] = useState<ManagementBoardMember[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
-  // Fetch data on component mount 
+  // Fetch data on component mount
   useEffect(() => {
     const fetchManagementBoard = async () => {
       try {
-        const response = await axios.get('/api/v1/managementBoard');
+        const response = await axios.get("/api/v1/managementBoard");
 
-        if(response.data.status === 200 && response.data.members){
+        if (response.data.status === 200 && response.data.members) {
           setMembers(response.data.members);
-        } else{
-          setError(response.data.message || "Failed to load management board data. Please try again later.");
+        } else {
+          setError(
+            response.data.message ||
+              "Failed to load management board data. Please try again later."
+          );
         }
+      } catch (err: any) {
+        console.error("Error fetching management board: ", err);
 
-      } catch(err: any){
-        console.error('Error fetching management board: ', err);
-
-        // Set error message 
-        if(err.response?.status === 404){
-          setError('Management board API not found');
-        } else if(err.code == 'ERR_NETWORK'){
-          setError('Network error');
-        } else{
-          setError('Failed to load management board data');
+        // Set error message
+        if (err.response?.status === 404) {
+          setError("Management board API not found");
+        } else if (err.code == "ERR_NETWORK") {
+          setError("Network error");
+        } else {
+          setError("Failed to load management board data");
         }
-      } finally{
+      } finally {
         setLoading(false);
       }
-    }
+    };
     fetchManagementBoard();
   }, []);
 
@@ -93,8 +96,10 @@ const ManagementBoard = () => {
       <Image
         src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
-        className="absolute left-[-8rem] top-[-5rem] rotate-[35deg] scale-x-[-1] z-30"
-        width={368}
+        className="absolute left-[-8rem] top-[-1rem] rotate-[35deg] scale-x-[-1] z-30"
+        width={380}
+        height={380}
+        loading="lazy"
       />
       <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
       <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
@@ -161,6 +166,11 @@ function MemberCard({
               alt={`${name} profile`}
               src={photo_url}
               className="object-cover w-full h-full translate-y-[13%]"
+              width={400}
+              height={400}
+              fetchPriority="high"
+              loading="eager"
+              priority={true}
             />
           </div>
         </CardHeader>
@@ -170,7 +180,9 @@ function MemberCard({
               <h6 className="leading-6 font-semibold text-[0.9rem] text-[#2C305F]">
                 {name}
               </h6>
-              <p className="leading-5 text-[#2C305F] text-[0.7rem]">{position}</p>
+              <p className="leading-5 text-[#2C305F] text-[0.7rem]">
+                {position}
+              </p>
             </div>
             {linkedin_url && linkedin_url.trim() ? (
               <Link

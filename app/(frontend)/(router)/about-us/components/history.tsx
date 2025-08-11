@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { fontSans } from "@/config/fonts";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
@@ -69,23 +70,33 @@ export default function HistorySection() {
 		}
 	}, [emblaHorizontalApi]);
 
-	return (
-		<section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
-			<div className="relative w-full">
-				<img
-					src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
-					alt="Bear mascot"
-					className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
-				/>
-				<img
-					src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
-					alt="Bear mascot"
-					className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
-				/>
-				<div className="absolute top-[4rem] left-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
-				<div className="absolute top-[4rem] right-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
-				<div className="absolute top-[4.35rem] left-[2.2rem] w-[12rem] h-[0.25rem] bg-[#2C305F] z-10"></div>
-				<div className="absolute top-[4.35rem] right-[2.2rem] w-[12rem] h-[0.25rem] bg-[#2C305F] z-10"></div>
+  return (
+    <section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
+      <div className="relative w-full">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          alt="Bear mascot"
+          className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
+          width={400}
+          height={400}
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
+        />
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          alt="Bear mascot"
+          className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
+          width={400}
+          height={400}
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
+        />
+        <div className="absolute top-[4rem] left-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute top-[4rem] right-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute top-[4.35rem] left-[2.2rem] w-[12rem] h-[0.25rem] bg-[#2C305F] z-10"></div>
+        <div className="absolute top-[4.35rem] right-[2.2rem] w-[12rem] h-[0.25rem] bg-[#2C305F] z-10"></div>
 
 				<div className="absolute bottom-[-4rem] left-[6rem] w-[4.3rem] h-[4.3rem] bg-[#2C305F] rounded-full z-10"></div>
 				<div className="absolute bottom-[-2.6rem] left-[3rem] w-[4.3rem] h-[4.3rem] bg-[#C9D6EA] rounded-full z-20"></div>
