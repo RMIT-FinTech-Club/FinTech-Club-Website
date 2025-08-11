@@ -104,7 +104,10 @@ const Department = () => {
               return (
                 <div
                   key={dept}
-                  className="group p-[1px] rounded-[10px] bg-gradient-to-b from-[#F0EDFF] to-[#5E5E92]"
+                  className="group p-[1px] rounded-[10px]"
+                  style={{
+                    background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
+                  }}
                 >
                   <Button
                     onPress={() => setDepartment(department)}
@@ -119,11 +122,17 @@ const Department = () => {
         </section>
       </div>
 
-      <div className="h-full w-[29vw] bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-br-[18vw] relative z-0">
+      <div
+        className="h-full w-[29vw] rounded-br-[18vw] relative z-0"
+        style={{ background: "linear-gradient(to bottom, #C9D6EA, #DBB968)" }}
+      >
         <div className="h-[49rem] w-[27.5vw] bg-[#2C305F] rounded-br-[17vw] absolute top-0 left-0 z-10"></div>
       </div>
 
-      <div className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-t-[10vw]">
+      <div
+        className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 rounded-t-[10vw]"
+        style={{ background: "linear-gradient(to bottom, #C9D6EA, #DBB968)" }}
+      >
         <div className="h-[40rem] w-[33vw] absolute m-[1rem] z-20">
           <Image
             src={department.background}
