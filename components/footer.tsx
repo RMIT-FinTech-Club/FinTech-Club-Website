@@ -212,6 +212,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
+      {/* Copyright Section */}
       <div className="container mx-auto text-center mt-[10vh] border-t border-gray-500 pt-4">
         <p className="text-sm">Copyright ©2025 All Rights Reserved.</p>
       </div>

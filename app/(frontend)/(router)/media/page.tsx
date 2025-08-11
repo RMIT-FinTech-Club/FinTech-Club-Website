@@ -14,8 +14,8 @@ const Media = () => {
           <Article />   
           <SpecificArticle />
           <SpecificPodcast /> */}
-        </>
-    );
+		</>
+	);
 };
 
 export default Media;

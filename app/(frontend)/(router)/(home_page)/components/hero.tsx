@@ -48,7 +48,7 @@ const HeroSection = () => {
           <Image
             className="w-full object-cover rounded-3xl"
             src="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png"
-            alt="Placeholder image"
+            alt="Intro Photo - Orientation Day"
             fetchPriority="high"
             loading="eager"
             width={1000}
@@ -98,7 +98,7 @@ const HeroSection = () => {
       <div className="flex-col md:flex-row justify-between items-center flex w-full h-fit">
         <Image
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
-          alt=""
+          alt="Bear Mascot"
           width={1000}
           height={200}
           fetchPriority="high"
@@ -108,7 +108,7 @@ const HeroSection = () => {
         />
         <Image
           src="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-EOSTrip.png"
-          alt=""
+          alt="Intro Photo - EOS Trip"
           width={1000}
           height={200}
           fetchPriority="high"
@@ -118,7 +118,7 @@ const HeroSection = () => {
         />
         <Image
           src="https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ClubDay.png"
-          alt=""
+          alt="Intro Photo - Club Day"
           width={1000}
           height={200}
           fetchPriority="high"
