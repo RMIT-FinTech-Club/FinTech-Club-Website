@@ -58,8 +58,9 @@ const ManagementBoard = () => {
         <Image
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
           alt="Bear mascot"
-          className="absolute left-[-8rem] top-[-5rem] rotate-[35deg] scale-x-[-1] z-30"
+          className="absolute left-[-8rem] top-0 rotate-[35deg] scale-x-[-1] z-30"
           width={368}
+          height={368}
         />
         <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
         <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
