@@ -1,13 +1,17 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 function Overview() {
-   const router = useRouter();
+  const router = useRouter();
   return (
-    <div className="bg-[#2C305F] bg-gradient-to-t from-[#2C305F] to-[#5E5E92]">
+    <div
+      style={{
+        background: "linear-gradient(to top, #2C305F, #5E5E92)",
+      }}
+    >
       <div className="absolute bottom-[-11rem] right-[5rem] w-[4rem] h-[4rem] bg-[#F0EDFF] rounded-full z-10"></div>
       <div className="absolute bottom-[-1rem] right-[-1rem] w-[4rem] h-[4rem] bg-[#A28436] rounded-full z-10"></div>
       <div className="absolute bottom-[-8rem] right-[-1rem] w-[8rem] h-[8rem] bg-[#DCB968] rounded-full z-20"></div>
@@ -30,16 +34,21 @@ function Overview() {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur.
           </p>
-
-          <Button
-    as={Link}
-    href="/media/article"
-    size="md"
-    radius="sm"
-    className="ml-[4rem] mt-[1.5rem] bg-[#DCB968] text-[1rem] font-semibold text-[#2C305F]"
->
-  View Article
-  </Button>
+          <div
+            className="w-fit h-fit rounded-md p-[2px] mt-[1.5rem] "
+            style={{
+              background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
+            }}
+          >
+            <Button
+              as={Link}
+              href="/media/article"
+              size="md"
+              className="bg-ft-primary-yellow text-[1rem] font-semibold text-[#2C305F] rounded-md"
+            >
+              View Article
+            </Button>
+          </div>
         </div>
 
         {/* Right side - Decorative illustration */}
@@ -128,8 +137,8 @@ function Overview() {
           {/* Large circle */}
           <div className="relative flex justify-center items-center w-[30rem] h-[30rem] rounded-full border-4 border-[#F7D27F] mx-auto z-30 bg-[#2C305F]">
             <img
-              src="https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/home/achievement/BestClubSemC-2024.png"
-              alt="image"
+              src="https://d2prwyp3rwi40.cloudfront.net/media/podcast/FintechtainmentPoster-New.png"
+              alt="FinTechTainment Poster"
               className="w-[26rem] h-[26rem] rounded-full object-cover"
             />
           </div>
@@ -137,27 +146,40 @@ function Overview() {
         {/* Left side - Effect */}
         <div>
           <h1 className=" text-[4rem] font-bold text-[#EBEBEB]">
-            Fintechtainment
+            FinTechTainment
           </h1>
 
-          <p className="text-base text-[#EBEBEB] max-w-[42vw] text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+          <p className="text-base text-[#EBEBEB] max-w-[45vw] text-justify">
+            FintechTainment is play of words between <strong>"Fintech"</strong>{" "}
+            and
+            <strong> "Entertainment"</strong>. It is a media/podcast project
+            aimed at interviewing industry professionals with topics in the
+            fields of:{" "}
+            <strong>
+              {" "}
+              Business, Finance, Technology, and Entrepreneurship
+            </strong>
+            . Our approach is to have casual conversations about insightful
+            academic/industry topics, in a way that is relatable and
+            understandable by students.
           </p>
-             
-          <Button
-    as={Link}
-    href="/media/podcast"
-    size="md"
-    radius="sm"
-    className="ml-[4rem] mt-[1.5rem] bg-[#DCB968] text-[1rem] font-semibold text-[#2C305F]"
->
-  View Podcast
-          </Button>
+
+          <div
+            className="w-fit h-fit rounded-md p-[2px] mt-[1.5rem] ml-[4rem]"
+            style={{
+              background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
+            }}
+          >
+            <Button
+              as={Link}
+              href="/media/podcast"
+              size="md"
+              radius="md"
+              className="bg-ft-primary-yellow text-[1rem] font-semibold text-[#2C305F] rounded-md"
+            >
+              View Podcast
+            </Button>
+          </div>
         </div>
       </section>
     </div>
