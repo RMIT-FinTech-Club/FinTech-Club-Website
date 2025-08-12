@@ -9,10 +9,8 @@ export default async function uploadFile(file: File, folder: string) {
       folderName: folder
     }),
   });
-
   const { uploadUrl, key } = await res.json();
   console.log(uploadUrl, key);// check the key.
-
   //Upload to S3 bucket directly
   await fetch(uploadUrl, {
     method: "PUT",
@@ -23,9 +21,6 @@ export default async function uploadFile(file: File, folder: string) {
   // Save key/URL to your DB if needed
   const fileUrl = `https://d2prwyp3rwi40.cloudfront.net/${key}`; 
   console.log("File uploaded to S3:", fileUrl);
-
   return fileUrl;
-
 }
 
-//delete file from S3 bucket
