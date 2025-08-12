@@ -59,7 +59,7 @@ const IntroSection = () => {
       <div className="grid grid-rows-2 md:w-1/3 justify-center gap-y-16">
         <div className="flex flex-col justify-start text-center gap-3">
           <h4 className="text-ft-primary-yellow">
-            <CountUp start={0} end={inView ? 5000 : 0} duration={5}>
+            <CountUp start={0} end={inView ? 7000 : 0} duration={5}>
               {({ countUpRef }) => (
                 <span ref={countUpRef} className="text-6xl font-semibold" />
               )}
@@ -67,7 +67,7 @@ const IntroSection = () => {
             +
           </h4>
           
-          <h5 className="text-ft-primary-blue">FanPage followings</h5>
+          <h5 className="text-ft-primary-blue">Social Media Followings</h5>
           <p>
             A testament to FinTech Club’s prominence in the RMIT Community and
             beyond!
@@ -76,7 +76,7 @@ const IntroSection = () => {
 
         <div className="flex flex-col justify-start text-center gap-3">
           <h4 className="text-ft-primary-yellow">
-            <CountUp start={0} end={inView ? 60 : 0} duration={5}>
+            <CountUp start={0} end={inView ? 40 : 0} duration={5}>
               {({ countUpRef }) => (
                 <span ref={countUpRef} className="text-6xl font-semibold" />
               )}

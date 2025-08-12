@@ -297,12 +297,6 @@ const partnerConfig: Record<
     gridCols: "flex-row",
     imageHeight: "h-[10rem]",
   },
-  7: {
-    title: "Other Partners",
-    partners: otherPartners,
-    gridCols: "flex-row",
-    imageHeight: "h-[12rem]",
-  },
   1: {
     title: "Other Partners",
     partners: otherPartners,
@@ -314,10 +308,6 @@ const partnerConfig: Record<
 export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
   const activeItem = items.find((item) => item.id === activeItemId) || items[3];
   const config = partnerConfig[activeItem.id];
-
-  if (!config) {
-    return <div>Invalid partner category</div>;
-  }
 
   const { title, partners, gridCols, imageHeight, centerLast } = config;
 

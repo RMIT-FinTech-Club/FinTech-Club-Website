@@ -19,7 +19,6 @@ const baseItems = [
   { id: 4, icon: "/home/blockchain.svg" },
   { id: 5, icon: "/home/fintech.svg" },
   { id: 6, icon: "/home/charity.svg" },
-  { id: 7, icon: "/home/other_partners.svg" },
 ] as const;
 
 // Create the initial state by mapping over baseItems
