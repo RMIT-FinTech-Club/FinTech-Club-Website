@@ -1,8 +1,6 @@
-import EventProject from "@/components/projects/pages/event/EventProject"
+import EventProject from "@/components/projects/pages/event/EventProject";
 const Event = () => {
-	return (
-		<EventProject />
-	);
+	return <EventProject />;
 };
 
 export default Event;

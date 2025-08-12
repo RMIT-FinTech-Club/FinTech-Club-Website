@@ -1,96 +1,247 @@
 "use client";
-import { useRef } from "react";
-import Slider, { type Settings } from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
-import CardEvent from "./CardEvent";
-import { NextArrow, PreArrow } from "@/components/carouselArrows";
-import { useQuery } from "@tanstack/react-query";
 
-const settings = {
-	className: "w-full center",
-	infinite: true,
-	autoplay: true,
-	centerMode: true,
-	autoSpeed: 1000,
-	speed: 500,
-	slidesToShow: 1,
-	slidesToScroll: 1,
-	variableWidth: true,
-	initialSlide: 0,
-} as Settings;
+import { useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import styles from "@/styles/upcoming.module.css";
+import clsx from "clsx";
 
-type UpComingEvents = {
-	imageUrl: string;
-	name: string;
-	description: string;
-	location: string;
-	date: string;
-	time: string;
-	_id: string;
+// Data shape for an event card
+type EventItem = {
+  name: string;
+  image: string;
+  date: string;
+  label: string;
 };
 
-const UpcomingEvent = async () => {
-	const { data: upcomingEvents } = useQuery<UpComingEvents[]>({
-		queryKey: ["upcoming-events"],
-		queryFn: async () => {
-			const response = await fetch("/api/v1/events/upcoming");
-			return response.json().then((data) => data.data);
-		},
-		refetchOnWindowFocus: false,
-		staleTime: 1000 * 60 * 60,
-	})
-	const sliderRef = useRef<Slider>(null);
+// Static list of events (source of truth for dots order)
+const placeholders: EventItem[] = [
+  {
+    name: "Hackathon 2025",
+    image:
+      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
+    date: "31th August",
+    label: "label",
+  },
+  {
+    name: "Design Sprint",
+    image:
+      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
+    date: "02 Sep",
+    label: "label",
+  },
+  {
+    name: "Dev Conf",
+    image:
+      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
+    date: "10 Sep",
+    label: "label",
+  },
+  {
+    name: "AI Meetup",
+    image:
+      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
+    date: "18 Sep",
+    label: "label",
+  },
+  {
+    name: "Cloud Day",
+    image:
+      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
+    date: "25 Sep",
+    label: "label",
+  },
+];
 
-	return (
-		<section className="flex flex-col md:px-24 gap-5 w-screen py-2 lg:py-12">
-			<h1 className="text-3xl font-bold mx-auto text-ft-primary-blue">
-				PROJECTS
-			</h1>
-			<section className="relative mx-auto w-full">
-				<section className="flex flex-row justify-between items-center w-full mb-5 gap-4">
-					<hr className="w-1/3  border-b-2 border-solid border-ft-primary-yellow md:hidden" />
-					<div className="text-ft-primary-yellow text-2xl font-semibold">
-						2024
-					</div>
-					<hr className="w-1/3 border-b-2 border-solid border-ft-primary-yellow md:w-full" />
-				</section>
-				<PreArrow
-					buttonOnClick={() => {
-						sliderRef?.current?.slickPrev();
-					}}
-					className="hidden md:block absolute top-1/2 -translate-y-1/2 -left-16"
-				/>
-				<Slider ref={sliderRef} {...settings}>
-					{upcomingEvents && upcomingEvents.map((event) => {
-						// Split date to get month and day
-						const dateMonth = (event["date"] as string).split(" ");
+export default function UpcomingEvent() {
+  // Rotating copy of placeholders that drives what’s rendered
+  const [items, setItems] = useState<EventItem[]>(placeholders);
 
-						return (
-							<CardEvent
-								key={event["_id"]}
-								eventId={event["_id"]}
-								imageUrl={event["imageUrl"]}
-								eventName="No name"
-								location={event["location"]}
-								title={event["name"]}
-								detail={event["description"]}
-								timeOnHour={event["time"]}
-								timeOnDay={dateMonth[0]}
-								timeOnMonth={dateMonth[1]}
-							/>
-						);
-					})}
-				</Slider>
-				<NextArrow
-					buttonOnClick={() => {
-						sliderRef?.current?.slickNext();
-					}}
-					className="hidden md:block absolute top-1/2 -translate-y-1/2 -right-16"
-				/>
-			</section>
-		</section>
-	);
-};
+  // Prevents new clicks while the 3s CSS animation is running
+  const [animating, setAnimating] = useState(false);
 
-export default UpcomingEvent;
+  // Refs to the 5 visible card DOM nodes (positions card_1..card_5)
+  const cardRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Trigger a step to the next or previous slide.
+  // We apply CSS classes to animate positions, then rotate the data array
+  // after 3s to match the new visual order.
+  const handleClick = (dir: "next" | "prev") => {
+    if (animating) return;
+    setAnimating(true);
+
+    // Add animation class to each of the 5 card positions
+    cardRef.current.forEach((el, i) => {
+      el?.classList.add(styles[`card_${i + 1}_${dir}`]);
+    });
+
+    // After animation finishes, rotate the array to match visual result
+    setTimeout(() => {
+      const rotated = [...items];
+
+      if (dir === "prev") {
+        // Move the last item to the front (right → center)
+        // Matches clicking card_2 to go "previous"
+        rotated.unshift(rotated.pop()!);
+      } else {
+        // Move the first item to the end (left → center)
+        // Matches clicking card_4 to go "next"
+        rotated.push(rotated.shift()!);
+      }
+
+      setItems(rotated);
+      setAnimating(false);
+
+      // Clean up animation classes for the next click
+      cardRef.current.forEach((el, i) => {
+        el?.classList.remove(styles[`card_${i + 1}_${dir}`]);
+      });
+    }, 3000); // Must match the CSS animation-duration
+  };
+
+  // Compute the 5 cards to render at fixed positions card_1..card_5.
+  // If there are fewer than 5 items you can loop; here we assume >= 5.
+  const visible = Array.from(
+    { length: 5 },
+    (_, i) => items[i % (items.length || 1)]
+  );
+
+  return (
+    <div className="h-fit w-[100vw] py-6 relative flex flex-col items-center">
+      {/* Header + decorative stars */}
+      <div className="h-[max-content] w-[max-content] relative mx-auto mt-[2vh] mb-[4vh]">
+        <p className="text-[4vw] text-bluePrimary uppercase font-extrabold text-center">
+          UPCOMING EVENTS
+        </p>
+        <div
+          className="absolute bottom-[calc(100%-2vh)] left-[0.2vw] h-[5vh] aspect-square bg-center bg-no-repeat bg-contain"
+          style={{ backgroundImage: "url(/home/star.svg)" }}
+        />
+        <div
+          className="absolute top-[-2vh] left-[-13vh] h-[12vh] aspect-square bg-center bg-no-repeat bg-contain"
+          style={{ backgroundImage: "url(/home/star.svg)" }}
+        />
+        <div
+          className="absolute top-[1vh] right-[-11vh] h-[10vh] aspect-square bg-center bg-no-repeat bg-contain"
+          style={{ backgroundImage: "url(/home/star.svg)" }}
+        />
+        <div
+          className="absolute top-[calc(100%-3vh)] right-[-1vw] h-[5vh] aspect-square bg-center bg-no-repeat bg-contain"
+          style={{ backgroundImage: "url(/home/star.svg)" }}
+        />
+      </div>
+
+      {/* Carousel stage (5 fixed positions) */}
+      <div className="h-[85vh] w-full relative">
+        {visible.map((ev, index) => (
+          <div
+            key={`${ev.name}-${index}`}
+            ref={(el: HTMLDivElement | null) => {
+              // Keep a ref to each fixed position wrapper
+              cardRef.current[index] = el;
+            }}
+            className={clsx(
+              styles.card, // base: 3D, opacity, duration, fill-mode, etc.
+              styles[`card_${index + 1}`], // fixed position class: card_1..card_5
+              "grid place-items-center h-[75vh] w-[25vw] border-bluePrimary border-[0.5vh] rounded-[2vw] p-[2vh] bg-blueSlate"
+            )}
+            onClick={() => {
+              // Click on the side cards to navigate:
+              // card_2 → prev (bring right item to center)
+              // card_4 → next (bring left item to center)
+              if (index === 1) handleClick("prev");
+              else if (index === 3) handleClick("next");
+            }}
+          >
+            {/* Card content */}
+            <p className="text-[3vh] text-yellowSand uppercase text-center font-bold">
+              {ev.name}
+            </p>
+
+            <div
+              className="relative w-full h-[35vh] rounded-[3vh] p-[1.5vh]"
+              style={{
+                background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+              }}
+            >
+              <div
+                className="w-full h-full rounded-[2.5vh] bg-center bg-cover bg-no-repeat"
+                style={{ backgroundImage: `url(${ev.image})` }}
+              />
+            </div>
+
+            <div className="w-full h-[15vh] flex justify-between">
+              <div
+                className="h-full aspect-square rounded-[3vh] p-[1.5vh] flex justify-center items-center"
+                style={{
+                  background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                }}
+              >
+                <p className="text-[2vh] leading-[2.2vh] font-bold text-center">
+                  {ev.date}
+                </p>
+              </div>
+              <div
+                className="h-full w-full ml-[2vw] rounded-[3vh] p-[1.5vh] flex justify-center items-center"
+                style={{
+                  background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                }}
+              >
+                <div className="bg-white w-full h-full rounded-[2.5vh] text-[2vh] leading-[2.2vh] font-bold text-center flex justify-center items-center">
+                  {ev.label}
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="h-[max-content] w-[max-content] max-w-full rounded-[3vh] py-[1.5vh] px-[3vw] flex justify-center items-center cursor-pointer"
+              style={{
+                background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+              }}
+            >
+              <p className="text-[3vh] leading-[3.3vh] font-bold text-center">
+                Join Now
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dots + arrows */}
+      <div className="w-full flex justify-center items-center gap-[1.5vw] mt-[-4vh] z-[10]">
+        <button
+          className="h-[5vh] w-[5vh] text-[3vh] leading-[4vh] rounded-full border border-[#ddd] grid place-items-center hover:bg-[#f7f7f7] disabled:opacity-50"
+          onClick={() => handleClick("prev")}
+          disabled={animating}
+          aria-label="Previous"
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </button>
+
+        <div className="flex items-center gap-[0.8vw]">
+          {placeholders.map((_, i) => {
+            // Active dot = the original index of the center card (items[2])
+            const activeIndex = placeholders.indexOf(items[2]);
+            return (
+              <div
+                key={i}
+                className={`h-[2vh] aspect-square rounded-full ${
+                  i === activeIndex ? "bg-yellowPrimary" : "bg-[#D9D9D9]"
+                }`}
+              />
+            );
+          })}
+        </div>
+
+        <button
+          className="h-[5vh] w-[5vh] text-[3vh] leading-[4vh] rounded-full border border-[#ddd] grid place-items-center hover:bg-[#f7f7f7] disabled:opacity-50"
+          onClick={() => handleClick("next")}
+          disabled={animating}
+          aria-label="Next"
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </button>
+      </div>
+    </div>
+  );
+}

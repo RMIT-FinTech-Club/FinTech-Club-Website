@@ -1,5 +1,4 @@
 "use client";
-import CoreValue from "./components/coreValue";
 import ExecuteBoard from "./components/execute-board/executeBoard";
 import ManagementBoard from "./components/execute-board/managementBoard";
 import III from "./components/III/III";
@@ -15,11 +14,10 @@ const AboutUs = () => {
 			<VisionMission />
 			<III />
 			<FinTechInTheEyes />
-			<ClubMentors/>
+			<ClubMentors />
 			<ExecuteBoard />
 			<ManagementBoard />
 			{/* <Members /> */}
-			{/* <CoreValue /> */}
 		</>)
 };
 

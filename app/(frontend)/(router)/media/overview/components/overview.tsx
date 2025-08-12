@@ -1,6 +1,11 @@
+"use client";
+
 import { Button } from "@heroui/react";
+import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 function Overview() {
+   const router = useRouter();
   return (
     <div className="bg-[#2C305F] bg-gradient-to-t from-[#2C305F] to-[#5E5E92]">
       <div className="absolute bottom-[-11rem] right-[5rem] w-[4rem] h-[4rem] bg-[#F0EDFF] rounded-full z-10"></div>
@@ -27,12 +32,14 @@ function Overview() {
           </p>
 
           <Button
-            size="md"
-            radius="sm"
-            className="mt-[1.5rem] bg-[#DCB968] text-[1rem] font-semibold text-[#2C305F]"
-          >
-            View Article
-          </Button>
+    as={Link}
+    href="/media/article"
+    size="md"
+    radius="sm"
+    className="ml-[4rem] mt-[1.5rem] bg-[#DCB968] text-[1rem] font-semibold text-[#2C305F]"
+>
+  View Article
+  </Button>
         </div>
 
         {/* Right side - Decorative illustration */}
@@ -141,14 +148,15 @@ function Overview() {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur.
           </p>
-
+             
           <Button
-            href="/"
-            size="md"
-            radius="sm"
-            className="ml-[4rem] mt-[1.5rem] bg-[#DCB968] text-[1rem] font-semibold text-[#2C305F]"
-          >
-            View Podcast
+    as={Link}
+    href="/media/podcast"
+    size="md"
+    radius="sm"
+    className="ml-[4rem] mt-[1.5rem] bg-[#DCB968] text-[1rem] font-semibold text-[#2C305F]"
+>
+  View Podcast
           </Button>
         </div>
       </section>

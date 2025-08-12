@@ -1,5 +1,5 @@
 import plugin from "tailwindcss/plugin";
-import { CSSRuleObject, KeyValuePair, ResolvableTo, ScreensConfig } from "tailwindcss/types/config";
+import { CSSRuleObject, KeyValuePair, ResolvableTo } from "tailwindcss/types/config";
 
 export const orientationPlugin = plugin(({ addVariant }) => {
   addVariant("portrait", "@media (orientation: portrait)");
@@ -37,7 +37,7 @@ type ConfigUtilities = {
     fontSize: ResolvableTo<FontSizeType>
 }
 
-type ConfigDefaultBreakpoints = "sm" | "md" | "lg" | "xl" | "2xl";
+type ConfigDefaultBreakpoints = "default" | "md" | "lg" ;
 
 /**
  * Represents the configuration for responsive styling.

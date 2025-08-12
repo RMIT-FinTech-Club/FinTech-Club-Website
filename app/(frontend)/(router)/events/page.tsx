@@ -35,7 +35,7 @@ const Events = () => {
 					<EventCard event={event} />
 				))}
 			</div>
-			</section>
+		</section>
 	);
 };
 

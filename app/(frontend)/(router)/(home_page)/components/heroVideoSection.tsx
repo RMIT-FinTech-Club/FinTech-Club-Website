@@ -1,10 +1,7 @@
 "use client";
 import { IconChevronCompactDown } from "@tabler/icons-react";
 import clsx from "clsx";
-import {
-	type Variants,
-	motion,
-} from "framer-motion";
+import { type Variants, motion } from "framer-motion";
 import type React from "react";
 
 const HerosectionVid: React.FC = () => {

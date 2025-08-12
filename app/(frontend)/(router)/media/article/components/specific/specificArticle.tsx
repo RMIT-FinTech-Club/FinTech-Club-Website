@@ -1,9 +1,5 @@
 function SpecificArticle() {
-  return (
-    <section>
-
-    </section>
-  )
-  }
+	return <section></section>;
+}
 
 export default SpecificArticle;
