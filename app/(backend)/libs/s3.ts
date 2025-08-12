@@ -1,5 +1,5 @@
 // lib/s3.ts
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { nanoid } from "nanoid";
 import mime from "mime";
@@ -35,7 +35,7 @@ export async function uploadToS3(fileName: string, fileType: string, folderName:
 
 //Delete Function
 export async function deleteFromS3(key: string) {
-  const command = new PutObjectCommand({
+  const command = new DeleteObjectCommand({
     Bucket: process.env.BUCKET_NAME,
     Key: key,
   });
