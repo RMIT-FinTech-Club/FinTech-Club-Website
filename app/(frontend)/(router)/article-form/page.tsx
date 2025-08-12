@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import uploadFile from "@/app/(backend)/libs/uploadFile";
+import deleteFile from "@/app/(backend)/libs/deleteFile";
 
 const labelCategories = [
   "Fintech", "Technology", "Blockchain", "AI", "Customer Service", "Security",
@@ -26,13 +27,11 @@ export default function ArticleUploader() {
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   // Article list state
-  const [articles, setArticles] = useState<any[]>([]);
+  const [articles, setArticles] = useState<any[]>([]); // articles is used to get the list of articles from the backend and return in the List 
   const [editingId, setEditingId] = useState<string | null>(null);
 
   // Fetch articles on mount
-  useEffect(() => {
-    fetchArticles();
-  }, []);
+  useEffect(() => {fetchArticles()}, []);
 
   const fetchArticles = async () => {
     const res = await fetch("/api/v1/article");
@@ -117,19 +116,41 @@ export default function ArticleUploader() {
     }
   };
 
-  // Delete article
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this article?")) return;
-    try {
-      // Call the DELETE API
-      const res = await fetch(`/api/v1/article/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Failed to delete");
-      alert("🗑️ Deleted!");
-      fetchArticles();
-    } catch (err) {
-      alert("❌ Failed to delete");
+ // get key from url
+function getS3KeyFromUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.startsWith("/") ? u.pathname.slice(1) : u.pathname;
+    return decodeURIComponent(path);
+  } catch (err) {
+    console.error("Invalid URL:", err);
+    return "";
+  }
+}
+
+  const handleDelete = async (articleId: string, contentUrl?: string, illustrationUrl?: string) => {
+  if (!confirm("Are you sure you want to delete this article?")) return;
+
+  try {
+    // Xoá file trên S3 nếu có
+    if (contentUrl) {
+      await deleteFile(getS3KeyFromUrl(contentUrl));
     }
-  };
+    if (illustrationUrl) {
+      await deleteFile(getS3KeyFromUrl(illustrationUrl));
+    }
+    // Xoá bài viết trong database
+    const res = await fetch(`/api/v1/article/${articleId}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Failed to delete article");
+    // Nếu xoá thành công → cập nhật state để bỏ bài khỏi list
+    setArticles(prev => prev.filter(article => article._id !== articleId));
+    alert("🗑️ Deleted!");
+  } catch (err) {
+    console.error(err);
+    alert("❌ Failed to delete");
+  }
+};
+
 
   // Edit article
   const handleEdit = (article: any) => {
@@ -159,7 +180,7 @@ export default function ArticleUploader() {
     setIllustrationUrl(null);
   };
 
-  return (
+return (
     <div style={{ padding: "1rem", maxWidth: "600px", margin: "auto", display: "flex", flexDirection: "column", gap: "1rem" }}>
       <h2>{editingId ? "Edit Article" : "Create Article"}</h2>
       <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
@@ -173,7 +194,6 @@ export default function ArticleUploader() {
           setAuthors(e.target.value.split(",").map(a => a.trim()).filter(Boolean));
         }}
       />
-
       <label>Labels (hold Ctrl or Cmd to select multiple):</label>
       <select multiple value={labels} onChange={(e) => {
         const selected = Array.from(e.target.selectedOptions).map(opt => opt.value);
@@ -199,7 +219,7 @@ export default function ArticleUploader() {
           <iframe src={contentUrl} width="100%" height="200px" title="PDF Preview"></iframe>
         </div>
       )}
-
+      
       {/* Upload Image */}
       <label>Upload Illustration Image:</label>
       <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)} />
@@ -216,7 +236,6 @@ export default function ArticleUploader() {
       <button onClick={handleSubmit} style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}>
         {editingId ? "Update Article" : "Submit Article"}
       </button>
-
       {/* Article List */}
       <h2 style={{ marginTop: "2rem" }}>Article List</h2>
       <ul style={{ listStyle: "none", padding: 0 }}>
@@ -228,7 +247,10 @@ export default function ArticleUploader() {
             <div>Labels: {article.labels?.join(", ")}</div>
             <div>Publication: {article.publicationDate?.slice(0,10)}</div>
             <button onClick={() => handleEdit(article)} style={{ marginRight: "1rem" }}>Edit</button>
-            <button onClick={() => handleDelete(article._id)}>Delete</button>
+            <button
+             onClick={() => {
+               handleDelete(article._id, article.content_url, article.illustration_url);
+              }}>Delete</button>
           </li>
         ))}
       </ul>
