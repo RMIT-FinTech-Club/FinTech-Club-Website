@@ -35,9 +35,16 @@ export default function ArticleUploader() {
 
   const fetchArticles = async () => {
     const res = await fetch("/api/v1/article");
-    const data = await res.json();
+    if (!res.ok) {
+      console.error("Failed to fetch articles", res.status, res.statusText);
+      setArticles([]);
+      return;
+    }
+
+    const text = await res.text();
+    const data = text ? JSON.parse(text) : [];
     setArticles(data);
-  };
+};
 
   // handle UPLOAD PDF
   const handlePDFUpload = async () => {
@@ -47,6 +54,10 @@ export default function ArticleUploader() {
     }
     setIsUploadingPDF(true);
     try {
+      // If editing an existing article, delete the old PDF
+      if (editingId && contentUrl) {
+      await deleteFile(getS3KeyFromUrl(contentUrl));
+    }
       const url = await uploadFile(pdfFile, "article/products/");
       setContentUrl(url);
     } catch (err) {
@@ -64,6 +75,10 @@ export default function ArticleUploader() {
     }
     setIsUploadingImage(true);
     try {
+      // If editing an existing article, delete the old image
+      if (editingId && illustrationUrl) {
+      await deleteFile(getS3KeyFromUrl(illustrationUrl));
+    }
       const url = await uploadFile(imageFile,"article/graphics/");
       setIllustrationUrl(url);
     } catch (err) {
@@ -163,6 +178,7 @@ function getS3KeyFromUrl(url: string): string {
     setPublicationDate(article.publicationDate?.slice(0,10) || "");
     setContentUrl(article.content_url);
     setIllustrationUrl(article.illustration_url);
+
   };
 
   // Reset form
