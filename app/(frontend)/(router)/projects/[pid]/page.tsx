@@ -10,6 +10,8 @@ import ProductCta from "./_components/technical/product-cta";
 import Scope from "./_components/scope";
 import ProductCarousel from "./_components/media/product-carousel";
 import KeyActivities from "./_components/event/key-activities";
+import GuestCarousel from "./_components/event/guest-carousel";
+import KeyMetrics from "./_components/event/key-metric";
 
 export default function ProjectDetail() {
   return (
@@ -37,6 +39,10 @@ export default function ProjectDetail() {
       <ProductCarousel />
 
       <KeyActivities />
+
+      <GuestCarousel />
+
+      <KeyMetrics /> 
     </div>
   );
 }

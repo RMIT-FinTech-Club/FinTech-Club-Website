@@ -112,8 +112,6 @@ export default function GuestCarousel() {
           </CarouselContent>
         </Carousel>
 
-        
-
         {/* <div className="flex justify-center space-x-2">
           {projectList.map((_, index) => (
             <button
