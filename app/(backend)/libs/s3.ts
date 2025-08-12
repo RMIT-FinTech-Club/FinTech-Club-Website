@@ -14,8 +14,9 @@ const s3 = new S3Client({
 
 // Upload Function
 export async function uploadToS3(fileName: string, fileType: string, folderName: string) {
-  const fileExtension = mime.getExtension(fileType) || "bin" ;// mime is used to get the file extention.
-  const key = `${folderName}${nanoid()}${fileName}.${fileExtension}`; // Put inside folder (article/, podcast/, etc.)
+  const originalFileName = fileName.split('.').slice(0,-1).join('.'); // Remove extension for key
+  const fileExtension = mime.getExtension(fileType) || "bin" ;// mime is used to get the standard file extention format.
+  const key = `${folderName}${nanoid()}${originalFileName}.${fileExtension}`; // Put inside folder (article/, podcast/, etc.)
   console.log(`S3 key: ${key}`);
 
   const command = new PutObjectCommand({
