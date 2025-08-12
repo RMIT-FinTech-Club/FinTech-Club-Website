@@ -9,6 +9,7 @@ export default async function uploadFile(file: File, folder: string) {
       folderName: folder
     }),
   });
+  
   const { uploadUrl, key } = await res.json();
   console.log(uploadUrl, key);// check the key.
   //Upload to S3 bucket directly
