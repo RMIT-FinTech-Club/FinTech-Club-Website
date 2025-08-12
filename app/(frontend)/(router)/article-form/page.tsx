@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import uploadFile from "@/app/(backend)/libs/uploadFile";
 
 const labelCategories = [
@@ -11,22 +11,34 @@ const labelCategories = [
 ];
 
 export default function ArticleUploader() {
+  // Form states
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [authors, setAuthors] = useState<string[]>([]);
   const [authorInput, setAuthorInput] = useState("");
   const [labels, setLabels] = useState<string[]>([]);
   const [publicationDate, setPublicationDate] = useState("");
-
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [contentUrl, setContentUrl] = useState<string | null>(null);
-
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [illustrationUrl, setIllustrationUrl] = useState<string | null>(null);
-
   const [isUploadingPDF, setIsUploadingPDF] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
+  // Article list state
+  const [articles, setArticles] = useState<any[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  // Fetch articles on mount
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  const fetchArticles = async () => {
+    const res = await fetch("/api/v1/article");
+    const data = await res.json();
+    setArticles(data);
+  };
 
   // handle UPLOAD PDF
   const handlePDFUpload = async () => {
@@ -36,7 +48,7 @@ export default function ArticleUploader() {
     }
     setIsUploadingPDF(true);
     try {
-      const url = await uploadFile(pdfFile, "products/");
+      const url = await uploadFile(pdfFile, "article/products/");
       setContentUrl(url);
     } catch (err) {
       alert("Failed to upload PDF");
@@ -45,7 +57,7 @@ export default function ArticleUploader() {
     }
   };
 
-//Handle UPLOAD IMAGE
+  //Handle UPLOAD IMAGE
   const handleImageUpload = async () => {
     if (!imageFile || !imageFile.type.startsWith("image/")) {
       alert("Please select a valid image.");
@@ -53,7 +65,7 @@ export default function ArticleUploader() {
     }
     setIsUploadingImage(true);
     try {
-      const url = await uploadFile(imageFile,"graphics/");
+      const url = await uploadFile(imageFile,"article/graphics/");
       setIllustrationUrl(url);
     } catch (err) {
       alert("Failed to upload image");
@@ -62,7 +74,7 @@ export default function ArticleUploader() {
     }
   };
 
-// Handle Submit
+  // Handle Submit (Create or Update)
   const handleSubmit = async () => {
     if (!title || !summary || !contentUrl || !illustrationUrl || !authors.length || !labels.length) {
       alert("Please fill all required fields.");
@@ -79,21 +91,77 @@ export default function ArticleUploader() {
     };
 
     try {
-      const res = await fetch("/api/v1/article", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      });
+      let res; 
+      if (editingId) {
+        // Call the PUT API to update
+        res = await fetch(`/api/v1/article/${editingId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+      } else {
+        // Call the POST API to create
+        res = await fetch("/api/v1/article", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+      }
       if (!res.ok) throw new Error("Failed to save article");
-      alert("✅ Article created successfully!");
+      alert(editingId ? "✅ Article updated!" : "✅ Article created!");
+      fetchArticles();
+      resetForm();
     } catch (err) {
       alert("❌ Failed to submit article");
       console.error(err);
     }
   };
 
+  // Delete article
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this article?")) return;
+    try {
+      // Call the DELETE API
+      const res = await fetch(`/api/v1/article/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete");
+      alert("🗑️ Deleted!");
+      fetchArticles();
+    } catch (err) {
+      alert("❌ Failed to delete");
+    }
+  };
+
+  // Edit article
+  const handleEdit = (article: any) => {
+    setEditingId(article._id); // Set the Editting ID to let handleSubmit know it's an update or create new article
+    setTitle(article.title);
+    setSummary(article.summary);
+    setAuthors(article.authors);
+    setAuthorInput(article.authors.join(", "));
+    setLabels(article.labels);
+    setPublicationDate(article.publicationDate?.slice(0,10) || "");
+    setContentUrl(article.content_url);
+    setIllustrationUrl(article.illustration_url);
+  };
+
+  // Reset form
+  const resetForm = () => {
+    setEditingId(null);
+    setTitle("");
+    setSummary("");
+    setAuthors([]);
+    setAuthorInput("");
+    setLabels([]);
+    setPublicationDate("");
+    setPdfFile(null);
+    setContentUrl(null);
+    setImageFile(null);
+    setIllustrationUrl(null);
+  };
+
   return (
     <div style={{ padding: "1rem", maxWidth: "600px", margin: "auto", display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <h2>{editingId ? "Edit Article" : "Create Article"}</h2>
       <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
       <textarea placeholder="Summary" value={summary} onChange={(e) => setSummary(e.target.value)} required rows={3} />
 
@@ -128,7 +196,7 @@ export default function ArticleUploader() {
       {contentUrl && (
         <div>
           <p>✅ Uploaded PDF:</p>
-          <iframe src={contentUrl} width="100%" height="400px" title="PDF Preview"></iframe>
+          <iframe src={contentUrl} width="100%" height="200px" title="PDF Preview"></iframe>
         </div>
       )}
 
@@ -141,13 +209,29 @@ export default function ArticleUploader() {
       {illustrationUrl && (
         <div>
           <p>✅ Uploaded Image:</p>
-          <img src={illustrationUrl} alt="Preview" style={{ maxWidth: "100%", maxHeight: "300px" }} />
+          <img src={illustrationUrl} alt="Preview" style={{ maxWidth: "100%", maxHeight: "200px" }} />
         </div>
       )}
 
       <button onClick={handleSubmit} style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}>
-        Submit Article
+        {editingId ? "Update Article" : "Submit Article"}
       </button>
+
+      {/* Article List */}
+      <h2 style={{ marginTop: "2rem" }}>Article List</h2>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {articles.map(article => (
+          <li key={article._id} style={{ border: "1px solid #ccc", marginBottom: "1rem", padding: "1rem" }}>
+            <strong>{article.title}</strong>
+            <div>{article.summary}</div>
+            <div>Authors: {article.authors?.join(", ")}</div>
+            <div>Labels: {article.labels?.join(", ")}</div>
+            <div>Publication: {article.publicationDate?.slice(0,10)}</div>
+            <button onClick={() => handleEdit(article)} style={{ marginRight: "1rem" }}>Edit</button>
+            <button onClick={() => handleDelete(article._id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
