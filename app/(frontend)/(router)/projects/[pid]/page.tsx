@@ -3,8 +3,15 @@
 import { Card, CardBody } from "@heroui/react";
 import Hero from "./_components/hero";
 import TeamStructure from "./_components/team-structure";
-import GoalAndScope from "./_components/goal-and-scope";
-import Timeline from "./_components/timeline";
+import Goal from "./_components/goal";
+import Timeline from "./_components/technical/timeline";
+import Gallery from "./_components/gallery";
+import ProductCta from "./_components/technical/product-cta";
+import Scope from "./_components/scope";
+import ProductCarousel from "./_components/media/product-carousel";
+import KeyActivities from "./_components/event/key-activities";
+import GuestCarousel from "./_components/event/guest-carousel";
+import KeyMetrics from "./_components/event/key-metric";
 
 export default function ProjectDetail() {
   return (
@@ -13,13 +20,29 @@ export default function ProjectDetail() {
       <Hero />
 
       {/* Goal and Scope Section */}
-      <GoalAndScope />
+      <Goal />
+
+      {/* Scope Section */}
+      <Scope />
 
       {/* Team Structure Section */}
       <TeamStructure />
 
       {/* Timeline Section */}
-      <Timeline /> 
+      <Timeline />
+
+      {/* Gallery Section */}
+      <Gallery />
+
+      <ProductCta />
+
+      <ProductCarousel />
+
+      <KeyActivities />
+
+      <GuestCarousel />
+
+      <KeyMetrics /> 
     </div>
   );
 }
