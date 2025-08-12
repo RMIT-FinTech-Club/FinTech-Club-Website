@@ -11,7 +11,7 @@ type EventItem = {
   name: string;
   image: string;
   date: string;
-  label: string;
+  labels: string[];
 };
 
 // Static list of events (source of truth for dots order)
@@ -21,35 +21,42 @@ const placeholders: EventItem[] = [
     image:
       "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
     date: "31th August",
-    label: "label",
+    labels: ["Tech", "Innovation"],
   },
   {
     name: "Design Sprint",
     image:
       "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "02 Sep",
-    label: "label",
+    date: "02nd Sep",
+    labels: ["Design", "UX"],
   },
   {
     name: "Dev Conf",
     image:
       "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "10 Sep",
-    label: "label",
+    date: "10th Sep",
+    labels: ["Developer", "Conference"],
   },
   {
     name: "AI Meetup",
     image:
       "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "18 Sep",
-    label: "label",
+    date: "18th Sep",
+    labels: ["AI", "Networking", "Innovation", "Forum"],
   },
   {
     name: "Cloud Day",
     image:
       "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "25 Sep",
-    label: "label",
+    date: "25th Sep",
+    labels: ["Cloud", "Technology"],
+  },
+  {
+    name: "Startup Pitch",
+    image:
+      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
+    date: "30th Sep",
+    labels: ["Startup", "Pitching"],
   },
 ];
 
@@ -106,6 +113,13 @@ export default function UpcomingEvent() {
     (_, i) => items[i % (items.length || 1)]
   );
 
+  const labelBgColors = [
+    "bg-ft-primary-yellow-50",
+    "bg-ft-secondary-blue",
+    "bg-ft-secondary-yellow",
+    "bg-ft-primary-blue-300",
+  ];
+
   return (
     <div className="h-fit w-[100vw] py-6 relative flex flex-col items-center">
       {/* Header + decorative stars */}
@@ -143,7 +157,7 @@ export default function UpcomingEvent() {
             className={clsx(
               styles.card, // base: 3D, opacity, duration, fill-mode, etc.
               styles[`card_${index + 1}`], // fixed position class: card_1..card_5
-              "grid place-items-center h-[75vh] w-[25vw] border-bluePrimary border-[0.5vh] rounded-[2vw] p-[2vh] bg-blueSlate"
+              "grid place-items-center h-[75vh] w-[27vw] border-bluePrimary border-[0.5vh] rounded-[2vw] p-[2vh] bg-blueSlate"
             )}
             onClick={() => {
               // Click on the side cards to navigate:
@@ -154,7 +168,7 @@ export default function UpcomingEvent() {
             }}
           >
             {/* Card content */}
-            <p className="text-[3vh] text-yellowSand uppercase text-center font-bold">
+            <p className="text-[1.5rem] text-yellowSand uppercase text-center font-bold">
               {ev.name}
             </p>
 
@@ -172,36 +186,47 @@ export default function UpcomingEvent() {
 
             <div className="w-full h-[15vh] flex justify-between">
               <div
-                className="h-full aspect-square rounded-[3vh] p-[1.5vh] flex justify-center items-center"
+                className="h-full aspect-square rounded-[3vh] p-[1.5vh]"
                 style={{
                   background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
                 }}
               >
-                <p className="text-[2vh] leading-[2.2vh] font-bold text-center">
-                  {ev.date}
-                </p>
+                <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] flex justify-center items-center">
+                  <p className="text-[1.25rem] leading-[4vh] font-medium text-center">
+                    {ev.date}
+                  </p>
+                </div>
               </div>
               <div
-                className="h-full w-full ml-[2vw] rounded-[3vh] p-[1.5vh] flex justify-center items-center"
+                className="h-full w-full ml-[1vw] rounded-[3vh] p-[1.5vh] flex justify-center items-center"
                 style={{
                   background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
                 }}
               >
-                <div className="bg-white w-full h-full rounded-[2.5vh] text-[2vh] leading-[2.2vh] font-bold text-center flex justify-center items-center">
-                  {ev.label}
+                <div className="bg-white w-full h-full rounded-[2.5vh] flex flex-wrap justify-around items-center">
+                  {ev.labels.map((tag, i) => (
+                    <div
+                      key={i}
+                      className={`${labelBgColors[i % 4]} text-black text-[0.75rem] text-center min-w-[6rem] font-normal px-3 py-1 rounded-md`}
+                    >
+                      {tag}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
             <div
-              className="h-[max-content] w-[max-content] max-w-full rounded-[3vh] py-[1.5vh] px-[3vw] flex justify-center items-center cursor-pointer"
+              className="h-fit w-fit rounded-[4.5vh] py-[1vh] px-[0.5vw] cursor-pointer"
               style={{
                 background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
               }}
             >
-              <p className="text-[3vh] leading-[3.3vh] font-bold text-center">
-                Join Now
-              </p>
+              <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] py-[1vh] px-[1vw] flex justify-center items-center">
+                <p className="text-[1rem] leading-[3.3vh] font-semibold text-center">
+                  More Details
+                </p>
+              </div>
             </div>
           </div>
         ))}
