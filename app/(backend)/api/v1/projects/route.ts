@@ -6,7 +6,7 @@ import {
   getCacheHeaders 
 } from "@/app/(backend)/libs/redis";
 import { getLargeScaledOngoingProjects, getDepartmentProjects, createProject, getProjectByIdOrSlug } from "@/app/(backend)/controllers/projectController";
-import { checkAdminAuth } from "@/app/(backend)/middleware/auth";
+import { requireAdmin } from "@/app/(backend)/middleware/middleware";
 
 export async function GET(req: NextRequest) {
   await connectMongoDB();
@@ -79,7 +79,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  if (!(await checkAdminAuth(req))) {
+  const isAdmin = await requireAdmin(req);
+  if (!isAdmin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
