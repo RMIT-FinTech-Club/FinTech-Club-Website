@@ -19,13 +19,13 @@ export default async function uploadFile(file: File, folder: string) {
     headers: { "Content-Type": file.type},
     body: file,
   });
-  console.log(file.type)// check the type of the file.
+  //console.log(file.type)// check the type of the file.
   // Save key/URL to your DB if needed
+  const fileUrl = `https://d2prwyp3rwi40.cloudfront.net/${key}`; 
+  console.log("File uploaded to S3:", fileUrl);
 
-  const fileUrl = `https://${process.env.NEXT_PUBLIC_BUCKET_NAME}.s3.${process.env.NEXT_PUBLIC_BUCKET_REGION}.amazonaws.com/${key}`;
-  const FileUrl = `https://d2prwyp3rwi40.cloudfront.net/${key}`; 
-  console.log("File uploaded to S3:", FileUrl);
-
-  return FileUrl;
+  return fileUrl;
 
 }
+
+//delete file from S3 bucket
