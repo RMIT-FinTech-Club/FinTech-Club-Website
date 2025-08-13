@@ -7,6 +7,8 @@ type ProjectItem = {
     id: string | number;
     title: string;
     imageUrl?: string;
+    description?: string;
+    href?: string;
 };
 
 function usePerPage() {
@@ -66,37 +68,74 @@ export default function ProjectCarousel({ items }: { items: ProjectItem[] }) {
                     w-full shrink-0 grid
                     grid-cols-1            /* mobile + tablet (<=1023): 1 column */
                     lg:grid-cols-2         /* desktop (>=1024): 2 columns */
-                    gap-6 md:max-lg:gap-4 lg:gap-8
+                    gap-4 md:max-lg:gap-2 lg:gap-6
                     px-2 md:max-lg:px-2 lg:px-4
                     "
                 >
                 {group.map((item) => (
                     <article
-                    key={item.id}
-                    className="rounded-xl bg-white border-[4px] border-[#2C305F] overflow-hidden shadow-sm md:max-lg:rounded-xl"
+                        key={item.id}
+                        className="group h-full flex flex-col rounded-lg bg-white border-[4px] border-[#2C305F]
+                                    overflow-hidden shadow-sm md:max-lg:rounded-lg"
                     >
-                    {/* media area */}
-                        <div className="relative bg-white h-40 sm:h-44 md:max-lg:h-48 lg:h-56">
+                        {/* Media stays fixed so the card height never changes */}
+                        <div className="relative w-full aspect-[16/9]">
                             {item.imageUrl ? (
-                                <Image
+                            <Image
                                 src={item.imageUrl}
                                 alt={item.title}
                                 fill
                                 className="object-cover"
-                                sizes="(min-width: 1024px) 50vw, 100vw"
-                                priority={false}
-                                />
+                                sizes="(min-width:1024px) 50vw, 100vw"
+                            />
                             ) : (
-                                <div className="h-full w-full flex items-center justify-center text-[#2C305F]/40">
+                            <div className="absolute inset-0 flex items-center justify-center text-[#2C305F]/40">
                                 <PhotoIcon className="h-10 w-10" />
-                                </div>
+                            </div>
                             )}
                         </div>
-                    {/* title bar */}
-                    <div className="bg-[#2C305F] text-white font-semibold px-3 py-2 lg:px-4 lg:py-3">
-                        {item.title}
-                    </div>
+
+                        {/* Sliding bottom panel */}
+                        <div className="relative flex-1">
+                            {/* The whole panel is absolutely positioned and slides up.
+                                56px = visible title strip height at rest. */}
+                            <div
+                            className="
+                                absolute inset-x-0 bottom-0
+                                translate-y-[calc(100%-56px)]
+                                group-hover:translate-y-0 group-focus-within:translate-y-0
+                                transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+                                will-change-transform
+                            "
+                            >
+                            {/* Title strip (always visible) */}
+                            <div className="bg-[#2C305F] text-white font-semibold leading-none
+                                            min-h-14 px-4 lg:px-5 flex items-center">
+                                {item.title}
+                            </div>
+
+                            {/* Revealed content */}
+                            <div className="bg-[#2C305F] px-4 lg:px-5 pb-4 pt-2 text-white/90 space-y-3 flex flex-row items-center justify-between">
+                                {item.description ? (
+                                    <p className="text-sm opacity-90 text-left flex-1">{item.description}</p>
+                                ) : <span className="flex-1" />}
+
+                                <div className="ml-4">
+                                    <a
+                                        href={item.href ?? "#"}
+                                        className="inline-flex items-center justify-center rounded-xl
+                                                bg-[#DBB968] text-[#2C305F] font-semibold
+                                                px-5 py-2.5 shadow
+                                                hover:brightness-105 focus:outline-none focus:ring-2 focus:ring-white/40"
+                                    >
+                                        Explore More
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </article>
+
                 ))}
                 </div>
             ))}

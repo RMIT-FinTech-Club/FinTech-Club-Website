@@ -37,10 +37,10 @@ export default function DeptProjects() {
             <div className="p-5 md:max-lg:p-4">
                 <ProjectCarousel
                 items={[
-                    { id: 1, title: "Fintech Club Website", imageUrl: "/images/projects/fintech-web-1.jpg" },
-                    { id: 2, title: "Fintech Club Website", imageUrl: "/images/projects/fintech-web-2.jpg" },
-                    { id: 3, title: "Another Project", imageUrl: "/images/projects/another.jpg" },
-                    { id: 4, title: "Mobile App Revamp", imageUrl: "/images/projects/app.jpg" },
+                    { id: 1, title: "Fintech Club Website", imageUrl: "https://media.istockphoto.com/id/465257035/photo/small-orange-kitten-lie-on-the-bed.jpg?s=612x612&w=0&k=20&c=p3Br3Jby5H-MOk9tSt0lEloX3JpM2bdEZ_b7egqxDV4=", description:"Comprehensive business workshops for students and professionals" },
+                    { id: 2, title: "Fintech Club Website", imageUrl: "/images/projects/fintech-web-2.jpg", description:"Comprehensive business workshops for students and professionals" },
+                    { id: 3, title: "Another Project", imageUrl: "/images/projects/another.jpg", description:"Comprehensive business workshops for students and professionals" },
+                    { id: 4, title: "Mobile App Revamp", imageUrl: "/images/projects/app.jpg", description:"Comprehensive business workshops for students and professionals" },
                 ]}
                 />
             </div>
