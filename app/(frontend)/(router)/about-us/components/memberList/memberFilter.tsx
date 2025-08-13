@@ -1,4 +1,4 @@
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { CaretDown } from "tabler-icons-react";

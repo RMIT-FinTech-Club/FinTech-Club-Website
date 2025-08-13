@@ -1,7 +1,6 @@
-"use client";
+import Image from "next/image";
 import { fontSans } from "@/config/fonts";
 import { motion } from "framer-motion";
-import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect, useState } from "react";
 
@@ -42,6 +41,11 @@ const historyData = [
 		content:
 			"After four years of trials-tribulations, our club had grown more experienced and more matured, readying us for a giant leap in 2024 and beyond! Our mission this year is to deliver exceptional value to internal club members, while further heightening our club’s presence in the RMIT community and abroad. To realize this objective, we aim to organize more Business & Tech skill workshops, upscale our media projects, and initiate more mutually beneficial collaborations with industry and student clubs to create real-life experiences for members. Ultimately, we want to further contribute to a FinTech Club that members are proud of, and that the community admires.",
 	},
+	{
+		year: "2025",
+		title: "lorem10",
+		content: "lorem",
+	},
 ];
 
 export default function HistorySection() {
@@ -66,127 +70,140 @@ export default function HistorySection() {
 		}
 	}, [emblaHorizontalApi]);
 
-	return (
-		<>
-			<div className="mx-auto w-screen md:px-[52px] mt-12 bg-white bg-opacity-0 flex-col grid grid-cols-10 justify-center items-center gap-4">
-				<div className="md:inline-flex sm:hidden md:w-full md:h-1 bg-black flex items-center col-span-2">
-					<div className="md:inline-block sm:hidden md:w-6 md:h-6 bg-black rounded-full" />
-				</div>
+  return (
+    <section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
+      <div className="relative w-full">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          alt="Bear mascot"
+          className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
+          width={400}
+          height={400}
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
+        />
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          alt="Bear mascot"
+          className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
+          width={400}
+          height={400}
+          fetchPriority="high"
+          loading="eager"
+          priority={true}
+        />
+        <div className="absolute top-[4rem] left-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute top-[4rem] right-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute top-[4.35rem] left-[2.2rem] w-[12rem] h-[0.25rem] bg-[#2C305F] z-10"></div>
+        <div className="absolute top-[4.35rem] right-[2.2rem] w-[12rem] h-[0.25rem] bg-[#2C305F] z-10"></div>
 
-				<div className="flex-col justify-start items-center md:gap-1 flex md:col-span-6 col-span-10 min-w-fit">
-					<div
-						className={`self-stretch text-center text-slate-700 text-2xl font-bold ${fontSans.style} tracking-tight`}
-					>
-						BACK TO TIME
-					</div>
-					<div className="self-stretch text-center">
-						<span
-							className={`text-slate-700 md:text-5xl text-2xl font-bold ${fontSans.style}`}
-						>
-							Discover the 
-						</span>
-						<span
-							className={`text-zinc-800 md:text-5xl text-2xl font-bold ${fontSans.style}`}
-						>
-							{" "}
-						</span>
-						<span
-							className={`text-orange-300 md:text-5xl text-2xl font-bold ${fontSans.style} `}
-						>
-							FINTECH CLUB
-							<br />
-						</span>
-						<span
-							className={`text-slate-400 md:text-5xl text-2xl font-bold ${fontSans.style}`}
-						>
-							Story & History
-						</span>
-					</div>
-				</div>
+				<div className="absolute bottom-[-4rem] left-[6rem] w-[4.3rem] h-[4.3rem] bg-[#2C305F] rounded-full z-10"></div>
+				<div className="absolute bottom-[-2.6rem] left-[3rem] w-[4.3rem] h-[4.3rem] bg-[#C9D6EA] rounded-full z-20"></div>
+				<div className="absolute bottom-[2.6rem] left-[1.5rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
+				<div className="absolute bottom-[2.6rem] left-[9.5rem] w-[4.3rem] h-[4.3rem] bg-[#2C305F] rounded-full z-10"></div>
+				<div className="absolute bottom-[9rem] left-[4rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
+				<div className="absolute bottom-[6rem] left-[15rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
 
-				<div className="md:inline-flex sm:hidden md:w-full md:h-1 bg-black flex flex-row-reverse items-center justify-self-end col-span-2">
-					<div className="md:inline-block sm:hidden md:w-6 md:h-6 bg-black rounded-full" />
-				</div>
-			</div>
+				<div className="absolute bottom-[-4rem] right-[6rem] w-[4.3rem] h-[4.3rem] bg-[#2C305F] rounded-full z-10"></div>
+				<div className="absolute bottom-[-2.6rem] right-[3rem] w-[4.3rem] h-[4.3rem] bg-[#C9D6EA] rounded-full z-20"></div>
+				<div className="absolute bottom-[2.6rem] right-[1.5rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
+				<div className="absolute bottom-[2.6rem] right-[9.5rem] w-[4.3rem] h-[4.3rem] bg-[#2C305F] rounded-full z-10"></div>
+				<div className="absolute bottom-[9rem] right-[4rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
+				<div className="absolute bottom-[6rem] right-[15rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
 
-			{/* desktop version */}
-			<div className="items-center w-screen md:mt-0 md:grid md:grid-cols-12 grid-cols-1 overflow-hidden my-auto px-12">
-				<IconArrowLeft stroke={5} className="max-sm:hidden cursor-pointer items-center col-span-1 justify-self-start" onClick={() => emblaHorizontalApi?.scrollPrev()} />
-				<div
-					className={`mt-[93px] mb-[77px] md:col-span-10 md:w-[0px] w-auto md:h-[300px] h-[200px] grid grid-cols-3 col-span-5 z-0 md:mx-auto ${centerSlideIndex === 0
-						? "pr-96"
-						: centerSlideIndex === historyData.length - 1
-							? " md:pr-0"
-							: " md:pr-0"
-						}`}
-					ref={emblaHorizontalRef}
-				>
-					<div className="flex items-center col-start-2 ">
-						{historyData.map((data, index) => {
-							return (
-								<div
-									key={data.year}
-									className={`flex shrink-0 md:ml-[50px] ml-[50px] lg:ml-[90px] items-center rounded-full duration-1000 ease-out select-none ${index === centerSlideIndex
-										? "md:w-[170px] md:h-[170px] lg:w-60 lg:h-60 bg-slate-700 w-48 h-48"
-										: "sm:inline-flex lg:w-32 lg:h-32 bg-amber-200 md:w-[120px] w-[100px] md:h-[120px] h-[100px] opacity-30"
-										}`}
-									// On click for changing the year
-									onClick={() =>
-										emblaHorizontalApi?.scrollTo(index)
-									}
+        {/* Header */}
+        <div>
+          <h5
+            className={`text-[1.5rem] text-[#2C305F] font-semibold ${fontSans.style}`}
+          >
+            BACK TO TIME
+          </h5>
+          <h3 className={`leading-[3rem] text-[3rem] font-bold mt-2`}>
+            <span className="text-[#2C305F]">Discover the </span>
+            <span className="text-[#DCB968]">FINTECH CLUB </span>
+          </h3>
+          <h3 className="leading-[3rem] text-[3rem] font-bold mt-4 text-[#97ABD6]">
+            Story & History
+          </h3>
+        </div>
+
+				{/* YEAR SECTION */}
+				<div className="flex justify-center items-center gap-[4rem] my-[3.5rem]">
+					{/* Always render 2 before */}
+					{[centerSlideIndex - 2, centerSlideIndex - 1].map((i) =>
+						i < 0 ? (
+							<div
+								key={i}
+								className="w-24 h-24 md:w-28 md:h-28"
+							/>
+						) : (
+							<div
+								key={i}
+								className="flex items-center justify-center bg-[#FBDC83] w-24 h-24 md:w-28 md:h-28 rounded-full cursor-pointer"
+								onClick={() => setCenterSlideIndex(i)}
+							>
+								<span
+									className={`text-2xl  font-bold text-[#262857] ${fontSans.style}`}
 								>
-									<div
-										className={`mx-auto font-extrabold ${index === centerSlideIndex
-											? "text-orange-300 md:text-4xl lg:text-5xl text-3xl"
-											: "sm:inline-flex text-slate-700 md:text-3xl lg:text-4xl"
-											} ${fontSans.style}`}
-									>
-										{data.year}
-									</div>
-								</div>
-							);
-						})}
-					</div>
-				</div>
-				<IconArrowRight stroke={5} className="max-sm:hidden items-center col-span-1 cursor-pointer justify-self-end" onClick={() => emblaHorizontalApi?.scrollNext()} />
-			</div>
+									{historyData[i].year}
+								</span>
+							</div>
+						),
+					)}
 
-			<div className="grid md:grid-cols-12 justify-between md:h-80 mb-40 items-center w-screen">
-				<img
-					alt="fintech mascot"
-					className="scale-[2.5] md:w-[300px] lg:w-[600px] rotate-[58.03deg] rounded-[59px] md:col-span-1 hidden md:inline-block md:h-auto z-0"
-					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
-				/>
-				<motion.div
-					className="box col-span-10 md:px-96"
-					key={centerSlideIndex}
-					initial={{ opacity: 0, scale: 0.5 }}
-					animate={{ opacity: 1, scale: 1 }}
-					transition={{
-						duration: 0.9,
-						ease: [0, 0.71, 0.2, 1.01],
-					}}
-				>
-					<div className="md:col-span-1 col-span-full">
-						<div
-							className={`md:mb-[26px] mb-2 mx-auto text-pretty text-center text-slate-400 md:text-5xl text-3xl font-semibold ${fontSans.style}`}
+					{/* Center year bubble */}
+					<div className="flex items-center justify-center bg-[#262857] w-44 h-44 md:w-48 md:h-48 rounded-full">
+						<span
+							className={`text-4xl text-[#FBDC83] font-bold ${fontSans.style}`}
 						>
-							{/* Develop and Grow */}
-							{historyData[centerSlideIndex].title}
-						</div>
-						<div
-							className={`mx-auto text-justify text-black text-lg font-medium ${fontSans.style} md:p-0 px-11`}
-						>
-							{historyData[centerSlideIndex].content}
-						</div>
+							{historyData[centerSlideIndex].year}
+						</span>
 					</div>
-				</motion.div>
-				<img
-					alt="fintech mascot"
-					className="scale-[2.5] rotate-[-58.03deg] md:w-[400px] lg:w-[600px] rounded-[59px] md:col-span-1 md:block hidden md:h-auto justify-self-end z-0"
-					src="https://ik.imagekit.io/mbrrji2rk/fintechMascot.png?updatedAt=1718991881430"
-				/>
-			</div>
-		</>
-	);
+
+					{/* Always render 2 after */}
+					{[centerSlideIndex + 1, centerSlideIndex + 2].map((i) =>
+						i >= historyData.length ? (
+							<div
+								key={i}
+								className="w-24 h-24 md:w-28 md:h-28"
+							/>
+						) : (
+							<div
+								key={i}
+								className="flex items-center justify-center bg-[#FBDC83] w-24 h-24 md:w-28 md:h-28 rounded-full cursor-pointer"
+								onClick={() => setCenterSlideIndex(i)}
+							>
+								<span
+									className={`text-2xl font-bold text-[#262857] ${fontSans.style}`}
+								>
+									{historyData[i].year}
+								</span>
+							</div>
+						),
+					)}
+				</div>
+
+        {/* Content Section */}
+        <motion.div
+          key={centerSlideIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
+        >
+          <h4
+            className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}
+          >
+            {historyData[centerSlideIndex].title}
+          </h4>
+          <p
+            className={`text-justify text-[#000] text-lg px-[3.5rem] ${fontSans.style}`}
+          >
+            {historyData[centerSlideIndex].content}
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

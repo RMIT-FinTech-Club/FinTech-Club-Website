@@ -1,6 +1,6 @@
 "use client";
 import type { Event } from "../../components/types";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import type React from "react";
 
 const EventDetail: React.FC<{ event: Event }> = ({ event }) => {
