@@ -29,11 +29,14 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
 				shadowPosition,
 			)}
 		>
-			<h1 className={clsx("text-center text-6xl my-8", headingColor)}> {title} </h1>
+			<h1 className={clsx("text-center text-6xl my-8", headingColor)}>
+				{" "}
+				{title}{" "}
+			</h1>
 			<div
 				className={clsx(
 					"text-[1.25rem] leading-[1.75rem] text-justify relative max-w-[30rem]",
-				textColor,	
+					textColor,
 				)}
 			>
 				{" "}

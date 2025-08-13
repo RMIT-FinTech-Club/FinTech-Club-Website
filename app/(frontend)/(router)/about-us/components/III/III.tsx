@@ -181,22 +181,22 @@ function III() {
         </div>
       </div>
 
-      <div className="absolute w-[25rem] h-[25rem] bg-[#FFEFCA] rounded-full top-[46%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
-      <div className="absolute w-[20rem] h-[20rem] bg-[#F7D27F] rounded-full top-[3rem] right-[-11rem]"></div>
-      <div className="absolute w-[3.5rem] h-[3.5rem] bg-[#F0EDFF] rounded-full top-[20rem] right-[7rem]"></div>
-      <div className="absolute w-[6rem] h-[6rem] bg-[#FFEFCA] rounded-full top-[23rem] right-[1rem]"></div>
-      <div className="absolute w-[7rem] h-[7rem] bg-[#FFEFCA] rounded-full top-[21rem] left-[1rem]"></div>
-      <div className="absolute w-[18rem] h-[18rem] bg-[#F7D27F] rounded-full top-[22rem] left-[-12rem]"></div>
-      <div className="absolute w-[3rem] h-[3rem] bg-[#F0EDFF] rounded-full top-[17rem] left-[1rem]"></div>
+			<div className="absolute w-[25rem] h-[25rem] bg-[#FFEFCA] rounded-full top-[46%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
+			<div className="absolute w-[20rem] h-[20rem] bg-[#F7D27F] rounded-full top-[3rem] right-[-11rem]"></div>
+			<div className="absolute w-[3.5rem] h-[3.5rem] bg-[#F0EDFF] rounded-full top-[20rem] right-[7rem]"></div>
+			<div className="absolute w-[6rem] h-[6rem] bg-[#FFEFCA] rounded-full top-[23rem] right-[1rem]"></div>
+			<div className="absolute w-[7rem] h-[7rem] bg-[#FFEFCA] rounded-full top-[21rem] left-[1rem]"></div>
+			<div className="absolute w-[18rem] h-[18rem] bg-[#F7D27F] rounded-full top-[22rem] left-[-12rem]"></div>
+			<div className="absolute w-[3rem] h-[3rem] bg-[#F0EDFF] rounded-full top-[17rem] left-[1rem]"></div>
 
-      <div className="absolute w-[10rem] h-[10rem] bg-[#C9D6EA] rounded-full top-[41rem] left-[-2.5rem]"></div>
-      <div className="absolute w-[10rem] h-[10rem] bg-[#2B305E] rounded-full top-[46rem] left-[4rem]"></div>
-      <div className="absolute w-[10rem] h-[10rem] bg-[#DBB968] rounded-full top-[53rem] left-[-4.5rem]"></div>
+			<div className="absolute w-[10rem] h-[10rem] bg-[#C9D6EA] rounded-full top-[41rem] left-[-2.5rem]"></div>
+			<div className="absolute w-[10rem] h-[10rem] bg-[#2B305E] rounded-full top-[46rem] left-[4rem]"></div>
+			<div className="absolute w-[10rem] h-[10rem] bg-[#DBB968] rounded-full top-[53rem] left-[-4.5rem]"></div>
 
-      <div className="absolute w-[2rem] h-[2rem] bg-[#2B305E] rounded-full top-[48rem] left-[18rem]"></div>
-      <div className="absolute w-[2.5rem] h-[2.5rem] bg-[#DBB968] rounded-full top-[58rem] left-[8rem]"></div>
-    </section>
-  );
+			<div className="absolute w-[2rem] h-[2rem] bg-[#2B305E] rounded-full top-[48rem] left-[18rem]"></div>
+			<div className="absolute w-[2.5rem] h-[2.5rem] bg-[#DBB968] rounded-full top-[58rem] left-[8rem]"></div>
+		</section>
+	);
 }
 
 export default III;

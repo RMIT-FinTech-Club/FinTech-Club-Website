@@ -1,11 +1,11 @@
-"use client";
-import DeptProjects from "./dept-projects/page";
+import ProjectPage from "@/components/projects/ProjectPage";
 
 const Projects = () => {
 	return (
 		<>
-			<DeptProjects />
-		</>)
+			<ProjectPage />
+		</>
+	);
 };
 
 export default Projects;
