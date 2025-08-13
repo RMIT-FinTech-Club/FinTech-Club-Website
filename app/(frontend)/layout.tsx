@@ -5,7 +5,7 @@ import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import "react-toastify/dist/ReactToastify.css";
 import "@styles/carousel.css";
-import { Link } from "@heroui/link";
+import { Link } from "@heroui/react";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
