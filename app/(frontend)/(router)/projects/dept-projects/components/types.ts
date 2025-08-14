@@ -31,3 +31,15 @@ export type SharedHeightOpts = {
   deps?: ReadonlyArray<unknown>;
   clampVh?: number; 
 };
+
+export type Project = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  description: string;
+  href?: string;
+};
+
+export type DeptProjectsMap = Record<string, Project[]>;
+export type ApiProject = { title: string; image_url: string; description: string };
+export type ApiResponse = { data?: { projects?: ApiProject[] } };
