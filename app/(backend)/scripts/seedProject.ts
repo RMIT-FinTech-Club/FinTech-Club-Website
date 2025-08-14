@@ -10,14 +10,13 @@ const generateCloudFrontUrl = (path: string) => {
   // Remove any leading slash from path
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
   
-  // Check if CLOUDFRONT_DOMAIN already includes https://
-  if (CLOUDFRONT_DOMAIN.includes('https://')) {
-    // Remove trailing slash if present
-    const cleanDomain = CLOUDFRONT_DOMAIN.endsWith('/') ? CLOUDFRONT_DOMAIN.slice(0, -1) : CLOUDFRONT_DOMAIN;
-    return `${cleanDomain}/${cleanPath}`;
-  } else {
-    return `https://${CLOUDFRONT_DOMAIN}/${cleanPath}`;
-  }
+  // Clean the domain - remove any invisible characters and ensure proper format
+  const cleanDomain = CLOUDFRONT_DOMAIN
+    .replace(/[^\x20-\x7E]/g, '') // Remove invisible characters
+    .replace(/^https?:\/\//, '') // Remove http:// or https:// if present
+    .replace(/\/$/, ''); // Remove trailing slash
+  
+  return `https://${cleanDomain}/${cleanPath}`;
 };
 
 // Helper Functions
@@ -97,7 +96,7 @@ const testProjects = [
       ]
     }
   },
-  // Department project (Event)
+  // Department project (Event) - Business Department
   {
     title: "Business Workshop Series",
     description: "Comprehensive business workshops for students and professionals",
@@ -139,6 +138,37 @@ const testProjects = [
       }
     }
   },
+  // Second Business Department project (Career)
+  {
+    title: "Business Mentorship Program",
+    description: "One-on-one mentorship program connecting students with business professionals",
+    type: "department",
+    status: "ongoing",
+    category: "career",
+    department: "Business",
+    department_photo_url: generateCloudFrontUrl("departments/business-photo.jpg"),
+    department_description: "Leading business innovation and entrepreneurship",
+    labels: ["Mentorship", "Career Development", "Business", "Networking"],
+    image_url: generateCloudFrontUrl("projects/business-mentorship.jpg"),
+    slug: "business-mentorship-program",
+    meta_title: "Business Mentorship Program - FinTech Club",
+    meta_description: "One-on-one mentorship program connecting students with business professionals",
+    category_specific: {
+      company: {
+        name: "Business Industry Partners",
+        description: "Leading business professionals and executives"
+      },
+      goals: "Provide personalized career guidance and industry insights",
+      target_audience: "Business students and young professionals",
+      key_outcomes: {
+        participants: 80,
+        attendance_rate: 95,
+        skills_developed: ["Leadership", "Strategic thinking", "Industry knowledge"],
+        job_placements: 25
+      },
+      event_details_link: generateCloudFrontUrl("events/business-mentorship-details.pdf")
+    }
+  },
   // Completed project (Media)
   {
     title: "FinTech Podcast Series",
@@ -178,7 +208,89 @@ const testProjects = [
       ]
     }
   },
-  // Completed project (Community)
+  // Ongoing HR Department project (Community)
+  {
+    title: "Community Outreach Initiative",
+    description: "Ongoing community development and social impact programs",
+    type: "department",
+    status: "ongoing",
+    category: "community",
+    department: "Human Resources",
+    department_photo_url: generateCloudFrontUrl("departments/hr-photo.jpg"),
+    department_description: "Supporting community development and social impact",
+    labels: ["Community", "Social Impact", "Development", "Outreach"],
+    image_url: generateCloudFrontUrl("projects/community-outreach.jpg"),
+    slug: "community-outreach-initiative",
+    meta_title: "Community Outreach Initiative - FinTech Club",
+    meta_description: "Ongoing community development and social impact programs",
+    category_specific: {
+      goals: "Build sustainable community partnerships and drive social impact",
+      target_audience: "Local communities and organizations",
+      key_activities: ["Partnership building", "Volunteer coordination", "Impact assessment"],
+      ngos: [
+        {
+          name: "Community Development Alliance",
+          description: "Local non-profit focused on community growth"
+        }
+      ],
+      team_leader: [
+        {
+          name: "Carol Davis",
+          role: "Community Coordinator",
+          position: "HR Department Lead"
+        }
+      ],
+      key_metrics: {
+        volunteers: 40,
+        funds_raised: 8000,
+        communities_reached: 5,
+        beneficiaries_served: 350
+      }
+    }
+  },
+  // Second HR Department project (Event)
+  {
+    title: "HR Leadership Summit",
+    description: "Annual summit for HR professionals and students",
+    type: "department",
+    status: "ongoing",
+    category: "event",
+    department: "Human Resources",
+    department_photo_url: generateCloudFrontUrl("departments/hr-photo.jpg"),
+    department_description: "Supporting community development and social impact",
+    labels: ["Leadership", "HR", "Summit", "Professional Development"],
+    image_url: generateCloudFrontUrl("projects/hr-leadership-summit.jpg"),
+    slug: "hr-leadership-summit",
+    meta_title: "HR Leadership Summit - FinTech Club",
+    meta_description: "Annual summit for HR professionals and students",
+    category_specific: {
+      goals: "Foster leadership skills and industry knowledge in HR",
+      target_audience: "HR students and professionals",
+      format: "hybrid",
+      key_activities: ["Keynote speeches", "Panel discussions", "Networking", "Workshops"],
+      guest_speakers: [
+        {
+          name: "Dr. Emily Chen",
+          avatar_url: generateCloudFrontUrl("speakers/emily-chen.jpg"),
+          position: "HR Director, Global Tech Corp",
+          linkedin_url: "https://linkedin.com/in/emilychen"
+        }
+      ],
+      team_leader: [
+        {
+          name: "David Wilson",
+          role: "Summit Coordinator",
+          position: "HR Department Co-Lead"
+        }
+      ],
+      key_metrics: {
+        attendees: 200,
+        attendance_rate: 88,
+        media_coverage: "Industry publication coverage"
+      }
+    }
+  },
+  // Completed project (Community) - 2023
   {
     title: "Financial Literacy for Youth",
     description: "Community outreach program teaching financial literacy to young people",
@@ -253,6 +365,169 @@ const testProjects = [
         generateCloudFrontUrl("gallery/career-fair1.jpg"),
         generateCloudFrontUrl("gallery/career-fair2.jpg")
       ]
+    }
+  },
+  // Ongoing Technical Department project (Technical)
+  {
+    title: "Blockchain Development Lab",
+    description: "Hands-on blockchain development and smart contract creation",
+    type: "department",
+    status: "ongoing",
+    category: "technical",
+    department: "Technical",
+    department_photo_url: generateCloudFrontUrl("departments/technical-photo.jpg"),
+    department_description: "Leading technical innovation and development",
+    labels: ["Blockchain", "Smart Contracts", "Development", "Innovation"],
+    image_url: generateCloudFrontUrl("projects/blockchain-lab.jpg"),
+    slug: "blockchain-development-lab",
+    meta_title: "Blockchain Development Lab - FinTech Club",
+    meta_description: "Hands-on blockchain development and smart contract creation",
+    category_specific: {
+      goals: "Develop practical blockchain applications and smart contracts",
+      scope: "Full blockchain development lifecycle from concept to deployment",
+      team_structure: [
+        {
+          role: "Blockchain Developer",
+          responsibilities: ["Smart contract development", "DApp creation", "Testing"],
+          skills: ["Solidity", "Web3.js", "Ethereum", "React"]
+        },
+        {
+          role: "Frontend Developer",
+          responsibilities: ["User interface", "Wallet integration", "User experience"],
+          skills: ["React", "TypeScript", "Web3", "CSS"]
+        }
+      ],
+      team_leader: [
+        {
+          name: "Alex Thompson",
+          role: "Technical Lead",
+          position: "Technical Department Lead"
+        }
+      ],
+      timeline: [
+        {
+          milestone: "Phase 1: Smart Contract Development",
+          date: "2024-02-01",
+          status: "in-progress"
+        },
+        {
+          milestone: "Phase 2: Frontend Development",
+          date: "2024-03-01",
+          status: "planned"
+        }
+      ],
+      product_link: generateCloudFrontUrl("projects/blockchain-demo.html")
+    }
+  },
+  // Second Technical Department project (Media)
+  {
+    title: "Tech Tutorial Series",
+    description: "Educational video series covering FinTech technologies and tools",
+    type: "department",
+    status: "ongoing",
+    category: "media",
+    department: "Technical",
+    department_photo_url: generateCloudFrontUrl("departments/technical-photo.jpg"),
+    department_description: "Leading technical innovation and development",
+    labels: ["Tutorials", "Education", "Technology", "Video"],
+    image_url: generateCloudFrontUrl("projects/tech-tutorials.jpg"),
+    slug: "tech-tutorial-series",
+    meta_title: "Tech Tutorial Series - FinTech Club",
+    meta_description: "Educational video series covering FinTech technologies and tools",
+    category_specific: {
+      goals: "Create comprehensive tutorials for FinTech technologies",
+      target_audience: "Students and professionals learning FinTech",
+      team_structure: [
+        {
+          role: "Content Creator",
+          responsibilities: ["Script writing", "Video production", "Editing"],
+          skills: ["Video editing", "Content creation", "Technical writing"]
+        }
+      ],
+      team_leader: [
+        {
+          name: "Sarah Kim",
+          role: "Content Director",
+          position: "Technical Department Co-Lead"
+        }
+      ],
+      product_library: [
+        {
+          title: "Introduction to APIs",
+          description: "Understanding REST APIs in FinTech",
+          video_url: generateCloudFrontUrl("tutorials/api-intro.mp4")
+        },
+        {
+          title: "Database Design Basics",
+          description: "Database fundamentals for FinTech applications",
+          video_url: generateCloudFrontUrl("tutorials/database-basics.mp4")
+        }
+      ],
+      library_link: generateCloudFrontUrl("tutorials/tech-tutorial-series.html")
+    }
+  },
+  // Ongoing Marketing Department project (Event)
+  {
+    title: "Digital Marketing Campaign",
+    description: "Comprehensive digital marketing campaign for FinTech Club initiatives",
+    type: "department",
+    status: "ongoing",
+    category: "event",
+    department: "Marketing",
+    department_photo_url: generateCloudFrontUrl("departments/marketing-photo.jpg"),
+    department_description: "Driving brand awareness and engagement",
+    labels: ["Marketing", "Digital", "Campaign", "Branding"],
+    image_url: generateCloudFrontUrl("projects/digital-marketing.jpg"),
+    slug: "digital-marketing-campaign",
+    meta_title: "Digital Marketing Campaign - FinTech Club",
+    meta_description: "Comprehensive digital marketing campaign for FinTech Club initiatives",
+    category_specific: {
+      goals: "Increase brand awareness and engagement across digital platforms",
+      target_audience: "Students, professionals, and industry partners",
+      format: "online",
+      key_activities: ["Social media management", "Content creation", "Email marketing", "Analytics"],
+      team_leader: [
+        {
+          name: "Lisa Park",
+          role: "Marketing Director",
+          position: "Marketing Department Lead"
+        }
+      ],
+      key_metrics: {
+        attendees: 1000,
+        attendance_rate: 75,
+        media_coverage: "Social media engagement"
+      }
+    }
+  },
+  // Second Marketing Department project (Career)
+  {
+    title: "Personal Branding Workshop",
+    description: "Workshop series on building personal brands in FinTech",
+    type: "department",
+    status: "ongoing",
+    category: "career",
+    department: "Marketing",
+    department_photo_url: generateCloudFrontUrl("departments/marketing-photo.jpg"),
+    department_description: "Driving brand awareness and engagement",
+    labels: ["Personal Branding", "Career", "Workshop", "Marketing"],
+    image_url: generateCloudFrontUrl("projects/personal-branding.jpg"),
+    slug: "personal-branding-workshop",
+    meta_title: "Personal Branding Workshop - FinTech Club",
+    meta_description: "Workshop series on building personal brands in FinTech",
+    category_specific: {
+      company: {
+        name: "Marketing Industry Partners",
+        description: "Leading marketing professionals and agencies"
+      },
+      goals: "Help students build strong personal brands in FinTech",
+      target_audience: "Marketing students and young professionals",
+      key_outcomes: {
+        participants: 60,
+        attendance_rate: 90,
+        skills_developed: ["Personal branding", "Social media", "Networking"],
+        job_placements: 15
+      }
     }
   },
   // Completed project (Competition)
