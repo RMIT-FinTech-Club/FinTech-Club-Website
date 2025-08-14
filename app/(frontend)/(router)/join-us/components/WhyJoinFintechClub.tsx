@@ -4,20 +4,23 @@ import { motion } from 'framer-motion';
 const WhyJoinFintechClub = () => {
   return (
     <section className="px-4 py-12 sm:px-8 lg:px-16">
-      <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-2 items-start">
+      <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-5 items-start">
 
         <motion.div
-          className="text-center md:text-left"
+          className="relative h-full col-span-2 flex flex-col items-center justify-center text-center md:text-left"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
+          <div className="absolute top-0 left-0">
+            <Image src="/joinUsPage/aboveTitle.svg" alt="decoration above title" width={100} height={100}/>
+          </div>
           <h2
-            className="text-3xl font-bold text-gray-900 sm:text-4xl md:text-6xl mb-4"
+            className="text-3xl text-center font-bold text-gray-900 sm:text-4xl md:text-6xl mb-4"
             style={{ lineHeight: 1.1 }}
           >
-            Why Join the RMIT<br />Vietnam FinTech Club?
+            Why Join the RMIT Vietnam FinTech Club?
           </h2>
 
           <p
@@ -26,18 +29,21 @@ const WhyJoinFintechClub = () => {
           >
             As a member of our dynamic community, you’ll unlock opportunities and experiences that will shape your future. Here’s what you’ll gain:
           </p>
+          <div className="absolute right-0 bottom-0">
+            <Image src="/joinUsPage/belowTitle.svg" alt="decoration above title" width={100} height={100}/>
+          </div>
         </motion.div>
 
         {/* 1 guy 3 boxes */}
         <motion.div
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 col-span-3"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
           viewport={{ once: true }}
         >
           <div className="flex-1">
-            <div className="bg-white shadow-lg rounded-lg p-6 text-left border border-gray-200 flex flex-col flex-grow">
+            <div className="bg-white shadow-2xl rounded-lg p-6 text-left flex flex-col flex-grow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full border border-[#DBB968] flex items-center justify-center min-w-[48px]">
                   <Image src="/joinUsPage/innovation-hub.svg" alt="Innovation Hub" width={24} height={24} />
@@ -51,7 +57,7 @@ const WhyJoinFintechClub = () => {
           </div>
 
           <div className="flex gap-6 lg:flex-row flex-col items-stretch">
-            <div className="flex-1 bg-white shadow-lg rounded-lg p-6 text-left border border-gray-200 flex flex-col flex-grow">
+            <div className="flex-1 bg-white shadow-2xl rounded-lg p-6 text-left flex flex-col flex-grow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full border border-[#DBB968] flex items-center justify-center min-w-[48px]">
                   <Image src="/joinUsPage/skill-building.svg" alt="Skill Building" width={24} height={24} />
@@ -63,7 +69,7 @@ const WhyJoinFintechClub = () => {
               </p>
             </div>
 
-            <div className="flex-1 bg-white shadow-lg rounded-lg p-6 text-left border border-gray-200 flex flex-col flex-grow">
+            <div className="flex-1 bg-white shadow-2xl rounded-lg p-6 text-left flex flex-col flex-grow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full border border-[#DBB968] flex items-center justify-center min-w-[48px]">
                   <Image src="/joinUsPage/professional-networking.png" alt="Professional Networking" width={24} height={24} />
