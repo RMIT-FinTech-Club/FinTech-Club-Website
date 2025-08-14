@@ -2,12 +2,16 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-const WhatAreYouWaitingFor = () => {
+interface WhatAreYouWaitingForProps {
+    id: string;
+}
+
+const WhatAreYouWaitingFor = ({id}: WhatAreYouWaitingForProps) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '0px 0px -20% 0px' });
 
     return (
-        <div ref={ref} className="flex flex-col sm:flex-row justify-center items-center w-full px-12 py-12 bg-white" style={{ minHeight: '80vh' }}>
+        <div id={id} ref={ref} className="flex flex-col sm:flex-row justify-center items-center w-full px-12 py-12 bg-white" style={{ minHeight: '80vh' }}>
 
             <motion.div
                 className="flex flex-col items-center sm:items-start text-center sm:text-left mb-8 sm:mb-0 sm:mr-8"
@@ -24,23 +28,30 @@ const WhatAreYouWaitingFor = () => {
                     What Are You Waiting For?
                 </motion.h2>
                 <div className="flex gap-4 mb-2">
-                    <a
-                        href="https://forms.office.com/r/Z55Yha5E10"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-3 bg-yellowPrimary text-black font-semibold rounded-[60px] border border-[#3c4376] hover:border-[#97ABD6] transition duration-600 ease-in-out hover:bg-[#97ABD6] text-center"
+                    <div
+                        className="p-0.5 rounded-[10px] bg-gradient-to-b from-[#F0EDFF] to-[#5E5E92]"
                     >
-                        Registration Form
-                    </a>
-                    <a
+                        <a
+                            href="https://forms.office.com/r/Z55Yha5E10"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-full h-full px-6 py-3 bg-yellowPrimary text-black font-semibold rounded-lg transition duration-600 ease-in-out hover:bg-yellowEarth hover:text-white text-center"
+                        >
+                            Registration Form
+                        </a>
+                    </div>
+                    <div
+                        className="p-0.5 rounded-[10px] bg-gradient-to-b from-[#F0EDFF] to-[#5E5E92]"
+                    >
+                        <a
                         href="https://bit.ly/FTC_Recruitment_Booklet_2024C"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 border border-[#2B305E] text-[#2B305E] font-semibold rounded-[60px] transition duration-600 ease-in-out hover:bg-[#3c4376] hover:text-white text-center"
+                        className="flex items-center justify-center px-6 py-3 bg-blueMist text-black font-semibold rounded-lg transition duration-600 ease-in-out hover:bg-blueSlate hover:text-white text-center"
                     >
                         View Our Booklet
                     </a>
-
+                    </div>     
                 </div>
             </motion.div>
 

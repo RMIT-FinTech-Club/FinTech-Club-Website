@@ -2,12 +2,16 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-const StepsToRegisterPage = () => {
+interface StepsToRegisterPageProps {
+    id: string;
+}
+
+const StepsToRegisterPage = ({id}: StepsToRegisterPageProps) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '0px 0px -20% 0px' });
 
     return (
-        <div ref={ref} className="w-full flex justify-center items-center bg-white relative" style={{ minHeight: '80vh' }}>
+        <div id={id} ref={ref} className="w-full flex justify-center items-center bg-white relative" style={{ minHeight: '80vh' }}>
 
             <motion.div
                 className="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row justify-center items-center w-full max-w-6xl lg:gap-x-6"
