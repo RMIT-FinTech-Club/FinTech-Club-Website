@@ -1,5 +1,5 @@
 {
-    "cSpell.words": [
-        "Fintech"
-    ]
+	"cSpell.words": ["Fintech"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true
 }
