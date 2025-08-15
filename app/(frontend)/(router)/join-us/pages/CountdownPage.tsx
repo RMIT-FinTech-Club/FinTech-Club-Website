@@ -1,31 +1,31 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import Countdown from '../components/Countdown';
 import NavigationButton from "../components/NavigationButton";
 
 export default function CountdownPage() {
-    const [navbarHeight, setNavbarHeight] = useState(0);
-    const [isShortHeight, setIsShortHeight] = useState(false);
+	const [navbarHeight, setNavbarHeight] = useState(0);
+	const [isShortHeight, setIsShortHeight] = useState(false);
 
-    useEffect(() => {
-        const navbar = document.querySelector("nav");
-        if (navbar) {
-            setNavbarHeight(navbar.offsetHeight);
-        }
+	useEffect(() => {
+		const navbar = document.querySelector("nav");
+		if (navbar) {
+			setNavbarHeight(navbar.offsetHeight);
+		}
 
-        const handleResize = () => {
-            if (navbar) {
-                setNavbarHeight(navbar.offsetHeight);
-            }
-            setIsShortHeight(window.innerHeight < 900);
-        };
+		const handleResize = () => {
+			if (navbar) {
+				setNavbarHeight(navbar.offsetHeight);
+			}
+			setIsShortHeight(window.innerHeight < 900);
+		};
 
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
     return (
         <div className="flex flex-col">

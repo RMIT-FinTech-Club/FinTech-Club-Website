@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import WhyJoinFintechClub from "../components/WhyJoinFintechClub";
 
 interface WhyJoinFinTechClubPageProps {

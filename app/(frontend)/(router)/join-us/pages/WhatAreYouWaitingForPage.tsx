@@ -1,6 +1,6 @@
-'use client'
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+"use client";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 interface WhatAreYouWaitingForProps {
     id: string;

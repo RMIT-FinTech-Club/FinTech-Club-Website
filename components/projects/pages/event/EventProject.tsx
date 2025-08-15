@@ -10,16 +10,16 @@ import EventParticipants from "./components/EventParticipants";
 import EventGallery from "./components/EventGallery";
 
 const EventProject: React.FC = () => {
-  return (
-    <>
-      <EventHeader />
-      <EventContent sectionValue={fakeAPI.contentSection} />
-      <EventSponsors sectionValue={fakeAPI.sponsorSection} />
-      <EventTeam sectionValue={fakeAPI.teamSection} />
-      <EventParticipants sectionValue={fakeAPI.participantsSection} />
-      <EventGallery sectionValue={fakeAPI.gallerySection} />
-    </>
-  );
+	return (
+		<>
+			<EventHeader />
+			<EventContent sectionValue={fakeAPI.contentSection} />
+			<EventSponsors sectionValue={fakeAPI.sponsorSection} />
+			<EventTeam sectionValue={fakeAPI.teamSection} />
+			<EventParticipants sectionValue={fakeAPI.participantsSection} />
+			<EventGallery sectionValue={fakeAPI.gallerySection} />
+		</>
+	);
 };
 
 export default EventProject;

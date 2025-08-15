@@ -1,57 +1,106 @@
-import { Card, CardBody, CardHeader, Image } from "@heroui/react";
-import React, { useRef } from "react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 import { IconBrandLinkedin } from "@tabler/icons-react";
 import { motion, useInView } from "framer-motion";
 import "./styles.css";
 import Link from "next/link";
+import axios from "axios";
 
-type ManagementBoardCardProps = {
-  image: string;
+type ManagementBoardMember = {
+  photo_url: string;
   name: string;
   position: string;
-  linkedin: string;
+  linkedin_url: string;
 };
 
-const managementBoardData = [
-  {
-    image:
-      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofBusiness-HaoLy.png",
-    name: "LY QUOC HAO",
-    position: "Head of Business",
-    linkedin: "https://www.linkedin.com/in/hao-ly-86482a313/",
-  },
-  {
-    image:
-      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofHR-GiaHoa.png",
-    name: "NGUYEN HUA GIA HOA",
-    position: "Head of Human Resources",
-    linkedin: "https://www.linkedin.com/in/hoa-nguyen-hua-gia/",
-  },
-  {
-    image:
-      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofMarketing-Mint.png",
-    name: "PHAM HOANG MINH THU",
-    position: "Head of Marketing",
-    linkedin: "https://www.linkedin.com/in/hoa-nguyen-hua-gia/",
-  },
-  {
-    image:
-      "https://d2prwyp3rwi40.cloudfront.net/about_us/management_board/HeadofTechnology-TanNguyen.png",
-    name: "NGUYEN MANH TAN",
-    position: "Head of Technology",
-    linkedin: "https://www.linkedin.com/in/manh-tan-nguyen-6373b3275/",
-  },
-];
-
 const ManagementBoard = () => {
+  const [members, setMembers] = useState<ManagementBoardMember[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  // Fetch data on component mount
+  useEffect(() => {
+    const fetchManagementBoard = async () => {
+      try {
+        const response = await axios.get("/api/v1/managementBoard");
+
+        if (response.data.status === 200 && response.data.members) {
+          setMembers(response.data.members);
+        } else {
+          setError(
+            response.data.message ||
+              "Failed to load management board data. Please try again later."
+          );
+        }
+      } catch (err: any) {
+        console.error("Error fetching management board: ", err);
+
+        // Set error message
+        if (err.response?.status === 404) {
+          setError("Management board API not found");
+        } else if (err.code == "ERR_NETWORK") {
+          setError("Network error");
+        } else {
+          setError("Failed to load management board data");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchManagementBoard();
+  }, []);
+
+  // Loading state
+  if (loading) {
+    return (
+      <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
+          alt="Bear mascot"
+          className="absolute left-[-8rem] top-0 rotate-[35deg] scale-x-[-1] z-30"
+          width={368}
+          height={368}
+        />
+        <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
+        <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
+        <div className="absolute bottom-[0.5rem] right-[16rem] w-[3.7rem] h-[3.7rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[0.2rem] right-[21rem] w-[1.8rem] h-[1.8rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[4.8rem] right-[15rem] w-[1.3rem] h-[1.3rem] bg-[#C9D6EA] rounded-full z-10"></div>
+        <div className="absolute bottom-[3rem] right-[5.5rem] w-[1.3rem] h-[1.3rem] bg-[#C9D6EA] rounded-full z-10"></div>
+        <div className="absolute bottom-[3rem] right-[2.4rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
+
+        <main className="mx-[64px] 2xl:mx-[10rem]">
+          <div className="content grid text-right">
+            <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
+              Meet Our
+            </h2>
+            <h1 className=" text-[#DCB968] text-[4.3rem]">Management Board</h1>
+            <p className="leading-3 w-full text-[#000000]">
+              Meet the talented representatives behind the four pillars of RMIT
+              Vietnam FinTech Club!
+            </p>
+          </div>
+          <div className="pt-16 pb-[8rem] flex justify-center items-center">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DCB968] mx-auto mb-4"></div>
+              <p className="text-[#5E5E92]">Loading management board...</p>
+            </div>
+          </div>
+        </main>
+      </section>
+    );
+  }
+
   return (
-    // using hex color (invalid)
     <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
       <Image
         src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
-        className="absolute left-[-8rem] top-[-5rem] rotate-[35deg] scale-x-[-1] z-30"
-        width={368}
+        className="absolute left-[-8rem] top-[-1rem] rotate-[35deg] scale-x-[-1] z-30"
+        width={380}
+        height={380}
+        loading="lazy"
       />
       <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
       <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
@@ -62,82 +111,108 @@ const ManagementBoard = () => {
       <div className="absolute bottom-[3rem] right-[2.4rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
 
       <main className="mx-[64px] 2xl:mx-[10rem]">
-        <div className="grid text-right">
+        <div className="content grid text-right">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
             Meet Our
           </h2>
           <h1 className=" text-[#DCB968] text-[4.3rem]">Management Board</h1>
-          <p className="leading-3 w-full text-[#000000]">
+          <p className="leading-8 w-full text-[#000000]">
             Meet the talented representatives behind the four pillars of RMIT
             Vietnam FinTech Club!
           </p>
         </div>
+
+        {/* Display error message */}
+        {error && (
+          <div className="pt-4 text-center">
+            <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block">
+              ⚠️ {error}
+            </p>
+          </div>
+        )}
+
         <div className=" pt-16 pb-[8rem] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[3rem] 2xl:gap-[5rem]">
-          {managementBoardData.map((item, index) => {
-            const ref = useRef(null);
-            const isInView = useInView(ref);
-            return (
-              // effect
-              <motion.div
-                key={index}
-                ref={ref}
-                animate={{
-                  y: isInView ? (index % 2 === 0 ? 25 : -25) : 0,
-                  opacity: isInView ? 1 : 0.7,
-                }}
-                transition={{ duration: 1, ease: "easeOut" }}
-              >
-                <MANAGEMENT_BOARD_CARD {...item} />
-              </motion.div>
-            );
-          })}
+          {members.map((item, index) => (
+            <MemberCard key={index} {...item} index={index} />
+          ))}
         </div>
       </main>
     </section>
   );
 };
 
-function MANAGEMENT_BOARD_CARD({
-  image,
+function MemberCard({
+  photo_url,
   name,
   position,
-  linkedin,
-}: ManagementBoardCardProps) {
+  linkedin_url,
+  index,
+}: ManagementBoardMember & { index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
   return (
-    <Card className="relative mt-[1.5rem] rounded-2xl border-[4px] border-[#F7D27F] border-solid overflow-hidden">
-      <CardHeader className="pb-0 pt-0 h-[12rem] 2xl:h-[16rem]">
-        <div className="z-0">
-          <Image
-            alt={`${name} profile`}
-            src={image}
-            className="object-cover w-full h-full translate-y-[13%]"
-          />
-        </div>
-      </CardHeader>
-      <CardBody className=" relative z-10 overflow-visible pb-[0.5rem] pl-[1rem] pt-[1.5rem] bg-[#F7D27F] rounded-t-[30px] flex justify-between">
-        <div className="flex justify-between items-start">
-          <div>
-            <h6 className="leading-6 font-semibold text-[0.9rem] text-[#2C305F]">
-              {name}
-            </h6>
-            <p className="leading-5 text-[#2C305F] text-[0.7rem]">{position}</p>
-          </div>
-          <Link
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Visit LinkedIn"
-          >
-            <IconBrandLinkedin
-              size={40}
-              color="#2C305F"
-              strokeWidth={0.8}
-              className="transition duration-300 transform hover:scale-110 hover:brightness-150 hover:drop-shadow-[0_0_6px_#2C305F]"
+    <motion.div
+      ref={ref}
+      animate={{
+        y: isInView ? (index % 2 === 0 ? 25 : -25) : 0,
+        opacity: isInView ? 1 : 0.7,
+      }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
+      <Card className="relative mt-[1.5rem] rounded-2xl border-[4px] border-[#F7D27F] border-solid overflow-hidden">
+        <CardHeader className="pb-0 pt-0 h-[12rem] 2xl:h-[16rem]">
+          <div className="z-0">
+            <Image
+              alt={`${name} profile`}
+              src={photo_url}
+              className="object-cover w-full h-full translate-y-[13%]"
+              width={400}
+              height={400}
+              fetchPriority="high"
+              loading="eager"
+              priority={true}
             />
-          </Link>
-        </div>
-      </CardBody>
-    </Card>
+          </div>
+        </CardHeader>
+        <CardBody className=" relative z-10 overflow-visible pb-[0.5rem] pl-[1rem] pt-[1.5rem] bg-[#F7D27F] rounded-t-[30px] flex justify-between">
+          <div className="flex justify-between items-start">
+            <div>
+              <h6 className="leading-6 font-semibold text-[0.9rem] text-[#2C305F]">
+                {name}
+              </h6>
+              <p className="leading-5 text-[#2C305F] text-[0.7rem]">
+                {position}
+              </p>
+            </div>
+            {linkedin_url && linkedin_url.trim() ? (
+              <Link
+                href={linkedin_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Visit LinkedIn"
+              >
+                <IconBrandLinkedin
+                  size={40}
+                  color="#2C305F"
+                  strokeWidth={0.8}
+                  className="transition duration-300 transform hover:scale-110 hover:brightness-150 hover:drop-shadow-[0_0_6px_#2C305F]"
+                />
+              </Link>
+            ) : (
+              <IconBrandLinkedin
+                size={40}
+                color="#9CA3AF"
+                strokeWidth={0.8}
+                className="opacity-50 cursor-not-allowed"
+                title="LinkedIn not available"
+              />
+            )}
+          </div>
+        </CardBody>
+      </Card>
+    </motion.div>
   );
 }
+
 export default ManagementBoard;
