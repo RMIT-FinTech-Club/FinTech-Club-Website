@@ -1,17 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import type { CategoryCardProps } from "./types";
+import type { CategoryCardProps } from "../types";
 
 export default function CategoryCard({ category, setSelectedCategory }: CategoryCardProps) {
-    const router = useRouter();
-
-//   const handleClick = () => {
-//     router.push(
-//       `/hall-of-fame/category?semester=${encodeURIComponent(
-//         semester
-//       )}&category=${encodeURIComponent(category)}`
-//     );
-//   };
+  const router = useRouter();
 
   return (
     <div 

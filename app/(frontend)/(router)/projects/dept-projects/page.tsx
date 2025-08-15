@@ -9,10 +9,10 @@ const API_BASE =
   process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000/api/v1";
 
 const DEPT_TABS = [
-  { value: "technology", label: "TECHNOLOGY", color: "bg-[#DBB968]", apiDept: "Business" },
+  { value: "technology", label: "TECHNOLOGY", color: "bg-[#DBB968]", apiDept: "Technical" },
   { value: "business", label: "BUSINESS", color: "bg-[#2C305F]", apiDept: "Business" },
-  { value: "marketing", label: "MARKETING", color: "bg-[#DBB968]", apiDept: "Business" },
-  { value: "human-resources", label: "HUMAN RESOURCES", color: "bg-[#2C305F]", apiDept: "Business" },
+  { value: "marketing", label: "MARKETING", color: "bg-[#DBB968]", apiDept: "Marketing" },
+  { value: "human-resources", label: "HUMAN RESOURCES", color: "bg-[#2C305F]", apiDept: "Human Resources" },
 ] as const;
 
 const DEFAULT_DESC: Record<string, React.ReactNode> = {
@@ -85,8 +85,17 @@ export default function DeptProjects() {
         );
 
         setDepartmentProjects(results);
-      } catch (e) {
-        if (!axios.isCancel(e)) setError("Failed to fetch department projects.");
+        setError(null);
+      } catch (e: any) {
+        console.error("Error fetching department projects:", e);
+        if (axios.isCancel(e)) return;
+        if (e.response?.status === 404) {
+          setError("Department projects API not found");
+        } else if (e.code === "ERR_NETWORK") {
+          setError("Network error. Please check your connection.");
+        } else {
+          setError("Failed to fetch department projects. Please try again later.");
+        }
       } finally {
         setLoading(false);
       }
@@ -96,8 +105,8 @@ export default function DeptProjects() {
   }, [departments]);
 
   if (loading) return <div className="p-8 text-center">Loading projects...</div>;
-  if (error) return <div className="p-8 text-center text-red-500">{error}</div>;
-
+  if (error) return <div className="p-8 text-center text-red-500">⚠️ {error}</div>;
+  
   const items = DEPT_TABS.map(({ value, label, color, apiDept }) => ({
     value,
     label,

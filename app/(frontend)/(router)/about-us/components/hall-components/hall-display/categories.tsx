@@ -1,5 +1,5 @@
 import CategoryCard from "./categoryCard";
-import type { FilterProps } from "./types"; 
+import type { FilterProps } from "../types"; 
 
 export default function Categories({ categories, setSelectedCategory }: FilterProps) {
   return (

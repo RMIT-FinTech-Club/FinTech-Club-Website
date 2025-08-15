@@ -3,7 +3,7 @@ import * as Select from "@radix-ui/react-select";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import type { SemesterFilterProps } from "./types";
+import type { SemesterFilterProps } from "../types";
 
 export default function HoFFilter({ semesters, onSelect, selectedLabel
 }: SemesterFilterProps) {

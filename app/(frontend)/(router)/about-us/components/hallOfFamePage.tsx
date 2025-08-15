@@ -6,8 +6,7 @@ import type { HallOfFameMember } from './hall-components/types';
 import HonoreePage from "./hall-components/honoreePage";
 import HallPage from "./hall-components/hallPage";
 import { useSemester } from './hall-components/hooks/useSemester';
-import ErrorFallback from "./hall-components/ErrorFallback";
-import HallRevealSection from "./hall-components/HallRevealSection";
+import HallRevealSection from "./hall-components/hall-display/HallRevealSection";
 
 export default function HallOfFamePage() {
   const categories = ["Department MVP", "Academic Ace", "Project MVP", "Community Builder", "Rookie of the Semester", "Best Department", "Club MVP"]
@@ -28,11 +27,17 @@ export default function HallOfFamePage() {
         const response = await axios.get("/api/v1/hall-of-fame", {
           params: { year: currentYear },
         });
-        console.log(response.data)
         setMembers(response.data.honorees);
-      } catch (err) {
-        setError("Failed to load Hall of Fame members.");
-        console.error(err);
+        setError(null);
+      } catch (err: any) {
+        console.error("Error fetching Hall of Fame members:", err);
+        if (err.response?.status === 404) {
+          setError("Hall of Fame API not found");
+        } else if (err.code === "ERR_NETWORK") {
+          setError("Network error. Please check your connection.");
+        } else {
+          setError("Failed to load Hall of Fame data. Please try again later.");
+        }
       } finally {
         setLoading(false);
       }
@@ -44,10 +49,14 @@ export default function HallOfFamePage() {
 
   return (
   <>
-    {loading && <ErrorFallback message="Loading Hall of Fame..." isLoading />}
-
-    {error && <ErrorFallback message={error} onRetry={() => window.location.reload()} />}
-
+    {error && !loading && (
+      <div className="pt-4 text-center">
+        <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block">
+          ⚠️ {error}
+        </p>
+      </div>
+    )}
+    
     {!loading && !error && (
       selectedCategory ? (
         <HonoreePage

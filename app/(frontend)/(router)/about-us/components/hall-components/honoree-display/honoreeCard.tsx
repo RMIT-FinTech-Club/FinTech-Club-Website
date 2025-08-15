@@ -1,5 +1,5 @@
 "use client";
-import type { HonoreeCardProps } from "./types";
+import type { HonoreeCardProps } from "../types";
 
 export default function HonoreeCard({ name, achievement, photo_url, hideAchievement }: HonoreeCardProps) {
 

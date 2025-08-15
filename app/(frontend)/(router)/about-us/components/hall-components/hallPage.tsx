@@ -1,6 +1,6 @@
 import HeaderTitle from "./headerTitle";
-import HoFFilter from "./hofFilter"
-import Categories from "./categories"
+import HoFFilter from "./hall-display/hofFilter"
+import Categories from "./hall-display/categories"
 import type { HallDisplayProps } from "./types";
 import { useSemester } from "./hooks/useSemester";
 
@@ -15,9 +15,6 @@ const HallDisplay = ({
   return (
       <section className="relative py-10 overflow-hidden bg-[#F9FAFB]">
         <div className='flex flex-row justify-center'>
-          {/* <div>
-            <img src="/bear_sideway.svg" alt="Mascot" className="absolute left-0 top-1/3 z-10 h-2/6 sm:h-3/6 md:h-4/6 lg:h-full xl:h-full md:-translate-y-1/3 lg:-translate-y-1/3" />
-          </div> */}
   
           {/* > lg (1024px and up) */}
           <div className="hidden lg:block">

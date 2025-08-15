@@ -1,11 +1,11 @@
 "use client";
 import HeaderTitle from "./headerTitle";
-import HonoreeList from "./honoreeList";
-import CategoryCard from "./categoryCard";
+import HonoreeList from "./honoree-display/honoreeList";
+import CategoryCard from "./hall-display/categoryCard";
 import type { CategoryPageProps } from "./types";
 import { useMemo } from "react";
 
-const CategoryPage = ({
+const HonoreePage = ({
     members,
     category,
     semester,
@@ -19,9 +19,6 @@ const CategoryPage = ({
   return (
     <section className="relative pt-10 overflow-hidden bg-[#F9FAFB]">
       <div className='flex flex-row justify-center'>
-        {/* <div>
-          <img src="/bear_sideway.svg" alt="Mascot" className="absolute left-0 top-1/3 z-10 h-2/6 sm:h-2/6 md:h-3/6 lg:h-4/6 xl:h-full md:-translate-y-1/3 lg:-translate-y-1/3" />
-        </div> */}
 
         {/* > lg (1024px and up) */}
         <div className="hidden lg:block">
@@ -66,40 +63,9 @@ const CategoryPage = ({
           </div>
         </div>
 
-        
-        {/* <img src='/bubblesTop.svg' alt='decorTop' className="absolute top-0 right-0"/>
-        <img src='/bubblesBottom.svg' alt='decorBottom' className="absolute bottom-0 right-0"/> */}
-        {/* > lg (1024px and up) */}
-        {/* <div className="hidden xl:block lg:block md:block">
-          <img
-            src="/bubblesTop.svg"
-            alt="decorTop"
-            className="absolute top-0 right-0 h-[15%]"
-          />
-          <img
-            src="/bubblesBottom.svg"
-            alt="decorBottom"
-            className="absolute bottom-0 right-0 h-[25%]"
-          />
-        </div> */}
-
-        {/* < md (smaller than 768px) */}
-        {/* <div className="hidden sm:block">
-          <img
-            src="/bubblesTop.svg"
-            alt="decorTop"
-            className="absolute top-0 right-0 h-0"
-          />
-          <img
-            src="/bubblesBottom.svg"
-            alt="decorBottom"
-            className="absolute bottom-0 right-0 h-0"
-          />
-        </div> */}
-
       </div>
     </section>
   );
 }
 
-export default CategoryPage;
+export default HonoreePage;

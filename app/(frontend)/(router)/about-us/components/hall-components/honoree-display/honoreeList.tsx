@@ -1,6 +1,6 @@
 "use client";
 import HonoreeCard from "./honoreeCard";
-import type { HonoreeListProps } from "./types";
+import type { HonoreeListProps } from "../types";
 
 const categoriesWithoutAchievement = ["Community Builder", "Rookie of the Semester", "Best Department", "Club MVP"];
 
