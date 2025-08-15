@@ -1,9 +1,8 @@
-import { time } from "console";
 import mongoose, {Schema} from "mongoose";
 
 const eventSchema = new Schema(
     {
-        name: {type: String, required: true,trim: true, index: true},
+        name: {type: String, required: true,trim: true},
         description: {type: String, required: true, trim: true,},
         posterUrl: {
             type: String, 
@@ -14,7 +13,7 @@ const eventSchema = new Schema(
 					`${props.value} is not a valid URL!`,
 			},
         },
-        date: {type: Date, required: true, index: true},
+        date: {type: Date, required: true},
         time: {
             type: String, 
             required: true,
@@ -24,7 +23,7 @@ const eventSchema = new Schema(
 					`${props.value} must be in HH:MM format`,
 			},
         },
-        mode: {type: String,enum: ['online', 'offline', 'hybrid'], required: true},
+        mode: {type: String, enum: ['online', 'offline', 'hybrid'], required: true},
         location: {type: String, trim: true,},
         agenda: [
             {
@@ -42,7 +41,7 @@ const eventSchema = new Schema(
         ],
         speakers: [
             {
-                name: {type: String, trim: true},
+                name: {type: String, trim: true,required: false, default: undefined},
                 photoUrl: {
                     type: String,
                     validate: {
@@ -50,22 +49,21 @@ const eventSchema = new Schema(
                         message: (props: { value: string }) =>
                             `${props.value} is not a valid URL!`,
                     },
+                    required: false,
+                    default: undefined
                 },
-                bio: {type: String, trim: true}
+                bio: {type: String, trim: true,required: false, default: undefined}
             }
         ],
-        partners: [
-            {
-                type: {
-                    type: String,
-                    validate: {
-                        validator: (v: string) => !v || /^https?:\/\//.test(v),
-                        message: (props: { value: string }) =>
-                            `${props.value} is not a valid URL!`,
-                    },
-                },
-            }
-        ],
+        partners: {
+            type: [String],
+            validate: {
+                validator: (arr: string[]) =>  arr.every(url => /^https?:\/\//.test(url)),
+                message: (props: { value: string[] }) =>
+                    `${props.value} contains an invalid URL!`,
+            },
+            default: undefined
+        },
         registrationDeadline: {type: Date, required: true}
     },
     {
