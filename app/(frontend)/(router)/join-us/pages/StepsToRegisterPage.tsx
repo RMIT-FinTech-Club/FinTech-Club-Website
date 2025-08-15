@@ -12,6 +12,7 @@ const StepsToRegisterPage = ({id}: StepsToRegisterPageProps) => {
 
 	return (
 		<div
+            id={id}
 			ref={ref}
 			className="w-full flex justify-center items-center bg-white relative"
 			style={{ minHeight: "80vh" }}

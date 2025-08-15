@@ -28,6 +28,7 @@ export default function CountdownPage() {
 	}, []);
 
     return (
+        // Container for the whole section
         <div className="flex flex-col">
             {/* Hero Section with Yellow background */}
             <div
@@ -93,7 +94,7 @@ export default function CountdownPage() {
                     className="absolute top-5 right-1/4 transform -translate-x-1/2 md:block hidden z-0"
                 />
             </div>
-            {/* Navigation Tabs section */}
+            {/* Navigation Tabs section: scroll to the corresponding section with IDs */}
             <div className="flex flex-row self-center w-full md:w-2/3 lg:w-2/3">
                 <NavigationButton text="MEMBER BENEFITS" link="#member-benefits" />
                 <NavigationButton text="RECRUITMENT PROCESS" link="#recruitment-process" />

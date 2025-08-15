@@ -7,30 +7,49 @@ const WhyJoinFintechClub = () => {
       <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-5 items-start">
 
         <motion.div
-          className="relative h-full col-span-2 flex flex-col items-center justify-center text-center md:text-left"
+          className="relative h-full col-span-3 flex flex-col items-center justify-center text-center md:text-center lg:col-span-2"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
-          <div className="absolute top-0 left-0">
-            <Image src="/joinUsPage/aboveTitle.svg" alt="decoration above title" width={100} height={100}/>
+			{/* Decoration above the Title */}
+          <div className="absolute -top-4 -left-4 md:-top-4 hidden sm:block">
+            <Image 
+				src="/joinUsPage/aboveTitle.svg" 
+				alt="decoration above title" 
+				width={75} height={75}
+				className="lg:w-24 lg:h-24"
+			/>
           </div>
-          <h2
-            className="text-3xl text-center font-bold text-gray-900 sm:text-4xl md:text-6xl mb-4"
-            style={{ lineHeight: 1.1 }}
-          >
-            Why Join the RMIT Vietnam FinTech Club?
-          </h2>
+		  {/* Text Container */}
+		  <div
+		  	className="max-w-2xl space-y-6"
+		  >
+			<h2
+				className="text-3xl text-center font-bold text-gray-900 sm:text-4xl md:text-6xl mb-4"
+				style={{ lineHeight: 1.1 }}
+			>
+				Why Join RMIT Vietnam FinTech Club?
+			</h2>
 
-          <p
-            className="mt-6 text-lg text-gray-700"
-            style={{ textShadow: "0px 1px 2px rgba(0, 0, 0, 0.15)" }}
-          >
-            As a member of our dynamic community, you’ll unlock opportunities and experiences that will shape your future. Here’s what you’ll gain:
-          </p>
-          <div className="absolute right-0 bottom-0">
-            <Image src="/joinUsPage/belowTitle.svg" alt="decoration above title" width={100} height={100}/>
+			<p
+				className="mt-6 text-lg text-gray-700"
+				style={{ textShadow: "0px 1px 2px rgba(0, 0, 0, 0.15)" }}
+			>
+				As a member of our dynamic community, 
+				you’ll unlock opportunities and experiences 
+				that will shape your future. Here’s what you’ll gain:
+			</p>
+		  </div>
+		  {/* Decoration below the title */}
+          <div className="absolute -bottom-6 -right-4 md:-right-8 hidden sm:block">
+            <Image 
+				src="/joinUsPage/belowTitle.svg" 
+				alt="decoration above title" 
+				width={40} height={40}
+				className="lg:w-24 lg:h-24 md:w-20 md:h-20"
+				/>
           </div>
         </motion.div>
 

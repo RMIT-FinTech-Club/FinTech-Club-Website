@@ -11,7 +11,14 @@ const WhatAreYouWaitingFor = ({id}: WhatAreYouWaitingForProps) => {
     const isInView = useInView(ref, { once: true, margin: '0px 0px -20% 0px' });
 
     return (
-        <div id={id} ref={ref} className="flex flex-col sm:flex-row justify-center items-center w-full px-12 py-12 bg-white" style={{ minHeight: '80vh' }}>
+        <div 
+            id={id} 
+            ref={ref} 
+            className="flex flex-col sm:flex-row justify-center items-center w-full px-12 py-12 bg-white" 
+            style={{ 
+                minHeight: '80vh' 
+            }}
+        >
 
             <motion.div
                 className="flex flex-col items-center sm:items-start text-center sm:text-left mb-8 sm:mb-0 sm:mr-8"
@@ -27,9 +34,13 @@ const WhatAreYouWaitingFor = ({id}: WhatAreYouWaitingForProps) => {
                 >
                     What Are You Waiting For?
                 </motion.h2>
+                {/* 2 divs as gradient border color to buttons */}
                 <div className="flex gap-4 mb-2">
                     <div
-                        className="p-0.5 rounded-[10px] bg-gradient-to-b from-[#F0EDFF] to-[#5E5E92]"
+                        className="p-0.5 rounded-[10px]"
+                        style={{
+                            background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)"
+                        }}
                     >
                         <a
                             href="https://forms.office.com/r/Z55Yha5E10"
@@ -41,7 +52,10 @@ const WhatAreYouWaitingFor = ({id}: WhatAreYouWaitingForProps) => {
                         </a>
                     </div>
                     <div
-                        className="p-0.5 rounded-[10px] bg-gradient-to-b from-[#F0EDFF] to-[#5E5E92]"
+                        className="p-0.5 rounded-[10px]"
+                        style={{
+                            background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)"
+                        }}
                     >
                         <a
                         href="https://bit.ly/FTC_Recruitment_Booklet_2024C"
