@@ -119,8 +119,7 @@ export async function getLargeScaledOngoingProjects() {
     console.log(`Found ${projects.length} large-scaled ongoing projects`);
     
     return {
-      message: "Large-scaled ongoing projects retrieved successfully",
-      success: true,
+      status: 200,
       data: projects.map(p => ({
         title: p.title,
         description: p.description,
@@ -132,7 +131,9 @@ export async function getLargeScaledOngoingProjects() {
         slug: p.slug,
         meta_title: p.meta_title,
         meta_description: p.meta_description
-      }))
+      })),
+      count: projects.length,
+      message: `Found ${projects.length} large-scaled ongoing projects`
     };
   } catch (error) {
     console.error("Error in getLargeScaledOngoingProjects:", error);
@@ -174,8 +175,7 @@ export async function getDepartmentProjects(department: string) {
     ]);
 
     return {
-      message: "Department projects retrieved successfully",
-      success: true,
+      status: 200,
       data: result || {
         department,
         department_photo_url: "",
@@ -183,7 +183,7 @@ export async function getDepartmentProjects(department: string) {
         projects: []
       },
       count: result?.count || 0,
-      cached: false
+      message: `Found ${result?.count || 0} department projects for ${department}`
     };
 
   } catch (error) {
@@ -224,6 +224,99 @@ export async function getProjectByIdOrSlug(idOrSlug: string) {
   const project = await Project.findOne(query);
   if (!project) throw new Error("Project not found");
   return project;
+}
+
+export async function getCompletedProjectsByYear(year: string) {
+  try {
+    // Validate year format
+    const yearNum = parseInt(year);
+    if (isNaN(yearNum) || yearNum < 1900 || yearNum > new Date().getFullYear() + 1) {
+      throw new Error("Invalid year parameter");
+    }
+
+    const projects = await Project.find({ 
+      status: "completed", 
+      year: yearNum 
+    })
+    .select('title description status category labels image_url year') // Only return required fields
+    .sort({ year: -1, created_at: -1 }) // Most recent year first, then by creation date
+    .limit(50) 
+    .lean();
+    
+    return {
+      status: 200,
+      data: projects,
+      count: projects.length,
+      year: yearNum,
+      message: `Found ${projects.length} completed projects for year ${yearNum}`
+    };
+  } catch (error) {
+    console.error(`Error fetching completed projects for year ${year}:`, error);
+    throw error;
+  }
+}
+
+export async function getCompletedProjectsDefault() {
+  try {
+    // Find the most recent year with completed projects
+    const mostRecentYear = await Project.findOne({ status: "completed" })
+      .sort({ year: -1 })
+      .select('year')
+      .lean();
+
+    if (!mostRecentYear || !mostRecentYear.year) {
+      return {
+        status: 200,
+        data: [],
+        count: 0,
+        year: null,
+        message: "No completed projects found"
+      };
+    }
+
+    const yearValue = mostRecentYear.year as number; // ignore typescript warnings 
+
+    // Get completed projects from the most recent year
+    const projects = await Project.find({ 
+      status: "completed", 
+      year: yearValue 
+    })
+    .select('title description status category labels image_url year') 
+    .sort({ created_at: -1 }) // Sort by creation date
+    .limit(50) 
+    .lean();
+    
+    return {
+      status: 200,
+      data: projects,
+      count: projects.length,
+      year: yearValue,
+      message: `Found ${projects.length} completed projects from most recent year ${yearValue}`
+    };
+  } catch (error) {
+    console.error("Error fetching completed projects (default):", error);
+    throw error;
+  }
+}
+
+export async function getAllProjects() {
+  try {
+    const projects = await Project.find({})
+      .select('title description type status category labels image_url year slug meta_title meta_description')
+      .sort({ created_at: -1 })
+      .limit(100) 
+      .lean();
+
+    return {
+      status: 200,
+      data: projects,
+      count: projects.length,
+      message: `Found ${projects.length} total projects`
+    };
+  } catch (error) {
+    console.error("Error fetching all projects:", error);
+    throw error;
+  }
 }
 
 export async function updateProject(idOrSlug: string, updateData: any) {
