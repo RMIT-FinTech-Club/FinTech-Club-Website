@@ -31,6 +31,7 @@ const PastProject = () => {
 	useEffect(() => {
 		const fetchPastHighLightedProject = async () => {
 			try {
+				/* testing with research database */
 				const res = await axios.get("/api/v1/research", {
 					params: {
 						status: "published",
@@ -82,7 +83,7 @@ const PastProject = () => {
 			<Slider {...settings}>
 				{pastProject.map((item) => (
 					<Project
-						key={item.status}
+						key={item._id}
 						_id={item._id}
 						thumbnail={item.thumbnail}
 						title={item.title}
