@@ -138,8 +138,8 @@
     }
 }
 
-<<<<<<< HEAD
-=======
+
+
 @keyframes fade_in {
     from {
         opacity: 0;
@@ -158,7 +158,7 @@
     }
 }
 
->>>>>>> origin/dev
+
 .circle_item {
     position: absolute;
     aspect-ratio: 1;
@@ -211,8 +211,7 @@
     top: 75vh;
 }
 
-<<<<<<< HEAD
-=======
+
 .pattern {
     opacity: 0;
 }
@@ -231,7 +230,7 @@
     animation: fade_in 3s ease forwards;
 }
 
->>>>>>> origin/dev
+
 .circle_item_1_next { animation-name: circle_item_1_next; }
 .circle_item_2_next { animation-name: circle_item_2_next; }
 .circle_item_3_next { animation-name: circle_item_3_next; }

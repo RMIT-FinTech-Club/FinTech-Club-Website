@@ -1,57 +1,24 @@
 "use client";
 import type React from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./carousel.css";
 import Project from "./projectCard";
 import Viewmore from "./viewMore";
+import axios from "axios";
+import { setTimeout } from "timers/promises";
 
 type datatype = {
+	_id: string;
 	year: number;
-	image: string;
+	image_url: string;
 	title: string;
-	brief: string;
+	description: string;
 };
 
-const data: datatype[] = [
-	{
-		year: 2025,
-		image: "AchievementBg.png",
-		title: "ABC",
-		brief: "ddddd",
-	},
-
-	{
-		year: 2025,
-		image: "AchievementBg.png",
-		title: "qrt",
-		brief: "yui",
-	},
-
-	{
-		year: 2025,
-		image: "AchievementBg.png",
-		title: "dsadasdsđ",
-		brief: "ccc",
-	},
-
-	{
-		year: 2026,
-		image: "AchievementBg.png",
-		title: "5454545",
-		brief: "ccc",
-	},
-
-	{
-		year: 2025,
-		image: "AchievementBg.png",
-		title: "dfdsffasdádasdsds",
-		brief: "dádasd",
-	},
-];
-
-const PastProject = () => {
+const PastProject = ({ params }: { params: { _id: string } }) => {
 	const settings = {
 		dots: true,
 		infinite: false,
@@ -60,26 +27,55 @@ const PastProject = () => {
 		focusOnSelect: true,
 	};
 
+	const [pastProject, setPastProject] = useState<datatype[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchMember = async () => {
+			axios
+				.get("/api/v1/projects")
+				.then((res) => res.data.json)
+				.then((data) => {
+					setPastProject(data);
+					console.log(data);
+				})
+				.catch((err) => {
+					console.error(err);
+					setIsLoading(false);
+				});
+		};
+		fetchMember();
+	}, []);
+
+	if (isLoading) return;
+	{
+		<div className="flex justify-center text-bluePrimary font-bold">
+			Loading Our Projects...
+		</div>;
+	}
+
 	return (
 		<section className="pb-10">
-			<h5 className="flex justify-center text-bluePrimary font-extrabold">
-				{" "}
+			<p className="flex justify-center text-bluePrimary font-extrabold text-[50px]">
 				PAST HIGHLIGHTED PROJECTS
-			</h5>
+			</p>
 
-			<div className="flex place-content-center pt-10 max-w-[1652px] max-h-[54px]">
-				<h6 className="text-yellowSand flex items-center pr-8"> 2025 </h6>
+			<div className="flex place-content-center pt-10 max-w-[1652px] max-h-[50px]">
+				<p className="text-yellowSand flex items-center pr-8 font-semibold text-[40px]">
+					2025
+				</p>
 				<div className="flex items-center max-w-[1200px] w-[2000px] h-[3px] font-black bg-yellowPrimary"></div>
 			</div>
 
-			<Slider {...settings} className="">
-				{data.map((item) => (
+			<Slider {...settings}>
+				{pastProject.map((item) => (
 					<Project
-						key={item.year}
+						key={item._id}
+						_id={item._id}
 						year={item.year}
+						image_url={item.image_url}
 						title={item.title}
-						image={item.image}
-						brief={item.brief}
+						description={item.description}
 					/>
 				))}
 			</Slider>

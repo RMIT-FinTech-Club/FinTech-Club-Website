@@ -1,4 +1,5 @@
-import { Card, CardBody, CardHeader, Image } from "@heroui/react";
+import { Card, CardBody, CardHeader } from "@heroui/react";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { IconBrandLinkedin } from "@tabler/icons-react";
 import { motion, useInView } from "framer-motion";
@@ -14,37 +15,39 @@ type ManagementBoardMember = {
 };
 
 const ManagementBoard = () => {
-  const [members , setMembers] = useState<ManagementBoardMember[]>([]);
+  const [members, setMembers] = useState<ManagementBoardMember[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
-  // Fetch data on component mount 
+  // Fetch data on component mount
   useEffect(() => {
     const fetchManagementBoard = async () => {
       try {
-        const response = await axios.get('/api/v1/managementBoard');
+        const response = await axios.get("/api/v1/managementBoard");
 
-        if(response.data.status === 200 && response.data.members){
+        if (response.data.status === 200 && response.data.members) {
           setMembers(response.data.members);
-        } else{
-          setError(response.data.message || "Failed to load management board data. Please try again later.");
+        } else {
+          setError(
+            response.data.message ||
+              "Failed to load management board data. Please try again later."
+          );
         }
+      } catch (err: any) {
+        console.error("Error fetching management board: ", err);
 
-      } catch(err: any){
-        console.error('Error fetching management board: ', err);
-
-        // Set error message 
-        if(err.response?.status === 404){
-          setError('Management board API not found');
-        } else if(err.code == 'ERR_NETWORK'){
-          setError('Network error');
-        } else{
-          setError('Failed to load management board data');
+        // Set error message
+        if (err.response?.status === 404) {
+          setError("Management board API not found");
+        } else if (err.code == "ERR_NETWORK") {
+          setError("Network error");
+        } else {
+          setError("Failed to load management board data");
         }
-      } finally{
+      } finally {
         setLoading(false);
       }
-    }
+    };
     fetchManagementBoard();
   }, []);
 
@@ -52,8 +55,23 @@ const ManagementBoard = () => {
   if (loading) {
     return (
       <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
+          alt="Bear mascot"
+          className="absolute left-[-8rem] top-0 rotate-[35deg] scale-x-[-1] z-30"
+          width={368}
+          height={368}
+        />
+        <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
+        <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
+        <div className="absolute bottom-[0.5rem] right-[16rem] w-[3.7rem] h-[3.7rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[0.2rem] right-[21rem] w-[1.8rem] h-[1.8rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[4.8rem] right-[15rem] w-[1.3rem] h-[1.3rem] bg-[#C9D6EA] rounded-full z-10"></div>
+        <div className="absolute bottom-[3rem] right-[5.5rem] w-[1.3rem] h-[1.3rem] bg-[#C9D6EA] rounded-full z-10"></div>
+        <div className="absolute bottom-[3rem] right-[2.4rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
+
         <main className="mx-[64px] 2xl:mx-[10rem]">
-          <div className="grid text-right">
+          <div className="content grid text-right">
             <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
               Meet Our
             </h2>
@@ -75,13 +93,14 @@ const ManagementBoard = () => {
   }
 
   return (
-    // using hex color (invalid)
     <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[5rem]">
       <Image
         src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
-        className="absolute left-[-8rem] top-[-5rem] rotate-[35deg] scale-x-[-1] z-30"
-        width={368}
+        className="absolute left-[-8rem] top-[-1rem] rotate-[35deg] scale-x-[-1] z-30"
+        width={380}
+        height={380}
+        loading="lazy"
       />
       <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
       <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
@@ -92,12 +111,12 @@ const ManagementBoard = () => {
       <div className="absolute bottom-[3rem] right-[2.4rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
 
       <main className="mx-[64px] 2xl:mx-[10rem]">
-        <div className="grid text-right">
+        <div className="content grid text-right">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
             Meet Our
           </h2>
           <h1 className=" text-[#DCB968] text-[4.3rem]">Management Board</h1>
-          <p className="leading-3 w-full text-[#000000]">
+          <p className="leading-8 w-full text-[#000000]">
             Meet the talented representatives behind the four pillars of RMIT
             Vietnam FinTech Club!
           </p>
@@ -141,7 +160,6 @@ function MemberCard({
       }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
-
       <Card className="relative mt-[1.5rem] rounded-2xl border-[4px] border-[#F7D27F] border-solid overflow-hidden">
         <CardHeader className="pb-0 pt-0 h-[12rem] 2xl:h-[16rem]">
           <div className="z-0">
@@ -149,6 +167,11 @@ function MemberCard({
               alt={`${name} profile`}
               src={photo_url}
               className="object-cover w-full h-full translate-y-[13%]"
+              width={400}
+              height={400}
+              fetchPriority="high"
+              loading="eager"
+              priority={true}
             />
           </div>
         </CardHeader>
@@ -158,7 +181,9 @@ function MemberCard({
               <h6 className="leading-6 font-semibold text-[0.9rem] text-[#2C305F]">
                 {name}
               </h6>
-              <p className="leading-5 text-[#2C305F] text-[0.7rem]">{position}</p>
+              <p className="leading-5 text-[#2C305F] text-[0.7rem]">
+                {position}
+              </p>
             </div>
             {linkedin_url && linkedin_url.trim() ? (
               <Link
@@ -175,18 +200,19 @@ function MemberCard({
                 />
               </Link>
             ) : (
-            <IconBrandLinkedin
-              size={40}
-              color="#9CA3AF"
-              strokeWidth={0.8}
-              className="opacity-50 cursor-not-allowed"
-              title="LinkedIn not available"
-            />
-          )}
+              <IconBrandLinkedin
+                size={40}
+                color="#9CA3AF"
+                strokeWidth={0.8}
+                className="opacity-50 cursor-not-allowed"
+                title="LinkedIn not available"
+              />
+            )}
           </div>
         </CardBody>
       </Card>
     </motion.div>
   );
 }
+
 export default ManagementBoard;

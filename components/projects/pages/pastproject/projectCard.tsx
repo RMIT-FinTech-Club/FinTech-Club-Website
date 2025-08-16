@@ -1,40 +1,34 @@
 import React from 'react';
-import { Card, CardBody, CardFooter, Image } from "@heroui/react";
-
-
+import { Card, CardBody } from "@heroui/react";
 
 type datatype = {
-    year: number;
-    image: string;
-    title: string;
-    brief: string;
-}
+	_id: string;
+	year: number;
+	image_url: string;
+	title: string;
+	description: string;
+};
 
+const Project: React.FC<datatype> = ({
+	image_url,
+	title,
+	description,
+	_id,
+}: datatype) => {
+	return (
+		<div className="pl-20">
+			<Card className="w-[500px] h-[400px] bg-blueMist rounded-xl">
+				<CardBody className="p-0 border-yellowCream">
+					<img src={image_url} className="rounded-md" />
 
-
-const Project: React.FC<datatype> = ({ image, title, brief }: datatype) => {
-
-    return (
-        <div className="pl-20">
-            <Card className="w-[500px] h-[400px]">
-                <CardBody className="p-0" >
-                    <Image
-                        alt="ảnh"
-                        width="100%"
-                        radius="md"
-                        className="w-full object-cover"
-                        src={image}
-
-                    />
-
-                    <div className="flex flex-col p-5">
-                        <p className="font-semibold"> {title} </p>
-                        <p className="font-normal">{brief} </p>
-                    </div>
-                </CardBody>
-            </Card>
-        </div>
-    )
+					<div className="flex flex-col p-5">
+						<p className="font-semibold"> {title} </p>
+						<p className="font-normal">{description} </p>
+					</div>
+				</CardBody>
+			</Card>
+		</div>
+	);
 };
 
 export default Project;

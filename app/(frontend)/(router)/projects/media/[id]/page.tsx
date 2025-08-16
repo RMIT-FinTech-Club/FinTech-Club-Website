@@ -52,7 +52,7 @@ const Podcast = ({ params }: PodcastProps) => {
 		return (
 			<div
 				className={clsx(
-					"w-screen  overflow-hidden flex flex-col items-center justify-around relative bg-ft-primary-blue-900"
+					"w-screen  overflow-hidden flex flex-col items-center justify-around relative bg-ft-primary-blue-900",
 				)}
 				style={{
 					backgroundImage: `url(${backgroundImage})`,
@@ -78,16 +78,23 @@ const Podcast = ({ params }: PodcastProps) => {
 								height={1000}
 							/>
 						</div>
-						<p className="md:hidden text-white max-md:px-5 mx-auto text-center max-md:text-3xl">{data.title}</p>
+						<p className="md:hidden text-white max-md:px-5 mx-auto text-center max-md:text-3xl">
+							{data.title}
+						</p>
 						<div>
 							<AuthorList
-								authorDetails={data.authors.map((authorData: AuthorData) => ({
-									authorName: authorData.name,
-									authorAvatarURL: authorData.profileImageUrl,
-								}))}
+								authorDetails={data.authors.map(
+									(authorData: AuthorData) => ({
+										authorName: authorData.name,
+										authorAvatarURL:
+											authorData.profileImageUrl,
+									}),
+								)}
 							/>
 							<div className="max-md:hidden">
-								<PodcastDescription description={data.description} />
+								<PodcastDescription
+									description={data.description}
+								/>
 							</div>
 							<FollowUs />
 						</div>

@@ -1,54 +1,19 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import "./carousel.css";
 import Project from "./projectCard";
+import axios from "axios";
 
 type datatype = {
+	_id: string;
 	year: number;
-	image: string;
+	image_url: string;
 	title: string;
-	brief: string;
+	description: string;
 };
-
-const data: datatype[] = [
-	{
-		year: 2024,
-		image: "AchievementBg.png",
-		title: "ABC",
-		brief: "ddddd",
-	},
-
-	{
-		year: 2024,
-		image: "AchievementBg.png",
-		title: "qrt",
-		brief: "yui",
-	},
-
-	{
-		year: 2023,
-		image: "AchievementBg.png",
-		title: "dsadasdsđ",
-		brief: "ccc",
-	},
-
-	{
-		year: 2023,
-		image: "AchievementBg.png",
-		title: "5454545",
-		brief: "ccc",
-	},
-
-	{
-		year: 2023,
-		image: "AchievementBg.png",
-		title: "dfdsffasdádasdsds",
-		brief: "dádasd",
-	},
-];
 
 function Viewmore() {
 	const [View, setView] = useState(false);
@@ -64,6 +29,47 @@ function Viewmore() {
 		focusOnSelect: true,
 	};
 
+	const [pastProject, setPastProject] = useState<datatype[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchPastHighLightedProject = async () => {
+			try {
+				const res = await axios.get("/api/v1/projects", {
+					params: {
+						status: "ongoing",
+					},
+				});
+
+				let projectsData: datatype[] = [];
+
+				if (Array.isArray(res.data)) {
+					projectsData = res.data;
+				} else if (
+					res.data &&
+					typeof res.data === "object" &&
+					!Array.isArray(res.data)
+				) {
+					projectsData = [res.data];
+				}
+				setPastProject(projectsData);
+				console.log("Check data: ", projectsData);
+			} catch (error) {
+				console.log("Error fetching Past Highlighted Project: ", error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+		fetchPastHighLightedProject();
+	}, []);
+
+	if (isLoading) return;
+	{
+		<div className="flex justify-center text-bluePrimary font-bold">
+			Loading Our Projects...
+		</div>;
+	}
+
 	return (
 		<div>
 			<div className=" flex justify-center pt-10">
@@ -75,37 +81,43 @@ function Viewmore() {
 				<>
 					<div>
 						<div className="flex place-content-center pt-10 max-w-[1652px] max-h-[54px] ">
-							<h6 className="text-yellowSand flex items-center pr-8"> 2024 </h6>
+							<p className="text-yellowSand flex items-center pr-8 font-semibold text-[40px]">
+								2024
+							</p>
 							<div className="max-w-[1200px] w-[2000px] h-[3px] font-black bg-yellowPrimary flex items-center"></div>
 						</div>
 						<Slider {...settings} className="">
-							{data
+							{pastProject
 								.filter((item) => item.year == 2024)
 								.map((item) => (
 									<Project
-										key={item.year}
+										key={item._id}
+										_id={item._id}
 										year={item.year}
 										title={item.title}
-										image={item.image}
-										brief={item.brief}
+										image_url={item.image_url}
+										description={item.description}
 									/>
 								))}
 						</Slider>
 
 						<div className="flex place-content-center pt-10 max-w-[1652px] max-h-[54px]">
-							<h6 className="text-yellowSand flex items-center pr-8"> 2023 </h6>
+							<p className="text-yellowSand flex items-center pr-8 font-semibold text-[40px]">
+								2023
+							</p>
 							<div className="max-w-[1200px] w-[2000px] h-[3px] font-black bg-yellowPrimary flex items-center"></div>
 						</div>
 						<Slider {...settings} className="">
-							{data
+							{pastProject
 								.filter((item) => item.year == 2023)
 								.map((item) => (
 									<Project
-										key={item.year}
+										key={item._id}
+										_id={item._id}
 										year={item.year}
 										title={item.title}
-										image={item.image}
-										brief={item.brief}
+										image_url={item.image_url}
+										description={item.description}
 									/>
 								))}
 						</Slider>
