@@ -37,7 +37,7 @@ function Viewmore() {
 			try {
 				const res = await axios.get("/api/v1/projects", {
 					params: {
-						status: "ongoing",
+						status: "completed",
 					},
 				});
 

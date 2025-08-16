@@ -3,27 +3,25 @@ import { Card, CardBody } from "@heroui/react";
 
 type datatype = {
 	_id: string;
-	year: number;
-	image_url: string;
+	thumbnail: string;
 	title: string;
-	description: string;
+	thumbnailDescription: string;
 };
 
 const Project: React.FC<datatype> = ({
-	image_url,
+	thumbnail,
 	title,
-	description,
+	thumbnailDescription,
 	_id,
 }: datatype) => {
 	return (
 		<div className="pl-20">
 			<Card className="w-[500px] h-[400px] bg-blueMist rounded-xl">
 				<CardBody className="p-0 border-yellowCream">
-					<img src={image_url} className="rounded-md" />
-
-					<div className="flex flex-col p-5">
+					<img src={thumbnail} className="rounded-md w-full h-1/2" />
+					<div className="flex flex-col p-5 w-full">
 						<p className="font-semibold"> {title} </p>
-						<p className="font-normal">{description} </p>
+						<p className="font-normal">{thumbnailDescription} </p>
 					</div>
 				</CardBody>
 			</Card>

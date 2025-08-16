@@ -8,17 +8,15 @@ import "./carousel.css";
 import Project from "./projectCard";
 import Viewmore from "./viewMore";
 import axios from "axios";
-import { setTimeout } from "timers/promises";
 
 type datatype = {
 	_id: string;
-	year: number;
-	image_url: string;
+	thumbnail: string;
 	title: string;
-	description: string;
+	thumbnailDescription: string;
 };
 
-const PastProject = ({ params }: { params: { _id: string } }) => {
+const PastProject = () => {
 	const settings = {
 		dots: true,
 		infinite: false,
@@ -31,20 +29,34 @@ const PastProject = ({ params }: { params: { _id: string } }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const fetchMember = async () => {
-			axios
-				.get("/api/v1/projects")
-				.then((res) => res.data.json)
-				.then((data) => {
-					setPastProject(data);
-					console.log(data);
-				})
-				.catch((err) => {
-					console.error(err);
-					setIsLoading(false);
+		const fetchPastHighLightedProject = async () => {
+			try {
+				const res = await axios.get("/api/v1/research", {
+					params: {
+						status: "published",
+					},
 				});
+
+				let projectsData: datatype[] = [];
+
+				if (Array.isArray(res.data)) {
+					projectsData = res.data;
+				} else if (
+					res.data &&
+					typeof res.data === "object" &&
+					!Array.isArray(res.data)
+				) {
+					projectsData = [res.data];
+				}
+				setPastProject(projectsData);
+				console.log("Check data: ", projectsData);
+			} catch (error) {
+				console.log("Error fetching Past Highlighted Project: ", error);
+			} finally {
+				setIsLoading(false);
+			}
 		};
-		fetchMember();
+		fetchPastHighLightedProject();
 	}, []);
 
 	if (isLoading) return;
@@ -70,12 +82,11 @@ const PastProject = ({ params }: { params: { _id: string } }) => {
 			<Slider {...settings}>
 				{pastProject.map((item) => (
 					<Project
-						key={item._id}
+						key={item.status}
 						_id={item._id}
-						year={item.year}
-						image_url={item.image_url}
+						thumbnail={item.thumbnail}
 						title={item.title}
-						description={item.description}
+						thumbnailDescription={item.thumbnailDescription}
 					/>
 				))}
 			</Slider>
