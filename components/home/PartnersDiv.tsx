@@ -1,5 +1,5 @@
 import { PartnerItem } from "@/app/(frontend)/(router)/(home_page)/components/partners";
-import { Image } from "@heroui/react";
+import Image from "next/image";
 
 interface PartnerLogo {
   id: number;
@@ -297,12 +297,6 @@ const partnerConfig: Record<
     gridCols: "flex-row",
     imageHeight: "h-[10rem]",
   },
-  7: {
-    title: "Other Partners",
-    partners: otherPartners,
-    gridCols: "flex-row",
-    imageHeight: "h-[12rem]",
-  },
   1: {
     title: "Other Partners",
     partners: otherPartners,
@@ -314,10 +308,6 @@ const partnerConfig: Record<
 export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
   const activeItem = items.find((item) => item.id === activeItemId) || items[3];
   const config = partnerConfig[activeItem.id];
-
-  if (!config) {
-    return <div>Invalid partner category</div>;
-  }
 
   const { title, partners, gridCols, imageHeight, centerLast } = config;
 
@@ -361,10 +351,11 @@ export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
                         src={partner.url}
                         alt={partner.alt}
                         className={`${imageHeight} w-auto object-contain`}
-                        loading="lazy"
-                        onError={() => {
-                          // Optionally, you can handle fallback logic here if @heroui/react Image supports a fallback prop.
-                        }}
+                        width={400}
+                        height={400}
+                        fetchPriority="high"
+                        loading="eager"
+                        priority={true}
                       />
                     </div>
                   );
@@ -375,7 +366,11 @@ export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
                     src={partner.url}
                     alt={partner.alt}
                     className={`${imageHeight} w-auto object-contain`}
-                    loading="lazy"
+                    width={400}
+                    height={400}
+                    fetchPriority="high"
+                    loading="eager"
+                    priority={true}
                   />
                 );
               })}

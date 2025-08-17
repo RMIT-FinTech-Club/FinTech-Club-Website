@@ -1,4 +1,5 @@
 import { Button, Chip } from "@heroui/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
@@ -28,18 +29,36 @@ export default function Hero() {
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
-            <Button
-              as={Link}
-              href="/projects"
-              className="bg-ft-primary-blue-100 hover:bg-ft-primary-blue-100/90 text-black rounded-lg px-6 w-fit text-md"
-            >
-              Back to Projects
-            </Button>
+            <div className="flex gap-4">
+              <Button
+                as={Link}
+                href="/projects"
+                className="bg-ft-primary-yellow-300 hover:bg-ft-primary-yellow-100/90 text-ft-primary-blue-500 rounded-lg px-6 w-fit text-md font-semibold"
+              >
+                Explore more
+              </Button>
+
+              <Button
+                as={Link}
+                href="/projects"
+                className="bg-ft-primary-blue-100 hover:bg-ft-primary-blue-100/90 text-ft-primary-blue-500 rounded-lg px-6 w-fit text-md font-semibold"
+              >
+                Back to Projects
+              </Button>
+            </div>
           </div>
 
           {/* Right Column */}
           <div className="flex flex-col justify-between h-full flex-1 gap-4">
-            <div className="h-[75%] bg-foreground-500 rounded-bl-large"></div>
+            <div className="h-[75%]">
+              <Image
+                src="/placeholder.svg"
+                alt="Bear Mascot Illustration"
+                width={500}
+                height={500}
+                className="w-full h-full object-contai rounded-bl-large"
+              />
+            </div>
 
             <div className="flex-1 bg-ft-primary-yellow-500 rounded-tl-large rounded-bl-large"></div>
           </div>

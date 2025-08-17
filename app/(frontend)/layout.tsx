@@ -1,19 +1,17 @@
 import "@styles/globals.css";
 import Footer from "@/components/footer";
+import FooterNoRounded from "@/components/footerNoRounded";
 import Navbar from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import "react-toastify/dist/ReactToastify.css";
 import "@styles/carousel.css";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
-import type { Metadata } from "next";
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import "@styles/carousel.css";
-import { Flip, ToastContainer } from "react-toastify";
 import { Providers } from "../providers";
+import FooterWrapper from "./footer-wrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -36,41 +34,20 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className="overflow-x-hidden" lang="en" suppressHydrationWarning>
-      <head />
       <body
         className={clsx(
           "min-h-screen bg-white font-sans antialiased overflow-x-hidden",
           fontSans.className
         )}
-        // bg-background currently follow browser theme (light/dark)
-        // Result in black bg on certain devices => bad UI, bad contrast
-        // display bg-white as a temporary fix rn
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition={Flip}
-          />
           <div className="relative flex flex-col h-screen">
-            {<Navbar />}
+            <Navbar />
             <main className="flex-grow overflow-x-clip">{children}</main>
-            {<Footer />}
+            <FooterWrapper /> {/* 👈 handles conditional footer */}
           </div>
         </Providers>
       </body>
