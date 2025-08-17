@@ -11,9 +11,10 @@ import axios from "axios";
 
 type datatype = {
 	_id: string;
-	thumbnail: string;
+	year: number;
+	image_url: string;
 	title: string;
-	thumbnailDescription: string;
+	description: string;
 };
 
 const PastProject = () => {
@@ -31,10 +32,9 @@ const PastProject = () => {
 	useEffect(() => {
 		const fetchPastHighLightedProject = async () => {
 			try {
-				/* testing with research database */
-				const res = await axios.get("/api/v1/research", {
+				const res = await axios.get("/api/v1/projects", {
 					params: {
-						status: "published",
+						status: "completed",
 					},
 				});
 
@@ -85,9 +85,10 @@ const PastProject = () => {
 					<Project
 						key={item._id}
 						_id={item._id}
-						thumbnail={item.thumbnail}
+						year={item.year}
+						image_url={item.image_url}
 						title={item.title}
-						thumbnailDescription={item.thumbnailDescription}
+						description={item.description}
 					/>
 				))}
 			</Slider>
