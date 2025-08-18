@@ -39,7 +39,7 @@ const ManagementBoard = () => {
         // Set error message
         if (err.response?.status === 404) {
           setError("Management board API not found");
-        } else if (err.code == "ERR_NETWORK") {
+        } else if (err.code === "ERR_NETWORK") {
           setError("Network error");
         } else {
           setError("Failed to load management board data");
