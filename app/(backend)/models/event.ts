@@ -24,7 +24,7 @@ const eventSchema = new Schema(
 			},
         },
         mode: {type: String, enum: ['online', 'offline', 'hybrid'], required: true},
-        location: {type: String, trim: true,},
+        location: {type: String, trim: true, required: true},
         agenda: [
             {
                 time: {
@@ -73,8 +73,6 @@ const eventSchema = new Schema(
 
 // Index for filtering upcoming events by date
 eventSchema.index({ date: 1 });
-// Index for specific event lookup by _id (default in MongoDB, but explicit for clarity)
-eventSchema.index({ _id: 1 });
 
 const Event =
     mongoose.models?.Event || mongoose.model("Event", eventSchema);
