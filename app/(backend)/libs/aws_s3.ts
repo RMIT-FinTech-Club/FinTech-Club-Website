@@ -1,17 +1,17 @@
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const s3 = new S3Client({
-  region: process.env.AWS_REGION || "us-east-1",
+  region: process.env.NEXT_PUBLIC_BUCKET_REGION || "ap-southeast-2",
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.ACCESS_KEY!,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY!,
   },
 });
 // upload file to s3 and return cloudfront url for uploaded file 
 export async function uploadToS3(file: Buffer, fileName: string): Promise<string> {
   const key = `projects/${Date.now()}-${fileName}`;
   await s3.send(new PutObjectCommand({
-    Bucket: process.env.AWS_S3_BUCKET_NAME!,
+    Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME!,
     Key: key,
     Body: file,
     ACL: "public-read",
@@ -25,7 +25,7 @@ export async function deleteFromS3(fileUrl: string): Promise<void> {
   
   const key = fileUrl.replace(`https://${process.env.CLOUDFRONT_DOMAIN}/`, "");
   await s3.send(new DeleteObjectCommand({
-    Bucket: process.env.AWS_S3_BUCKET_NAME!,
+    Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME!,
     Key: key,
   }));
 } 
