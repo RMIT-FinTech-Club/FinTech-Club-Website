@@ -1,6 +1,6 @@
 "use client";
 
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";

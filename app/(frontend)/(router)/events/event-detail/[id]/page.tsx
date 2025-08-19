@@ -8,7 +8,7 @@ import EventLocation from "../components/eventLocation";
 import ClipLoader from "react-spinners/ClipLoader";
 import type { EventDetails } from "../components/types";
 import type { Event } from "../../components/types";
-import { Card, CardBody, CardFooter, Image, Skeleton } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Skeleton } from "@heroui/react";
 
 const EventDateAndLocation = ({ params }: { params: { id: string } }) => {
 	const [data, setData] = useState<Event>();

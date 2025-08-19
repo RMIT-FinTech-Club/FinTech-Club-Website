@@ -1,10 +1,7 @@
 "use client";
 import { IconChevronCompactDown } from "@tabler/icons-react";
 import clsx from "clsx";
-import {
-	type Variants,
-	motion,
-} from "framer-motion";
+import { type Variants, motion } from "framer-motion";
 import type React from "react";
 
 const HerosectionVid: React.FC = () => {
@@ -52,7 +49,7 @@ const HerosectionVid: React.FC = () => {
 				transition={{
 					staggerChildren: 0.1,
 				}}
-				className="absolute bottom-16 right-0 left-0"
+				className="absolute bottom-0 right-0 left-0"
 			>
 				<motion.p
 					className="text-center w-full text-ft-text-bright"

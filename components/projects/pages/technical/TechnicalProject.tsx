@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import type React from "react";
 import Header from "./components/Header";
 import ProjectCard from "./components/projectCard";
