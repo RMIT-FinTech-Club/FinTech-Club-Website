@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface NavigationButtonProps {
   text: string;
@@ -20,7 +20,7 @@ const NavigationButton = ({ text, link }: NavigationButtonProps) => {
     <a
       href={link}
       onClick={handleClick}
-      className="flex flex-1 justify-center items-center py-4 px-16 bg-blueMidnight hover:bg-bluePrimary text-white border rounded-b-3xl text-center font-semibold"
+      className="flex flex-1 justify-center items-center py-4 px-8 bg-ft-primary-blue hover:bg-ft-primary-blue-200 text-white border rounded-b-3xl text-center font-semibold"
     >
       {text}
     </a>

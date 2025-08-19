@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Countdown from "../components/Countdown";
 import NavigationButton from "../components/NavigationButton";
+import Image from "next/image";
 
 export default function CountdownPage() {
   const [navbarHeight, setNavbarHeight] = useState(0);
@@ -34,7 +35,7 @@ export default function CountdownPage() {
       <div
         className="relative flex flex-col items-center justify-center rounded-b-[80px]"
         style={{
-          minHeight: `calc(100vh - ${navbarHeight}px)`,
+          minHeight: `calc(90vh - ${navbarHeight}px)`,
           backgroundColor: "#DBB968",
           backgroundImage: "url('/joinUsPage/background-pattern.svg')",
           backgroundRepeat: "no-repeat",
@@ -43,21 +44,32 @@ export default function CountdownPage() {
         }}
       >
         <h1
-          className={`text-4xl md:text-5xl lg:text-7xl font-bold text-center text-[white] px-2 mb-8 z-10 ${
+          className={`text-4xl md:text-5xl lg:text-6xl font-bold text-center text-[white] z-10 ${
             isShortHeight ? "mt-8" : ""
           }`}
         >
           COUNT DOWN TO FORM CLOSED
         </h1>
         <div className={`${isShortHeight ? "mb-8" : ""}`}>
-          <Countdown date={new Date(2025, 10, 14)} />
+          <Countdown date={new Date("2025-08-31T23:59:00")} />
         </div>
 
         {/*  change svg here nhe  */}
-        <img
-          src="/joinUsPage/star1.svg"
-          alt="Dot 4"
-          className="absolute bottom-3/4 left-72 transform -translate-x-1/2 -translate-y-1/2 md:block hidden z-0"
+        <Image
+          src="/joinUsPage/white-star.svg"
+          alt="Big White Star"
+          height={100}
+          width={100}
+          loading="lazy"
+          className="absolute left-[1.5rem] translate-y-4 md:block hidden z-0"
+        />
+        <Image
+          src="/joinUsPage/white-star.svg"
+          alt="Big White Star"
+          height={50}
+          width={50}
+          loading="lazy"
+          className="absolute right-[3rem] translate-y-24 md:block hidden z-0"
         />
       </div>
       {/* Navigation Tabs section: scroll to the corresponding section with IDs */}
