@@ -50,7 +50,7 @@ export default function DepartmentAccordion({
   }, [labelsKey, minTabWidth]);
 
   const cssVars: React.CSSProperties & Record<`--${string}`, string> = {
-    "--acc-h": "650px",
+    "--acc-h": "700px",
     "--acc-dur": `${durationMs}ms`,
     "--acc-tab-w": `${tabW}px`,
   };
