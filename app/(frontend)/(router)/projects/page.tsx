@@ -1,9 +1,9 @@
-import ProjectPage from "@/components/projects/ProjectPage";
+import OngoingProjects from "@/components/projects/OngoingProjects";
 
 const Projects = () => {
 	return (
 		<>
-			<ProjectPage />
+			<OngoingProjects />
 		</>
 	);
 };
