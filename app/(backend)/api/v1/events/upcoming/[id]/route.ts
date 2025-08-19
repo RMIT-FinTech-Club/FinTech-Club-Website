@@ -2,7 +2,7 @@ import connectMongoDB from "@/app/(backend)/libs/mongodb";
 import UpCommingEvents from "@/app/(backend)/models/upCommingEvents";
 import { type NextRequest, NextResponse } from "next/server";
 
-connectMongoDB();
+connectMongoDB()
 
 export async function GET(
 	req: NextRequest,

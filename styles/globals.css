@@ -6,30 +6,27 @@
   html,
   body {
     font-family: "Poppins", system-ui, sans-serif;
-    background-color: #F9FAFB;
   }
 
-  /* p {
+  p {
     @apply text-ft-body-1;
-  } */
-
-  /* Scope custom typography to content areas only, not UI components */
-  .content h1 {
+  }
+  h1 {
     @apply text-ft-heading-1;
   }
-  .content h2 {
+  h2 {
     @apply text-ft-heading-2;
   }
-  .content h3 {
+  h3 {
     @apply text-ft-heading-3;
   }
-  .content h4 {
+  h4 {
     @apply text-ft-heading-4;
   }
-  .content h5 {
+  h5 {
     @apply text-ft-heading-5;
   }
-  .content h6 {
+  h6 {
     @apply text-ft-heading-6;
   }
 }
@@ -49,7 +46,6 @@
 .card:hover > .card-content {
   bottom: 3%;
 }
-
 @media screen and (max-width: 768px) {
   .mascot {
     display: none;

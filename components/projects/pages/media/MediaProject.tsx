@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import type React from "react";
 import fakeAPI from "../../fakeAPI/mediaAPI";
 import Header from "./components/Header";

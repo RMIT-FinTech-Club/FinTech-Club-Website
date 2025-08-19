@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/react";
+import { Skeleton } from "@nextui-org/react";
 
 const ProjectCardSkeletonLoading = () => {
 	return (

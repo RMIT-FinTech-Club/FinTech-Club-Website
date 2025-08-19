@@ -1,4 +1,4 @@
-import { Button } from "@heroui/react";
+import { Button } from "@nextui-org/react";
 import axios from "axios";
 import FormData from "form-data";
 import { useContext, useEffect, useState } from "react";
@@ -20,7 +20,7 @@ const PodcastFooter = () => {
 		publicationDate,
 		language,
 	} = podcastDetail;
-	function handleCancel() {}
+	function handleCancel() { }
 	function handleBack() {
 		setFocusIndex(focusIndex - 1);
 		setIsDisabled(true);
@@ -94,7 +94,7 @@ const PodcastFooter = () => {
 			<Button
 				onClick={focusIndex == 3 ? handleSubmit : handleContinue}
 				className="bg-ft-primary-blue-600 text-white px-10"
-				// isDisabled={isDisabled}
+			// isDisabled={isDisabled}
 			>
 				{focusIndex === 3 ? "Submit" : "Continue"}
 			</Button>

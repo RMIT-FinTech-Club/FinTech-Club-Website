@@ -1,6 +1,8 @@
-import AcademicProject from "@/components/projects/pages/academic/AcademicProject";
+import AcademicProject from "@/components/projects/pages/academic/AcademicProject"
 
 const Academic = () => {
-	return <AcademicProject />;
+	return (
+		<AcademicProject />
+	);
 };
 export default Academic;

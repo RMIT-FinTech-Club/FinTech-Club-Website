@@ -23,9 +23,7 @@ const VisionMission = () => {
 				headingColor={"text-ft-primary-blue"}
 				textColor={"text-black"}
 				bgColor={"bg-ft-primary-yellow"}
-				rounded={
-					"md:rounded-br-[60px] md:rounded-tr-[60px] md:rounded-tl-[60px]"
-				}
+				rounded={"md:rounded-br-[60px] md:rounded-tr-[60px] md:rounded-tl-[60px]"}
 				shadowPosition={"shadow-[rgba(0,0,15,0.2)_-10px_5px_4px_0px]"}
 			/>
 			<ContentContainer
@@ -34,9 +32,7 @@ const VisionMission = () => {
 				headingColor={"text-ft-primary-yellow"}
 				textColor={"text-white"}
 				bgColor={"bg-ft-primary-blue"}
-				rounded={
-					"md:rounded-bl-[60px] md:rounded-tl-[60px] md:rounded-tr-[60px]"
-				}
+				rounded={"md:rounded-bl-[60px] md:rounded-tl-[60px] md:rounded-tr-[60px]"}
 				shadowPosition={"shadow-[rgba(0,0,15,0.2)_-10px_5px_4px_0px]"}
 			/>
 			<PuzzleContainer />

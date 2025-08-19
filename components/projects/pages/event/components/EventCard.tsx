@@ -54,41 +54,39 @@ const EventCard = () => {
 				</p>
 				<div className="w-1/5 h-1 bg-black my-8 mx-auto" />
 				<div className="grid lg:grid-cols-2 lg:grid-flow-row mt-12 md:gap-20 max-md:gap-6 md:px-40 px-12 ">
-					{eventProjectsData.map(
-						(event: EventProject, index: number) => (
-							<Link
-								// href={`/projects/event/${event._id}`}
-								href={"#"}
-								className={`relative w-full lg:max-w-[400px] ${index % 2 === 0 ? "justify-self-end" : "justify-self-start"} text-center bg-ft-background h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000`}
-							>
-								<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#DCB968] hover:bg-gradient-to-b hover:from-[#ffe098] hover:to-black to-black opacity-40 transition-all duration-300 group-hover:opacity-0 rounded-2xl" />
-								<Image
-									src={event.eventThumbnail}
-									alt="Avatar"
-									className="w-full h-full object-cover rounded-lg"
-									width={1000}
-									height={1000}
-								/>
-								<div className="absolute h-auto bottom-3 row-start-2 row-span-1 md:px-10 px-4 grid md:grid-cols-12 grid-cols-4 z-10">
-									<div className="w-fit h-fit md:col-span-2 col-span-1 bg-black hover:bg-black/90 rounded-2xl p-2 transition-all duration-3000 justify-center my-auto">
-										<IconArrowsMaximize
-											className="w-12 h-12"
-											stroke={2}
-											color="white"
-										/>
+					{eventProjectsData.map((event: EventProject, index: number) => (
+						<Link
+							// href={`/projects/event/${event._id}`}
+							href={"#"}
+							className={`relative w-full lg:max-w-[400px] ${index % 2 === 0 ? "justify-self-end" : "justify-self-start"} text-center bg-ft-background h-64 rounded-2xl hover:bg-[#dbb969]/90 hover:shadow-2xl transition-all duration-3000`}
+						>
+							<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#DCB968] hover:bg-gradient-to-b hover:from-[#ffe098] hover:to-black to-black opacity-40 transition-all duration-300 group-hover:opacity-0 rounded-2xl" />
+							<Image
+								src={event.eventThumbnail}
+								alt="Avatar"
+								className="w-full h-full object-cover rounded-lg"
+								width={1000}
+								height={1000}
+							/>
+							<div className="absolute h-auto bottom-3 row-start-2 row-span-1 md:px-10 px-4 grid md:grid-cols-12 grid-cols-4 z-10">
+								<div className="w-fit h-fit md:col-span-2 col-span-1 bg-black hover:bg-black/90 rounded-2xl p-2 transition-all duration-3000 justify-center my-auto">
+									<IconArrowsMaximize
+										className="w-12 h-12"
+										stroke={2}
+										color="white"
+									/>
+								</div>
+								<div className="ml-5 md:col-span-9 col-span-3 md:justify-self-start justify-self-start text-left text-white">
+									<div className="text-3xl font-extrabold">
+										{event.year}
 									</div>
-									<div className="ml-5 md:col-span-9 col-span-3 md:justify-self-start justify-self-start text-left text-white">
-										<div className="text-3xl font-extrabold">
-											{event.year}
-										</div>
-										<div className="md:text-md text-sm">
-											{event.eventName}
-										</div>
+									<div className="md:text-md text-sm">
+										{event.eventName}
 									</div>
 								</div>
-							</Link>
-						),
-					)}
+							</div>
+						</Link>
+					))}
 				</div>
 			</div>
 		</>

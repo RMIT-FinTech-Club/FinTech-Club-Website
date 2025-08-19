@@ -1,5 +1,4 @@
-import { Card, CardBody, CardHeader } from "@heroui/react";
-import Image from "next/image";
+import { Card, CardBody, CardHeader, Image } from "@heroui/react";
 import React, { useRef } from "react";
 import "./styles.css";
 import Link from "next/link";
@@ -7,37 +6,41 @@ import { IconBrandLinkedin } from "@tabler/icons-react";
 import { motion, useInView } from "framer-motion";
 
 type ExecutiveBoardCardProps = {
-	image: string;
-	name: string;
-	position: string;
-	linkedin: string;
+  image: string;
+  name: string;
+  position: string;
+  linkedin: string;
 };
 
 const executiveBoardData = [
-	{
-		image: "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png",
-		name: "Truong Quoc Tri",
-		position: "President",
-		linkedin: "https://www.linkedin.com/in/truong-quoc-tri/",
-	},
-	{
-		image: "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/EVP-KhuongDuy.png",
-		name: "Le Nguyen Khuong Duy",
-		position: "External Vice President",
-		linkedin: "https://www.linkedin.com/in/marcio-lnkd/",
-	},
-	{
-		image: "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/IVP-KhueNguyen.png",
-		name: "Nguyen Van Khue",
-		position: "Internal Vice President",
-		linkedin: "https://www.linkedin.com/in/vankhuenguyen/",
-	},
-	{
-		image: "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/CFO-ThienDan.png",
-		name: "Nguyen Thien Dan",
-		position: "Chief of Finance Officer",
-		linkedin: "https://www.linkedin.com/in/dan-nguyen-2a2a01265/",
-	},
+  {
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png",
+    name: "Truong Quoc Tri",
+    position: "President",
+    linkedin: "https://www.linkedin.com/in/truong-quoc-tri/",
+  },
+  {
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/EVP-KhuongDuy.png",
+    name: "Le Nguyen Khuong Duy",
+    position: "External Vice President",
+    linkedin: "https://www.linkedin.com/in/marcio-lnkd/",
+  },
+  {
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/IVP-KhueNguyen.png",
+    name: "Nguyen Van Khue",
+    position: "Internal Vice President",
+    linkedin: "https://www.linkedin.com/in/vankhuenguyen/",
+  },
+  {
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/CFO-ThienDan.png",
+    name: "Nguyen Thien Dan",
+    position: "Chief of Finance Officer",
+    linkedin: "https://www.linkedin.com/in/dan-nguyen-2a2a01265/",
+  },
 ];
 
 const ExecuteBoard = () => {
@@ -55,12 +58,12 @@ const ExecuteBoard = () => {
       <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
       
       <main className="mx-[4rem] 2xl:mx-[10rem]">
-        <div className="content grid">
+        <div className="grid">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
             Meet Our
           </h2>
           <h1 className=" text-[#2C305F] text-[4.3rem]">Executive Board</h1>
-          <p className="leading-8 w-full text-[#000000]">
+          <p className="leading-3 w-full text-[#000000]">
             Meet the fierce, brilliant, and passionate minds behind the FinTech
             Club machine!
           </p>
@@ -70,36 +73,32 @@ const ExecuteBoard = () => {
             const ref = useRef(null);
             const isInView = useInView(ref);
 
-						return (
-							// effect
-							<motion.div
-								key={index}
-								ref={ref}
-								animate={{
-									y: isInView
-										? index % 2 === 0
-											? -25
-											: 25
-										: 0,
-									opacity: isInView ? 1 : 0.7,
-								}}
-								transition={{ duration: 1, ease: "easeOut" }}
-							>
-								<EXECUTIVE_BOARD_CARD {...item} />
-							</motion.div>
-						);
-					})}
-				</div>
-			</main>
-		</section>
-	);
+            return (
+              // effect
+              <motion.div
+                key={index}
+                ref={ref}
+                animate={{
+                  y: isInView ? (index % 2 === 0 ? -25 : 25) : 0,
+                  opacity: isInView ? 1 : 0.7,
+                }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              >
+                <EXECUTIVE_BOARD_CARD {...item} />
+              </motion.div>
+            );
+          })}
+        </div>
+      </main>
+    </section>
+  );
 };
 
 function EXECUTIVE_BOARD_CARD({
-	image,
-	name,
-	position,
-	linkedin,
+  image,
+  name,
+  position,
+  linkedin,
 }: ExecutiveBoardCardProps) {
   return (
     <Card className="relative mt-[1.5rem] rounded-2xl border-[4px] border-[#2C305F] border-solid overflow-hidden">
@@ -109,11 +108,6 @@ function EXECUTIVE_BOARD_CARD({
             alt={`${name} profile`}
             src={image}
             className="object-cover w-full h-full translate-y-[13%]"
-            width={400}
-            height={400}
-            fetchPriority="high"
-            loading="eager"
-            priority={true}
           />
         </div>
       </CardHeader>

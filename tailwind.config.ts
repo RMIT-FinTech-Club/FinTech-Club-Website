@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
-import { heroui } from "@heroui/react";
+import { nextui } from "@nextui-org/react";
 import {
-  uiThemeConfig,
-  stylingConfig,
+  nextuiThemeConfig,
+  responsiveStylingConfig,
   tailwindExtendedThemeConfig,
 } from "./config/theme";
 import responsiveStyling, {
@@ -14,23 +14,10 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-      xs: "475px",
-      sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1536px",
-    },
     extend: tailwindExtendedThemeConfig,
-        backgroundImage: {
-        'fintech-gradient': 'linear-gradient(to top, rgba(220, 185, 104, 0.9),  rgba(71, 74, 110, 0.8)), url("https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ClubDay.png")',
-        'gradient-over-image': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75)), url("https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ClubDay.png")',
-        'gradient-no-image': 'linear-gradient(to bottom, rgba(13, 23, 66, 0.75), rgba(36, 41, 70, 0.75), rgba(34, 39, 70, 0.75), rgba(219, 185, 104, 0.75)))',
-        },
     animation: {
       scroll: "scroll 20s linear infinite",
     },
@@ -59,10 +46,9 @@ const config: Config = {
   },
   darkMode: "class",
   plugins: [
-    heroui(uiThemeConfig),
-    responsiveStyling(stylingConfig),
+    nextui(nextuiThemeConfig),
+    responsiveStyling(responsiveStylingConfig),
     orientationPlugin,
-    require("tailwindcss-animate"),
   ],
 };
 

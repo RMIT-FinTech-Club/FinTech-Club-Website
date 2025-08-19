@@ -7,9 +7,9 @@ const JoinUs = () => {
 	return (
 		<>
 			<CountdownPage />
-			<WhyJoinFintechClubPage id="member-benefits" />
-			<StepsToRegisterPage id="recruitment-process" />
-			<WhatAreYouWaitingForPage id="join-now" />
+			<WhyJoinFintechClubPage />
+			<StepsToRegisterPage />
+			<WhatAreYouWaitingForPage />
 		</>
 	);
 };

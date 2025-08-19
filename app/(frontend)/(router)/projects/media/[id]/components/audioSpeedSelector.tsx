@@ -4,7 +4,7 @@ import {
 	DropdownItem,
 	DropdownMenu,
 	DropdownTrigger,
-} from "@heroui/react";
+} from "@nextui-org/react";
 import { useMemo, useState } from "react";
 import { CaretDown } from "tabler-icons-react";
 

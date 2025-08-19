@@ -1,4 +1,4 @@
-import { Image } from "@heroui/react";
+import { Image } from "@nextui-org/react";
 import type React from "react";
 
 interface CardProps {

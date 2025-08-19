@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "@heroui/react";
 import "slick-carousel/slick/slick.css";
@@ -58,35 +57,17 @@ const Department = () => {
   return (
     <div className="relative w-screen h-[50rem] flex flex-row">
       {/*con gấu */}
-      <div className="absolute w-[14rem] h-auto top-[-4rem] left-[-5.25rem] rotate-[109deg] z-30">
-        <Image
-          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
-          alt="Bear mascot"
-          width={400}
-          height={400}
-          loading="lazy"
-        />
+      <div className="absolute w-[12rem] h-auto top-[-2rem] left-[-4.25rem] rotate-[109deg] z-30">
+        <img src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"></img>
       </div>
 
       <div className="h-full w-[70vw] bg-[#F9FAFB] border-b-[1rem] border-[#DAB868]">
         <section className="relative flex flex-col items-start pl-20 pt-[8.5rem] max-w-[45vw]">
           <div className="absolute w-[3rem] h-auto top-[4.5rem] right-[7rem]">
-            <Image
-              src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"
-              alt="Yellow Star"
-              width={400}
-              height={400}
-              loading="lazy"
-            />
+            <img src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"></img>
           </div>
           <div className="absolute w-[6rem] h-auto top-[6rem] right-[-1rem]">
-            <Image
-              src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"
-              alt="Yellow Star"
-              width={400}
-              height={400}
-              loading="lazy"
-            />
+            <img src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"></img>
           </div>
           <p className="text-[#DCB968] font-bold text-6xl">BE ONE OF US</p>
           <p className={`font-bold mt-6 text-[#5E5E92] text-wrap text-5xl`}>
@@ -104,10 +85,7 @@ const Department = () => {
               return (
                 <div
                   key={dept}
-                  className="group p-[1px] rounded-[10px]"
-                  style={{
-                    background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
-                  }}
+                  className="group p-[1px] rounded-[10px] bg-gradient-to-b from-[#F0EDFF] to-[#5E5E92]"
                 >
                   <Button
                     onPress={() => setDepartment(department)}
@@ -122,27 +100,16 @@ const Department = () => {
         </section>
       </div>
 
-      <div
-        className="h-full w-[29vw] rounded-br-[18vw] relative z-0"
-        style={{ background: "linear-gradient(to bottom, #C9D6EA, #DBB968)" }}
-      >
+      <div className="h-full w-[29vw] bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-br-[18vw] relative z-0">
         <div className="h-[49rem] w-[27.5vw] bg-[#2C305F] rounded-br-[17vw] absolute top-0 left-0 z-10"></div>
       </div>
 
-      <div
-        className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 rounded-t-[10vw]"
-        style={{ background: "linear-gradient(to bottom, #C9D6EA, #DBB968)" }}
-      >
+      <div className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 bg-gradient-to-b from-[#C9D6EA] to-[#DBB968] rounded-t-[10vw]">
         <div className="h-[40rem] w-[33vw] absolute m-[1rem] z-20">
-          <Image
+          <img
             src={department.background}
             alt={`${department.name} background`}
             className="h-full w-full object-fill rounded-t-[9vw]"
-            width={400}
-            height={400}
-            fetchPriority="high"
-            loading="eager"
-            priority={true}
           />
         </div>
       </div>

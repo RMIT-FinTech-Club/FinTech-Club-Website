@@ -3,7 +3,7 @@ import clsx from "clsx";
 import type React from "react";
 import { useState } from "react";
 import type ClubMember from "./clubMember";
-import { Skeleton } from "@heroui/react";
+import { Skeleton } from "@nextui-org/react";
 
 type MemberCardProps = {
 	member: ClubMember;
