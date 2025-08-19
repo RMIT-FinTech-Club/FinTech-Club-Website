@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
 import axios from "axios";
-import DepartmentAccordionClient from "./components/DepartmentAccordionClient";
+import DeptAccordionController from "./components/accordion/DeptAccordionController";
 import type { DeptItemBase, Project, DeptProjectsMap, ApiResponse } from "./components/types";
-import DeptSection from "./components/carousel/DeptSection"
+import DeptSection from "./components/panel/DeptContentSection"
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000/api/v1";
@@ -116,5 +116,5 @@ export default function DeptProjects() {
     ),
   }));
 
-  return <DepartmentAccordionClient items={items} defaultOpen="technology" />;
+  return <DeptAccordionController items={items} defaultOpen="technology" />;
 }

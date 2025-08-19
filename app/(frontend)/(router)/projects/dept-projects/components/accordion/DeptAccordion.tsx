@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
 import { Accordion } from "@/components/ui/accordion";
-import type { DepartmentAccordionProps } from "./types";
-import { useSharedPanelHeight } from "../hooks/useSharedPanelHeights";
-import DeptAccordionItem from "./accordion/DeptAccordionItem";
+import type { DepartmentAccordionProps } from "../types";
+import { useSharedPanelHeight } from "../../hooks/useSharedPanelHeights";
+import DeptTabPanel from "./DeptTabPanel";
 
 export default function DepartmentAccordion({
   items,
@@ -69,7 +69,7 @@ export default function DepartmentAccordion({
       style={cssVars}
     >
       {items.map(({ value, label, color, content, renderContent }) => (
-        <DeptAccordionItem
+        <DeptTabPanel
           key={value}
           value={value}
           label={label}

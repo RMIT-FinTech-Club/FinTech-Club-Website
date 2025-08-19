@@ -1,6 +1,6 @@
 import { Project } from "../types";
 import { Poppins } from "next/font/google";
-import ProjectCarousel from "../ProjectCarousel";
+import ProjectCarousel from "../carousel/ProjectCarousel";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "600", "800"] });
 

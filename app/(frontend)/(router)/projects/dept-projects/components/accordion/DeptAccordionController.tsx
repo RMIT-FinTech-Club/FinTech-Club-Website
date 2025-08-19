@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
-import DepartmentAccordion from "./DepartmentAccordion";
-import type { DeptItem, DeptInputItem, DeptItemBase } from "./types";
+import DeptAccordion from "./DeptAccordion";
+import type { DeptItem, DeptInputItem, DeptItemBase } from "../types";
 
 type Props = {
   items: DeptInputItem[];
@@ -62,7 +62,7 @@ export default function DepartmentAccordionClient({
   }, [items, alternateColors]);
 
   return (
-    <DepartmentAccordion
+    <DeptAccordion
       items={normalized}
       defaultValue={defaultOpen ?? normalized[0]?.value}
       minTabWidth={72}
