@@ -54,13 +54,18 @@ export default function FinTechInTheEyes() {
             <p
               className={`text-[1.25rem] leading-8 text-justify mt-6 ${fontSans.style}`}
             >
-              FinTech Club has been a transformative experience for me. As an
-              introvert, I found it challenging to make new friends at RMIT.
-              However, joining the FinTech Club changed everything. I connected
-              with like-minded individuals who shared my passion for finance and
-              technology. Winning the "Star-Up" competition boosted my
-              confidence and skills, and becoming President allowed me to give
-              back to this uplifting community.
+              FinTech Club truly made my university life. Before joining, I was
+              the type of student who just went to class and went home, not
+              realizing how much more campus life could offer. Once I became
+              part of the club, I discovered how exciting and meaningful my
+              university journey could be, full of learning, fun, friendships,
+              and mentorships. Through working on projects and bonding with
+              clubmates, I found a place where I truly belonged, and I thrived
+              in ways I had never expected. From that moment on, I knew I wanted
+              to give back to this community that gave me so much. That
+              motivation eventually led me to pursue the role of President, so I
+              could help others experience the same growth and belonging that
+              FinTech gave me.
             </p>
           </div>
         </div>
