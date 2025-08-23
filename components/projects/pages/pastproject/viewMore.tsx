@@ -35,25 +35,38 @@ function Viewmore() {
 	useEffect(() => {
 		const fetchPastHighLightedProject = async () => {
 			try {
-				const res = await axios.get("/api/v1/projects", {
+				const res2023 = await axios.get("/api/v1/projects", {
 					params: {
 						status: "completed",
+						year: 2023,
 					},
 				});
 
-				let projectsData: datatype[] = [];
+				const res2024 = await axios.get("/api/v1/projects", {
+					params: {
+						status: "completed",
+						year: 2024,
+					},
+				});
 
-				if (Array.isArray(res.data)) {
-					projectsData = res.data;
-				} else if (
-					res.data &&
-					typeof res.data === "object" &&
-					!Array.isArray(res.data)
-				) {
-					projectsData = [res.data];
+					let projectsData2023: datatype[] = [];
+
+					if (Array.isArray(res2023.data.data)) {
+						projectsData2023 = res2023.data.data;
+					} else {
+						projectsData2023 = [];
+					}
+
+				let projectsData2024: datatype[] = [];
+
+				if (Array.isArray(res2024.data.data)) {
+					projectsData2024 = res2024.data.data;
+				} else {
+					projectsData2024 = [];
 				}
-				setPastProject(projectsData);
-				console.log("Check data: ", projectsData);
+				setPastProject(projectsData2024);
+				setPastProject(projectsData2023);
+				console.log("Check data: ", projectsData2023);
 			} catch (error) {
 				console.log("Error fetching Past Highlighted Project: ", error);
 			} finally {
@@ -87,18 +100,17 @@ function Viewmore() {
 							<div className="max-w-[1200px] w-[2000px] h-[3px] font-black bg-yellowPrimary flex items-center"></div>
 						</div>
 						<Slider {...settings} className="">
-							{pastProject
-								.filter((item) => item.year == 2024)
-								.map((item) => (
-									<Project
-										key={item._id}
-										_id={item._id}
-										year={item.year}
-										title={item.title}
-										image_url={item.image_url}
-										description={item.description}
-									/>
-								))}
+							{pastProject.length > 0 &&
+								pastProject
+									.filter((item) => item.year === 2024)
+									.map((item) => (
+										<Project
+											key={item._id}
+											title={item.title}
+											image_url={item.image_url}
+											description={item.description}
+										/>
+									))}
 						</Slider>
 
 						<div className="flex place-content-center pt-10 max-w-[1652px] max-h-[54px]">
@@ -108,18 +120,17 @@ function Viewmore() {
 							<div className="max-w-[1200px] w-[2000px] h-[3px] font-black bg-yellowPrimary flex items-center"></div>
 						</div>
 						<Slider {...settings} className="">
-							{pastProject
-								.filter((item) => item.year == 2023)
-								.map((item) => (
-									<Project
-										key={item._id}
-										_id={item._id}
-										year={item.year}
-										title={item.title}
-										image_url={item.image_url}
-										description={item.description}
-									/>
-								))}
+							{pastProject.length > 0 &&
+								pastProject
+									.filter((item) => item.year === 2023)
+									.map((item) => (
+										<Project
+											key={item._id}
+											title={item.title}
+											image_url={item.image_url}
+											description={item.description}
+										/>
+									))}
 						</Slider>
 					</div>
 				</>

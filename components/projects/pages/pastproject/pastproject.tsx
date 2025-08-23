@@ -28,6 +28,7 @@ const PastProject = () => {
 
 	const [pastProject, setPastProject] = useState<datatype[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState<string>("");
 
 	useEffect(() => {
 		const fetchPastHighLightedProject = async () => {
@@ -35,23 +36,20 @@ const PastProject = () => {
 				const res = await axios.get("/api/v1/projects", {
 					params: {
 						status: "completed",
+						year: 2025,
 					},
 				});
 
 				let projectsData: datatype[] = [];
 
-				if (Array.isArray(res.data)) {
-					projectsData = res.data;
-				} else if (
-					res.data &&
-					typeof res.data === "object" &&
-					!Array.isArray(res.data)
-				) {
-					projectsData = [res.data];
+				if (Array.isArray(res.data.data)) {
+					projectsData = res.data.data;
+				} else {
+					projectsData = [];
 				}
 				setPastProject(projectsData);
 				console.log("Check data: ", projectsData);
-			} catch (error) {
+			} catch (error: any) {
 				console.log("Error fetching Past Highlighted Project: ", error);
 			} finally {
 				setIsLoading(false);
@@ -64,6 +62,13 @@ const PastProject = () => {
 	{
 		<div className="flex justify-center text-bluePrimary font-bold">
 			Loading Our Projects...
+		</div>;
+	}
+
+	if (pastProject.length < 0) return;
+	{
+		<div className="flex justify-self-center text-bluePrimary font-bold">
+			Currently no projects to show!
 		</div>;
 	}
 
@@ -81,16 +86,15 @@ const PastProject = () => {
 			</div>
 
 			<Slider {...settings}>
-				{pastProject.map((item) => (
-					<Project
-						key={item._id}
-						_id={item._id}
-						year={item.year}
-						image_url={item.image_url}
-						title={item.title}
-						description={item.description}
-					/>
-				))}
+				{pastProject.length > 0 &&
+					pastProject.map((item) => (
+						<Project
+							key={item._id}
+							image_url={item.image_url}
+							title={item.title}
+							description={item.description}
+						/>
+					))}
 			</Slider>
 
 			<Viewmore />
