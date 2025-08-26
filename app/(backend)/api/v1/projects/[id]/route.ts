@@ -6,7 +6,7 @@ import {
   getCacheHeaders 
 } from "@/app/(backend)/libs/redis";
 import { getProjectDetails, updateProject, deleteProject } from "@/app/(backend)/controllers/projectController";
-import { checkAdminAuth } from "@/app/(backend)/middleware/auth";
+import { requireAdmin } from "@/app/(backend)/middleware/middleware";
 
 export async function GET(
   req: NextRequest,
@@ -37,7 +37,8 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!(await checkAdminAuth(req))) {
+  const isAdmin = await requireAdmin(req);
+  if (!isAdmin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -59,7 +60,8 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!(await checkAdminAuth(req))) {
+  const isAdmin = await requireAdmin(req);
+  if (!isAdmin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

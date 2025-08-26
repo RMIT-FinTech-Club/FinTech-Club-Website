@@ -7,15 +7,14 @@ const projectSchema = new Schema(
   {
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true },
-    type: { type: String, enum: ["large-scaled", "department"], required: true, index: true },
-    status: { type: String, enum: ["ongoing", "completed"], required: true, index: true },
+    type: { type: String, enum: ["large-scaled", "department"], required: true },
+    status: { type: String, enum: ["ongoing", "completed"], required: true },
     category: {
       type: String,
       required: true,
       enum: ["technical", "media", "event", "community", "career", "competition"],
-      index: true,
     },
-    labels: { type: [String], default: [], index: true },
+    labels: { type: [String], default: [] },
     image_url: {
       type: String,
       required: true,
@@ -30,7 +29,6 @@ const projectSchema = new Schema(
       required: function (this: any): boolean {
         return this.type === "department";
       },
-      index: true,
     },
     department_photo_url: {
       type: String,
@@ -53,7 +51,6 @@ const projectSchema = new Schema(
       required: function (this: any): boolean {
         return this.status === "completed";
       },
-      index: true,
     },
     meta_title: { type: String, required: true },
     meta_description: { type: String, required: true },
@@ -61,7 +58,6 @@ const projectSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      index: true,
       validate: {
         validator: (v: string) => slugRegex.test(v),
         message: "Invalid slug format (use lowercase, numbers, dashes)",
@@ -92,8 +88,6 @@ projectSchema.pre('updateMany', function(next) {
   next();
 });
 
-projectSchema.index({ _id: 1 });
-projectSchema.index({ slug: 1 }, { unique: true });
 projectSchema.index({ type: 1 });
 projectSchema.index({ status: 1 });
 projectSchema.index({ department: 1 });

@@ -14,12 +14,12 @@ export default function FinTechInTheEyes() {
           loading="lazy"
         />
       </div>
-      <section className="max-w-screen flex justify-center mr-[5vw] items-center">
-        <div className="w-fit">
+      <section className="max-w-screen flex justify-center mr-[8vw] items-center">
+        <div>
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png"
             alt="President Avatar"
-            className="w-[29vw] aspect-auto object-cover"
+            className="w-[30vw] aspect-auto object-cover"
             width={400}
             height={400}
             fetchPriority="high"
@@ -27,7 +27,7 @@ export default function FinTechInTheEyes() {
             priority={true}
           />
         </div>
-        <div className="flex flex-col w-[45vw]">
+        <div className="flex flex-col w-[47vw]">
           <div className="flex flex-col items-start">
             <h1 className={`text-6xl py-2 text-[#DBB968] font-[1000]`}>
               FINTECH
@@ -52,15 +52,20 @@ export default function FinTechInTheEyes() {
           </div>
           <div className="flex flex-col items-center">
             <p
-              className={`text-[1.25rem] leading-8 text-justify mt-6 ${fontSans.style}`}
+              className={`text-[1.15rem] leading-7 text-justify mt-4 ${fontSans.style}`}
             >
-              FinTech Club has been a transformative experience for me. As an
-              introvert, I found it challenging to make new friends at RMIT.
-              However, joining the FinTech Club changed everything. I connected
-              with like-minded individuals who shared my passion for finance and
-              technology. Winning the "Star-Up" competition boosted my
-              confidence and skills, and becoming President allowed me to give
-              back to this uplifting community.
+              FinTech Club truly made my university life. Before joining, I was
+              the type of student who just went to class and went home, not
+              realizing how much more campus life could offer. Once I became
+              part of the club, I discovered how exciting and meaningful my
+              university journey could be, full of learning, fun, friendships,
+              and mentorships. Through working on projects and bonding with
+              clubmates, I found a place where I truly belonged, and I thrived
+              in ways I had never expected. From that moment on, I knew I wanted
+              to give back to this community that gave me so much. That
+              motivation eventually led me to pursue the role of President, so I
+              could help others experience the same growth and belonging that
+              FinTech gave me.
             </p>
           </div>
         </div>
