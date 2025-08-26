@@ -7,6 +7,8 @@ import FinTechInTheEyes from "./components/inTheEyes";
 import Members from "./components/members";
 import { ClubMentors } from "./components/mentors";
 import VisionMission from "./components/vision-mission/missionVision";
+import HallOfFame from "./components/hallOfFamePage";
+
 const AboutUs = () => {
 	return (
 		<>
@@ -17,6 +19,7 @@ const AboutUs = () => {
 			<ClubMentors />
 			<ExecuteBoard />
 			<ManagementBoard />
+			<HallOfFame />
 			{/* <Members /> */}
 		</>)
 };
