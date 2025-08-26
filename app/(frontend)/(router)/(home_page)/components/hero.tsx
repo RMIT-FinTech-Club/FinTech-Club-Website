@@ -31,13 +31,13 @@ const HeroSection = () => {
 
           <div className="justify-start items-center gap-6 flex mt-8">
             <Button
-              className="bg-[#DBB968] text-[#2C305F] w-[7rem] font-bold"
+              className="bg-[#DBB968] text-[#2C305F] w-[7rem] font-semibold rounded-lg"
               variant="solid"
             >
               <Link href="/about-us">Read More</Link>
             </Button>
             <Button
-              className="bg-ft-primary-blue text-ft-text-bright w-[7rem] font-bold"
+              className="bg-ft-primary-blue text-ft-text-bright w-[7rem] font-semibold rounded-lg"
               variant="solid"
             >
               <Link href="/join-us">Join Us</Link>

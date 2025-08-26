@@ -193,7 +193,7 @@ export default function HistorySection() {
             {historyData[centerSlideIndex].title}
           </h4>
           <p
-            className={`text-justify text-[#000] text-lg px-[3.5rem] ${fontSans.style}`}
+            className={`text-justify text-[#000000] text-lg px-[3rem] ${fontSans.style}`}
           >
             {historyData[centerSlideIndex].content}
           </p>

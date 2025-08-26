@@ -14,12 +14,12 @@ export default function FinTechInTheEyes() {
           loading="lazy"
         />
       </div>
-      <section className="max-w-screen flex justify-center mr-[5vw] items-center">
-        <div className="w-fit">
+      <section className="max-w-screen flex justify-center mr-[8vw] items-center">
+        <div>
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/about_us/executive_board/President-TriTruong.png"
             alt="President Avatar"
-            className="w-[29vw] aspect-auto object-cover"
+            className="w-[30vw] aspect-auto object-cover"
             width={400}
             height={400}
             fetchPriority="high"
@@ -27,7 +27,7 @@ export default function FinTechInTheEyes() {
             priority={true}
           />
         </div>
-        <div className="flex flex-col w-[45vw]">
+        <div className="flex flex-col w-[47vw]">
           <div className="flex flex-col items-start">
             <h1 className={`text-6xl py-2 text-[#DBB968] font-[1000]`}>
               FINTECH
@@ -52,7 +52,7 @@ export default function FinTechInTheEyes() {
           </div>
           <div className="flex flex-col items-center">
             <p
-              className={`text-[1.25rem] leading-8 text-justify mt-6 ${fontSans.style}`}
+              className={`text-[1.15rem] leading-7 text-justify mt-4 ${fontSans.style}`}
             >
               FinTech Club truly made my university life. Before joining, I was
               the type of student who just went to class and went home, not
