@@ -61,6 +61,7 @@ const ManagementBoard = () => {
           className="absolute left-[-8rem] top-0 rotate-[35deg] scale-x-[-1] z-30"
           width={368}
           height={368}
+          loading="lazy"
         />
         <div className="absolute bottom-[-2rem] right-[8rem] w-[7rem] h-[7rem] bg-[#C9D6EA] rounded-full z-20"></div>
         <div className="absolute bottom-[-2rem] right-[13rem] w-[3.7rem] h-[3.7rem] bg-[#DBB968] rounded-full z-10"></div>
@@ -76,7 +77,7 @@ const ManagementBoard = () => {
               Meet Our
             </h2>
             <h1 className=" text-[#DCB968] text-[4.3rem]">Management Board</h1>
-            <p className="leading-3 w-full text-[#000000]">
+            <p className="leading-8 w-full text-[#000000]">
               Meet the talented representatives behind the four pillars of RMIT
               Vietnam FinTech Club!
             </p>
@@ -84,7 +85,7 @@ const ManagementBoard = () => {
           <div className="pt-16 pb-[8rem] flex justify-center items-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DCB968] mx-auto mb-4"></div>
-              <p className="text-[#5E5E92]">Loading management board...</p>
+              <p className="text-[#5E5E92]">Loading Management Board...</p>
             </div>
           </div>
         </main>

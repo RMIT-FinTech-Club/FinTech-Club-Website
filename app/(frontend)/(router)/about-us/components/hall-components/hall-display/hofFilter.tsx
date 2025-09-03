@@ -5,7 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { SemesterFilterProps } from "../types";
 
-export default function HoFFilter({ semesters, onSelect, selectedLabel
+export default function HoFFilter({
+  semesters,
+  onSelect,
+  selectedLabel,
 }: SemesterFilterProps) {
   const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -90,9 +93,9 @@ export default function HoFFilter({ semesters, onSelect, selectedLabel
                     damping: 20,
                   }}
                   className="
-                    z-50 mt-1 w-40 rounded-md bg-[#DCB968] text-[#2C305F]
-                    shadow-lg border border-[#2C305F]
-                  "
+                              z-50 mt-1 w-40 rounded-md bg-[#DCB968] text-[#2C305F]
+                              shadow-lg border border-[#2C305F]
+                            "
                 >
                   <Select.Viewport className="p-1">
                     {semesters.map((label) => (
@@ -100,11 +103,11 @@ export default function HoFFilter({ semesters, onSelect, selectedLabel
                         key={label}
                         value={label}
                         className="
-                          relative cursor-pointer select-none rounded
-                          px-4 py-2 text-sm
-                          hover:bg-[#2C305F]/10
-                          focus:bg-[#2C305F]/20 focus:outline-none
-                        "
+              relative cursor-pointer select-none rounded
+              px-4 py-2 text-sm
+              hover:bg-[#2C305F]/10
+              focus:bg-[#2C305F]/20 focus:outline-none
+            "
                       >
                         <Select.ItemText>
                           <span className="text-sm xl:text-lg font-semibold text-[#2C305F]">
@@ -117,14 +120,12 @@ export default function HoFFilter({ semesters, onSelect, selectedLabel
                         </Select.ItemIndicator>
                       </Select.Item>
                     ))}
-                    
                   </Select.Viewport>
                 </motion.div>
               </Select.Content>
             </Select.Portal>
           )}
         </AnimatePresence>
-
       </div>
     </Select.Root>
   );

@@ -8,17 +8,17 @@ import { motion, useInView } from "framer-motion";
 import axios from "axios";
 
 type ExecutiveBoardMember = {
-	photo_url: string;
-	name: string;
-	position: string;
-	linkedin_url: string;
+  photo_url: string;
+  name: string;
+  position: string;
+  linkedin_url: string;
 };
 
 const ExecutiveBoard = () => {
   const [members, setMembers] = useState<ExecutiveBoardMember[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
-  
+
   // Fetch data on component mount
   useEffect(() => {
     const fetchExecutiveBoard = async () => {
@@ -51,34 +51,34 @@ const ExecutiveBoard = () => {
     fetchExecutiveBoard();
   }, []);
 
-  if(loading) {
+  if (loading) {
     return (
       <section className="relative bg-[#F9FAFB] bg-cover bg-center pt-[4rem]">
-      <div className="absolute top-[4.3rem] right-[1.8rem] w-[4rem] h-[4rem] bg-[#C9D6EA] rounded-full"></div>
-      <div className="absolute top-[11rem] right-[5rem] w-[2.5rem] h-[2.5rem] bg-[#DBB968] rounded-full"></div>
-      <div className="absolute bottom-[-1rem] right-[-2.4rem] w-[6rem] h-[6rem] bg-[#DBB968] rounded-full z-20"></div>
-      <div className="absolute bottom-[-2rem] right-[1.8rem] w-[3.7rem] h-[3.7rem] bg-[#2C305F] rounded-full z-10"></div>
-      <div className="absolute bottom-[-6rem] left-[1rem] w-[8rem] h-[8rem] bg-[#2C305F] rounded-full z-10"></div>
-      <div className="absolute bottom-[2rem] left-[8.5rem] w-[2.8rem] h-[2.8rem] bg-[#C9D6EA] rounded-full z-10"></div>
-      <div className="absolute bottom-[-1.8rem] left-[12rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
-      <div className="absolute bottom-[5rem] left-[15rem] w-[2rem] h-[2rem] bg-[#DBB968] rounded-full z-10"></div>
-      <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
+        <div className="absolute top-[4.3rem] right-[1.8rem] w-[4rem] h-[4rem] bg-[#C9D6EA] rounded-full"></div>
+        <div className="absolute top-[11rem] right-[5rem] w-[2.5rem] h-[2.5rem] bg-[#DBB968] rounded-full"></div>
+        <div className="absolute bottom-[-1rem] right-[-2.4rem] w-[6rem] h-[6rem] bg-[#DBB968] rounded-full z-20"></div>
+        <div className="absolute bottom-[-2rem] right-[1.8rem] w-[3.7rem] h-[3.7rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[-6rem] left-[1rem] w-[8rem] h-[8rem] bg-[#2C305F] rounded-full z-10"></div>
+        <div className="absolute bottom-[2rem] left-[8.5rem] w-[2.8rem] h-[2.8rem] bg-[#C9D6EA] rounded-full z-10"></div>
+        <div className="absolute bottom-[-1.8rem] left-[12rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
+        <div className="absolute bottom-[5rem] left-[15rem] w-[2rem] h-[2rem] bg-[#DBB968] rounded-full z-10"></div>
+        <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
 
         <main className="mx-[64px] 2xl:mx-[10rem]">
-          <div className="content grid text-right">
+          <div className="content grid">
             <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
               Meet Our
             </h2>
-            <h1 className=" text-[#DCB968] text-[4.3rem]">Executive Board</h1>
-            <p className="leading-3 w-full text-[#000000]">
-              Meet the fierce, brilliant, and passionate minds behind the FinTech
-              Club machine!
+            <h1 className=" text-[#2C305F] text-[4.3rem]">Executive Board</h1>
+            <p className="leading-8 w-full text-[#000000]">
+              Meet the fierce, brilliant, and passionate minds behind the
+              FinTech Club machine!
             </p>
           </div>
           <div className="pt-16 pb-[8rem] flex justify-center items-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DCB968] mx-auto mb-4"></div>
-              <p className="text-[#5E5E92]">Loading executive board...</p>
+              <p className="text-[#5E5E92]">Loading Executive Board...</p>
             </div>
           </div>
         </main>
@@ -97,7 +97,7 @@ const ExecutiveBoard = () => {
       <div className="absolute bottom-[-1.8rem] left-[12rem] w-[4.3rem] h-[4.3rem] bg-[#DBB968] rounded-full z-10"></div>
       <div className="absolute bottom-[5rem] left-[15rem] w-[2rem] h-[2rem] bg-[#DBB968] rounded-full z-10"></div>
       <div className="absolute bottom-[1rem] left-[21rem] w-[1.6rem] h-[1.6rem] bg-[#C9D6EA] rounded-full z-10"></div>
-      
+
       <main className="mx-[4rem] 2xl:mx-[10rem]">
         <div className="content grid">
           <h2 className="leading-8 text-[#5E5E92] text-[2.2rem] font-bold">
@@ -130,10 +130,10 @@ const ExecutiveBoard = () => {
 };
 
 function ExecutiveBoardCard({
-	photo_url,
-	name,
-	position,
-	linkedin_url,
+  photo_url,
+  name,
+  position,
+  linkedin_url,
   index,
 }: ExecutiveBoardMember & { index: number }) {
   const ref = useRef(null);
@@ -143,7 +143,7 @@ function ExecutiveBoardCard({
     <motion.div
       ref={ref}
       animate={{
-        y: isInView ? (index % 2 === 0 ? 25 : -25) : 0,
+        y: isInView ? (index % 2 === 0 ? -25 : 25) : 0,
         opacity: isInView ? 1 : 0.7,
       }}
       transition={{ duration: 1, ease: "easeOut" }}
@@ -202,5 +202,5 @@ function ExecutiveBoardCard({
     </motion.div>
   );
 }
-  
-  export default ExecutiveBoard;
+
+export default ExecutiveBoard;

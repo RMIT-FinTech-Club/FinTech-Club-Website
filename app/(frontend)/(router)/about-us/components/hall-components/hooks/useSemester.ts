@@ -5,9 +5,9 @@ const getDefaultSemester = (): string => {
   const month = today.getMonth();
   const year = today.getFullYear();
 
-  if (month >= 10 || month <= 0) return `${year}C`; // Nov–Jan
-  if (month >= 6 && month <= 9) return `${year}B`;  // Jul–Oct
-  if (month >= 2 && month <= 4) return `${year}A`;  // Mar–May
+  if (month >= 10 || month <= 0) return `${year}B`; // Nov–Jan
+  if (month >= 6 && month <= 9) return `${year}A`;  // Jul–Oct
+  if (month >= 2 && month <= 4) return `${year}C`;  // Mar–May
 
   return `${year}A`;
 };
