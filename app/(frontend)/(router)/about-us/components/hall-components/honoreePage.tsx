@@ -4,7 +4,6 @@ import HonoreeList from "./honoree-display/honoreeList";
 import CategoryCard from "./hall-display/categoryCard";
 import type { CategoryPageProps } from "./types";
 import { useMemo } from "react";
-import Image from "next/image";
 
 const HonoreePage = ({
   members,

@@ -24,7 +24,7 @@ const HerosectionVid: React.FC = () => {
 	};
 
 	return (
-		<div className={clsx("relative w-screen h-screen")}>
+		<div className={clsx("relative w-screen h-[93vh]")}>
 			{/* Video background */}
 			<video
 				autoPlay

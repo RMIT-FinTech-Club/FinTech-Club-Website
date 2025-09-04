@@ -144,7 +144,7 @@ const Achievements = () => {
             </svg>
           </div>
           <Image
-            src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
+            src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/PublicityAward-2024.png"
             className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
             width={200}
             height={150}
