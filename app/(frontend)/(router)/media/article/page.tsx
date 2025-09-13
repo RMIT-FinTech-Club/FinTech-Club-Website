@@ -28,8 +28,7 @@ export default function ArticleLibrary() {
     console.info("You clicked a breadcrumb.");
   };
 
-  // Define podcast data array
-  const podcasts = [
+  const articles = [
     {
       imageSrc:
         "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
@@ -103,12 +102,12 @@ export default function ArticleLibrary() {
   ];
 
   const itemsPerPage = 5; // Show 5 cards per page
-  const totalPages = Math.ceil(podcasts.length / itemsPerPage);
+  const totalPages = Math.ceil(articles.length / itemsPerPage);
 
   // Determine which cards to render based on page
   const getVisibleCards = () => {
     const startIndex = (page - 1) * itemsPerPage;
-    return podcasts.filter(
+    return articles.filter(
       (_, index) => index >= startIndex && index < startIndex + itemsPerPage
     );
   };
@@ -116,32 +115,47 @@ export default function ArticleLibrary() {
   const visibleCards = getVisibleCards();
   return (
     <section>
-      <div className="w-screen h-[92vh] bg-fintech-gradient bg-no-repeat bg-center flex items-center justify-center">
-        <div className="absolute w-screen h-screen top-[-12vh] left-[2vw]">
+      <div
+        className="w-screen h-[92vh] flex items-center justify-center"
+        style={{
+          background: "linear-gradient(to bottom, #474A6E, #DBB968)",
+        }}
+      >
+        <div className="absolute w-screen h-screen z-10">
           <Image
-            src="https://d2prwyp3rwi40.cloudfront.net/media/YellowStars.png"
-            alt="Yellow Stars"
+            src="https://d2prwyp3rwi40.cloudfront.net/media/article/BiWeeklyArticle-LandscapePoster.png"
+            alt="Bi-Weekly Article Poster"
             width={1000}
             height={200}
             fetchPriority="high"
             loading="eager"
             priority={true}
+            className="w-full h-full opacity-25"
+          />
+        </div>
+        <div className="absolute w-screen h-screen top-[-12vh] left-[2vw] z-20">
+          <Image
+            src="https://d2prwyp3rwi40.cloudfront.net/media/YellowStars.png"
+            alt="Yellow Stars"
+            width={1000}
+            height={200}
+            loading="lazy"
             className="w-full"
           />
         </div>
 
-        <div className="flex flex-col items-center justify-center z-10 mt-[15vh]">
+        <div className="flex flex-col items-center justify-center z-10 mt-[17vh]">
           <h1 className="text-5xl font-bold text-[9vh] text-center text-[#2C305F] drop-shadow-[1.5px_1.5px_0_#DCB968]">
             Bi-weekly Article
           </h1>
           <p className="leading-6 font-semibold text-base text-white w-[50vw] text-justify py-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Welcome to the Bi-weekly Article Series, where curiosity meets
+            analysis at the intersection of finance and technology. Our
+            articles, crafted by dedicated members of the FinTech Club, blend
+            academic depth with real-world relevance, providing you with
+            rigorously researched insights into emerging industry trends
+            alongside pivotal global economic events. Explore our latest work
+            and discover what’s truly shaping the industry today.
           </p>
           <div
             className="w-fit h-fit rounded-md p-[2px] mt-[1.5rem] "
@@ -201,15 +215,15 @@ export default function ArticleLibrary() {
         <LabelSort onSelect={handleLabelSelect} />
       </div>
       <div className="py-6 px-24">
-        {visibleCards.map((podcast, index) => (
+        {visibleCards.map((article, index) => (
           <ArticleCard
             key={index}
-            imageSrc={podcast.imageSrc}
-            imageAlt={podcast.imageAlt}
-            labels={podcast.labels}
-            title={podcast.title}
-            description={podcast.description}
-            date={podcast.date}
+            imageSrc={article.imageSrc}
+            imageAlt={article.imageAlt}
+            labels={article.labels}
+            title={article.title}
+            description={article.description}
+            date={article.date}
           />
         ))}
       </div>
