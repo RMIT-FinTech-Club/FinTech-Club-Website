@@ -10,11 +10,10 @@ export async function GET(req: NextRequest) {
 
         const { searchParams } = new URL(req.url);
         
-        // Add validation for query parameters
         const limitParam = searchParams.get('limit');
         const offsetParam = searchParams.get('offset');
         
-        const limit = Math.min(Math.max(parseInt(limitParam || '10', 10), 1), 100); // Cap at 100
+        const limit = Math.min(Math.max(parseInt(limitParam || '10', 10), 1), 100);
         const offset = Math.max(parseInt(offsetParam || '0', 10), 0);
         
         const currDate = new Date();
@@ -27,16 +26,28 @@ export async function GET(req: NextRequest) {
         const total = await Event.countDocuments({ date: { $gte: currDate } });
 
         return NextResponse.json({
+            status: 200,
             total,
             limit,
             offset,
             events,
+        }, { 
+            status: 200 
         });
+
     } catch (err: any) {
         console.error('Error fetching events:', err);
-        return NextResponse.json(err, { status: err.status });
+
+        return NextResponse.json({ 
+            status: 500, 
+            message: "Internal Server Error",
+            error: err.message 
+        }, { 
+            status: 500
+        });
     }
 }
+
 
 export async function POST(req: NextRequest) {
     // Require admin for POST

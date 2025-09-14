@@ -1,128 +1,295 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/upcoming.module.css";
 import clsx from "clsx";
+import axios from "axios";
+import Link from "next/link";
 
-// Data shape for an event card
-type EventItem = {
+interface EventItem {
+  _id: string;
   name: string;
-  image: string;
+  posterUrl: string;
   date: string;
-  labels: string[];
+  time: string;
+  mode: "Hybrid" | "Offline" | "Online";
+  location: string;
+}
+
+// Helper functions remain the same
+const addOrdinalSuffix = (day: number): string => {
+  if (day > 10 && day < 14) return `${day}th`;
+  const lastDigit = day % 10;
+  switch (lastDigit) {
+    case 1: return `${day}st`;
+    case 2: return `${day}nd`;
+    case 3: return `${day}rd`;
+    default: return `${day}th`;
+  }
 };
 
-// Static list of events (source of truth for dots order)
-const placeholders: EventItem[] = [
-  {
-    name: "Hackathon 2025",
-    image:
-      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "31th August",
-    labels: ["Tech", "Innovation"],
-  },
-  {
-    name: "Design Sprint",
-    image:
-      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "02nd Sep",
-    labels: ["Design", "UX"],
-  },
-  {
-    name: "Dev Conf",
-    image:
-      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "10th Sep",
-    labels: ["Developer", "Conference"],
-  },
-  {
-    name: "AI Meetup",
-    image:
-      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "18th Sep",
-    labels: ["AI", "Networking", "Innovation", "Forum"],
-  },
-  {
-    name: "Cloud Day",
-    image:
-      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "25th Sep",
-    labels: ["Cloud", "Technology"],
-  },
-  {
-    name: "Startup Pitch",
-    image:
-      "https://tr.rbxcdn.com/180DAY-62ee9984377b63b7ed19737271c65a04/500/280/Image/Jpeg/noFilter",
-    date: "30th Sep",
-    labels: ["Startup", "Pitching"],
-  },
-];
+const formatEventDate = (isoString: string): { day: string; month: string } => {
+  const dateObj = new Date(isoString);
+  const day = addOrdinalSuffix(dateObj.getDate());
+  const month = dateObj.toLocaleString("en-US", { month: "short" });
+  return { day, month };
+};
+
+// Component to display when there are no events
+const NoEventsDisplay = () => (
+  <div className="text-center py-16">
+    <h3 className="text-2xl font-bold text-[#2C305F] mb-2">
+      No Upcoming Events
+    </h3>
+    <p className="text-[#5E5E92]">
+      Please check back later for new and exciting events!
+    </p>
+  </div>
+);
 
 export default function UpcomingEvent() {
-  // Rotating copy of placeholders that drives what’s rendered
-  const [items, setItems] = useState<EventItem[]>(placeholders);
-
-  // Prevents new clicks while the 3s CSS animation is running
+  // Initialize state with empty arrays, no placeholders
+  const [items, setItems] = useState<EventItem[]>([]);
+  const [originalItems, setOriginalItems] = useState<EventItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
   const [animating, setAnimating] = useState(false);
-
-  // Refs to the 5 visible card DOM nodes (positions card_1..card_5)
   const cardRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Trigger a step to the next or previous slide.
-  // We apply CSS classes to animate positions, then rotate the data array
-  // after 3s to match the new visual order.
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await axios.get("/api/v1/event");
+        const fetchedEvents = response.data.events || [];
+
+        if (response.data.status === 200 && fetchedEvents.length > 0) {
+          // The carousel UI is designed for 5+ items.
+          if (fetchedEvents.length < 5) {
+            console.warn("API returned fewer than 5 events. Displaying 'No Events' message.");
+            // Set items to empty to trigger the announcement display
+            setItems([]);
+            setOriginalItems([]);
+          } else {
+            setItems(fetchedEvents);
+            setOriginalItems(fetchedEvents); // Keep a non-rotating copy for the dots
+          }
+        } else {
+          // This handles the case where the API returns an empty array
+          setItems([]);
+          setOriginalItems([]);
+        }
+      } catch (err: any) {
+        console.error("Error fetching upcoming events: ", err);
+        if (err.response?.status === 404) {
+          setError("Upcoming events API not found.");
+        } else if (err.code === "ERR_NETWORK") {
+          setError("Network error. Could not fetch events.");
+        } else {
+          setError("Failed to load upcoming events.");
+        }
+        setItems([]); // Ensure items are empty on error
+        setOriginalItems([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   const handleClick = (dir: "next" | "prev") => {
     if (animating) return;
     setAnimating(true);
-
-    // Add animation class to each of the 5 card positions
     cardRef.current.forEach((el, i) => {
       el?.classList.add(styles[`card_${i + 1}_${dir}`]);
     });
 
-    // After animation finishes, rotate the array to match visual result
     setTimeout(() => {
       const rotated = [...items];
-
       if (dir === "prev") {
-        // Move the last item to the front (right → center)
-        // Matches clicking card_2 to go "previous"
         rotated.unshift(rotated.pop()!);
       } else {
-        // Move the first item to the end (left → center)
-        // Matches clicking card_4 to go "next"
         rotated.push(rotated.shift()!);
       }
-
       setItems(rotated);
       setAnimating(false);
-
-      // Clean up animation classes for the next click
       cardRef.current.forEach((el, i) => {
         el?.classList.remove(styles[`card_${i + 1}_${dir}`]);
       });
-    }, 3000); // Must match the CSS animation-duration
+    }, 3000);
   };
 
-  // Compute the 5 cards to render at fixed positions card_1..card_5.
-  // If there are fewer than 5 items you can loop; here we assume >= 5.
-  const visible = Array.from(
-    { length: 5 },
-    (_, i) => items[i % (items.length || 1)]
-  );
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <div className="flex h-[80vh] w-full flex-col items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F] mx-auto mb-4"></div>
+            <p className="text-[#5E5E92]">Loading Upcoming Events...</p>
+          </div>
+        </div>
+      );
+    }
 
-  const labelBgColors = [
-    "bg-ft-primary-yellow-50",
-    "bg-ft-secondary-blue",
-    "bg-ft-secondary-yellow",
-    "bg-ft-primary-blue-300",
-  ];
+    if (error) {
+      return (
+        <div className="text-center py-16">
+          <p className="text-lg text-red-600 bg-red-100 px-4 py-3 rounded-lg inline-block">
+            ⚠️ {error}
+          </p>
+        </div>
+      );
+    }
+
+    if (items.length === 0) {
+      return <NoEventsDisplay />;
+    }
+
+    // --- Carousel Rendering Logic ---
+    const visible = Array.from({ length: 5 }, (_, i) => items[i % items.length]);
+    const activeItem = items[2];
+    const activeIndex = originalItems.findIndex(item => item._id === activeItem._id);
+    
+    return (
+      <>
+        <div className="h-[85vh] w-full relative">
+          {visible.map((ev, index) => {
+            const { day, month } = formatEventDate(ev.date);
+            return (
+              <div
+                key={`${ev._id}-${index}`}
+                ref={(el) => { cardRef.current[index] = el; }}
+                className={clsx(
+                  styles.card,
+                  styles[`card_${index + 1}`],
+                  "grid place-items-center h-[77vh] w-[27vw] border-bluePrimary border-[0.5vh] rounded-[2vw] p-[2vh] bg-blueSlate"
+                )}
+                onClick={() => {
+                  if (index === 1) handleClick("prev");
+                  else if (index === 3) handleClick("next");
+                }}
+              >
+                {/* Card content remains the same */}
+                 <p className="text-[1.5rem] leading-7 text-yellowSand uppercase text-center font-bold">
+                    {ev.name}
+                  </p>
+
+                  <div
+                    className="relative w-full h-[35vh] rounded-[3vh] p-[1.5vh]"
+                    style={{
+                      background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                    }}
+                  >
+                    <div
+                      className="w-full h-full rounded-[2.5vh] bg-center bg-cover bg-no-repeat"
+                      style={{ backgroundImage: `url(${ev.posterUrl})` }}
+                    />
+                  </div>
+
+                  <div className="w-full h-[15vh] flex justify-between">
+                    <div
+                      className="h-full aspect-square rounded-[3vh] p-[1.5vh]"
+                      style={{
+                        background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                      }}
+                    >
+                      <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] flex flex-col justify-center items-center">
+                        <p className="text-[0.85rem] leading-[4vh] font-medium text-center">
+                          {ev.time}
+                        </p>
+                        <p className="text-[0.85rem] leading-[4vh] font-medium text-center">
+                          {day} {month}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className="h-full w-full ml-[1vw] rounded-[3vh] p-[1.5vh] flex justify-center items-center"
+                      style={{
+                        background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                      }}
+                    >
+                      <div className="bg-white w-full h-full rounded-[2.5vh] flex flex-wrap justify-around items-center">
+                        <p className="text-[0.9rem] leading-[4vh] font-bold text-ft-primary-blue-50 uppercase">
+                          Location
+                        </p>
+                        <p className="text-[0.85rem] leading-[4vh] font-medium text-center text-bluePrimary">
+                          {ev.location}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className="h-full aspect-square rounded-[3vh] p-[1.5vh] ml-[1vw]"
+                      style={{
+                        background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                      }}
+                    >
+                      <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] flex flex-col justify-center items-center">
+                        <p className="text-[0.9rem] leading-[4vh] font-bold text-ft-primary-blue-50 uppercase">
+                          Format
+                        </p>
+                        <p className="text-[0.85rem] leading-[4vh] font-medium text-center">
+                          {ev.mode}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    href={`/events/${ev._id}`}
+                    className="h-fit w-fit rounded-[4.5vh] py-[1vh] px-[0.5vw] cursor-pointer"
+                    style={{
+                      background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
+                    }}
+                  >
+                    <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] py-[1vh] px-[1vw] flex justify-center items-center transition-transform hover:scale-105">
+                      <p className="text-[1rem] leading-[3.3vh] font-semibold text-center">
+                        More Details
+                      </p>
+                    </div>
+                  </Link>
+              </div>
+            );
+          })}
+        </div>
+        <div className="w-full flex justify-center items-center gap-[1.5vw] mt-[-4vh] z-[10]">
+          <button
+            className="h-[5vh] w-[5vh] text-[3vh] leading-[4vh] rounded-full border border-[#ddd] grid place-items-center hover:bg-[#f7f7f7] disabled:opacity-50"
+            onClick={() => handleClick("prev")}
+            disabled={animating}
+            aria-label="Previous"
+          >
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </button>
+          <div className="flex items-center gap-[0.8vw]">
+            {originalItems.map((_, i) => (
+              <div
+                key={i}
+                className={`h-[2vh] aspect-square rounded-full ${
+                  i === activeIndex ? "bg-yellowPrimary" : "bg-[#D9D9D9]"
+                }`}
+              />
+            ))}
+          </div>
+          <button
+            className="h-[5vh] w-[5vh] text-[3vh] leading-[4vh] rounded-full border border-[#ddd] grid place-items-center hover:bg-[#f7f7f7] disabled:opacity-50"
+            onClick={() => handleClick("next")}
+            disabled={animating}
+            aria-label="Next"
+          >
+            <FontAwesomeIcon icon={faAngleRight} />
+          </button>
+        </div>
+      </>
+    );
+  };
 
   return (
     <div className="h-fit w-[100vw] py-6 relative flex flex-col items-center">
-      {/* Header + decorative stars */}
+      {/* Header */}
       <div className="h-[max-content] w-[max-content] relative mx-auto mt-[2vh] mb-[4vh]">
         <p className="text-[4vw] text-bluePrimary uppercase font-extrabold text-center">
           UPCOMING EVENTS
@@ -144,129 +311,8 @@ export default function UpcomingEvent() {
           style={{ backgroundImage: "url(/home/star.svg)" }}
         />
       </div>
-
-      {/* Carousel stage (5 fixed positions) */}
-      <div className="h-[85vh] w-full relative">
-        {visible.map((ev, index) => (
-          <div
-            key={`${ev.name}-${index}`}
-            ref={(el: HTMLDivElement | null) => {
-              // Keep a ref to each fixed position wrapper
-              cardRef.current[index] = el;
-            }}
-            className={clsx(
-              styles.card, // base: 3D, opacity, duration, fill-mode, etc.
-              styles[`card_${index + 1}`], // fixed position class: card_1..card_5
-              "grid place-items-center h-[75vh] w-[27vw] border-bluePrimary border-[0.5vh] rounded-[2vw] p-[2vh] bg-blueSlate"
-            )}
-            onClick={() => {
-              // Click on the side cards to navigate:
-              // card_2 → prev (bring right item to center)
-              // card_4 → next (bring left item to center)
-              if (index === 1) handleClick("prev");
-              else if (index === 3) handleClick("next");
-            }}
-          >
-            {/* Card content */}
-            <p className="text-[1.5rem] text-yellowSand uppercase text-center font-bold">
-              {ev.name}
-            </p>
-
-            <div
-              className="relative w-full h-[35vh] rounded-[3vh] p-[1.5vh]"
-              style={{
-                background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
-              }}
-            >
-              <div
-                className="w-full h-full rounded-[2.5vh] bg-center bg-cover bg-no-repeat"
-                style={{ backgroundImage: `url(${ev.image})` }}
-              />
-            </div>
-
-            <div className="w-full h-[15vh] flex justify-between">
-              <div
-                className="h-full aspect-square rounded-[3vh] p-[1.5vh]"
-                style={{
-                  background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
-                }}
-              >
-                <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] flex justify-center items-center">
-                  <p className="text-[1.25rem] leading-[4vh] font-medium text-center">
-                    {ev.date}
-                  </p>
-                </div>
-              </div>
-              <div
-                className="h-full w-full ml-[1vw] rounded-[3vh] p-[1.5vh] flex justify-center items-center"
-                style={{
-                  background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
-                }}
-              >
-                <div className="bg-white w-full h-full rounded-[2.5vh] flex flex-wrap justify-around items-center">
-                  {ev.labels.map((tag, i) => (
-                    <div
-                      key={i}
-                      className={`${labelBgColors[i % 4]} text-black text-[0.75rem] text-center min-w-[6rem] font-normal px-3 py-1 rounded-md`}
-                    >
-                      {tag}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="h-fit w-fit rounded-[4.5vh] py-[1vh] px-[0.5vw] cursor-pointer"
-              style={{
-                background: "linear-gradient(to bottom, #C9D6EA, #DBB968)",
-              }}
-            >
-              <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] py-[1vh] px-[1vw] flex justify-center items-center">
-                <p className="text-[1rem] leading-[3.3vh] font-semibold text-center">
-                  More Details
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Dots + arrows */}
-      <div className="w-full flex justify-center items-center gap-[1.5vw] mt-[-4vh] z-[10]">
-        <button
-          className="h-[5vh] w-[5vh] text-[3vh] leading-[4vh] rounded-full border border-[#ddd] grid place-items-center hover:bg-[#f7f7f7] disabled:opacity-50"
-          onClick={() => handleClick("prev")}
-          disabled={animating}
-          aria-label="Previous"
-        >
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </button>
-
-        <div className="flex items-center gap-[0.8vw]">
-          {placeholders.map((_, i) => {
-            // Active dot = the original index of the center card (items[2])
-            const activeIndex = placeholders.indexOf(items[2]);
-            return (
-              <div
-                key={i}
-                className={`h-[2vh] aspect-square rounded-full ${
-                  i === activeIndex ? "bg-yellowPrimary" : "bg-[#D9D9D9]"
-                }`}
-              />
-            );
-          })}
-        </div>
-
-        <button
-          className="h-[5vh] w-[5vh] text-[3vh] leading-[4vh] rounded-full border border-[#ddd] grid place-items-center hover:bg-[#f7f7f7] disabled:opacity-50"
-          onClick={() => handleClick("next")}
-          disabled={animating}
-          aria-label="Next"
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </button>
-      </div>
+      {/* Conditionally render content */}
+      {renderContent()}
     </div>
   );
 }

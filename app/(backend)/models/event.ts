@@ -23,7 +23,7 @@ const eventSchema = new Schema(
 					`${props.value} must be in HH:MM format`,
 			},
         },
-        mode: {type: String, enum: ['online', 'offline', 'hybrid'], required: true},
+        mode: {type: String, enum: ['Online', 'Offline', 'Hybrid'], required: true},
         location: {type: String, trim: true, required: true},
         agenda: [
             {
