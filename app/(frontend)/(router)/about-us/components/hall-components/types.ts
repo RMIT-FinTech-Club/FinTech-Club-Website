@@ -40,6 +40,7 @@ export type HonoreeCardProps = {
   name: string;
   achievement?: string;
   photo_url: string;
+  category: string;
   hideAchievement: boolean;
 };
 
