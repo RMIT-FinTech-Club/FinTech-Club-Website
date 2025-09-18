@@ -16,7 +16,7 @@ const HeroSection = () => {
           <div className="absolute top-[7.25rem] right-[-1.5rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
           <h2>What is</h2>
           <h1 className="text-[#000A64] !font-black uppercase mt-[0.75rem] mb-[1.25rem]">
-            <span className="text-[#DCB968]">Fin</span>Tech Club ?
+            <span className="text-[#DCB968]">Fin</span>Tech Club?
           </h1>
 
           <p className="leading-relaxed text-justify text-[1.5rem] md:text-[1.25rem]">

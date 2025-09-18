@@ -20,7 +20,8 @@ const WhyJoinFintechClub = () => {
               className="text-3xl text-center font-bold text-gray-900 sm:text-4xl md:text-6xl mb-4"
               style={{ lineHeight: 1.1 }}
             >
-              Why Join <span className="text-bluePrimary">RMIT Vietnam</span> <span className="text-yellowPrimary">FinTech Club?</span>
+              Why Join <span className="text-bluePrimary">RMIT Vietnam</span>{" "}
+              <span className="text-yellowPrimary">FinTech Club?</span>
             </h2>
 
             <p
@@ -63,7 +64,8 @@ const WhyJoinFintechClub = () => {
               <p className="text-gray-700 flex-grow">
                 Collaborate on cutting-edge FinTech projects that bring
                 real-world solutions to life. You'll have the freedom to
-                experiment, innovate, and push boundaries.
+                experiment, innovate, and push boundaries through department and
+                club-wide activities.
               </p>
             </div>
           </div>
@@ -86,8 +88,8 @@ const WhyJoinFintechClub = () => {
               </div>
               <p className="text-gray-700 flex-grow">
                 Enhance your skills in problem-solving, teamwork, leadership,
-                and technical knowledge. Gain hands-on experience with the
-                latest financial technologies.
+                and technical knowledge; Gain hands-on experience within each
+                training sessions and projects.
               </p>
             </div>
 
@@ -107,8 +109,9 @@ const WhyJoinFintechClub = () => {
                 </h3>
               </div>
               <p className="text-gray-700 flex-grow">
-                Connect with industry leaders, attend exclusive events, and get
-                mentorship from professionals in finance and technology.
+                Connect with talented members, industry expertises; Attend
+                exclusive events, specialized workshops; Acquiring
+                mind-blowing knowledge in different areas.
               </p>
             </div>
           </div>

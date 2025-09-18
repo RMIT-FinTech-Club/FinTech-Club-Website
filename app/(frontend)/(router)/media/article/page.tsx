@@ -130,7 +130,7 @@ export default function ArticleLibrary() {
             fetchPriority="high"
             loading="eager"
             priority={true}
-            className="w-full h-full opacity-25"
+            className="w-full h-full opacity-15"
           />
         </div>
         <div className="absolute w-screen h-screen top-[-12vh] left-[2vw] z-20">
