@@ -1,0 +1,301 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import MuiLink from "@mui/material/Link";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import axios from "axios";
+
+// --- INTERFACES MATCHING YOUR REAL API DATA ---
+
+interface ApiArticle {
+  _id: string;
+  title: string;
+  summary: string;
+  content_url: string;
+  illustration_url: string;
+  labels: string[];
+  authors: string[];
+  publicationDate: string;
+}
+
+interface RelatedArticle {
+  _id: string;
+  title: string;
+  illustration_url: string;
+  publicationDate: string;
+}
+
+// Helper function for formatting dates
+const formatPublicationDate = (isoString: string): string => {
+  if (!isoString) return "";
+  const dateObj = new Date(isoString);
+  return dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+export default function SpecificArticle({
+  params,
+}: {
+  params: { id: string };
+}) {
+  // --- STATE MANAGEMENT ---
+  const [article, setArticle] = useState<ApiArticle | null>(null);
+  const [relatedArticles, setRelatedArticles] = useState<RelatedArticle[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // --- DATA FETCHING ---
+  useEffect(() => {
+    if (!params.id) return;
+
+    const fetchArticleData = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await axios.get(`/api/v1/article/${params.id}`);
+        const { article: fetchedArticle, suggestedRelatedArticles } =
+          response.data;
+
+        setArticle(fetchedArticle);
+        setRelatedArticles(suggestedRelatedArticles);
+      } catch (err) {
+        console.error("Error fetching article:", err);
+        setError("Could not load the article. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticleData();
+  }, [params.id]);
+
+  const handleBreadcrumbClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    console.info("You clicked a breadcrumb.");
+  };
+
+  // --- CONDITIONAL RENDERING ---
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-screen items-center justify-center text-red-500 text-xl">
+        {error}
+      </div>
+    );
+  }
+
+  if (!article) {
+    return (
+      <div className="flex h-screen items-center justify-center text-xl">
+        Article not found.
+      </div>
+    );
+  }
+
+  return (
+    <section className="relative">
+      {/* HERO SECTION */}
+      <div
+        className="w-screen h-[92vh] flex items-center justify-between px-16"
+        style={{
+          background: "linear-gradient(to bottom, #0D1742 62%, #DBB968 100%)",
+        }}
+      >
+        {/* <div className="absolute w-screen h-screen z-20 top-[0.1rem] left-[-0.1rem]">
+            <Image src="https://d2prwyp3rwi40.cloudfront.net/media/YellowStars-NoRope.png" alt="Yellow Stars" width={1000} height={200} loading="lazy" className="w-full" />
+        </div> */}
+        <div className="flex flex-col items-start justify-center z-30 w-[58vw]">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {article.labels?.map((label) => (
+              <div
+                key={label}
+                className="p-2 rounded-lg bg-ft-primary-yellow-200 text-sm font-medium"
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+          <h1 className="text-4xl font-bold text-ft-text-bright">
+            {article.title}
+          </h1>
+          <p className="font-medium text-base text-white text-justify py-4 whitespace-pre-wrap">
+            {article.summary}
+          </p>
+          <div
+            className="w-fit h-fit rounded-md p-[2px]"
+            style={{ background: "linear-gradient(to top, #474A6E, #DBB968)" }}
+          >
+            <Link href="/media/article">
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 1.1 }}
+                className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+              >
+                Back to Article Library
+              </motion.button>
+            </Link>
+          </div>
+        </div>
+        <div className="z-30">
+          <Image
+            src={article.illustration_url}
+            alt={article.title}
+            width={500}
+            height={500}
+            className="w-[25vw] h-auto rounded-lg"
+            fetchPriority="high"
+            loading="eager"
+            priority={true}
+          />
+        </div>
+      </div>
+
+      {/* BREADCRUMBS */}
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator={
+          <NavigateNextIcon fontSize="small" sx={{ color: "#A28436" }} />
+        }
+        sx={{ color: "#000000", "& .MuiBreadcrumbs-separator": { mx: 0.5 } }}
+        className="w-full py-8 px-16"
+      >
+        <MuiLink
+          underline="hover"
+          sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+          component={Link}
+          href="/media"
+        >
+          Media
+        </MuiLink>
+        <MuiLink
+          underline="hover"
+          sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+          component={Link}
+          href="/media/article"
+        >
+          Article Library
+        </MuiLink>
+        <MuiLink
+          underline="hover"
+          sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+          component={Link}
+          href={`/media/article/${article._id}`}
+        >
+          {article.title}
+        </MuiLink>
+      </Breadcrumbs>
+
+      {/* MAIN CONTENT SECTION */}
+      <div className="flex justify-center pb-12 px-16 gap-8">
+        <div className="w-full max-w-4xl">
+          <iframe
+            src={article.content_url}
+            title="PDF Viewer"
+            className="w-full h-[150vh] rounded-lg shadow-lg"
+            aria-label="PDF article preview"
+          >
+            This browser does not support PDFs.
+          </iframe>
+          <div
+            className="w-fit h-fit rounded-md p-[2px] mt-[2rem] mb-20 mx-auto"
+            style={{
+              background: "linear-gradient(to top, #474A6E, #DBB968)",
+            }}
+          >
+            <a href="/media/article">
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 1.1 }}
+                className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+              >
+                Back to Article Library
+              </motion.button>
+            </a>
+          </div>
+        </div>
+
+        {/* SIDEBAR */}
+        <div className="w-full max-w-[16rem] flex flex-col gap-4">
+          {/* Author Section */}
+          {article.authors?.length > 0 && (
+            <div className="p-6 rounded-lg shadow-md border-2 border-[#DBB968]">
+              <h2 className="text-3xl font-bold text-[#DBB968] mb-4">
+                Authors
+              </h2>
+              <div className="divide-y divide-gray-200">
+                {article.authors.map((authorName, index) => (
+                  <div key={index} className="py-4 last:pb-0 first:pt-0">
+                    <p className="text-lg font-semibold text-[#000000]">
+                      {authorName}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Related Articles Section */}
+          {relatedArticles?.length > 0 && (
+            <div>
+              <h2 className="text-3xl font-bold text-ft-primary-yellow-100 mb-4">
+                Related Articles
+              </h2>
+              <div className="flex flex-col gap-6">
+                {relatedArticles.map((related) => (
+                  <Link
+                    href={`/media/article/${related._id}`}
+                    key={related._id}
+                    className="block rounded-lg overflow-hidden border-2 border-transparent hover:border-[#DBB968] hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="relative w-full h-72">
+                      <Image
+                        src={related.illustration_url}
+                        alt={related.title}
+                        layout="fill"
+                        objectFit="fill"
+                        className="rounded-t-lg"
+                      />
+                    </div>
+                    <div className="p-4 bg-gray-50 rounded-b-lg">
+                      <p className="font-semibold text-gray-800 text-md leading-snug">
+                        {related.title}
+                      </p>
+                      <p className="text-sm text-gray-500 mt-2">
+                        {formatPublicationDate(related.publicationDate)}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="absolute bottom-[-9rem] left-0">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
+          alt="Mascot"
+          width={200}
+          height={500}
+          loading="lazy"
+          className="w-[25vw] h-auto scale-x-[-1]"
+        />
+      </div>
+    </section>
+  );
+}

@@ -1,10 +1,8 @@
 "use client";
 
-import React from "react";
-import { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import LabelSort from "./components/labelSort";
@@ -12,14 +10,147 @@ import ArticleCard from "./components/articleCard";
 import { motion } from "framer-motion";
 import PaginationRounded from "./components/pagination";
 import Image from "next/image";
+import axios from "axios";
+
+// Interface for the raw data from the API
+interface ApiArticle {
+  _id: string;
+  title: string;
+  summary: string;
+  illustration_url: string;
+  labels: string[];
+  publicationDate: string;
+}
+
+// Interface for the data structure your ArticleCard component needs
+interface DisplayArticle {
+  _id: string;
+  imageSrc: string;
+  imageAlt: string;
+  labels: string[];
+  title: string;
+  description: string;
+  date: string;
+}
+
+// --- Helper functions for date formatting ---
+const addOrdinalSuffix = (day: number): string => {
+  if (day > 10 && day < 14) return `${day}th`;
+  const lastDigit = day % 10;
+  switch (lastDigit) {
+    case 1:
+      return `${day}st`;
+    case 2:
+      return `${day}nd`;
+    case 3:
+      return `${day}rd`;
+    default:
+      return `${day}th`;
+  }
+};
+
+const formatArticleDate = (isoString: string): string => {
+  const dateObj = new Date(isoString);
+  const day = addOrdinalSuffix(dateObj.getDate());
+  const month = dateObj.toLocaleString("en-US", { month: "long" });
+  const year = dateObj.getFullYear();
+  return `${month} ${day}, ${year}`;
+};
 
 export default function ArticleLibrary() {
-  const pRef = useRef<HTMLParagraphElement>(null);
-  const [page, setPage] = useState(1); // Single page state
+  // State for managing API data, loading, and errors
+  const [articles, setArticles] = useState<DisplayArticle[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  // State for pagination and filtering
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+
+  // State to hold all unique labels for the dropdown
+  const [availableLabels, setAvailableLabels] = useState<string[]>([]);
+
+  const itemsPerPage = 5;
+
+  // Effect to fetch all unique labels once on component mount
+  useEffect(() => {
+    const fetchAllLabels = async () => {
+      try {
+        // Assuming the API without params returns all articles
+        const response = await axios.get(`/api/v1/article`);
+        const allArticles: ApiArticle[] =
+          response.data.articles || response.data || [];
+
+        // Use a Set to get only unique labels
+        const allLabelsFlat = allArticles.flatMap((article) => article.labels);
+        const uniqueLabels = Array.from(new Set(allLabelsFlat)).sort();
+
+        // Add "All" option to the beginning
+        setAvailableLabels(["All", ...uniqueLabels]);
+      } catch (err) {
+        console.error("Failed to fetch unique labels:", err);
+        // Set a default or handle the error
+        setAvailableLabels(["All"]);
+      }
+    };
+
+    fetchAllLabels();
+  }, []); // Empty dependency array ensures this runs only once
+
+  // Effect to fetch paginated/filtered articles when page or selectedLabel changes
+  useEffect(() => {
+    const fetchArticles = async () => {
+      setLoading(true);
+      setError("");
+
+      try {
+        const params = new URLSearchParams({
+          page: page.toString(),
+          limit: itemsPerPage.toString(),
+        });
+        if (selectedLabel && selectedLabel !== "All") {
+          params.append("labels", selectedLabel);
+        }
+
+        const response = await axios.get(
+          `/api/v1/article?${params.toString()}`
+        );
+        const {
+          articles: fetchedArticles = [],
+          totalPages: fetchedTotalPages = 1,
+        } = response.data;
+
+        const formattedArticles: DisplayArticle[] = fetchedArticles.map(
+          (article: ApiArticle) => ({
+            _id: article._id,
+            title: article.title,
+            description: article.summary,
+            imageSrc: article.illustration_url,
+            imageAlt: article.title,
+            labels: article.labels,
+            date: formatArticleDate(article.publicationDate),
+          })
+        );
+
+        setArticles(formattedArticles);
+        setTotalPages(fetchedTotalPages);
+      } catch (err: any) {
+        console.error("Error fetching articles:", err);
+        setError("Failed to load articles. Please try again later.");
+        setArticles([]);
+        setTotalPages(1);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, [page, selectedLabel]);
 
   const handleLabelSelect = (label: string) => {
-    console.log("Selected label:", label);
-    // TODO: Call API based on selected label
+    setSelectedLabel(label);
+    setPage(1); // Reset to first page when filter changes
   };
 
   const handleBreadcrumbClick = (
@@ -28,91 +159,68 @@ export default function ArticleLibrary() {
     console.info("You clicked a breadcrumb.");
   };
 
-  const articles = [
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 1",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 1",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 1st, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 2",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 2",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 2nd, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 3",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 3",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 3rd, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 4",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 4",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 4th, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 5",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 5",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 5th, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 6",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 6",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 5th, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Article 7",
-      labels: ["Finance", "Tech"],
-      title: "Article Title 7",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 5th, 2025",
-    },
-  ];
+  const renderArticleContent = () => {
+    if (loading) {
+      return (
+        <div className="flex h-[40vh] w-full flex-col items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F]"></div>
+          <p className="mt-4 text-lg text-gray-600">Loading Articles...</p>
+        </div>
+      );
+    }
 
-  const itemsPerPage = 5; // Show 5 cards per page
-  const totalPages = Math.ceil(articles.length / itemsPerPage);
+    if (error) {
+      return (
+        <div className="text-center py-16">
+          <p className="text-lg text-red-600 bg-red-100 px-4 py-3 rounded-lg inline-block">
+            ⚠️ {error}
+          </p>
+        </div>
+      );
+    }
 
-  // Determine which cards to render based on page
-  const getVisibleCards = () => {
-    const startIndex = (page - 1) * itemsPerPage;
-    return articles.filter(
-      (_, index) => index >= startIndex && index < startIndex + itemsPerPage
+    if (articles.length === 0) {
+      return (
+        <div className="text-center py-16">
+          <h3 className="text-2xl font-bold text-[#2C305F] mb-2">
+            No Articles Found
+          </h3>
+          <p className="text-[#5E5E92]">
+            There are no articles matching your selected filter.
+          </p>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <div className="py-6 px-24">
+          {articles.map((article) => (
+            <Link href={`/media/article/${article._id}`} key={article._id}>
+              <ArticleCard
+                imageSrc={article.imageSrc}
+                imageAlt={article.imageAlt}
+                labels={article.labels}
+                title={article.title}
+                description={article.description}
+                date={article.date}
+              />
+            </Link>
+          ))}
+        </div>
+        {totalPages > 1 && (
+          <div className="flex justify-center">
+            <PaginationRounded
+              page={page}
+              onPageChange={(value) => setPage(value)}
+              count={totalPages}
+            />
+          </div>
+        )}
+      </>
     );
   };
 
-  const visibleCards = getVisibleCards();
   return (
     <section>
       <div
@@ -125,26 +233,21 @@ export default function ArticleLibrary() {
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/media/article/BiWeeklyArticle-LandscapePoster.png"
             alt="Bi-Weekly Article Poster"
-            width={1000}
-            height={200}
-            fetchPriority="high"
-            loading="eager"
-            priority={true}
-            className="w-full h-full opacity-15"
+            fill
+            priority
+            className="object-cover opacity-15"
           />
         </div>
         <div className="absolute w-screen h-screen top-[-12vh] left-[2vw] z-20">
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/media/YellowStars.png"
             alt="Yellow Stars"
-            width={1000}
-            height={200}
-            loading="lazy"
-            className="w-full"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
           />
         </div>
-
-        <div className="flex flex-col items-center justify-center z-10 mt-[17vh]">
+        <div className="flex flex-col items-center justify-center z-30 mt-[17vh]">
           <h1 className="text-5xl font-bold text-[9vh] text-center text-[#2C305F] drop-shadow-[1.5px_1.5px_0_#DCB968]">
             Bi-weekly Article
           </h1>
@@ -158,12 +261,12 @@ export default function ArticleLibrary() {
             and discover what’s truly shaping the industry today.
           </p>
           <div
-            className="w-fit h-fit rounded-md p-[2px] mt-[1.5rem] "
+            className="w-fit h-fit rounded-md p-[2px] mt-[1.5rem]"
             style={{
               background: "linear-gradient(to top, #474A6E, #DBB968)",
             }}
           >
-            <a href="/media">
+            <Link href="/media">
               <motion.button
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 1.1 }}
@@ -171,7 +274,7 @@ export default function ArticleLibrary() {
               >
                 Back to Media
               </motion.button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -211,29 +314,15 @@ export default function ArticleLibrary() {
           Article Library
         </MuiLink>
       </Breadcrumbs>
+
       <div className="relative pb-4 pl-24">
-        <LabelSort onSelect={handleLabelSelect} />
-      </div>
-      <div className="py-6 px-24">
-        {visibleCards.map((article, index) => (
-          <ArticleCard
-            key={index}
-            imageSrc={article.imageSrc}
-            imageAlt={article.imageAlt}
-            labels={article.labels}
-            title={article.title}
-            description={article.description}
-            date={article.date}
-          />
-        ))}
-      </div>
-      <div className="flex justify-center mt-8">
-        <PaginationRounded
-          page={page}
-          onPageChange={setPage}
-          count={totalPages}
+        <LabelSort
+          availableLabels={availableLabels}
+          onSelect={handleLabelSelect}
         />
       </div>
+
+      {renderArticleContent()}
     </section>
   );
 }

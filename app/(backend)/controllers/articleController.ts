@@ -2,14 +2,16 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import Article from "../models/article";
 import connectMongoDB from "../libs/mongodb";
-import type {Article as ArticleType } from "../types/article";
+import type { Article as ArticleType } from "../types/article";
 
 // Function: get all research
 export async function getAllArticle(request: NextRequest) {
   try {
     await connectMongoDB();
-    const article = await Article.find({}).sort({ createdAt: -1 });
-    return NextResponse.json(article, { status: 200 });
+    const articles = await Article.find({})
+      .select("_id title summary illustration_url labels publicationDate")
+      .sort({ createdAt: -1 });
+    return NextResponse.json(articles, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: "Cannot fetch article papers" },
@@ -23,16 +25,14 @@ export async function getArticleById(id: string, nextRequest?: NextRequest) {
     await connectMongoDB();
     const article = await Article.findById(id);
     if (!article) {
-      return NextResponse.json(
-        { error: "Article not found" },
-        { status: 404 }
-      );
-    }
-    //Return the related articles based on main article's labels 
+      return NextResponse.json({ error: "Article not found" }, { status: 404 });
+    } //Return the related articles based on main article's labels
     const relatedArticles = await Article.find({
       labels: { $in: article.labels }, // Match articles with the same labels
-      _id: { $ne: article._id } // Exclude the main article itself
-    }).sort({publicationDAte: -1 }).limit(5);
+      _id: { $ne: article._id }, // Exclude the main article itself
+    })
+      .sort({ publicationDate: -1 })
+      .limit(5);
 
     const suggestedRelatedArticles = relatedArticles.map((relatedArticle) => ({
       _id: relatedArticle._id,
@@ -42,7 +42,10 @@ export async function getArticleById(id: string, nextRequest?: NextRequest) {
       illustration_url: relatedArticle.illustration_url,
     }));
 
-    return NextResponse.json({article, suggestedRelatedArticles}, { status: 200 });
+    return NextResponse.json(
+      { article, suggestedRelatedArticles },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { error: "Cannot fetch article" },
@@ -52,7 +55,9 @@ export async function getArticleById(id: string, nextRequest?: NextRequest) {
 }
 
 // Function: create article
-export async function createArticle(data: Omit<ArticleType, '_id' | 'createdAt' | 'updatedAt'>) {
+export async function createArticle(
+  data: Omit<ArticleType, "_id" | "createdAt" | "updatedAt">
+) {
   try {
     await connectMongoDB();
     const article = await Article.create(data);
@@ -61,7 +66,7 @@ export async function createArticle(data: Omit<ArticleType, '_id' | 'createdAt' 
       { status: 201 }
     );
   } catch (error) {
-    console.error('Create article error:', error);
+    console.error("Create article error:", error);
     return NextResponse.json(
       { error: "Cannot create article" },
       { status: 500 }
@@ -75,21 +80,18 @@ export async function updateArticle(id: string, data: Partial<ArticleType>) {
     await connectMongoDB();
     const article = await Article.findByIdAndUpdate(id, data, {
       new: true,
-      runValidators: true
+      runValidators: true,
     });
     if (!article) {
-      return NextResponse.json(
-        { error: "Article not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Article not found" }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "Aricle updated successfully", article },
+      { message: "Article updated successfully", article },
       { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(
-      { error: "Cannot update article"},
+      { error: "Cannot update article" },
       { status: 500 }
     );
   }
@@ -100,10 +102,7 @@ export async function deleteArticle(id: string) {
     await connectMongoDB();
     const article = await Article.findByIdAndDelete(id);
     if (!article) {
-      return NextResponse.json(
-        { error: "Article not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Article not found" }, { status: 404 });
     }
     return NextResponse.json(
       { message: "Article deleted successfully" },
@@ -126,47 +125,43 @@ export async function filterArticleByLabel(request: NextRequest) {
   const limit = parseInt(searchParams.get("limit") || "5", 10);
   const skip = (page - 1) * limit;
 
-// If no label, page, or limit is provided, return the latest 5 articles  
-  if ( labels.length === 0 && !request.nextUrl.searchParams.has("page") && !request.nextUrl.searchParams.has("limit")) {  
-    const lastestArticles = await Article.find({}).sort({publicationDate: -1 }).limit(5);
-    return NextResponse.json(lastestArticles, { status: 200 });
-  }
-// Validate pagination parameters
+  // Validate pagination parameters
   if (page < 1 || limit < 1) {
-    return NextResponse.json({ message: "Invalid pagination parameters" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Invalid pagination parameters" },
+      { status: 400 }
+    );
   }
 
   try {
     await connectMongoDB();
-     // Build query
-    const query: any = {};
-    // 2 If labels are provided
-    if (labels.length ===1) {
-      query.labels = {
-        $in: labels.map(label => new RegExp(`^${label}$`, "i"))
-      };
-    }else {
-      query.labels = {
-        $all: labels.map(label => new RegExp(`^${label}$`, "i"))
-      };
-    }
 
-    const totalArticles = await Article.countDocuments(query);
-    const totalPages = Math.ceil(totalArticles / limit);
-    //
-    const articles = await Article.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit);
-    if(articles.length === 0){
-      return NextResponse.json({
-        message: "No articles with your selected lables"
-      }
-      )
-    }else{
-      return NextResponse.json(
-        {articles,},
-        {status: 200 }
-      );
+    // Build query - this handles the case where `labels` is empty
+    const query: any = {};
+    if (labels.length > 0) {
+      query.labels = {
+        $in: labels.map((label) => new RegExp(`^${label}$`, "i")),
+      };
     }
     
+    // Perform queries to get total count and the paginated articles
+    const totalArticles = await Article.countDocuments(query);
+    const totalPages = Math.ceil(totalArticles / limit);
+    
+    const articles = await Article.find(query)
+      .select("_id title summary illustration_url labels publicationDate")
+      .sort({ publicationDate: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    // ALWAYS return the same data structure
+    return NextResponse.json(
+      { 
+        articles, 
+        totalPages 
+      }, 
+      { status: 200 }
+    );
 
   } catch (error) {
     console.error("Error in GET /article:", error);
