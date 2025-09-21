@@ -1,6 +1,4 @@
 import "@styles/globals.css";
-import Footer from "@/components/footer";
-import FooterNoRounded from "@/components/footerNoRounded";
 import Navbar from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
@@ -39,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html className="overflow-x-hidden" lang="en" suppressHydrationWarning>
       <body
         className={clsx(
-          "min-h-screen bg-white font-sans antialiased overflow-x-hidden",
+          "min-h-screen bg-[#F9FAFB] font-sans antialiased overflow-x-hidden",
           fontSans.className
         )}
       >
@@ -47,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="flex-grow overflow-x-clip">{children}</main>
-            <FooterWrapper /> {/* 👈 handles conditional footer */}
+            <FooterWrapper />
           </div>
         </Providers>
       </body>

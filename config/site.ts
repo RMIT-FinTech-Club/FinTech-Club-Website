@@ -24,11 +24,6 @@ export const siteConfig = {
     {
       label: "Events",
       href: "/events",
-    },
-  ],
-  links: {
-    github: "https://github.com/RMIT-FinTech-Club/FinTech-website",
-    discord: "https://discord.gg/GHDEEhEGZa",
-    facebook: "https://www.facebook.com/rmitfintechclub",
-  },
+    }
+  ]
 };
