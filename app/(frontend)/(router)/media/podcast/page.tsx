@@ -1,10 +1,9 @@
 "use client";
 
-import React, { Suspense } from "react";
-import { useEffect, useRef, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import LabelSort from "./components/labelSort";
@@ -12,108 +11,206 @@ import PodcastCard from "./components/podcastCard";
 import { motion } from "framer-motion";
 import PaginationRounded from "./components/pagination";
 import Image from "next/image";
+import axios from "axios";
 
-export default function PodcastPage() {
-  const pRef = useRef<HTMLParagraphElement>(null);
-  const [page, setPage] = useState(1); // Single page state
+// Interface for the raw podcast data from the API
+interface ApiPodcast {
+  _id: string;
+  title: string;
+  summary: string;
+  thumbnail_url: string;
+  labels: string[];
+  publicationDate: string;
+}
+
+// Interface for the data structure your PodcastCard component needs
+interface DisplayPodcast {
+  _id: string;
+  imageSrc: string;
+  imageAlt: string;
+  labels: string[];
+  title: string;
+  description: string;
+  date: string;
+}
+
+// --- Helper functions for date formatting ---
+const addOrdinalSuffix = (day: number): string => {
+  if (day > 10 && day < 14) return `${day}th`;
+  const lastDigit = day % 10;
+  switch (lastDigit) {
+    case 1:
+      return `${day}st`;
+    case 2:
+      return `${day}nd`;
+    case 3:
+      return `${day}rd`;
+    default:
+      return `${day}th`;
+  }
+};
+
+const formatPodcastDate = (isoString: string): string => {
+  const dateObj = new Date(isoString);
+  const day = addOrdinalSuffix(dateObj.getDate());
+  const month = dateObj.toLocaleString("en-US", { month: "long" });
+  const year = dateObj.getFullYear();
+  return `${month} ${day}, ${year}`;
+};
+
+export default function PodcastLibrary() {
+  // State for managing API data, loading, and errors
+  const [podcasts, setPodcasts] = useState<DisplayPodcast[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  // State for pagination and filtering
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+
+  // State to hold all unique labels for the dropdown
+  const [availableLabels, setAvailableLabels] = useState<string[]>([]);
+
+  const itemsPerPage = 5;
+
+  // Effect to fetch all unique labels once on component mount
+  useEffect(() => {
+    const fetchAllLabels = async () => {
+      try {
+        // Fetch all podcasts (or a large number) to aggregate labels
+        const response = await axios.get(`/api/v1/podcast?limit=100`); 
+        const allPodcasts: ApiPodcast[] = response.data.podcasts || [];
+
+        // Use a Set to get only unique labels
+        const allLabelsFlat = allPodcasts.flatMap((podcast) => podcast.labels);
+        const uniqueLabels = Array.from(new Set(allLabelsFlat)).sort();
+
+        // Add "All" option to the beginning
+        setAvailableLabels(["All", ...uniqueLabels]);
+      } catch (err) {
+        console.error("Failed to fetch unique labels:", err);
+        setAvailableLabels(["All"]); // Set a default
+      }
+    };
+    fetchAllLabels();
+  }, []); // Empty dependency array ensures this runs only once
+
+  // Effect to fetch paginated/filtered podcasts when page or selectedLabel changes
+  useEffect(() => {
+    const fetchPodcasts = async () => {
+      setLoading(true);
+      setError("");
+
+      try {
+        const params = new URLSearchParams({
+          page: page.toString(),
+          limit: itemsPerPage.toString(),
+        });
+        if (selectedLabel && selectedLabel !== "All") {
+          params.append("labels", selectedLabel);
+        }
+
+        const response = await axios.get(`/api/v1/podcast?${params.toString()}`);
+        const {
+          podcasts: fetchedPodcasts = [],
+          totalPages: fetchedTotalPages = 1,
+        } = response.data;
+
+        const formattedPodcasts: DisplayPodcast[] = fetchedPodcasts.map(
+          (podcast: ApiPodcast) => ({
+            _id: podcast._id,
+            title: podcast.title,
+            description: podcast.summary,
+            imageSrc: podcast.thumbnail_url,
+            imageAlt: podcast.title,
+            labels: podcast.labels,
+            date: formatPodcastDate(podcast.publicationDate),
+          })
+        );
+
+        setPodcasts(formattedPodcasts);
+        setTotalPages(fetchedTotalPages);
+      } catch (err: any) {
+        console.error("Error fetching podcasts:", err);
+        setError("Failed to load podcasts. Please try again later.");
+        setPodcasts([]);
+        setTotalPages(1);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPodcasts();
+  }, [page, selectedLabel]);
 
   const handleLabelSelect = (label: string) => {
-    console.log("Selected label:", label);
-    // TODO: Call API based on selected label
+    setSelectedLabel(label);
+    setPage(1); // Reset to first page when filter changes
   };
+  
+  const renderPodcastContent = () => {
+    if (loading) {
+      return (
+        <div className="flex h-[40vh] w-full flex-col items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F]"></div>
+          <p className="mt-4 text-lg text-gray-600">Loading Podcasts...</p>
+        </div>
+      );
+    }
 
-  const handleBreadcrumbClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    console.info("You clicked a breadcrumb.");
-  };
+    if (error) {
+      return (
+        <div className="text-center py-16">
+          <p className="text-lg text-red-600 bg-red-100 px-4 py-3 rounded-lg inline-block">
+            ⚠️ {error}
+          </p>
+        </div>
+      );
+    }
 
-  // Define podcast data array
-  const podcasts = [
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 1",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 1",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 1st, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 2",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 2",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 2nd, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 3",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 3",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 3rd, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 4",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 4",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 4th, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 5",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 5",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 5th, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 6",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 6",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 5th, 2025",
-    },
-    {
-      imageSrc:
-        "https://d2prwyp3rwi40.cloudfront.net/home/assets/IntroPhoto-ODay.png",
-      imageAlt: "Podcast 7",
-      labels: ["Finance", "Tech"],
-      title: "Podcast Title 7",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date: "January 5th, 2025",
-    },
-  ];
+    if (podcasts.length === 0) {
+      return (
+        <div className="text-center py-16">
+          <h3 className="text-2xl font-bold text-[#2C305F] mb-2">
+            No Podcasts Found
+          </h3>
+          <p className="text-[#5E5E92]">
+            There are no podcasts matching your selected filter.
+          </p>
+        </div>
+      );
+    }
 
-  const itemsPerPage = 5; // Show 5 cards per page
-  const totalPages = Math.ceil(podcasts.length / itemsPerPage);
-
-  // Determine which cards to render based on page
-  const getVisibleCards = () => {
-    const startIndex = (page - 1) * itemsPerPage;
-    return podcasts.filter(
-      (_, index) => index >= startIndex && index < startIndex + itemsPerPage
+    return (
+      <>
+        <div className="py-6 px-24">
+          {podcasts.map((podcast) => (
+            <Link href={`/media/podcast/${podcast._id}`} key={podcast._id}>
+                <PodcastCard
+                  imageSrc={podcast.imageSrc}
+                  imageAlt={podcast.imageAlt}
+                  labels={podcast.labels}
+                  title={podcast.title}
+                  description={podcast.description}
+                  date={podcast.date}
+                />
+            </Link>
+          ))}
+        </div>
+        {totalPages > 1 && (
+          <div className="flex justify-center">
+            <PaginationRounded
+              page={page}
+              onPageChange={(value) => setPage(value)}
+              count={totalPages}
+            />
+          </div>
+        )}
+      </>
     );
   };
-
-  const visibleCards = getVisibleCards();
+  
   return (
     <section>
       <div
@@ -124,30 +221,27 @@ export default function PodcastPage() {
       >
         <div className="absolute w-screen h-screen z-10">
           <Image
-            src="https://d2prwyp3rwi40.cloudfront.net/media/podcast/Fintechtainment-LandscapePoster.png"
+            src="https://d2prwyp3rwi40.cloudfront.net/media/podcast/Fintechtainment-LandscapePoster-New.png"
             alt="Fintechtainment Poster"
-            width={1000}
-            height={200}
-            fetchPriority="high"
-            loading="eager"
-            priority={true}
-            className="w-full h-full opacity-25"
+            fill
+            priority
+            className="object-fill opacity-15"
           />
         </div>
         <div className="absolute w-screen h-screen top-[-12vh] left-[2vw] z-20">
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/media/YellowStars.png"
             alt="Yellow Stars"
-            width={1000}
-            height={200}
+            width={1200}
+            height={800}
             loading="lazy"
-            className="w-full"
+            className="w-full h-auto"
           />
         </div>
 
-        <div className="flex flex-col items-center justify-center z-10 mt-[17vh]">
+        <div className="flex flex-col items-center justify-center z-30 mt-[17vh]">
           <h1 className="text-5xl font-bold text-[9vh] text-center text-ft-primary-yellow-50 drop-shadow-[1.5px_1.5px_0_#1E264A]">
-            Fintechtainment
+            FintechTainment
           </h1>
           <p className="leading-6 font-semibold text-base text-white w-[50vw] text-justify py-6">
             FintechTainment is play of words between "Fintech" and
@@ -163,7 +257,7 @@ export default function PodcastPage() {
               background: "linear-gradient(to top, #474A6E, #DBB968)",
             }}
           >
-            <a href="/media">
+            <Link href="/media">
               <motion.button
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 1.1 }}
@@ -171,7 +265,7 @@ export default function PodcastPage() {
               >
                 Back to Media
               </motion.button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -194,7 +288,6 @@ export default function PodcastPage() {
           }}
           component={Link}
           href="/media"
-          onClick={handleBreadcrumbClick}
         >
           Media
         </MuiLink>
@@ -206,37 +299,18 @@ export default function PodcastPage() {
           }}
           component={Link}
           href="/media/podcast"
-          onClick={handleBreadcrumbClick}
         >
           Podcast Library
         </MuiLink>
-        <Typography sx={{ color: "white" }} aria-current="page">
-          Podcast Library
-        </Typography>
       </Breadcrumbs>
       <div className="relative pb-4 pl-24">
-        <LabelSort onSelect={handleLabelSelect} />
-      </div>
-      <div className="py-6 px-24">
-			  {visibleCards.map((podcast, index) => (
-				<PodcastCard
-				  key={index}
-				  imageSrc={podcast.imageSrc}
-				  imageAlt={podcast.imageAlt}
-				  labels={podcast.labels}
-				  title={podcast.title}
-				  description={podcast.description}
-				  date={podcast.date}
-				/>
-			  ))}
-			</div>
-      <div className="flex justify-center mt-8">
-        <PaginationRounded
-          page={page}
-          onPageChange={setPage}
-          count={totalPages}
+        <LabelSort
+            availableLabels={availableLabels}
+            onSelect={handleLabelSelect}
         />
       </div>
+      
+      {renderPodcastContent()}
     </section>
   );
 }

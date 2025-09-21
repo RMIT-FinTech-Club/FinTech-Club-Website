@@ -115,10 +115,7 @@ export default function SpecificArticle({
         style={{
           background: "linear-gradient(to bottom, #0D1742 62%, #DBB968 100%)",
         }}
-      >
-        {/* <div className="absolute w-screen h-screen z-20 top-[0.1rem] left-[-0.1rem]">
-            <Image src="https://d2prwyp3rwi40.cloudfront.net/media/YellowStars-NoRope.png" alt="Yellow Stars" width={1000} height={200} loading="lazy" className="w-full" />
-        </div> */}
+      >        
         <div className="flex flex-col items-start justify-center z-30 w-[58vw]">
           <div className="flex flex-wrap gap-2 mb-4">
             {article.labels?.map((label) => (
@@ -133,23 +130,48 @@ export default function SpecificArticle({
           <h1 className="text-4xl font-bold text-ft-text-bright">
             {article.title}
           </h1>
-          <p className="font-medium text-base text-white text-justify py-4 whitespace-pre-wrap">
+          <p className="font-medium text-base text-white text-justify py-2 whitespace-pre-wrap">
             {article.summary}
           </p>
-          <div
-            className="w-fit h-fit rounded-md p-[2px]"
-            style={{ background: "linear-gradient(to top, #474A6E, #DBB968)" }}
-          >
-            <Link href="/media/article">
+          <section className="flex flex-row justify-start gap-4">
+            <div
+              className="w-fit h-fit rounded-md p-[2px] mt-[0.5rem]"
+              style={{
+                background: "linear-gradient(to top, #474A6E, #DBB968)",
+              }}
+            >
               <motion.button
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 1.1 }}
                 className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+                onClick={() => {
+                  const element = document.getElementById("article");
+                  if (element) {
+                    // Use the browser's built-in smooth scrolling
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
               >
-                Back to Article Library
+                Read Article
               </motion.button>
-            </Link>
-          </div>
+            </div>
+            <div
+              className="w-fit h-fit rounded-md p-[2px] mt-[0.5rem]"
+              style={{
+                background: "linear-gradient(to top, #474A6E, #DBB968)",
+              }}
+            >
+              <Link href="/media/article">
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 1.1 }}
+                  className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+                >
+                  Back to Article Library
+                </motion.button>
+              </Link>
+            </div>
+          </section>
         </div>
         <div className="z-30">
           <Image
@@ -201,12 +223,12 @@ export default function SpecificArticle({
       </Breadcrumbs>
 
       {/* MAIN CONTENT SECTION */}
-      <div className="flex justify-center pb-12 px-16 gap-8">
+      <div id="article" className="flex justify-center pb-12 px-16 gap-8">
         <div className="w-full max-w-4xl">
           <iframe
             src={article.content_url}
             title="PDF Viewer"
-            className="w-full h-[150vh] rounded-lg shadow-lg"
+            className="w-full h-[120vh] rounded-lg shadow-lg"
             aria-label="PDF article preview"
           >
             This browser does not support PDFs.

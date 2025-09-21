@@ -1,5 +1,5 @@
 import type { NextRequest} from "next/server";
-import { deletePodcast, getPodcastByLabel, updatePodcast, getPodcastById } from "@/app/(backend)/controllers/podcastController";
+import { deletePodcast, updatePodcast, getPodcastById } from "@/app/(backend)/controllers/podcastController";
 
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {

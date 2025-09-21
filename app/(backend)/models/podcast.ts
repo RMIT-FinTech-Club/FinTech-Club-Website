@@ -1,43 +1,86 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, ValidatorProps } from "mongoose";
 
-const labelCategories = ["Fintech", "Technology", "Blockchain", "AI", "Customer Service", "Security", "Sustainability", "Innovation", "Digital Transformation", "Startups", "Healthcare", "Art", "Ethics", "5G", "IoT", "Quantum", "Energy", "Voice", "Cloud", "Edge", "Smart City", "Education", "Wearable", "Automotive", "Metaverse", "Policy"];
-
-const podcastSchema = new Schema({
-    title: { type: String, required: true},
+const podcastSchema = new Schema(
+  {
+    title: { type: String, required: true },
     summary: { type: String, required: true },
     publicationDate: { type: Date, default: Date.now },
-    video_url:{type:String, required: true, validator:{
+    video_url: {
+      type: String,
+      required: true,
+      validate: {
         validator: function (value: string) {
-            try {
-                new URL(value); // Throw when the value is not a valid URL
-                return true;
-            } catch (err) {
-                return false;
-            }
-        }
-    }
-    },
-    thumbnail_url:{type: String, required: true, validator:{
-        validator: function (value: string) {
-            try {
-                new URL(value); // Throw when the value is not a valid URL
-                return true;
-            } catch (err) {
-                return false;
-            }
-        }
-    }},
-    guest_speaker:{type: String, required: true},
-    creator_team:{type: [String], required: true },
-    labels: { type: [String], required: true, validator:{
-        validator: function (value: string[]) {
-            return value.every(label => labelCategories.includes(label));
+          try {
+            new URL(value);
+            return true;
+          } catch (err) {
+            return false;
+          }
         },
-        message: "One or more labels is not a valid label"
-    }}
-},{
+        message: (props: ValidatorProps) =>
+          `${props.value} is not a valid URL!`,
+      },
+    },
+    thumbnail_url: {
+      type: String,
+      required: true,
+      validate: {
+        validator: function (value: string) {
+          try {
+            new URL(value);
+            return true;
+          } catch (err) {
+            return false;
+          }
+        },
+        message: (props: ValidatorProps) =>
+          `${props.value} is not a valid URL!`,
+      },
+    },
+    guest_speaker: {
+      name: { type: String, required: true },
+      description: { type: String, required: true },
+      avatar_url: {
+        type: String,
+        required: true,
+        validate: {
+          validator: function (value: string) {
+            try {
+              new URL(value);
+              return true;
+            } catch (err) {
+              return false;
+            }
+          },
+          message: (props: ValidatorProps) =>
+            `${props.value} is not a valid URL!`,
+        },
+      },
+      linkedIn_url: {
+        type: String,
+        required: true,
+        validate: {
+          validator: function (value: string) {
+            try {
+              const url = new URL(value);
+              return url.hostname.includes("linkedin.com");
+            } catch (err) {
+              return false;
+            }
+          },
+          message: (props: ValidatorProps) =>
+            `${props.value} is not a valid LinkedIn URL!`,
+        },
+      },
+    },
+    labels: { type: [String], required: true },
+  },
+  {
     timestamps: true,
-}); 
-    
-const Podcast =  mongoose.models?.Podcast || mongoose.model("Podcast", podcastSchema,"PodcastsCollection");
-export default Podcast;      
+  }
+);
+
+const Podcast =
+  mongoose.models?.Podcast || mongoose.model("Podcast", podcastSchema);
+
+export default Podcast;

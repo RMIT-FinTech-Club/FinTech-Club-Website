@@ -1,0 +1,352 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import MuiLink from "@mui/material/Link";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import axios from "axios";
+
+// --- INTERFACES MATCHING YOUR REAL API DATA ---
+
+interface GuestSpeaker {
+  name: string;
+  description: string;
+  avatar_url: string;
+  linkedIn_url: string;
+}
+
+interface ApiPodcast {
+  _id: string;
+  title: string;
+  summary: string;
+  publicationDate: string;
+  video_url: string;
+  thumbnail_url: string;
+  labels: string[];
+  guest_speaker: GuestSpeaker;
+}
+
+interface RelatedPodcast {
+  _id: string;
+  title: string;
+  publicationDate: string;
+  thumbnail_url: string;
+}
+
+// Helper function for formatting dates
+const formatPublicationDate = (isoString: string): string => {
+  if (!isoString) return "";
+  const dateObj = new Date(isoString);
+  return dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+export default function SpecificPodcast({
+  params,
+}: {
+  params: { id: string };
+}) {
+  // --- STATE MANAGEMENT ---
+  const [podcast, setPodcast] = useState<ApiPodcast | null>(null);
+  const [relatedPodcasts, setRelatedPodcasts] = useState<RelatedPodcast[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // --- DATA FETCHING ---
+  useEffect(() => {
+    if (!params.id) return;
+
+    const fetchPodcastData = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await axios.get(`/api/v1/podcast/${params.id}`);
+        const { podcast: fetchedPodcast, suggestedRelatedPodcasts } =
+          response.data;
+
+        setPodcast(fetchedPodcast);
+        setRelatedPodcasts(suggestedRelatedPodcasts);
+      } catch (err) {
+        console.error("Error fetching podcast:", err);
+        setError("Could not load the podcast. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPodcastData();
+  }, [params.id]);
+
+  // --- CONDITIONAL RENDERING ---
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-screen items-center justify-center text-red-500 text-xl">
+        {error}
+      </div>
+    );
+  }
+
+  if (!podcast) {
+    return (
+      <div className="flex h-screen items-center justify-center text-xl">
+        Podcast not found.
+      </div>
+    );
+  }
+
+  return (
+    <section className="relative">
+      {/* HERO SECTION */}
+      <div
+        className="w-screen h-[92vh] flex items-center justify-center px-16"
+        style={{
+          background: "linear-gradient(to bottom, #0D1742 62%, #DBB968 100%)",
+        }}
+      >
+        <div className="flex flex-col justify-center z-30 w-full">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {podcast.labels.map((label) => (
+              <div
+                key={label}
+                className="p-2 rounded-lg bg-ft-primary-yellow-200 text-sm font-medium text-[#0D1742]"
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+          <h1 className="text-4xl font-bold text-ft-text-bright">
+            {podcast.title}
+          </h1>
+          <p className="font-medium text-base text-white text-justify py-4 whitespace-pre-wrap">
+            {podcast.summary}
+          </p>
+          <section className="flex flex-row justify-start gap-4">
+            <div
+              className="w-fit h-fit rounded-md p-[2px] mt-[0.5rem]"
+              style={{
+                background: "linear-gradient(to top, #474A6E, #DBB968)",
+              }}
+            >
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 1.1 }}
+                className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+                onClick={() => {
+                  const element = document.getElementById("podcast-episode");
+                  if (element) {
+                    // Use the browser's built-in smooth scrolling
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                View Podcast
+              </motion.button>
+            </div>
+            <div
+              className="w-fit h-fit rounded-md p-[2px] mt-[0.5rem]"
+              style={{
+                background: "linear-gradient(to top, #474A6E, #DBB968)",
+              }}
+            >
+              <Link href="/media/podcast">
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 1.1 }}
+                  className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+                >
+                  Back to Podcast Library
+                </motion.button>
+              </Link>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      {/* BREADCRUMBS */}
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator={
+          <NavigateNextIcon fontSize="small" sx={{ color: "#A28436" }} />
+        }
+        className="w-full py-8 px-16"
+      >
+        <MuiLink
+          component={Link}
+          href="/media"
+          sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+        >
+          Media
+        </MuiLink>
+        <MuiLink
+          component={Link}
+          href="/media/podcast"
+          sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+        >
+          Podcast Library
+        </MuiLink>
+        <MuiLink
+          component={Link}
+          href={`/media/podcast/${podcast._id}`}
+          sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+        >
+          {podcast.title}
+        </MuiLink>
+      </Breadcrumbs>
+
+      <div
+        id="podcast-episode"
+        className="flex justify-center pb-12 px-16 gap-8"
+      >
+        {/* Main Content Area */}
+        <div className="w-full max-w-4xl">
+          <div className="relative aspect-video w-full">
+            <iframe
+              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+              src={podcast.video_url}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div>
+            <h1 className="text-3xl mt-6 font-bold text-ft-primary-blue-50">
+              {podcast.title}
+            </h1>
+            <p className="text-ft-primary-blue-200 mt-2 italic">
+              Published on {formatPublicationDate(podcast.publicationDate)}
+            </p>
+          </div>
+          {/* --- Guest Speaker Section --- */}
+          <div className="flex my-8 border-2 border-ft-primary-yellow-50 rounded-2xl shadow-lg overflow-hidden">
+            <div className="relative bg-ft-primary-blue-200 w-1/3 flex-shrink-0">
+              <Image
+                src={podcast.guest_speaker.avatar_url}
+                alt={podcast.guest_speaker.name}
+                fill
+                className="object-contain p-4"
+              />
+            </div>
+
+            {/* Text content container */}
+            <div className="bg-ft-primary-blue-300 p-6 w-2/3 self-stretch flex flex-col justify-between">
+              <div>
+                <h3 className="font-bold text-2xl text-ft-primary-blue-50">
+                  {podcast.guest_speaker.name}
+                </h3>
+                <p className="text-[#000000] mt-2 text-base text-justify">
+                  {podcast.guest_speaker.description}
+                </p>
+              </div>
+
+              {/* LinkedIn link with hover effect */}
+              <div className="mt-4 self-start">
+                <a
+                  href={podcast.guest_speaker.linkedIn_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block transition-transform duration-200 hover:scale-110 border-solid border-2 border-[#2C305F] p-2 rounded-lg hover:bg-[#FFEFCA]"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#2C305F"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Back to Library Button */}
+          <div
+            className="w-fit h-fit rounded-md p-[2px] mt-[2rem]"
+            style={{
+              background: "linear-gradient(to top, #474A6E, #DBB968)",
+            }}
+          >
+            <a href="/media/podcast">
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 1.1 }}
+                className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+              >
+                Back to Podcast Library
+              </motion.button>
+            </a>
+          </div>
+        </div>
+
+        {/* Right Sidebar */}
+        <div className="w-full max-w-[17.75rem] flex flex-col gap-8">
+          {relatedPodcasts && relatedPodcasts.length > 0 && (
+            <div>
+              <h2 className="text-3xl font-bold text-[#0D1742] mb-4">
+                Related Podcasts
+              </h2>
+              <div className="flex flex-col gap-4">
+                {relatedPodcasts.map((related) => (
+                  <Link
+                    href={`/media/podcast/${related._id}`}
+                    key={related._id}
+                    className="flex flex-col items-center bg-white rounded-2xl shadow-lg border-2 border-transparent hover:border-[#DBB968] overflow-hidden hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="relative w-full h-40 flex-shrink-0">
+                      <Image
+                        src={related.thumbnail_url}
+                        alt={related.title}
+                        layout="fill"
+                        objectFit="fill"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <p className="font-bold text-sm text-[#0D1742] leading-tight">
+                        {related.title}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {formatPublicationDate(related.publicationDate)}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="absolute right-[-8.5rem] bottom-[15rem]">
+          <Image
+            src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+            alt="Mascot"
+            width={200}
+            height={500}
+            loading="lazy"
+            className="w-[25vw] h-auto -rotate-[35deg]"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

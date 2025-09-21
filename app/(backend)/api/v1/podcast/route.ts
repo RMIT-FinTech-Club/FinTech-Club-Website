@@ -1,17 +1,18 @@
-import type {NextRequest} from "next/server";
-import { addNewPodcast, getAllPodcasts, getPodcastByLabel } from "@/app/(backend)/controllers/podcastController";
+import type { NextRequest } from "next/server";
+import { getPodcasts, createPodcast } from "@/app/(backend)/controllers/podcastController";
 
-export async function GET(request:NextRequest) {
-    const {searchParams} = new URL(request.url);
-    const labels = searchParams.getAll("labels");
-    if(labels.length > 0 ){
-        return getPodcastByLabel(request);
-    }else {
-        return getAllPodcasts(request)
-        
-    }
+/**
+ * Handles GET requests to fetch all podcasts, with support for
+ * filtering by labels and pagination.
+ */
+export async function GET(request: NextRequest) {
+  return getPodcasts(request);
 }
-export async function POST(request: NextRequest){
-    const podcast = await request.json();
-    return addNewPodcast(podcast);
+
+/**
+ * Handles POST requests to create a new podcast.
+ */
+export async function POST(request: NextRequest) {
+  const podcastData = await request.json();
+  return createPodcast(podcastData);
 }
