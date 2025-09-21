@@ -238,7 +238,7 @@ export default function SpecificPodcast({
                 src={podcast.guest_speaker.avatar_url}
                 alt={podcast.guest_speaker.name}
                 fill
-                className="object-contain p-4"
+                className="object-cover p-4"
               />
             </div>
 

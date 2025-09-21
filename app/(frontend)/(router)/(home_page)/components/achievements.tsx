@@ -68,7 +68,7 @@ const Achievements = () => {
         <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[6rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Best Club of Semester
         </h3>
-        <p className="text-[2.5rem] font-bold text-[#5E5E92] pt-[1rem] pl-[48rem]">
+        <p className="text-[2.5rem] font-bold text-[#5E5E92] pl-[48rem]">
           5 times
         </p>
         <div className="pb-[17rem]">
@@ -86,10 +86,10 @@ const Achievements = () => {
         </div>
       </div>
 
-      <div className="flex justify-center gap-[2rem] mt-[4rem] ">
+      <div className="flex justify-center gap-[2rem] mt-[2rem] ">
         <Image
-          src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png"
-          className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
+          src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/InnovationAward-2023.png"
+          className="object-fill w-[32rem] h-[90vh] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
           width={200}
           height={150}
           alt="Innovation Award"
@@ -205,7 +205,7 @@ const CARD_STACK = ({
     <motion.img
       src={image}
       alt={`Achievement ${id}`}
-      className="mt-[25rem] object-cover w-[32rem] hover:cursor-grab active:cursor-grabbing rounded-lg"
+      className="mt-[20rem] object-cover w-[32rem] hover:cursor-grab active:cursor-grabbing rounded-lg"
       style={{
         position: "absolute",
         x: isFront ? x : -offset * 30, // Overlap from right to left
