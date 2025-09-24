@@ -9,8 +9,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import axios from "axios";
 
-// --- INTERFACES MATCHING YOUR REAL API DATA ---
-
 interface ApiArticle {
   _id: string;
   title: string;
@@ -21,8 +19,7 @@ interface ApiArticle {
   authors: string[];
   publicationDate: string;
 }
-
-interface RelatedArticle {
+interface SidebarArticle {
   _id: string;
   title: string;
   illustration_url: string;
@@ -47,7 +44,9 @@ export default function SpecificArticle({
 }) {
   // --- STATE MANAGEMENT ---
   const [article, setArticle] = useState<ApiArticle | null>(null);
-  const [relatedArticles, setRelatedArticles] = useState<RelatedArticle[]>([]);
+  // Updated state for dynamic sidebar content
+  const [sidebarArticles, setSidebarArticles] = useState<SidebarArticle[]>([]);
+  const [sidebarTitle, setSidebarTitle] = useState("Related Articles");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -60,11 +59,16 @@ export default function SpecificArticle({
       setError("");
       try {
         const response = await axios.get(`/api/v1/article/${params.id}`);
-        const { article: fetchedArticle, suggestedRelatedArticles } =
-          response.data;
+        // Destructure the new, simplified response from the API
+        const {
+          article: fetchedArticle,
+          sidebarTitle,
+          sidebarArticles,
+        } = response.data;
 
         setArticle(fetchedArticle);
-        setRelatedArticles(suggestedRelatedArticles);
+        setSidebarTitle(sidebarTitle);
+        setSidebarArticles(sidebarArticles);
       } catch (err) {
         console.error("Error fetching article:", err);
         setError("Could not load the article. Please try again later.");
@@ -115,7 +119,7 @@ export default function SpecificArticle({
         style={{
           background: "linear-gradient(to bottom, #0D1742 62%, #DBB968 100%)",
         }}
-      >        
+      >
         <div className="flex flex-col items-start justify-center z-30 w-[58vw]">
           <div className="flex flex-wrap gap-2 mb-4">
             {article.labels?.map((label) => (
@@ -210,7 +214,7 @@ export default function SpecificArticle({
           component={Link}
           href="/media/article"
         >
-          Article Library
+          Bi-weekly Article Library
         </MuiLink>
         <MuiLink
           underline="hover"
@@ -271,41 +275,39 @@ export default function SpecificArticle({
             </div>
           )}
 
-          {/* Related Articles Section */}
-          {relatedArticles?.length > 0 && (
-            <div>
-              <h2 className="text-3xl font-bold text-ft-primary-yellow-100 mb-4">
-                Related Articles
-              </h2>
-              <div className="flex flex-col gap-6">
-                {relatedArticles.map((related) => (
-                  <Link
-                    href={`/media/article/${related._id}`}
-                    key={related._id}
-                    className="block rounded-lg overflow-hidden border-2 border-transparent hover:border-[#DBB968] hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="relative w-full h-72">
-                      <Image
-                        src={related.illustration_url}
-                        alt={related.title}
-                        layout="fill"
-                        objectFit="fill"
-                        className="rounded-t-lg"
-                      />
-                    </div>
-                    <div className="p-4 bg-gray-50 rounded-b-lg">
-                      <p className="font-semibold text-gray-800 text-md leading-snug">
-                        {related.title}
-                      </p>
-                      <p className="text-sm text-gray-500 mt-2">
-                        {formatPublicationDate(related.publicationDate)}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+          {/* Sidebar Articles Section */}
+          <div>
+            <h2 className="text-3xl font-bold text-ft-primary-yellow-100 mb-4">
+              {sidebarTitle}
+            </h2>
+            <div className="flex flex-col gap-6">
+              {sidebarArticles.map((item) => (
+                <Link
+                  href={`/media/article/${item._id}`}
+                  key={item._id}
+                  className="block rounded-lg overflow-hidden border-2 border-transparent hover:border-[#DBB968] hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="relative w-full h-72">
+                    <Image
+                      src={item.illustration_url}
+                      alt={item.title}
+                      layout="fill"
+                      objectFit="fill"
+                      className="rounded-t-lg"
+                    />
+                  </div>
+                  <div className="p-4 bg-gray-50 rounded-b-lg">
+                    <p className="font-semibold text-gray-800 text-md leading-snug">
+                      {item.title}
+                    </p>
+                    <p className="text-sm text-gray-500 mt-2">
+                      {formatPublicationDate(item.publicationDate)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          )}
+          </div>
         </div>
       </div>
       <div className="absolute bottom-[-9rem] left-0">

@@ -164,7 +164,7 @@ const Media = () => {
           </h1>
 
           <p className="text-base text-[#EBEBEB] max-w-[45vw] text-justify">
-            FintechTainment is play of words between <strong>"Fintech"</strong>{" "}
+            FinTechTainment is play of words between <strong>"Fintech"</strong>{" "}
             and
             <strong> "Entertainment"</strong>. It is a media/podcast project
             aimed at interviewing industry professionals with topics in the

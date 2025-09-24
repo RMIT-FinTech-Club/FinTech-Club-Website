@@ -62,14 +62,14 @@ const podcastSchema = new Schema(
         validate: {
           validator: function (value: string) {
             try {
-              const url = new URL(value);
-              return url.hostname.includes("linkedin.com");
+              new URL(value);
+              return true;
             } catch (err) {
               return false;
             }
           },
           message: (props: ValidatorProps) =>
-            `${props.value} is not a valid LinkedIn URL!`,
+            `${props.value} is not a valid URL!`,
         },
       },
     },

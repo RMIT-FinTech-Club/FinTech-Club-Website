@@ -75,26 +75,47 @@ export async function getPodcastById(id: string) {
       return NextResponse.json({ error: "Podcast not found" }, { status: 404 });
     }
 
-    // Find related podcasts based on the main podcast's labels
-    const relatedPodcasts = await Podcast.find({
-      labels: { $in: podcast.labels },
-      _id: { $ne: podcast._id }, // Corrected: Exclude the main podcast
-    })
-      .select("_id title publicationDate thumbnail_url labels")
-      .sort({ publicationDate: -1 })
-      .limit(5);
+    let sidebarTitle = "Related Podcasts";
+    let sidebarPodcasts = [];
 
+    // 1. Attempt to find related podcasts first
+    sidebarPodcasts = await Podcast.find({
+      labels: { $in: podcast.labels },
+      _id: { $ne: podcast._id }, // Exclude the current podcast
+    })
+      .select("_id title publicationDate thumbnail_url")
+      .sort({ publicationDate: -1 })
+      .limit(3);
+
+    // 2. If no related podcasts were found, fetch the latest ones as a fallback
+    if (sidebarPodcasts.length === 0) {
+      sidebarTitle = "Latest Podcasts";
+      sidebarPodcasts = await Podcast.find({
+        _id: { $ne: podcast._id }, // Still exclude the current podcast
+      })
+        .select("_id title publicationDate thumbnail_url")
+        .sort({ publicationDate: -1 })
+        .limit(3);
+    }
+
+    // 3. Return a consistent data structure for the frontend
     return NextResponse.json(
-      { podcast, suggestedRelatedPodcasts: relatedPodcasts },
+      {
+        podcast,
+        sidebarTitle, 
+        sidebarPodcasts, 
+      },
       { status: 200 }
     );
   } catch (error) {
+    console.error("Error fetching podcast by ID:", error);
     return NextResponse.json(
       { error: "Cannot fetch podcast" },
       { status: 500 }
     );
   }
 }
+
 
 /**
  * Function: Create a new podcast.

@@ -9,8 +9,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import axios from "axios";
 
-// --- INTERFACES MATCHING YOUR REAL API DATA ---
-
+// --- INTERFACES (no changes needed here) ---
 interface GuestSpeaker {
   name: string;
   description: string;
@@ -29,14 +28,14 @@ interface ApiPodcast {
   guest_speaker: GuestSpeaker;
 }
 
-interface RelatedPodcast {
+interface SidebarPodcast {
   _id: string;
   title: string;
   publicationDate: string;
   thumbnail_url: string;
 }
 
-// Helper function for formatting dates
+// Helper function (no changes needed here)
 const formatPublicationDate = (isoString: string): string => {
   if (!isoString) return "";
   const dateObj = new Date(isoString);
@@ -54,7 +53,9 @@ export default function SpecificPodcast({
 }) {
   // --- STATE MANAGEMENT ---
   const [podcast, setPodcast] = useState<ApiPodcast | null>(null);
-  const [relatedPodcasts, setRelatedPodcasts] = useState<RelatedPodcast[]>([]);
+  // Updated state to handle the dynamic sidebar content
+  const [sidebarPodcasts, setSidebarPodcasts] = useState<SidebarPodcast[]>([]);
+  const [sidebarTitle, setSidebarTitle] = useState("Related Podcasts");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -66,12 +67,18 @@ export default function SpecificPodcast({
       setLoading(true);
       setError("");
       try {
+        // Fetch data and destructure the new response shape
         const response = await axios.get(`/api/v1/podcast/${params.id}`);
-        const { podcast: fetchedPodcast, suggestedRelatedPodcasts } =
-          response.data;
+        const {
+          podcast: fetchedPodcast,
+          sidebarTitle,
+          sidebarPodcasts,
+        } = response.data;
 
+        // Set the state with the data from the API
         setPodcast(fetchedPodcast);
-        setRelatedPodcasts(suggestedRelatedPodcasts);
+        setSidebarTitle(sidebarTitle);
+        setSidebarPodcasts(sidebarPodcasts);
       } catch (err) {
         console.error("Error fetching podcast:", err);
         setError("Could not load the podcast. Please try again later.");
@@ -109,7 +116,7 @@ export default function SpecificPodcast({
   }
 
   return (
-    <section className="relative">
+    <section className="relative mb-6">
       {/* HERO SECTION */}
       <div
         className="w-screen h-[92vh] flex items-center justify-center px-16"
@@ -196,7 +203,7 @@ export default function SpecificPodcast({
           href="/media/podcast"
           sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
         >
-          Podcast Library
+          FinTechTainment Library
         </MuiLink>
         <MuiLink
           component={Link}
@@ -302,49 +309,52 @@ export default function SpecificPodcast({
 
         {/* Right Sidebar */}
         <div className="w-full max-w-[17.75rem] flex flex-col gap-8">
-          {relatedPodcasts && relatedPodcasts.length > 0 && (
-            <div>
-              <h2 className="text-3xl font-bold text-[#0D1742] mb-4">
-                Related Podcasts
-              </h2>
-              <div className="flex flex-col gap-4">
-                {relatedPodcasts.map((related) => (
-                  <Link
-                    href={`/media/podcast/${related._id}`}
-                    key={related._id}
-                    className="flex flex-col items-center bg-white rounded-2xl shadow-lg border-2 border-transparent hover:border-[#DBB968] overflow-hidden hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="relative w-full h-40 flex-shrink-0">
-                      <Image
-                        src={related.thumbnail_url}
-                        alt={related.title}
-                        layout="fill"
-                        objectFit="fill"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <p className="font-bold text-sm text-[#0D1742] leading-tight">
-                        {related.title}
-                      </p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        {formatPublicationDate(related.publicationDate)}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+          <div className="relative">
+            {/* 1. Title is now dynamic */}
+            <h2 className="text-3xl font-bold text-[#0D1742] mb-4">
+              {sidebarTitle}
+            </h2>
+
+            {/* 2. Logic now uses the new state variables */}
+            <div className="flex flex-col gap-4">
+              {sidebarPodcasts.map((item) => (
+                <Link
+                  href={`/media/podcast/${item._id}`}
+                  key={item._id}
+                  className="flex flex-col items-center bg-white rounded-2xl shadow-lg border-2 border-transparent hover:border-[#DBB968] overflow-hidden hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="relative w-full h-40 flex-shrink-0">
+                    <Image
+                      src={item.thumbnail_url}
+                      alt={item.title}
+                      layout="fill"
+                      objectFit="fill"
+                    />
+                  </div>
+                  <div className="p-4 w-full">
+                    <p className="font-bold text-sm text-[#0D1742] leading-tight">
+                      {item.title}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {formatPublicationDate(item.publicationDate)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          )}
-        </div>
-        <div className="absolute right-[-8.5rem] bottom-[15rem]">
-          <Image
-            src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
-            alt="Mascot"
-            width={200}
-            height={500}
-            loading="lazy"
-            className="w-[25vw] h-auto -rotate-[35deg]"
-          />
+
+            {/* Mascot image (no changes) */}
+            <div className="absolute right-[-12.5rem] bottom-[-22rem]">
+              <Image
+                src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+                alt="Mascot"
+                width={200}
+                height={500}
+                loading="lazy"
+                className="w-[25vw] h-auto -rotate-[35deg]"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
