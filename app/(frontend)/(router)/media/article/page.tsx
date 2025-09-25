@@ -311,7 +311,7 @@ export default function ArticleLibrary() {
           href="/media/article"
           onClick={handleBreadcrumbClick}
         >
-          Bi-weekly Article Library
+          Article Library
         </MuiLink>
       </Breadcrumbs>
 

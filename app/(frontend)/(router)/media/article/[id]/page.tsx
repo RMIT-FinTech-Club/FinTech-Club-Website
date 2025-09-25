@@ -214,7 +214,7 @@ export default function SpecificArticle({
           component={Link}
           href="/media/article"
         >
-          Bi-weekly Article Library
+          Article Library
         </MuiLink>
         <MuiLink
           underline="hover"

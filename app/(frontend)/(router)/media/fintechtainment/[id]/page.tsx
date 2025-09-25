@@ -169,7 +169,7 @@ export default function SpecificPodcast({
                 background: "linear-gradient(to top, #474A6E, #DBB968)",
               }}
             >
-              <Link href="/media/podcast">
+              <Link href="/media/fintechtainment">
                 <motion.button
                   whileHover={{ scale: 1.15 }}
                   whileTap={{ scale: 1.1 }}
@@ -200,14 +200,14 @@ export default function SpecificPodcast({
         </MuiLink>
         <MuiLink
           component={Link}
-          href="/media/podcast"
+          href="/media/fintechtainment"
           sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
         >
           FinTechTainment Library
         </MuiLink>
         <MuiLink
           component={Link}
-          href={`/media/podcast/${podcast._id}`}
+          href={`/media/fintechtainment/${podcast._id}`}
           sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
         >
           {podcast.title}
@@ -295,13 +295,13 @@ export default function SpecificPodcast({
               background: "linear-gradient(to top, #474A6E, #DBB968)",
             }}
           >
-            <a href="/media/podcast">
+            <a href="/media/fintechtainment">
               <motion.button
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 1.1 }}
                 className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
               >
-                Back to Podcast Library
+                Back to FinTechTainment Library
               </motion.button>
             </a>
           </div>
@@ -319,7 +319,7 @@ export default function SpecificPodcast({
             <div className="flex flex-col gap-4">
               {sidebarPodcasts.map((item) => (
                 <Link
-                  href={`/media/podcast/${item._id}`}
+                  href={`/media/fintechtainment/${item._id}`}
                   key={item._id}
                   className="flex flex-col items-center bg-white rounded-2xl shadow-lg border-2 border-transparent hover:border-[#DBB968] overflow-hidden hover:shadow-xl transition-all duration-300"
                 >

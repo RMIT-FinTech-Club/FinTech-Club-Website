@@ -45,7 +45,7 @@ const Media = () => {
               size="md"
               className="bg-ft-primary-yellow text-[1rem] font-semibold text-[#2C305F] rounded-md"
             >
-              View Article
+              Explore Article Library
             </Button>
           </div>
         </div>
@@ -186,12 +186,12 @@ const Media = () => {
           >
             <Button
               as={Link}
-              href="/media/podcast"
+              href="/media/fintechtainment"
               size="md"
               radius="md"
               className="bg-ft-primary-yellow text-[1rem] font-semibold text-[#2C305F] rounded-md"
             >
-              View Podcast
+              Explore FinTechTainment Library
             </Button>
           </div>
         </div>
