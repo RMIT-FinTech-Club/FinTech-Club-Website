@@ -48,7 +48,7 @@ const ReelPlayer: React.FC<ReelPlayerProps> = ({
         {/* Column 1: Video Player */}
         <div className="relative flex-shrink-0 h-[95vh] max-h-[800px] aspect-[9/16] overflow-hidden rounded-xl shadow-2xl">
           <iframe
-            src={`https://www.youtube.com/embed/${currentReel.videoId}?autoplay=1&rel=0`}
+            src={`https://www.youtube.com/embed/${currentReel.videoId}?shorts=1&autoplay=1&rel=0`}
             title={currentReel.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen

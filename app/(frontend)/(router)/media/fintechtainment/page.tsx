@@ -35,6 +35,16 @@ interface DisplayPodcast {
   date: string;
 }
 
+interface ApiReel {
+  _id: string;
+  title: string;
+  description: string;
+  videoId: string;
+  thumbnailUrl: string;
+  labels: string[];
+  publicationDate: string;
+}
+
 // --- HELPER FUNCTIONS ---
 const addOrdinalSuffix = (day: number): string => {
   if (day > 10 && day < 14) return `${day}th`;
@@ -62,98 +72,79 @@ const formatPodcastDate = (isoString: string): string => {
 export default function PodcastLibrary() {
   // --- STATE ---
   const [activeTab, setActiveTab] = useState("podcast");
+
+  // Podcast State
   const [podcasts, setPodcasts] = useState<DisplayPodcast[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
-  const [availableLabels, setAvailableLabels] = useState<string[]>([]);
+  const [podcastsLoading, setPodcastsLoading] = useState<boolean>(true);
+  const [podcastsError, setPodcastsError] = useState<string>("");
+  const [podcastPage, setPodcastPage] = useState(1);
+  const [totalPodcastPages, setTotalPodcastPages] = useState(1);
+  const [selectedPodcastLabel, setSelectedPodcastLabel] = useState<
+    string | null
+  >(null);
+  const [availablePodcastLabels, setAvailablePodcastLabels] = useState<
+    string[]
+  >([]);
+
+  // Reel State
+  const [reels, setReels] = useState<ApiReel[]>([]);
+  const [reelsLoading, setReelsLoading] = useState<boolean>(true);
+  const [reelsError, setReelsError] = useState<string>("");
+  const [reelPage, setReelPage] = useState(1);
+  const [totalReelPages, setTotalReelPages] = useState(1);
+  const [selectedReelLabel, setSelectedReelLabel] = useState<string | null>(
+    null
+  );
+  const [availableReelLabels, setAvailableReelLabels] = useState<string[]>([]);
+
   const [selectedReelIndex, setSelectedReelIndex] = useState<number | null>(
     null
   );
 
-  const itemsPerPage = 5;
-
-  // --- DATA ---
-  // In page.tsx
-
-  const fintech101Reels = [
-    {
-      id: 1,
-      title: "What is Fintech? The 60-Second Explainer",
-      description:
-        "A quick rundown of what 'Fintech' (Financial Technology) actually means and how it's changing the way we handle money, from banking to investing.",
-      thumbnailUrl:
-        "https://images.unsplash.com/photo-1601597111158-2f8e6392d435?&auto=format&fit=crop&w=800&q=80",
-      videoId: "hYWeWbKtNcM",
-      publicationDate: "2025-09-20T10:00:00.000Z",
-      labels: ["Fintech", "Technology", "Finance 101"],
-    },
-    {
-      id: 2,
-      title: "Understanding Blockchain in under a minute",
-      description:
-        "Demystifying blockchain technology. Learn about decentralized ledgers, blocks, and why it's the secure foundation behind cryptocurrencies like Bitcoin.",
-      thumbnailUrl:
-        "https://images.unsplash.com/photo-1639322537228-f710d846310a?&auto=format&fit=crop&w=800&q=80",
-      videoId: "yubzJw0uiE4",
-      publicationDate: "2025-09-15T10:00:00.000Z",
-      labels: ["Blockchain", "Crypto", "Decentralization"],
-    },
-    {
-      id: 3,
-      title: "Digital Wallets: How Do They Work?",
-      description:
-        "Explore the technology behind digital wallets like Apple Pay and Google Pay. How do they store your card information securely and make payments so easy?",
-      thumbnailUrl:
-        "https://images.unsplash.com/photo-1593532938825-7a6273c7c220?&auto=format&fit=crop&w=800&q=80",
-      videoId: "P_Ho_6y1vi0",
-      publicationDate: "2025-09-10T10:00:00.000Z",
-      labels: ["Digital Payments", "Mobile Tech"],
-    },
-    {
-      id: 4,
-      title: "The Rise of Robo-Advisors 🤖",
-      description:
-        "What are Robo-Advisors? Discover how automated, algorithm-driven platforms are making investment advice more accessible and affordable for everyone.",
-      thumbnailUrl:
-        "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?&auto=format&fit=crop&w=800&q=80",
-      videoId: "zw8y2i_O2yY",
-      publicationDate: "2025-09-05T10:00:00.000Z",
-      labels: ["Investing", "AI in Finance", "WealthTech"],
-    },
-  ];
-
   // --- EFFECTS ---
+  // Fetch labels for both content types on initial load
   useEffect(() => {
-    const fetchAllLabels = async () => {
+    const fetchAllPodcastLabels = async () => {
       try {
-        const response = await axios.get(`/api/v1/podcast?limit=100`);
+        const response = await axios.get(`/api/v1/podcast?limit=200`);
         const allPodcasts: ApiPodcast[] = response.data.podcasts || [];
         const allLabelsFlat = allPodcasts.flatMap((p) => p.labels);
         const uniqueLabels = Array.from(new Set(allLabelsFlat)).sort();
-        setAvailableLabels(["All", ...uniqueLabels]);
+        setAvailablePodcastLabels(["All", ...uniqueLabels]);
       } catch (err) {
-        console.error("Failed to fetch unique labels:", err);
-        setAvailableLabels(["All"]);
+        console.error("Failed to fetch unique podcast labels:", err);
+        setAvailablePodcastLabels(["All"]);
       }
     };
-    fetchAllLabels();
+    const fetchAllReelLabels = async () => {
+      try {
+        const response = await axios.get(`/api/v1/reel?limit=200`);
+        const allReels: ApiReel[] = response.data.reels || [];
+        const allLabelsFlat = allReels.flatMap((r) => r.labels);
+        const uniqueLabels = Array.from(new Set(allLabelsFlat)).sort();
+        setAvailableReelLabels(["All", ...uniqueLabels]);
+      } catch (err) {
+        console.error("Failed to fetch unique reel labels:", err);
+        setAvailableReelLabels(["All"]);
+      }
+    };
+    fetchAllPodcastLabels();
+    fetchAllReelLabels();
   }, []);
 
+  // Fetch podcasts when relevant state changes
   useEffect(() => {
     if (activeTab === "podcast") {
       const fetchPodcasts = async () => {
-        setLoading(true);
-        setError("");
+        setPodcastsLoading(true);
+        setPodcastsError("");
         try {
           const params = new URLSearchParams({
-            page: page.toString(),
-            limit: itemsPerPage.toString(),
+            page: podcastPage.toString(),
+            limit: "5",
           });
-          if (selectedLabel && selectedLabel !== "All") {
-            params.append("labels", selectedLabel);
+          if (selectedPodcastLabel && selectedPodcastLabel !== "All") {
+            params.append("labels", selectedPodcastLabel);
           }
           const response = await axios.get(
             `/api/v1/podcast?${params.toString()}`
@@ -174,28 +165,62 @@ export default function PodcastLibrary() {
             })
           );
           setPodcasts(formattedPodcasts);
-          setTotalPages(fetchedTotalPages);
+          setTotalPodcastPages(fetchedTotalPages);
         } catch (err: any) {
-          console.error("Error fetching podcasts:", err);
-          setError("Failed to load podcasts. Please try again later.");
-          setPodcasts([]);
-          setTotalPages(1);
+          setPodcastsError("Failed to load podcasts. Please try again later.");
         } finally {
-          setLoading(false);
+          setPodcastsLoading(false);
         }
       };
       fetchPodcasts();
     }
-  }, [page, selectedLabel, activeTab]);
+  }, [podcastPage, selectedPodcastLabel, activeTab]);
 
-  const handleLabelSelect = (label: string) => {
-    setSelectedLabel(label);
-    setPage(1);
+  // Fetch reels when relevant state changes
+  useEffect(() => {
+    if (activeTab === "fintech101") {
+      const fetchReels = async () => {
+        setReelsLoading(true);
+        setReelsError("");
+        try {
+          const params = new URLSearchParams({
+            page: reelPage.toString(),
+            limit: "12",
+          });
+          if (selectedReelLabel && selectedReelLabel !== "All") {
+            params.append("labels", selectedReelLabel);
+          }
+          const response = await axios.get(`/api/v1/reel?${params.toString()}`);
+          const {
+            reels: fetchedReels = [],
+            totalPages: fetchedTotalPages = 1,
+          } = response.data;
+          setReels(fetchedReels);
+          setTotalReelPages(fetchedTotalPages);
+        } catch (err: any) {
+          setReelsError("Failed to load reels. Please try again later.");
+        } finally {
+          setReelsLoading(false);
+        }
+      };
+      fetchReels();
+    }
+  }, [reelPage, selectedReelLabel, activeTab]);
+
+  // --- HANDLERS ---
+  const handlePodcastLabelSelect = (label: string) => {
+    setSelectedPodcastLabel(label);
+    setPodcastPage(1);
+  };
+
+  const handleReelLabelSelect = (label: string) => {
+    setSelectedReelLabel(label);
+    setReelPage(1);
   };
 
   // --- RENDER LOGIC ---
   const renderPodcastContent = () => {
-    if (loading) {
+    if (podcastsLoading) {
       return (
         <div className="flex h-[40vh] w-full flex-col items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F]"></div>
@@ -203,27 +228,20 @@ export default function PodcastLibrary() {
         </div>
       );
     }
-    if (error) {
+    if (podcastsError)
       return (
-        <div className="text-center py-16">
-          <p className="text-lg text-red-600 bg-red-100 px-4 py-3 rounded-lg inline-block">
-            ⚠️ {error}
-          </p>
+        <div className="text-center py-16 text-red-600 bg-red-100 p-4 rounded-lg">
+          ⚠️ {podcastsError}
         </div>
       );
-    }
-    if (podcasts.length === 0) {
+    if (podcasts.length === 0)
       return (
         <div className="text-center py-16">
-          <h3 className="text-2xl font-bold text-[#2C305F] mb-2">
-            No Podcasts Found
-          </h3>
-          <p className="text-[#5E5E92]">
-            There are no podcasts matching your selected filter.
-          </p>
+          <h3>No Podcasts Found</h3>
+          <p>There are no podcasts matching your selected filter.</p>
         </div>
       );
-    }
+
     return (
       <>
         <div className="pt-8 px-4 md:px-16 lg:px-24">
@@ -232,23 +250,58 @@ export default function PodcastLibrary() {
               href={`/media/fintechtainment/${podcast._id}`}
               key={podcast._id}
             >
-              <PodcastCard
-                imageSrc={podcast.imageSrc}
-                imageAlt={podcast.imageAlt}
-                labels={podcast.labels}
-                title={podcast.title}
-                description={podcast.description}
-                date={podcast.date}
-              />
+              <PodcastCard {...podcast} />
             </Link>
           ))}
         </div>
-        {totalPages > 1 && (
+        {totalPodcastPages > 1 && (
           <div className="flex justify-center">
             <PaginationRounded
-              page={page}
-              onPageChange={(value) => setPage(value)}
-              count={totalPages}
+              page={podcastPage}
+              onPageChange={(value) => setPodcastPage(value)}
+              count={totalPodcastPages}
+            />
+          </div>
+        )}
+      </>
+    );
+  };
+
+  const renderReelContent = () => {
+    if (reelsLoading) {
+      return (
+        <div className="flex h-[40vh] w-full flex-col items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F]"></div>
+          <p className="mt-4 text-lg text-gray-600">Loading...</p>
+        </div>
+      );
+    }
+    if (reelsError)
+      return (
+        <div className="text-center py-16 text-red-600 bg-red-100 p-4 rounded-lg">
+          ⚠️ {reelsError}
+        </div>
+      );
+    if (reels.length === 0)
+      return (
+        <div className="text-center py-16">
+          <h3>No Videos Found</h3>
+          <p>There are no videos matching your selected filter.</p>
+        </div>
+      );
+
+    return (
+      <>
+        <ReelLibraryGrid
+          reels={reels.map((r) => ({ ...r, id: Number(r._id) }))}
+          onReelSelect={(index) => setSelectedReelIndex(index)}
+        />
+        {totalReelPages > 1 && (
+          <div className="flex justify-center mt-8">
+            <PaginationRounded
+              page={reelPage}
+              onPageChange={(value) => setReelPage(value)}
+              count={totalReelPages}
             />
           </div>
         )}
@@ -320,14 +373,26 @@ export default function PodcastLibrary() {
       {selectedReelIndex === null ? (
         <Breadcrumbs
           aria-label="breadcrumb"
-          separator={<NavigateNextIcon fontSize="small" sx={{ color: "#A28436" }} />}
+          separator={
+            <NavigateNextIcon fontSize="small" sx={{ color: "#A28436" }} />
+          }
           sx={{ color: "#000000", "& .MuiBreadcrumbs-separator": { mx: 0.5 } }}
           className="w-full pt-8 pb-2 pl-16"
         >
-          <MuiLink underline="hover" sx={{ color: "#000000", "&:hover": { color: "#A28436" } }} component={Link} href="/media">
+          <MuiLink
+            underline="hover"
+            sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+            component={Link}
+            href="/media"
+          >
             Media
           </MuiLink>
-          <MuiLink underline="hover" sx={{ color: "#000000", "&:hover": { color: "#A28436" } }} component={Link} href="/media/fintechtainment">
+          <MuiLink
+            underline="hover"
+            sx={{ color: "#000000", "&:hover": { color: "#A28436" } }}
+            component={Link}
+            href="/media/fintechtainment"
+          >
             FinTechTainment Library
           </MuiLink>
         </Breadcrumbs>
@@ -337,8 +402,17 @@ export default function PodcastLibrary() {
             onClick={() => setSelectedReelIndex(null)}
             className="flex items-center text-gray-700 font-semibold hover:text-black transition-colors"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                clipRule="evenodd"
+              />
             </svg>
             Back to FinTech 101 Library
           </button>
@@ -373,13 +447,13 @@ export default function PodcastLibrary() {
         </div>
       )}
 
-      {/* Conditional Tab Content */}
-      {activeTab === "podcast" && (
+      {/* Tab Content */}
+      {activeTab === "podcast" && selectedReelIndex === null && (
         <>
           <div className="relative px-4 md:px-16 lg:px-24">
             <LabelSort
-              availableLabels={availableLabels}
-              onSelect={handleLabelSelect}
+              availableLabels={availablePodcastLabels}
+              onSelect={handlePodcastLabelSelect}
             />
           </div>
           {renderPodcastContent()}
@@ -389,13 +463,18 @@ export default function PodcastLibrary() {
       {activeTab === "fintech101" && (
         <div className="px-4 pb-8 md:px-16 lg:px-24">
           {selectedReelIndex === null ? (
-            <ReelLibraryGrid
-              reels={fintech101Reels}
-              onReelSelect={(index) => setSelectedReelIndex(index)}
-            />
+            <>
+              <div className="relative mb-8">
+                <LabelSort
+                  availableLabels={availableReelLabels}
+                  onSelect={handleReelLabelSelect}
+                />
+              </div>
+              {renderReelContent()}
+            </>
           ) : (
             <ReelPlayer
-              reels={fintech101Reels}
+              reels={reels.map((r) => ({ ...r, id: Number(r._id) }))}
               selectedIndex={selectedReelIndex}
               onClose={() => setSelectedReelIndex(null)}
               onNavigate={(newIndex) => setSelectedReelIndex(newIndex)}
