@@ -1,5 +1,4 @@
 "use client";
-import CoreValue from "./components/coreValue";
 import ExecuteBoard from "./components/execute-board/executeBoard";
 import ManagementBoard from "./components/execute-board/managementBoard";
 import III from "./components/III/III";
@@ -8,6 +7,8 @@ import FinTechInTheEyes from "./components/inTheEyes";
 import Members from "./components/members";
 import { ClubMentors } from "./components/mentors";
 import VisionMission from "./components/vision-mission/missionVision";
+import HallOfFamePage from "./components/hallOfFamePage";
+
 const AboutUs = () => {
 	return (
 		<>
@@ -15,11 +16,11 @@ const AboutUs = () => {
 			<VisionMission />
 			<III />
 			<FinTechInTheEyes />
-			<ClubMentors/>
+			<ClubMentors />
 			<ExecuteBoard />
 			<ManagementBoard />
+			<HallOfFamePage />
 			{/* <Members /> */}
-			{/* <CoreValue /> */}
 		</>)
 };
 

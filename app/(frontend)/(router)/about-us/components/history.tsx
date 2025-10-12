@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { fontSans } from "@/config/fonts";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
@@ -42,8 +43,9 @@ const historyData = [
   },
   {
     year: "2025",
-    title: "lorem10",
-    content: "lorem",
+    title: "Going Beyond!",
+    content:
+      "In 2025, FinTech Club looks ahead with a vision that extends beyond the walls of RMIT while staying rooted in the spirit of community. Externally, we aim to expand our influence by engaging more deeply with industry partners, universities, and national and international initiatives, bringing the name of the RMIT FinTech Club onto a larger stage. Internally, we continue cultivating an environment where members can learn, bond, and thrive, ensuring that everyone finds growth and belonging. This year is about balance: pushing outward to create impact while reinforcing the values, culture, and connections that make FinTech Club a home for its members.",
   },
 ];
 
@@ -72,15 +74,21 @@ export default function HistorySection() {
   return (
     <section className="bg-[#F9FAFB] w-full px-6 pt-[1.5rem] pb-[2.5rem] text-center">
       <div className="relative w-full">
-        <img
+        <Image
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] left-[-8rem] top-[23rem] rotate-[50deg] z-30"
+          width={400}
+          height={400}
+          loading="lazy"
         />
-        <img
+        <Image
           src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
           alt="Bear mascot"
           className="absolute w-[368px] top-[23rem] right-[-8rem] rotate-[-50deg] z-30"
+          width={400}
+          height={400}
+          loading="lazy"
         />
         <div className="absolute top-[4rem] left-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
         <div className="absolute top-[4rem] right-[2rem] w-[1rem] h-[1rem] bg-[#2C305F] rounded-full z-10"></div>
@@ -103,17 +111,18 @@ export default function HistorySection() {
 
         {/* Header */}
         <div>
-          <h3
-            className={`text-xl text-[#2C305F] font-medium ${fontSans.style}`}
+          <h5
+            className={`text-[1.5rem] text-[#2C305F] font-semibold ${fontSans.style}`}
           >
             BACK TO TIME
-          </h3>
-          <h1 className={`leading-[4rem] text-[3rem] font-bold mt-2`}>
+          </h5>
+          <h3 className={`leading-[3rem] text-[3rem] font-bold mt-2`}>
             <span className="text-[#2C305F]">Discover the </span>
             <span className="text-[#DCB968]">FINTECH CLUB </span>
-            <br />
-            <span className=" pt-[2rem] text-[#97ABD6]">Story & History</span>
-          </h1>
+          </h3>
+          <h3 className="leading-[3rem] text-[3rem] font-bold mt-4 text-[#97ABD6]">
+            Story & History
+          </h3>
         </div>
 
         {/* YEAR SECTION */}
@@ -174,13 +183,13 @@ export default function HistorySection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-3xl mx-auto px-[3rem] pb-[2rem]"
         >
-          <h2
+          <h4
             className={`text-4xl font-semibold text-[#97ABD6] mb-4 ${fontSans.style}`}
           >
             {historyData[centerSlideIndex].title}
-          </h2>
+          </h4>
           <p
-            className={`text-justify text-[#000] text-lg px-[3.5rem] ${fontSans.style}`}
+            className={`text-justify text-[#000000] text-lg px-[3rem] ${fontSans.style}`}
           >
             {historyData[centerSlideIndex].content}
           </p>

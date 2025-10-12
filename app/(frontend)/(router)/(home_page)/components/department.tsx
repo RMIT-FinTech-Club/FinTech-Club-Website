@@ -1,180 +1,153 @@
 "use client";
-import { Button, Image } from "@nextui-org/react";
+import Image from "next/image";
 import React, { useState } from "react";
-import Slider from "react-slick";
+import { Button } from "@heroui/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-type Department =
-	| "technology"
-	| "business"
-	| "humanResources"
-	| "marketing";
+type Department = "Technology" | "Business" | "Marketing" | "HumanResources";
 
 type DepartmentInfo = {
-	name: string;
-	description: string;
-	imageUrl: string;
-	background: string;
-	bgColor: string;
-	textColor: string;
+  name: string;
+  button: string;
+  description: string;
+  background: string;
 };
 
 const departments: Record<Department, DepartmentInfo> = {
-	technology: {
-		name: "TECHNOLOGY DEPARTMENT",
-		description:
-			"With an unquenchable thirst for coding, fixing bugs, the Technology Department represents the second pillar of our organization. We are responsible for the development of the club’s technical projects, including the SnapID Computer Vision Project, RBPC Website, and currently the FinTech Club Website Project. Beyond practical coding projects, we also provide internal training & sharing sessions, public workshops, mentoring initiatives, and memorable bonding activities for Tech Dept. members. Our members receive the full package of skill improvement, industry connections, and a belonging environment.",
-		imageUrl:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept.svg",
-		background:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/hrdept-bg.jpg",
-		bgColor: "bg-[#73EEBF]",
-		textColor: "text-[#73EEBF]",
-	},
-	business: {
-		name: "BUSINESS DEPARTMENT",
-		description:
-			"The Business Department is regarded as the cornerstone of FinTech Club’s unequivocal success and rapid development. This curiosity-driven Dept. is actively involved in researching, brainstorming and collaborating with others to generate academic values, operation frameworks and awesome activities related to the Finance, Business and Technology space. More specifically, Business members are involved in curating internal skill training, knowledge workshops, hold meetings to evaluate working processes, propose toolkits, and composing well-researched articles on Financial Technology news and trends to educate members, and further engage the external community to our core disciplines!",
-		imageUrl:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept.svg",
-		background:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/busdept-bg.png",
-		bgColor: "bg-[#6a3bed]",
-		textColor: "text-[#6a3bed]",
-	},
-	humanResources: {
-		name: "HR DEPARTMENT",
-		description:
-			"What is a club, without its people? Where would the club’s fun and desirability be, without its culture? That is where the Human Resources Department comes in. HR is in charge of organizing the club’s internal bonding activities, the FinTech Olympics, Newbies Orientation Day, End of Semester Award Ceremony, and the FinTech Field Trip – in addition to ensuring member well-being, safety and connection via the HR Committee. The HR Department consists of some of the kindest, most caring, most enthusiastic members in FTC. So, if you want to be a part of this lovely community, join the HR Dept.!",
-		imageUrl:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept.svg",
-		background:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/techdept-bg.jpg",
-		bgColor: "bg-[#29C0F2]",
-		textColor: "text-[#29C0F2]",
-	},
-	marketing: {
-		name: "MARKETING DEPARTMENT",
-		description:
-			"With a creative and expressive mindset, the Marketing Department is accountable for maintaining and spreading the digital presence of the club’s story and mission. Through various media projects, collaborative teams, adventurous campaigns, the Marketing Dept. never failed to disappoint in generating the most engaging and visually appealing content to hook the eyes of curious FinTech Club followers! So, you want to express yourself, unleash your creativity, unbound your imagination? Join the Marketing Dept. to help us bolster our club presence, and fulfill your creative interests!",
-		imageUrl:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept.svg",
-		background:
-			"https://fintech-club-website.s3.ap-southeast-2.amazonaws.com/Homepage/DepartmentsBrief/mktdept-bg.png",
-		bgColor: "bg-[#E689EE]",
-		textColor: "text-[#E689EE]",
-	},
+  Technology: {
+    name: "TECHNOLOGY DEPARTMENT",
+    button: "Technology",
+    description:
+      "The Technology Department is an innovation hub for tech enthusiasts, driving practical FinTech solutions through development sprints, collaborative workshops, and industry partnerships. This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game blending strategy with Vietnamese culture, an AI Financial Coach based on the 6 Jar Money Management system, and a feature-rich upgrade of the FinTech Club Website. Beyond practical coding projects, we also foster growth through mentorship, internal training, and a supportive community that empowers every member to thrive.",
+    background:
+      "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Technology.png",
+  },
+  Business: {
+    name: "BUSINESS DEPARTMENT",
+    button: "Business",
+    description:
+      "The Business Department is a dynamic space for curious minds to grow through peer-to-peer learning, hands-on projects, and real-world exposure. This semester, we are leading two key initiatives: the Bi-weekly Article Series, which explores business and FinTech topics with academic depth and relevance, and Breaking the Curve, a workshop series that helps students excel academically through interactive sessions, expert insights, and practical learning. By engaging in writing, research, and discussions, members develop both analytical thinking and industry-ready skills while contributing to the club’s knowledge-sharing culture.",
+    background:
+      "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Business.png",
+  },
+  Marketing: {
+    name: "MARKETING DEPARTMENT",
+    button: "Marketing",
+    description:
+      "The Marketing Department is a creative hub that drives the club’s digital presence through strategic campaigns and internal training. This semester, we’re launching an Internal Training Series to upskill members in content creation, from writing and photography to editing. We’re also powering major campaigns for FTC x Charity and Hack-A-Venture, crafting branding, visual identities, and promotional materials across social media. Additionally, our revamped TikTok Project aims to spotlight member stories through engaging short-form videos, fostering connection and inspiration within the FinTech Club community.",
+    background:
+      "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Marketing.png",
+  },
+
+  HumanResources: {
+    name: "HUMAN RESOURCES DEPARTMENT",
+    button: "Human Resources",
+    description:
+      "The Human Resources Department plays a pivotal role in shaping FinTech Club’s culture and fostering a welcoming, supportive environment for all members. This semester, we’re bringing the community together through heartfelt initiatives like the Charity Project for Tu Hanh Pagoda, high-energy bonding at the FinTech Olympics, and the adventurous End of Semester Trip. We also support personal growth with our Internal CV Review Workshop, and add a spark of fun with the festive FTC Halloween celebration. HR is where connections are built, memories are made, and every member feels at home.",
+    background:
+      "https://d2prwyp3rwi40.cloudfront.net/home/department-mascot/Human+Resources.png",
+  },
 };
 
 const Department = () => {
-	// Manage the current department
-	const [department, setDepartment] = useState<DepartmentInfo>(
-		departments.humanResources,
-	);
+  const [department, setDepartment] = useState<DepartmentInfo>(
+    departments.Technology
+  );
 
-	const settings = {
-		dots: false,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 2,
-		slidesToScroll: 2,
-		arrows: true,
-	};
+  return (
+    <div className="relative w-screen h-[50rem] flex flex-row">
+      {/*con gấu */}
+      <div className="absolute w-[14rem] h-auto top-[-4rem] left-[-5.25rem] rotate-[109deg] z-30">
+        <Image
+          src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+tr%C6%B0%E1%BB%9Bc.svg"
+          alt="Bear mascot"
+          width={400}
+          height={400}
+          loading="lazy"
+        />
+      </div>
 
-	return (
-		<section
-			className={`relative flex flex-col-reverse w-full max-h-fit px-side-margin-mobile md:px-20 justify-center items-center lg:flex-row bg-ft-primary-blue-900 bg-cover bg-center backdrop-blur-[10px]`}
-			style={{
-				backgroundImage: department.background
-					? `url(${department.background})`
-					: "none",
-			}}
-		>
-			<div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50 rounded-2xl" />
-			{/* Department background image */}
+      <div className="h-full w-[70vw] bg-[#F9FAFB] border-b-[1rem] border-[#DAB868]">
+        <section className="relative flex flex-col items-start pl-20 pt-[8.5rem] max-w-[45vw]">
+          <div className="absolute w-[3rem] h-auto top-[4.5rem] right-[7rem]">
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"
+              alt="Yellow Star"
+              width={400}
+              height={400}
+              loading="lazy"
+            />
+          </div>
+          <div className="absolute w-[6rem] h-auto top-[6rem] right-[-1rem]">
+            <Image
+              src="https://d2prwyp3rwi40.cloudfront.net/home/assets/YellowStar.svg"
+              alt="Yellow Star"
+              width={400}
+              height={400}
+              loading="lazy"
+            />
+          </div>
+          <p className="text-[#DCB968] font-bold text-6xl">BE ONE OF US</p>
+          <p className={`font-bold mt-6 text-[#5E5E92] text-wrap text-5xl`}>
+            {department.name}
+          </p>
+          <p className="mt-4 text-base text-justify font-normal">
+            {department.description}
+          </p>
+          <button className="text-[#F0EDFF] bg-[#5E5E92] rounded-xl w-fit px-6 py-2 mt-4 font-semibold drop-shadow-lg text-[1rem]">
+            Explore more
+          </button>
+          <div className="mt-6 flex flex-row flex-wrap gap-4 justify-between">
+            {(Object.keys(departments) as Department[]).map((dept) => {
+              const department = departments[dept];
+              return (
+                <div
+                  key={dept}
+                  className="group p-[1px] rounded-[10px]"
+                  style={{
+                    background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
+                  }}
+                >
+                  <Button
+                    onPress={() => setDepartment(department)}
+                    className="w-[6.7rem] h-[4rem] rounded-[10px] text-[#0B0B3B] text-wrap font-semibold text-[0.85rem] bg-[#F0EDFF] group-hover:[background:linear-gradient(to_bottom,_#C9D6EA_0%,_#DBB968_58%)] transition-all duration-300"
+                  >
+                    {department.button.toUpperCase()}
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      </div>
 
-			{/* Mobile buttons bar */}
-			<div className="flex sm:hidden justify-center items-center w-full p-2">
-				<Slider {...settings} className="w-80">
-					<Button
-						onClick={() => setDepartment(departments.technology)}
-						variant="light"
-						className="text-white bg-transparent hover:bg-ft-primary-yellow-500 rounded-[10px] transition duration-300"
-					>
-						TECHNOLOGY
-					</Button>
-					<Button
-						onClick={() => setDepartment(departments.business)}
-						variant="light"
-						className="text-white bg-transparent hover:bg-ft-primary-yellow-500 rounded-[10px] transition duration-300"
-					>
-						BUSINESS
-					</Button>
-					<Button
-						onClick={() =>
-							setDepartment(departments.humanResources)
-						}
-						variant="light"
-						className="text-white bg-transparent hover:bg-ft-primary-yellow-500 rounded-[10px] transition duration-300"
-					>
-						HUMAN RESOURCES
-					</Button>
-					<Button
-						onClick={() => setDepartment(departments.marketing)}
-						variant="light"
-						className="text-white bg-transparent hover:bg-ft-primary-yellow-500 rounded-[10px] transition duration-300"
-					>
-						MARKETING
-					</Button>
-				</Slider>
-			</div>
+      <div
+        className="h-full w-[29vw] rounded-br-[18vw] relative z-0"
+        style={{ background: "linear-gradient(to bottom, #C9D6EA, #DBB968)" }}
+      >
+        <div className="h-[49rem] w-[27.5vw] bg-[#2C305F] rounded-br-[17vw] absolute top-0 left-0 z-10"></div>
+      </div>
 
-			{/* Department content */}
-			<div
-				className="flex flex-1 flex-col md:items-start items-center p-8 bg-opacity-50 z-10 md:mt-0"
-			>
-				{/* These elements will be pushed down on mobile due to the absolute positioning of the buttons bar */}
-				<h4
-					className={`font-bold ${department.textColor} text-wrap text-xl md:text-5xl sm:text-4xl`}
-				>
-					{department.name}
-				</h4>
-				<h4 className="text-ft-text-bright mt-4">BE ONE OF US!</h4>
-				<p className="ft-body-2 text-ft-text-bright w-full mt-6 text-justify md:text-left">
-					{department.description}
-				</p>
-
-				{/* Desktop buttons */}
-				<div className=" hidden sm:flex mt-6 gap-4">
-					{(Object.keys(departments) as Department[]).map((dept) => {
-						const isActive = departments[dept].name === department.name;
-						return (
-							<Button
-								key={dept}
-								onClick={() => setDepartment(departments[dept])}
-								variant={isActive ? "solid" : "light"}
-								className={`${isActive ? `text-black text-semibold ${departments[dept].bgColor}` : 'text-white'}`}
-							>
-								{dept.toUpperCase()}
-							</Button>
-						)
-					})}
-				</div>
-			</div>
-
-			{/* Department right image */}
-			<div className="relative w-full h-full md:h-5/6 md:w-2/5 flex justify-center items-center max-sm:mt-5">
-				<Image
-					className="object-cover md:h-full md:w-full"
-					src={department.imageUrl}
-					// Remove url() wrapper, NextUI Image component doesn't support it :<, this will change "url('image.png')" to "image.png"
-					alt={`${department.name} Image`}
-					loading="lazy"
-				/>
-			</div>
-		</section>
-	);
+      <div
+        className="h-[42rem] w-[35.5vw] bottom-0 right-[14.5rem] absolute z-30 rounded-t-[10vw]"
+        style={{ background: "linear-gradient(to bottom, #C9D6EA, #DBB968)" }}
+      >
+        <div className="h-[40rem] w-[33vw] absolute m-[1rem] z-20">
+          <Image
+            src={department.background}
+            alt={`${department.name} background`}
+            className="h-full w-full object-fill rounded-t-[9vw]"
+            width={400}
+            height={400}
+            fetchPriority="high"
+            loading="eager"
+            priority={true}
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Department;
