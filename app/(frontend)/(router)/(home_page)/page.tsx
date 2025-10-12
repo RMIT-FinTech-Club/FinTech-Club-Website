@@ -19,9 +19,9 @@ const Home = () => {
         <Achievements />
         <Partners />
         <Department />
-        <Suspense fallback={<Loading />}>
+        {/* <Suspense fallback={<Loading />}>
           <UpcomingEvent />
-        </Suspense>
+        </Suspense> */}
       </div>
     </>
   );
