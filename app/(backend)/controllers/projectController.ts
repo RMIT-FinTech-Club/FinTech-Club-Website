@@ -264,7 +264,11 @@ export async function getCompletedProjectsDefault() {
       .select('year')
       .lean();
 
-    if (!mostRecentYear || !mostRecentYear.year) {
+    if (
+      !mostRecentYear ||
+      Array.isArray(mostRecentYear) ||
+      typeof mostRecentYear.year === "undefined"
+    ) {
       return {
         status: 200,
         data: [],
