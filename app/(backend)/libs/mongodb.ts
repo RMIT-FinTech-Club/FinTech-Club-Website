@@ -16,7 +16,7 @@ const connectMongoDB = async () => {
 	}
 
 	try {
-		await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI!, {
+		await mongoose.connect(process.env.MONGODB_URI!, {
 			dbName: "fintech",
 		});
 		console.log("Connected to MongoDB");
