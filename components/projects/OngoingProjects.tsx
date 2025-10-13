@@ -1,108 +1,149 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import axios from "axios";
 
-type DepartmentDataProps = {
+type ProjectData = {
   labels: string[];
   title: string;
-  content: string;
+  description: string;
   link: string;
   image: string;
 };
 
-const departmentData: DepartmentDataProps[] = [
-  {
-    labels: ["Fintech", "Innovation"],
-    title: "Digital Banking Platform",
-    content:
-      "Revolutionary banking solution that transforms traditional financial services with cutting-edge technology and user-centric design. Our platform integrates advanced security measures with intuitive user interfaces to provide seamless financial experiences for modern consumers.",
-    link: "#",
-    image:
-      "https://images.unsplash.com/photo-1563986768711-b3bde3dc821e?q=80&w=1468&auto=format&fit=crop",
-  },
-  {
-    labels: ["AI/ML"],
-    title: "Smart Analytics Engine",
-    content:
-      "Advanced machine learning platform that provides real-time insights and predictive analytics for business optimization. Harness the power of artificial intelligence to make data-driven decisions and stay ahead of market trends with our comprehensive analytics suite.",
-    link: "#",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-  },
-  {
-    labels: ["Blockchain", "Web3", "DeFi"],
-    title: "Decentralized Trading System",
-    content:
-      "Next-generation blockchain infrastructure enabling secure, transparent, and efficient peer-to-peer transactions. Built on cutting-edge distributed ledger technology, our platform ensures maximum security while maintaining optimal performance and scalability.",
-    link: "#",
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop",
-  },
-];
+interface ApiProject {
+  _id: string;
+  title: string;
+  description: string;
+  labels: string[];
+  image_url: string;
+  slug: string;
+}
 
-const OngoingProjects = ({
-  projects = departmentData,
-}: {
-  projects?: DepartmentDataProps[];
-}) => {
+const OngoingProjects = () => {
+  // State for data, loading, and errors
+  const [projects, setProjects] = useState<ProjectData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // State for slider functionality
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
 
+  // Refs for managing intervals and timers
   const lastInteractionRef = useRef(Date.now());
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const currentProject = projects[currentIndex];
-  const nextProject = projects.length
-    ? projects[(currentIndex + 1) % projects.length]
-    : null;
+  // Fetch data from the API when the component mounts
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "/api/v1/projects?type=large-scaled&status=ongoing"
+        );
+        const apiProjects: ApiProject[] = response.data.data || [];
 
-  // Function to go to next slide
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % projects.length);
-  };
+        // Map the API data to the structure your component needs
+        const formattedProjects: ProjectData[] = apiProjects.map((p) => ({
+          title: p.title,
+          description: p.description,
+          labels: p.labels,
+          image: p.image_url,
+          link: `/projects/${p.slug}`, // Create the link from the slug
+        }));
 
-  // Function to go to specific slide
+        setProjects(formattedProjects);
+      } catch (err) {
+        console.error("Failed to fetch ongoing projects:", err);
+        setError("Could not load projects at this time.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []); // Empty array ensures this runs only once on mount
+
+  // --- Slider Logic ---
+  // Utility to reset the inactivity timer
+  const registerInteraction = useCallback(() => {
+    lastInteractionRef.current = Date.now();
+  }, []);
+
+  // Go to the next slide
+  const nextSlide = useCallback(() => {
+    if (projects.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % projects.length);
+    }
+  }, [projects.length]);
+
+  // Go to a specific slide
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
+    registerInteraction();
   };
 
-  // Reset inactivity timer
-  const registerInteraction = () => {
-    lastInteractionRef.current = Date.now();
-    setIsAutoPlaying(false); // stop autoplay if running
+  // Toggle the autoplay state and register it as an interaction
+  const togglePlayPause = () => {
+    setIsAutoPlaying((prev) => !prev);
+    registerInteraction();
   };
 
-  // Watch for inactivity to trigger autoplay
+  // Effect to check for user inactivity and start autoplay
   useEffect(() => {
     const checkInactivity = setInterval(() => {
-      const now = Date.now();
-      if (now - lastInteractionRef.current > 10000) {
-        // 30 seconds inactivity
+      if (!isAutoPlaying && Date.now() - lastInteractionRef.current > 10000) {
         setIsAutoPlaying(true);
       }
     }, 1000);
 
     return () => clearInterval(checkInactivity);
-  }, []);
+  }, [isAutoPlaying]); // Dependency ensures the check is aware of the current play state
 
-  // Handle auto-play
+  // Effect to handle the autoplay interval itself
   useEffect(() => {
     if (isAutoPlaying) {
-      autoPlayIntervalRef.current = setInterval(() => {
-        nextSlide();
-      }, 5000); // every 5 seconds
+      autoPlayIntervalRef.current = setInterval(nextSlide, 5000);
     } else if (autoPlayIntervalRef.current) {
       clearInterval(autoPlayIntervalRef.current);
       autoPlayIntervalRef.current = null;
     }
-
     return () => {
       if (autoPlayIntervalRef.current) {
         clearInterval(autoPlayIntervalRef.current);
       }
     };
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, nextSlide]);
+
+  // --- Conditional Rendering ---
+  if (loading) {
+    return (
+      <section className="flex h-screen w-full items-center justify-center bg-[#000543]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="flex h-screen w-full items-center justify-center bg-[#000543]">
+        <p className="text-lg text-red-400">{error}</p>
+      </section>
+    );
+  }
+
+  if (projects.length === 0) {
+    return (
+      <section className="flex h-screen w-full items-center justify-center bg-[#000543]">
+        <p className="text-lg text-white">No clubwide projects found.</p>
+      </section>
+    );
+  }
+
+  const currentProject = projects[currentIndex];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
     <section className="relative overflow-hidden">
@@ -130,11 +171,13 @@ const OngoingProjects = ({
           ></div>
         </div>
 
-        {/* Content */}
+        {/* description */}
         <div className="pt-[5rem] h-[calc(100vh-3rem)] relative z-10 flex items-center justify-center px-[5rem]">
           {/* Left */}
           <div className="relative flex-1 max-w-xl text-white">
-            <div className="absolute top-[-4rem] px-[0.8rem] py-[0.5rem] text-[#2C305F] font-semibold bg-[#F0EDFF] rounded-tl-md rounded-tr-[5rem] rounded-br-[5rem] rounded-bl-md">On-going Projects</div>
+            <div className="absolute top-[-4rem] px-[0.8rem] py-[0.5rem] text-[#2C305F] font-semibold bg-[#F0EDFF] rounded-tl-md rounded-tr-[5rem] rounded-br-[5rem] rounded-bl-md">
+              Clubwide Projects
+            </div>
 
             <div className="flex flex-wrap gap-2 mb-6">
               {currentProject.labels.map((label, index) => (
@@ -152,12 +195,11 @@ const OngoingProjects = ({
             </h2>
 
             <p className="text-base leading-relaxed mb-8 text-gray-100 text-justify w-[90%]">
-              {currentProject.content}
+              {currentProject.description}
             </p>
 
             {currentProject.link && (
               <Button
-                onClick={registerInteraction}
                 className="bg-[#DCB968] hover:bg-yellowEarth text-[#2C305F] text-[16px] py-3 font-semibold rounded-lg transition-colors"
                 as="a"
                 href={currentProject.link}
@@ -239,13 +281,50 @@ const OngoingProjects = ({
 
         {/* Counter */}
         <div className="absolute top-8 right-8 z-20 bg-black/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm border border-white/20 flex items-center gap-2">
+          {/* Counter Text */}
           {currentIndex + 1} / {projects.length}
-          {isAutoPlaying && (
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-xs">AUTO</span>
-            </div>
-          )}
+          {/* Autoplay Indicator and Control */}
+          <div className="flex items-center">
+            {/* The Toggle Button */}
+            <button
+              onClick={togglePlayPause} 
+              title={isAutoPlaying ? "Pause Autoplay" : "Start Autoplay"}
+              className="flex items-center justify-center ml-1 w-8 h-8 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+            >
+              {isAutoPlaying ? (
+                // Pause icon
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="6" y="4" width="4" height="16"></rect>
+                  <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+              ) : (
+                // Play icon
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ const Projects = () => {
 	return (
 		<>
 			<OngoingProjects />
-			<DeptProjects />
+			{/* <DeptProjects /> */}
 		</>
 	);
 };
