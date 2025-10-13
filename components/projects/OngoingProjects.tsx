@@ -157,13 +157,13 @@ const OngoingProjects = () => {
             className="absolute inset-0"
             style={{
               background: `linear-gradient(to bottom, 
-                rgba(64, 68, 114, 0.75) 0%,
-                rgba(49, 53, 104, 0.81) 12.5%,
-                rgba(37, 41, 95, 0.86) 25%,
-                rgba(16, 21, 79, 0.94) 37.5%,
-                rgba(8, 13, 73, 0.97) 50%,
-                rgba(0, 5, 67, 1) 62.5%,
-                rgba(0, 5, 67, 1) 75%,
+                rgba(64, 68, 114, 0.65) 0%,
+                rgba(49, 53, 104, 0.7) 12.5%,
+                rgba(37, 41, 95, 0.75) 25%,
+                rgba(16, 21, 79, 0.8) 37.5%,
+                rgba(8, 13, 73, 0.9) 50%,
+                rgba(0, 5, 67, 0.9) 62.5%,
+                rgba(0, 5, 67, 0.95) 75%,
                 rgba(110, 95, 86, 0.95) 87.5%,
                 rgba(220, 185, 104, 0.9) 100%
               )`,
@@ -287,7 +287,7 @@ const OngoingProjects = () => {
           <div className="flex items-center">
             {/* The Toggle Button */}
             <button
-              onClick={togglePlayPause} 
+              onClick={togglePlayPause}
               title={isAutoPlaying ? "Pause Autoplay" : "Start Autoplay"}
               className="flex items-center justify-center ml-1 w-8 h-8 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
             >
