@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-// import * as jose from "jose";
 import { jwtVerify } from "jose";
 
 // Require authentication
@@ -44,10 +43,6 @@ export async function middleware(request: NextRequest) {
 // It specifies the paths for which this middleware should be executed.
 export const config = {
 	matcher: [
-		"/cms",
-		"/api/research",
-		"/api/v1/projects/media",
-		"/podcast-form",
 		"/api/v1/managementBoard",
 	],
 };

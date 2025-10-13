@@ -1,43 +1,119 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
 import mongoose, { Schema } from "mongoose";
+import crypto from "crypto";
 
-const cloudfrontUrlRegex = /^https?:\/\/(?:[a-zA-Z0-9\-]+\.)*cloudfront\.net\/.+/;
-const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+// Ensure the CloudFront domain is set for the validator
+if (!process.env.CLOUDFRONT_DOMAIN) {
+    throw new Error("CLOUDFRONT_DOMAIN environment variable is not set.");
+}
+// Escape special regex characters in the domain name (like '.')
+const escapedCloudfrontDomain = process.env.CLOUDFRONT_DOMAIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// Dynamically create a regex that accepts the default cloudfront.net OR your custom domain
+const cloudfrontUrlRegex = new RegExp(
+  `^https?:\/\/((?:[a-zA-Z0-9\\-]+\\.)*cloudfront\\.net|${escapedCloudfrontDomain})\/.+`
+);
+
+const urlValidator = {
+  validator: (v: string) => cloudfrontUrlRegex.test(v),
+  message: "Invalid CloudFront URL format.",
+};
+
+// Reusable Sub-Document Schemas
+const PersonSchema = new Schema(
+  {
+    name: { type: String, required: true, trim: true },
+    position: { type: String, required: true, trim: true },
+    avatar_url: { type: String, required: true, validate: urlValidator },
+    linkedin_url: { type: String, trim: true }, // Optional
+  },
+  { _id: false }
+);
+
+// For key/sideline activities
+const ActivitySchema = new Schema(
+  {
+    date: { type: String },
+    description: { type: String, required: true, trim: true },
+  },
+  { _id: false }
+);
+
+// For team structure with detailed roles, skills, and responsibilities
+const DetailedTeamMemberSchema = new Schema(
+  {
+    role: { type: String, required: true, trim: true },
+    leader_name: { type: String, required: true, trim: true },
+    responsibilities: { type: [String], required: true, default: [] },
+    skills: { type: [String], required: true, default: [] },
+  },
+  { _id: false }
+);
+
+// For simpler team structures
+const SimpleTeamMemberSchema = new Schema(
+  {
+    role: { type: String, required: true, trim: true },
+    leader_name: { type: String, required: true, trim: true },
+  },
+  { _id: false }
+);
+
+// For key metrics shown on completed projects
+const KeyMetricSchema = new Schema(
+  {
+    title: { type: String, required: true, trim: true },
+    value: { type: String, required: true, trim: true },
+    icon_url: { type: String, validate: urlValidator },
+  },
+  { _id: false }
+);
+
+// For timeline events in competitions
+const TimelineEventSchema = new Schema(
+  {
+    date: { type: Date, required: true },
+    title: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
+  },
+  { _id: false }
+);
+
+// Base Project Schema
 const projectSchema = new Schema(
   {
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true },
-    type: { type: String, enum: ["large-scaled", "department"], required: true },
+    type: {
+      type: String,
+      enum: ["large-scaled", "department"],
+      required: true,
+    },
     status: { type: String, enum: ["ongoing", "completed"], required: true },
     category: {
       type: String,
       required: true,
-      enum: ["technical", "media", "event", "community", "career", "competition"],
+      enum: [
+        "technical",
+        "media",
+        "event",
+        "community",
+        "career",
+        "competition",
+      ],
     },
     labels: { type: [String], default: [] },
     image_url: {
       type: String,
       required: true,
-      validate: {
-        validator: (v: string) => cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront image URL format",
-      },
+      validate: urlValidator,
     },
     category_specific: { type: Schema.Types.Mixed },
     department: {
       type: String,
       required: function (this: any): boolean {
         return this.type === "department";
-      },
-    },
-    department_photo_url: {
-      type: String,
-      required: function (this: any): boolean {
-        return this.type === "department";
-      },
-      validate: {
-        validator: (v: string) => cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront department photo URL format",
       },
     },
     department_description: {
@@ -56,365 +132,226 @@ const projectSchema = new Schema(
     meta_description: { type: String, required: true },
     slug: {
       type: String,
-      required: true,
       unique: true,
-      validate: {
-        validator: (v: string) => slugRegex.test(v),
-        message: "Invalid slug format (use lowercase, numbers, dashes)",
-      },
     },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date, default: Date.now },
+  },
+  {
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }, // <--- Correctly placed here
   }
 );
 
-projectSchema.pre('save', function(next) {
-  this.updated_at = new Date();
+// Middleware to auto-generate the slug before saving
+projectSchema.pre("save", function (next) {
+  // Only generate a slug if the title is new or has been modified
+  if (this.isModified("title") || this.isNew) {
+    // Create the base slug from the title
+    const baseSlug = this.title
+      .toLowerCase()
+      .trim()
+      .replace(/&/g, "-and-") // Replace & with 'and'
+      .replace(/[\s\W-]+/g, "-") // Replace spaces, non-word chars and dashes with a single dash
+      .replace(/^-+|-+$/g, ""); // Remove leading/trailing dashes
+
+    // Create a unique suffix to prevent collisions
+    const uniqueSuffix = crypto.randomBytes(4).toString("hex");
+
+    this.slug = `${baseSlug}-${uniqueSuffix}`;
+  }
   next();
 });
 
-projectSchema.pre('findOneAndUpdate', function(next) {
+projectSchema.pre("findOneAndUpdate", function (next) {
   this.set({ updated_at: new Date() });
   next();
 });
 
-projectSchema.pre('updateOne', function(next) {
+projectSchema.pre("updateOne", function (next) {
   this.set({ updated_at: new Date() });
   next();
 });
 
-projectSchema.pre('updateMany', function(next) {
+projectSchema.pre("updateMany", function (next) {
   this.set({ updated_at: new Date() });
   next();
 });
 
-projectSchema.index({ type: 1 });
-projectSchema.index({ status: 1 });
-projectSchema.index({ department: 1 });
-projectSchema.index({ year: 1 });
-projectSchema.index({ category: 1 });
-projectSchema.index({ labels: 1 });
+// Indexes for query optimization
+projectSchema.index({ type: 1, status: 1, category: 1 });
+projectSchema.index({ year: -1 });
 
+// Discriminator Schemas (Category-Specific)
 const TechnicalSchema = new Schema({
-  category_specific: {
-    goals: { type: String, required: true },
-    scope: { type: String, required: true },
-    team_structure: [
-      {
-        role: { type: String, required: true },
-        responsibilities: { type: [String], required: true },
-        skills: { type: [String], required: true },
-      },
-    ],
-    team_leader: [
-      {
-        name: { type: String, required: true },
-        role: { type: String, required: true },
-        position: { type: String, required: true },
-      },
-    ],
-    timeline: [
-      {
-        date: Date,
-        title: String,
-        description: String,
-        status: String,
-      },
-    ],
-    gallery: {
-      type: [String],
-      validate: {
-        validator: function (this: any, v: string[]): boolean {
-          if (this.parent().status === "completed") {
-            return v.every((url: string) => cloudfrontUrlRegex.test(url));
-          }
-          return true;
-        },
-        message: "Invalid CloudFront URL in gallery",
-      },
-    },
-    product_link: {
-      type: String,
-      validate: {
-        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront product link URL",
-      },
-    },
+  goals: { type: [String], required: true },
+  scope: { type: [String], required: true },
+  team_structure: { type: [DetailedTeamMemberSchema], required: true },
+  project_leader_name: { type: String, required: true },
+  gallery: {
+    type: [String],
+    validate: urlValidator,
+    default: [],
   },
+  timeline: {
+    type: [
+      {
+        time: { type: Date, required: true },
+        milestoneTitle: { type: String, required: true, trim: true },
+        milestoneDescription: { type: String, required: true, trim: true },
+      },
+    ],
+    default: [],
+  },
+  product_link: { type: String },
 });
 
 const MediaSchema = new Schema({
-  category_specific: {
-    goals: { type: String, required: true },
-    target_audience: { type: String, required: true },
-    team_structure: [
+  goals: { type: [String], required: true },
+  target_audience: { type: [String], required: true },
+  team_structure: { type: [DetailedTeamMemberSchema], required: true },
+  project_leader_name: { type: String, required: true },
+  products: {
+    type: [
       {
-        role: { type: String, required: true },
-        responsibilities: { type: [String], required: true },
-        skills: { type: [String], required: true },
+        // 'product' stores the ObjectId of the document
+        product: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          // 'refPath' tells Mongoose to look at the 'onModel' field
+          // to determine which collection to query.
+          refPath: "products.onModel",
+        },
+        // 'onModel' stores the name of the model ('Article' or 'Podcast')
+        onModel: {
+          type: String,
+          required: true,
+          enum: ["Article", "Podcast"],
+        },
       },
     ],
-    team_leader: [
-      {
-        name: { type: String, required: true },
-        role: { type: String, required: true },
-        position: { type: String, required: true },
-      },
-    ],
-    product_library: { type: [Schema.Types.Mixed], required: true },
-    library_link: {
-      type: String,
-      validate: {
-        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront library link URL",
-      },
-    },
+    default: [],
+  },
+  auto_update_type: { 
+    type: String, 
+    enum: ['Article', 'Podcast'], 
+    required: true
+  },
+  auto_update_limit: { 
+    type: Number, 
+    default: 5 
   },
 });
 
 const EventSchema = new Schema({
-  category_specific: {
-    goals: { type: String, required: true },
-    target_audience: { type: String, required: true },
-    format: { type: String, enum: ["online", "in-person"], required: true },
-    key_activities: { type: [String], required: true },
-    guest_speakers: [
-      {
-        name: { type: String, required: true },
-        avatar_url: {
-          type: String,
-          required: true,
-          validate: {
-            validator: (v: string) => cloudfrontUrlRegex.test(v),
-            message: "Invalid CloudFront avatar URL",
-          },
-        },
-        position: { type: String, required: true },
-        linkedin_url: { type: String },
-      },
+  goals: { type: [String], required: true },
+  target_audience: { type: [String], required: true },
+  key_activities: { type: [ActivitySchema], required: true },
+  guest_speakers: { type: [PersonSchema], default: [] },
+  sponsors: {
+    type: [
+      { name: String, logo_url: { type: String, validate: urlValidator } },
     ],
-    sponsor_brands: {
-      type: [String],
-      validate: {
-        validator: (v: string[]) => !v || v.every((url: string) => cloudfrontUrlRegex.test(url)),
-        message: "Invalid CloudFront sponsor brand URL",
-      },
+    default: [],
+  },
+  team_structure: { type: [SimpleTeamMemberSchema], required: true },
+  project_leader_name: { type: String, required: true },
+  key_metrics: {
+    type: [KeyMetricSchema],
+    required: function (this: any): boolean {
+      return this.parent().status === "completed";
     },
-    team_leader: [
-      {
-        name: { type: String, required: true },
-        role: { type: String, required: true },
-        position: { type: String, required: true },
-      },
-    ],
-    key_metrics: {
-      attendees: { type: Number, required: true },
-      attendance_rate: { type: Number, required: true },
-      media_coverage: { type: Number, required: true },
-    },
-    event_gallery: {
-      type: [String],
-      validate: {
-        validator: function (this: any, v: string[]): boolean {
-          if (this.parent().status === "completed") {
-            return v.every((url: string) => cloudfrontUrlRegex.test(url));
-          }
-          return true;
-        },
-        message: "Invalid CloudFront URL in event gallery",
-      },
-    },
-    event_details_link: {
-      type: String,
-      validate: {
-        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront event details link URL",
-      },
-    },
+  },
+  gallery: {
+    type: [String],
+    validate: urlValidator,
+    default: [],
   },
 });
 
 const CommunitySchema = new Schema({
-  category_specific: {
-    goals: { type: String, required: true },
-    target_audience: { type: String, required: true },
-    key_activities: { type: [String], required: true },
-    ngos: [
-      {
-        name: { type: String, required: true },
-        description: { type: String, required: true },
-      },
+  goals: { type: [String], required: true },
+  target_audience: { type: [String], required: true },
+  key_activities: { type: [ActivitySchema], required: true },
+  partner_ngos: {
+    type: [
+      { name: String, logo_url: { type: String, validate: urlValidator } },
     ],
-    team_leader: [
-      {
-        name: { type: String, required: true },
-        role: { type: String, required: true },
-        position: { type: String, required: true },
-      },
-    ],
-    key_metrics: {
-      volunteers: { type: Number, required: true },
-      funds_raised: { type: Number, required: true },
-      communities_reached: { type: Number, required: true },
-      beneficiaries_served: { type: Number, required: true },
+    default: [],
+  },
+  team_structure: { type: [SimpleTeamMemberSchema], required: true },
+  project_leader_name: { type: String, required: true },
+  key_metrics: {
+    type: [KeyMetricSchema],
+    required: function (this: any): boolean {
+      return this.parent().status === "completed";
     },
-    gallery: {
-      type: [String],
-      validate: {
-        validator: function (this: any, v: string[]): boolean {
-          if (this.parent().status === "completed") {
-            return v.every((url: string) => cloudfrontUrlRegex.test(url));
-          }
-          return true;
-        },
-        message: "Invalid CloudFront URL in gallery",
-      },
-    },
-    event_details_link: {
-      type: String,
-      validate: {
-        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront event details link URL",
-      },
-    },
+  },
+  gallery: {
+    type: [String],
+    validate: urlValidator,
+    default: [],
   },
 });
 
 const CareerSchema = new Schema({
-  category_specific: {
-    company: { type: Schema.Types.Mixed, required: true },
-    goals: { type: String, required: true },
-    target_audience: { type: String, required: true },
-    key_outcomes: {
-      participants: { type: Number, required: true },
-      attendance_rate: { type: Number, required: true },
-      skills_developed: { type: [String], required: true },
-      job_placements: { type: Number, required: true },
+  company: {
+    type: {
+      name: { type: String, required: true },
+      logo_url: { type: String, required: true, validate: urlValidator },
     },
-    gallery: {
-      type: [String],
-      validate: {
-        validator: function (this: any, v: string[]): boolean {
-          if (this.parent().status === "completed") {
-            return v.every((url: string) => cloudfrontUrlRegex.test(url));
-          }
-          return true;
-        },
-        message: "Invalid CloudFront URL in gallery",
-      },
+    required: true,
+  },
+  goals: { type: [String], required: true },
+  target_audience: { type: [String], required: true },
+  team_structure: { type: [SimpleTeamMemberSchema], required: true },
+  project_leader_name: { type: String, required: true },
+  key_metrics: {
+    type: [KeyMetricSchema],
+    required: function (this: any): boolean {
+      return this.parent().status === "completed";
     },
-    event_details_link: {
-      type: String,
-      validate: {
-        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront event details link URL",
-      },
-    },
+  },
+  gallery: {
+    type: [String],
+    validate: urlValidator,
+    default: [],
   },
 });
 
 const CompetitionSchema = new Schema({
-  category_specific: {
-    theme: { type: String, required: true },
-    goals: { type: String, required: true },
-    target_audience: { type: String, required: true },
-    format: { type: String, enum: ["online", "in-person"], required: true },
-    sideline_activities: { type: [Schema.Types.Mixed], required: true },
-    mentors: [
-      {
-        name: { type: String, required: true },
-        avatar_url: {
-          type: String,
-          required: true,
-          validate: {
-            validator: (v: string) => cloudfrontUrlRegex.test(v),
-            message: "Invalid CloudFront avatar URL",
-          },
-        },
-        position: { type: String, required: true },
-        linkedin_url: { type: String },
-      },
+  theme: { type: String, required: true },
+  goals: { type: [String], required: true },
+  target_audience: { type: [String], required: true },
+  sponsors: {
+    type: [
+      { name: String, logo_url: { type: String, validate: urlValidator } },
     ],
-    judges: [
-      {
-        name: { type: String, required: true },
-        avatar_url: {
-          type: String,
-          required: true,
-          validate: {
-            validator: (v: string) => cloudfrontUrlRegex.test(v),
-            message: "Invalid CloudFront avatar URL",
-          },
-        },
-        position: { type: String, required: true },
-        linkedin_url: { type: String },
-      },
-    ],
-    sponsor_brands: {
-      type: [String],
-      validate: {
-        validator: (v: string[]) => !v || v.every((url: string) => cloudfrontUrlRegex.test(url)),
-        message: "Invalid CloudFront sponsor brand URL",
-      },
-    },
-    timeline: [
-      {
-        date: Date,
-        title: String,
-        description: String,
-        status: String,
-      },
-    ],
-    key_metrics: {
-      participants: { type: Number, required: true },
-      workshops: { type: Number, required: true },
-      judges_mentors: { type: Number, required: true },
-      sponsors: { type: Number, required: true },
-      funds_raised: { type: Number, required: true },
-      social_media_engagement: { type: Number, required: true },
-      total_attendances: { type: Number, required: true },
-    },
-    gallery: {
-      type: [String],
-      validate: {
-        validator: function (this: any, v: string[]): boolean {
-          if (this.parent().status === "completed") {
-            return v.every((url: string) => cloudfrontUrlRegex.test(url));
-          }
-          return true;
-        },
-        message: "Invalid CloudFront URL in gallery",
-      },
-    },
-    competition_details_link: {
-      type: String,
-      validate: {
-        validator: (v: string) => !v || cloudfrontUrlRegex.test(v),
-        message: "Invalid CloudFront competition details link URL",
-      },
+    default: [],
+  },
+  team_structure: { type: [SimpleTeamMemberSchema], required: true },
+  project_leader_name: { type: String, required: true },
+  key_metrics: {
+    type: [KeyMetricSchema],
+    required: function (this: any): boolean {
+      return this.parent().status === "completed";
     },
   },
+  gallery: {
+    type: [String],
+    validate: urlValidator,
+    default: [],
+  },
+  details_link: { type: String },
 });
 
-const Project = mongoose.models?.Project || mongoose.model("Project", projectSchema);
+const Project =
+  mongoose.models?.Project || mongoose.model("Project", projectSchema);
 
 // Only create discriminators if they don't already exist
-if (!Project.discriminators?.technical) {
+if (!Project.discriminators) {
   Project.discriminator("technical", TechnicalSchema);
-}
-if (!Project.discriminators?.media) {
   Project.discriminator("media", MediaSchema);
-}
-if (!Project.discriminators?.event) {
   Project.discriminator("event", EventSchema);
-}
-if (!Project.discriminators?.community) {
   Project.discriminator("community", CommunitySchema);
-}
-if (!Project.discriminators?.career) {
   Project.discriminator("career", CareerSchema);
-}
-if (!Project.discriminators?.competition) {
   Project.discriminator("competition", CompetitionSchema);
 }
 
