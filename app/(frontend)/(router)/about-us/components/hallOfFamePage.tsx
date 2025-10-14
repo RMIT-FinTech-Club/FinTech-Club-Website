@@ -9,6 +9,7 @@ import { useSemester } from "./hall-components/hooks/useSemester";
 import HallRevealSection from "./hall-components/hall-display/HallRevealSection";
 import HeaderTitle from "./hall-components/headerTitle";
 import Image from "next/image";
+import { CircularProgress } from "@mui/material";
 
 export default function HallOfFamePage() {
   const categories = [
@@ -78,11 +79,11 @@ export default function HallOfFamePage() {
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end items-center w-full">
                 <HeaderTitle text="Hall of Fame" />
               </div>
-              <div className="pt-16 pb-[8rem] flex justify-center items-center">
-                <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#DCB968] mx-auto mb-4"></div>
-                  <p className="text-[#5E5E92]">Loading Hall of Fame...</p>
-                </div>
+              <div className="p-8 text-center flex flex-col items-center justify-center h-64">
+                <CircularProgress sx={{ color: "#DCB968" }} />
+                <p className="mt-4 text-lg text-[#5E5E92]">
+                  Loading Hall of Fame
+                </p>
               </div>
             </div>
           </div>
@@ -90,10 +91,11 @@ export default function HallOfFamePage() {
       )}
 
       {error && !loading && (
-        <div className="pt-4 text-center">
-          <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block">
-            ⚠️ {error}
-          </p>
+        <div className="relative w-[87vw] h-48 mx-auto mt-20 mb-10 md:h-64 p-[4px] rounded-lg bg-gradient-to-b from-[#DCB968] to-[#F7D27F]">
+          <div className="flex flex-col items-center justify-center w-full h-full bg-[#F9FAFB] rounded-[7px] text-center px-4">
+            <p className="text-5xl font-bold mb-4">⚠️</p>
+            <p className="text-[#2C305F] text-xl">{error}</p>
+          </div>
         </div>
       )}
 

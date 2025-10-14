@@ -3,6 +3,7 @@
 import { Button } from "@heroui/react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 type ProjectData = {
   labels: string[];
@@ -120,17 +121,20 @@ const OngoingProjects = () => {
   // --- Conditional Rendering ---
   if (loading) {
     return (
-      <section className="flex h-screen w-full items-center justify-center bg-[#000543]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-      </section>
+      <div className="p-8 text-center flex flex-col items-center justify-center h-screen">
+        <CircularProgress sx={{ color: "#DCB968" }} />
+        <p className="mt-4 text-lg text-[#5E5E92]">Loading Clubwide Projects</p>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <section className="flex h-screen w-full items-center justify-center bg-[#000543]">
-        <p className="text-lg text-red-400">{error}</p>
-      </section>
+      <div className="pt-4 text-center">
+        <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block">
+          ⚠️ {error}
+        </p>
+      </div>
     );
   }
 
@@ -147,7 +151,7 @@ const OngoingProjects = () => {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[calc(100vh-3rem)]">
+      <div className="relative h-[calc(100vh-2.75rem)]">
         {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat duration-700 ease-in-out"

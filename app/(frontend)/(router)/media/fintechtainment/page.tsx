@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import PaginationRounded from "./components/pagination";
 import Image from "next/image";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 // --- TYPE DEFINITIONS ---
 interface ApiPodcast {
@@ -198,7 +199,7 @@ export default function PodcastLibrary() {
           setReels(fetchedReels);
           setTotalReelPages(fetchedTotalPages);
         } catch (err: any) {
-          setReelsError("Failed to load reels. Please try again later.");
+          setReelsError("Failed to load Fintech101. Please try again later.");
         } finally {
           setReelsLoading(false);
         }
@@ -222,23 +223,19 @@ export default function PodcastLibrary() {
   const renderPodcastContent = () => {
     if (podcastsLoading) {
       return (
-        <div className="flex h-[40vh] w-full flex-col items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F]"></div>
-          <p className="mt-4 text-lg text-gray-600">Loading Podcasts...</p>
+        <div className="p-8 text-center flex flex-col items-center justify-center h-64">
+          <CircularProgress sx={{ color: "#DCB968" }} />
+          <p className="mt-4 text-lg text-[#5E5E92]">Loading Podcasts</p>
         </div>
       );
     }
     if (podcastsError)
       return (
-        <div className="text-center py-16 text-red-600 bg-red-100 p-4 rounded-lg">
-          ⚠️ {podcastsError}
-        </div>
-      );
-    if (podcasts.length === 0)
-      return (
-        <div className="text-center py-16">
-          <h3>No Podcasts Found</h3>
-          <p>There are no podcasts matching your selected filter.</p>
+        <div className="relative w-[87vw] h-48 mx-auto my-10 md:h-64 p-[4px] rounded-lg bg-gradient-to-b from-[#DCB968] to-[#F7D27F]">
+          <div className="flex flex-col items-center justify-center w-full h-full bg-[#F9FAFB] rounded-[7px] text-center px-4">
+            <p className="text-5xl font-bold mb-4">⚠️</p>
+            <p className="text-[#2C305F] text-xl">{podcastsError}</p>
+          </div>
         </div>
       );
 
@@ -270,23 +267,19 @@ export default function PodcastLibrary() {
   const renderReelContent = () => {
     if (reelsLoading) {
       return (
-        <div className="flex h-[40vh] w-full flex-col items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C305F]"></div>
-          <p className="mt-4 text-lg text-gray-600">Loading...</p>
+        <div className="p-8 text-center flex flex-col items-center justify-center h-64">
+          <CircularProgress sx={{ color: "#DCB968" }} />
+          <p className="mt-4 text-lg text-[#5E5E92]">Loading Fintech101</p>
         </div>
       );
     }
     if (reelsError)
       return (
-        <div className="text-center py-16 text-red-600 bg-red-100 p-4 rounded-lg">
-          ⚠️ {reelsError}
-        </div>
-      );
-    if (reels.length === 0)
-      return (
-        <div className="text-center py-16">
-          <h3>No Videos Found</h3>
-          <p>There are no videos matching your selected filter.</p>
+        <div className="relative w-[87vw] h-48 mx-auto my-10 md:h-64 p-[4px] rounded-lg bg-gradient-to-b from-[#DCB968] to-[#F7D27F]">
+          <div className="flex flex-col items-center justify-center w-full h-full bg-[#F9FAFB] rounded-[7px] text-center px-4">
+            <p className="text-5xl font-bold mb-4">⚠️</p>
+            <p className="text-[#2C305F] text-xl">{reelsError}</p>
+          </div>
         </div>
       );
 

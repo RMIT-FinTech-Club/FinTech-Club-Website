@@ -64,7 +64,7 @@ export default function DepartmentAccordion({
       className={`flex w-full min-w-0 
                   flex-col lg:flex-row lg:gap-0 lg:overflow-hidden 
                   overflow-x-auto lg:h-[var(--acc-h)] lg:items-stretch 
-                  my-20
+                  
                   ${className ?? ""}`}
       style={cssVars}
     >

@@ -8,6 +8,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 interface ApiArticle {
   _id: string;
@@ -89,24 +90,76 @@ export default function SpecificArticle({
   // --- CONDITIONAL RENDERING ---
   if (loading) {
     return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900"></div>
+      <div className="p-8 text-center flex flex-col items-center justify-center h-screen">
+        <CircularProgress sx={{ color: "#DCB968" }} />
+        <p className="mt-4 text-lg text-[#5E5E92]">Loading</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex h-screen items-center justify-center text-red-500 text-xl">
-        {error}
+      <div className="h-screen flex items-center justify-center">
+        <div className="relative w-[87vw] h-48 md:h-64 p-[4px] rounded-lg bg-gradient-to-b from-[#DCB968] to-[#F7D27F]">
+          <div className="flex flex-col items-center justify-center w-full h-full bg-[#F9FAFB] rounded-[7px] text-center px-4">
+            <p className="text-5xl font-bold mb-4">⚠️</p>
+            <p className="text-[#2C305F] text-xl">{error}</p>
+            <div
+              className="w-fit h-fit rounded-md p-[2px] mt-[1.5rem]"
+              style={{
+                background: "linear-gradient(to top, #474A6E, #DBB968)",
+              }}
+            >
+              <Link href="/media/article">
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 1.1 }}
+                  className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+                >
+                  Back to Article Library
+                </motion.button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (!article) {
     return (
-      <div className="flex h-screen items-center justify-center text-xl">
-        Article not found.
+      <div className="h-screen flex items-center justify-center">
+        <div className="relative w-[87vw] h-48 md:h-64 p-[4px] rounded-lg bg-gradient-to-b from-[#DCB968] to-[#F7D27F]">
+          <div className="flex flex-col items-center justify-center w-full h-full bg-[#F9FAFB] rounded-[7px] text-center px-4">
+            <Image
+              src="/error-404-New.png"
+              alt="404 Not Found"
+              width={50}
+              height={50}
+              loading="lazy"
+              className="mb-4"
+            />
+            <h3 className="text-2xl font-bold text-[#2C305F] mb-2">
+              Article Not Found
+            </h3>
+            <div
+              className="w-fit h-fit rounded-md p-[2px] mt-[0.5rem]"
+              style={{
+                background: "linear-gradient(to top, #474A6E, #DBB968)",
+              }}
+            >
+              <Link href="/media/article">
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 1.1 }}
+                  className="bg-ft-primary-blue-300 text-bluePrimary font-semibold px-4 py-2 rounded-md hover:bg-yellowCream"
+                >
+                  Back to Article Library
+                </motion.button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

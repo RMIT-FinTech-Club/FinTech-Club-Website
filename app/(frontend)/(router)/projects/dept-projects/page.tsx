@@ -1,50 +1,46 @@
 "use client";
+
 import * as React from "react";
 import axios from "axios";
 import DeptAccordionController from "./components/accordion/DeptAccordionController";
-import type { DeptItemBase, Project, DeptProjectsMap, ApiResponse } from "./components/types";
-import DeptSection from "./components/panel/DeptContentSection"
+import type {
+  DeptItemBase,
+  Project,
+  DeptProjectsMap,
+  ApiResponse,
+} from "./components/types";
+import DeptSection from "./components/panel/DeptContentSection";
+import { CircularProgress } from "@mui/material";
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3000/api/v1";
 
 const DEPT_TABS = [
-  { value: "technology", label: "TECHNOLOGY", color: "bg-[#DBB968]", apiDept: "Technical" },
-  { value: "business", label: "BUSINESS", color: "bg-[#2C305F]", apiDept: "Business" },
-  { value: "marketing", label: "MARKETING", color: "bg-[#DBB968]", apiDept: "Marketing" },
-  { value: "human-resources", label: "HUMAN RESOURCES", color: "bg-[#2C305F]", apiDept: "Human Resources" },
+  {
+    value: "technology",
+    label: "TECHNOLOGY",
+    color: "bg-[#DBB968]",
+    apiDept: "Technology",
+  },
+  {
+    value: "business",
+    label: "BUSINESS",
+    color: "bg-[#2C305F]",
+    apiDept: "Business",
+  },
+  {
+    value: "marketing",
+    label: "MARKETING",
+    color: "bg-[#DBB968]",
+    apiDept: "Marketing",
+  },
+  {
+    value: "human-resources",
+    label: "HUMAN RESOURCES",
+    color: "bg-[#2C305F]",
+    apiDept: "Human Resources",
+  },
 ] as const;
-
-const DEFAULT_DESC: Record<string, React.ReactNode> = {
-  "TECHNOLOGY": (
-    <p>
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-        officia deserunt mollit anim id est laborum.
-    </p>
-  ),
-  "BUSINESS": (
-    <p>
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-        officia deserunt mollit anim id est laborum.
-    </p>
-  ),
-  "MARKETING": (
-    <p>
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-        officia deserunt mollit anim id est laborum.
-    </p>
-  ),
-  "HUMAN RESOURCES": (
-    <p>
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-        officia deserunt mollit anim id est laborum.
-    </p>
-  ),
-};
 
 export default function DeptProjects() {
   const departments = React.useMemo(
@@ -52,7 +48,14 @@ export default function DeptProjects() {
     []
   );
 
-  const [departmentProjects, setDepartmentProjects] = React.useState<DeptProjectsMap>({});
+  // State for the projects in each department
+  const [departmentProjects, setDepartmentProjects] =
+    React.useState<DeptProjectsMap>({});
+  // 1. NEW: State to store the fetched descriptions for each department
+  const [departmentDescriptions, setDepartmentDescriptions] = React.useState<
+    Record<string, string>
+  >({});
+
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -64,27 +67,39 @@ export default function DeptProjects() {
       setError(null);
 
       try {
-        const results: DeptProjectsMap = {};
+        const projectResults: DeptProjectsMap = {};
+        const descriptionResults: Record<string, string> = {}; // Temp storage for descriptions
 
         await Promise.all(
           departments.map(async (dept) => {
-            const params = { type: "department", status: "ongoing", department: dept };
+            const params = {
+              type: "department",
+              status: "ongoing",
+              department: dept,
+            };
             const res = await axios.get<ApiResponse>(`${API_BASE}/projects`, {
               params,
               signal: controller.signal as any,
             });
 
+            // Extract projects
             const list = res.data?.data?.projects ?? [];
-            results[dept] = list.map((p, idx): Project => ({
-              id: `${dept}-${idx + 1}`,
-              title: p.title,
-              imageUrl: p.image_url,
-              description: p.description,
-            }));
+            projectResults[dept] = list.map(
+              (p): Project => ({
+                id: p.slug,
+                title: p.title,
+                imageUrl: p.image_url,
+                slug: p.slug,
+              })
+            );
+
+            descriptionResults[dept] =
+              res.data?.data?.department_description ?? "";
           })
         );
 
-        setDepartmentProjects(results);
+        setDepartmentProjects(projectResults);
+        setDepartmentDescriptions(descriptionResults); // Set the descriptions state
         setError(null);
       } catch (e: any) {
         console.error("Error fetching department projects:", e);
@@ -94,7 +109,9 @@ export default function DeptProjects() {
         } else if (e.code === "ERR_NETWORK") {
           setError("Network error. Please check your connection.");
         } else {
-          setError("Failed to fetch department projects. Please try again later.");
+          setError(
+            "Failed to fetch department projects. Please try again later."
+          );
         }
       } finally {
         setLoading(false);
@@ -104,15 +121,35 @@ export default function DeptProjects() {
     return () => controller.abort();
   }, [departments]);
 
-  if (loading) return <div className="p-8 text-center">Loading projects...</div>;
-  if (error) return <div className="p-8 text-center text-red-500">⚠️ {error}</div>;
-  
+  if (loading) {
+    return (
+      <div className="p-8 text-center flex flex-col items-center justify-center h-64">
+        <CircularProgress sx={{ color: "#DCB968" }} />
+        <p className="mt-4 text-lg text-[#5E5E92]">
+          Loading Department Projects
+        </p>
+      </div>
+    );
+  }
+  if (error)
+    return (
+      <div className="pt-4 text-center">
+        <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block">
+          ⚠️ {error}
+        </p>
+      </div>
+    );
+
   const items = DEPT_TABS.map(({ value, label, color, apiDept }) => ({
     value,
     label,
     color,
     renderContent: (_: DeptItemBase) => (
-      <DeptSection label={label} description={DEFAULT_DESC[label] || ""} items={departmentProjects[apiDept] || []} />
+      <DeptSection
+        label={label}
+        description={departmentDescriptions[apiDept] || ""}
+        items={departmentProjects[apiDept] || []}
+      />
     ),
   }));
 
