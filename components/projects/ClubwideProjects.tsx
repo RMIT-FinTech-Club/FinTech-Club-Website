@@ -22,7 +22,7 @@ interface ApiProject {
   slug: string;
 }
 
-const OngoingProjects = () => {
+const ClubwideProjects = () => {
   // State for data, loading, and errors
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -57,8 +57,8 @@ const OngoingProjects = () => {
 
         setProjects(formattedProjects);
       } catch (err) {
-        console.error("Failed to fetch ongoing projects:", err);
-        setError("Could not load projects at this time.");
+        console.error("Failed to fetch clubwide projects:", err);
+        setError("Failed to fetch clubwide projects. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -130,19 +130,12 @@ const OngoingProjects = () => {
 
   if (error) {
     return (
-      <div className="pt-4 text-center">
-        <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg inline-block">
-          ⚠️ {error}
-        </p>
+      <div className="relative w-[87vw] h-48 mx-auto my-10 md:h-64 p-[4px] rounded-lg bg-gradient-to-b from-[#DCB968] to-[#F7D27F]">
+        <div className="flex flex-col items-center justify-center w-full h-full bg-[#F9FAFB] rounded-[7px] text-center px-4">
+          <p className="text-5xl font-bold mb-4">⚠️</p>
+          <p className="text-[#2C305F] text-xl">{error}</p>
+        </div>
       </div>
-    );
-  }
-
-  if (projects.length === 0) {
-    return (
-      <section className="flex h-screen w-full items-center justify-center bg-[#000543]">
-        <p className="text-lg text-white">No clubwide projects found.</p>
-      </section>
     );
   }
 
@@ -335,4 +328,4 @@ const OngoingProjects = () => {
   );
 };
 
-export default OngoingProjects;
+export default ClubwideProjects;

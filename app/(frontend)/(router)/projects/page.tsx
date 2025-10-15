@@ -1,10 +1,10 @@
-import OngoingProjects from "@/components/projects/OngoingProjects";
+import ClubwideProjects from "@/components/projects/ClubwideProjects";
 import DeptProjects from "@/app/(frontend)/(router)/projects/dept-projects/page";
 
 const Projects = () => {
 	return (
 		<>
-			<OngoingProjects />
+			<ClubwideProjects />
 			<DeptProjects />
 		</>
 	);
