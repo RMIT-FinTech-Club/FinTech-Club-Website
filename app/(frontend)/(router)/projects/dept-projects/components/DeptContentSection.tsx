@@ -1,6 +1,6 @@
-import { Project } from "../types";
+import { Project } from "./types";
 import { Poppins } from "next/font/google";
-import ProjectCarousel from "../carousel/ProjectCarousel";
+import ProjectCarousel from "./ProjectCarousel";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["300", "600", "800"] });
 
@@ -14,8 +14,8 @@ export default function DeptSection({
   items: Project[];
 }) {
   return (
-    <section className="w-full space-y-4 p-3 md:p-7">
-      <div className="mt-4 w-full max-w-[1100px] md:max-lg:max-w-[880px] md:max-lg:pr-16">
+    <section className="w-[73.3vw] space-y-4">
+      <div className="relative mt-4 w-full">
         {/* Circles as background */}
         <div className="absolute inset-0 pointer-events-none z-0">
           {
@@ -24,15 +24,15 @@ export default function DeptSection({
             : (
               <div>
                 {/* Large light blue circle */}
-                <div className="absolute top-7 right-24 w-12 h-12 hidden lg:block bg-[#C9D6EA] rounded-full"></div>
+                <div className="absolute top-[-1.5rem] right-10 w-12 h-12 hidden lg:block bg-[#C9D6EA] rounded-full"></div>
                 {/* Large dark blue circle */}
-                <div className="absolute top-12 right-16 w-12 h-12 hidden lg:block bg-[#2C305F] rounded-full"></div>
+                <div className="absolute top-0 right-3 w-12 h-12 hidden lg:block bg-[#2C305F] rounded-full"></div>
                 {/* Large gold circle */}
-                <div className="absolute top-20 right-28 w-12 h-12 hidden lg:block bg-[#DBB968] rounded-full"></div>
+                <div className="absolute top-8 right-16 w-12 h-12 hidden lg:block bg-[#DBB968] rounded-full"></div>
                 {/* Small gold circle */}
-                <div className="absolute top-28 right-20 w-3 h-3 hidden lg:block bg-[#DBB968] rounded-full"></div>
+                <div className="absolute top-16 right-10 w-3 h-3 hidden lg:block bg-[#DBB968] rounded-full"></div>
                 {/* Small dark blue circle */}
-                <div className="absolute top-16 right-8 w-2 h-2 hidden lg:block bg-[#2C305F] rounded-full"></div>
+                <div className="absolute top-5 right-[-1rem] w-2 h-2 hidden lg:block bg-[#2C305F] rounded-full"></div>
               </div>
             )
           }
