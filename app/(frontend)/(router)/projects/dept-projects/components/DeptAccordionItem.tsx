@@ -69,8 +69,8 @@ export default function DeptAccordionItem({
       <AccordionContent
         forceMount // Keep content in DOM for smoother animations and SEO
         className={`
-          w-full p-4 md:p-8 text-left
-          lg:h-full lg:overflow-y-auto
+          w-full p-4 md:p-6 text-left
+          lg:h-full lg:overflow-y-auto lg:overflow-x-hidden
           transition-opacity ease-[cubic-bezier(0.4,0,0.2,1)]
           duration-[var(--acc-dur)]
           border-4 ${borderClass}

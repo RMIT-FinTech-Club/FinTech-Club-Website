@@ -52,7 +52,7 @@ const ClubwideProjects = () => {
           description: p.description,
           labels: p.labels,
           image: p.image_url,
-          link: `/projects/${p.slug}`, // Create the link from the slug
+          link: `/projects/${p.slug}`,
         }));
 
         setProjects(formattedProjects);
