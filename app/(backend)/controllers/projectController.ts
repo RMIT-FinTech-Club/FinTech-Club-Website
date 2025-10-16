@@ -167,7 +167,7 @@ export async function getDepartmentProjects(department: string) {
         department: { $first: "$department" },
         department_description: { $first: "$department_description" },
         projects: {
-          $push: { title: "$title", image_url: "$image_url", slug: "$slug" },
+          $push: { title: "$title", description: "$description", image_url: "$image_url", slug: "$slug" },
         },
       },
     },

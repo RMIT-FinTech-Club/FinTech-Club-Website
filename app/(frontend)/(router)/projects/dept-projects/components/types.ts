@@ -45,6 +45,7 @@ export type Project = {
   title: string;
   imageUrl: string;
   slug: string;
+  description: string;
 };
 
 /**
@@ -59,6 +60,7 @@ export type ApiProject = {
   title: string;
   image_url: string;
   slug: string;
+  description: string;
 };
 
 /**

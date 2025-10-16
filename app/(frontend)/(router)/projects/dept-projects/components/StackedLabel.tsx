@@ -20,7 +20,7 @@ export default function StackedLabel({
 
     return (
       <span
-        className={`${container} relative h-[32rem] flex-row items-stretch justify-between leading-none uppercase tracking-[0.08em] font-bold md:max-lg:gap-[0.25rem] ${poppins.className}`}
+        className={`${container} relative h-[38rem] flex-row items-stretch justify-between leading-none uppercase tracking-[0.08em] font-bold md:max-lg:gap-[0.25rem] ${poppins.className}`}
         aria-hidden="true"
       >
         {/* Outer container for HUMAN */}
@@ -31,7 +31,8 @@ export default function StackedLabel({
               {firstWord.map((ch, i) => (
                 <span
                   key={`human-${i}`}
-                  className="text-[clamp(1.25rem,0.8vw+0.85rem,1.75rem)] md:max-lg:text-[clamp(0.9rem,0.4vw+0.8rem,1.1rem)] py-1"
+                  className="text-[clamp(1.5rem,0.9vw+0.95rem,2rem)]
+                     md:max-lg:text-[clamp(1.05rem,0.45vw+0.9rem,1.25rem)] py-1"
                 >
                   {ch}
                 </span>
@@ -52,7 +53,8 @@ export default function StackedLabel({
               {secondWord.map((ch, i) => (
                 <span
                   key={`resources-${i}`}
-                  className="text-[clamp(1.25rem,0.8vw+0.85rem,1.75rem)] md:max-lg:text-[clamp(0.9rem,0.4vw+0.8rem,1.1rem)] py-1"
+                  className="text-[clamp(1.5rem,0.9vw+0.95rem,2rem)]
+                     md:max-lg:text-[clamp(1.05rem,0.45vw+0.9rem,1.25rem)] py-1"
                 >
                   {ch}
                 </span>

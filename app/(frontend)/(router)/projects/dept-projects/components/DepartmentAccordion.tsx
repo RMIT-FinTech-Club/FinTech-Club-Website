@@ -43,7 +43,7 @@ export default function DepartmentAccordion({ items, defaultOpen }: Props) {
       value={openItem}
       onValueChange={(v) => setOpenItem(v || undefined)}
       // [+] Simplified classes for a full-screen layout on desktop
-      className="flex w-full min-w-0 flex-col lg:flex-row lg:h-screen"
+      className="flex w-full min-w-0 flex-col lg:flex-row"
       style={cssVars}
     >
       {normalizedItems.map(({ value, label, color, content, renderContent }) => (

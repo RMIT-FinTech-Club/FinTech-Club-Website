@@ -14,12 +14,12 @@ export default function DeptSection({
   items: Project[];
 }) {
   return (
-    <section className="relative w-[76vw] space-y-4">
+    <section className="relative w-[74.45vw] space-y-4">
       <div className="w-full">
 
           <div
             className="bg-[#2C305F] h-12 w-56 absolute hidden lg:block
-                          lg:top-48 [@media(min-width:1160px)]:top-16 [@media(min-width:1160px)]:-left-6"
+                          lg:top-48 [@media(min-width:1160px)]:top-16 [@media(min-width:1160px)]:-left-8"
             style={{
               clipPath: "polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%)",
             }}
@@ -51,7 +51,7 @@ export default function DeptSection({
               {description}
             </div>
 
-            <div className="p-5 md:max-lg:p-4">
+            <div className="px-12 md:max-lg:px-8">
               <ProjectCarousel items={items} />
             </div>
           </div>

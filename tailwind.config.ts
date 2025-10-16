@@ -8,7 +8,6 @@ import {
 import responsiveStyling, {
   orientationPlugin,
 } from "./plugins/responsiveStyling";
-import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   content: [

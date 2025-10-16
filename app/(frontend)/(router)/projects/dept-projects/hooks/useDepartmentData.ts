@@ -36,6 +36,7 @@ export function useDepartmentData(departments: readonly string[]) {
               title: p.title,
               imageUrl: p.image_url,
               slug: p.slug,
+              description: p.description,
             }));
 
             descriptionResults[dept] = res.data?.data?.department_description ?? "";

@@ -288,7 +288,7 @@ export default function UpcomingEvent() {
                 >
                   <div className="bg-ft-primary-yellow-50 w-full h-full rounded-[3vh] py-[1vh] px-[1vw] flex justify-center items-center transition-transform hover:scale-105">
                     <p className="text-[1rem] leading-[3.3vh] font-semibold text-center">
-                      More Details
+                      Explore More
                     </p>
                   </div>
                 </Link>
