@@ -3,8 +3,11 @@ import { IconChevronCompactDown } from "@tabler/icons-react";
 import clsx from "clsx";
 import { type Variants, motion } from "framer-motion";
 import type React from "react";
+import { useMediaQuery } from "react-responsive";
 
 const HerosectionVid: React.FC = () => {
+	const isMobile = useMediaQuery({ maxWidth: 1024 });
+
 	const textAppearVariants: Variants = {
 		hidden: {
 			opacity: 0,
@@ -24,48 +27,103 @@ const HerosectionVid: React.FC = () => {
 	};
 
 	return (
-		<div className={clsx("relative w-screen h-[93vh]")}>
-			{/* Video background */}
-			<video
-				autoPlay
-				muted
-				loop
-				playsInline
-				preload="none"
-				id="hero-section-bg-vid"
-				className={clsx(
-					"w-full h-full", // Full screen
-					"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2", // Center the video
-					"object-cover", // Cover
-				)}
-			>
-				<source src="https://d2prwyp3rwi40.cloudfront.net/home/assets/HeroSectionVideo.mp4" type="video/mp4" />
-			</video>
+		<nav>
+			{isMobile ? (
+				<div className={clsx("relative w-screen h-[93vh]")}>
+					{/* Video background */}
+					<video
+						autoPlay
+						muted
+						loop
+						playsInline
+						preload="none"
+						id="hero-section-bg-vid"
+						className={clsx(
+							"w-full h-1/4", // Full screen
+							"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2", // Center the video
+							"object-cover" // Cover
+						)}
+					>
+						<source
+							src="https://d2prwyp3rwi40.cloudfront.net/home/assets/HeroSectionVideo.mp4"
+							type="video/mp4"
+						/>
+					</video>
 
-			{/* Text */}
-			<motion.div
-				initial="hidden"
-				animate="visible"
-				transition={{
-					staggerChildren: 0.1,
-				}}
-				className="absolute bottom-0 right-0 left-0"
-			>
-				<motion.p
-					className="text-center w-full text-ft-text-bright"
-					variants={textAppearVariants}
-				>
-					Swipe down to discover more
-				</motion.p>
+					{/* Text */}
+					<motion.div
+						initial="hidden"
+						animate="visible"
+						transition={{
+							staggerChildren: 0.1,
+						}}
+						className="absolute bottom-0 right-0 left-0"
+					>
+						<motion.p
+							className="text-center text-black w-full"
+							variants={textAppearVariants}
+						>
+							Swipe down to discover more
+						</motion.p>
 
-				<motion.div variants={textAppearVariants}>
-					<IconChevronCompactDown
-						size={48}
-						className="text-center w-full text-ft-text-bright"
-					/>
-				</motion.div>
-			</motion.div>
-		</div>
+						<motion.div variants={textAppearVariants}>
+							<IconChevronCompactDown
+								size={48}
+								className="text-center w-full text-black"
+							/>
+						</motion.div>
+					</motion.div>
+				</div>
+			) :
+				        /*desktop*/
+				(
+				<div className={clsx("relative w-screen h-[93vh]")}>
+					{/* Video background */}
+					<video
+						autoPlay
+						muted
+						loop
+						playsInline
+						preload="none"
+						id="hero-section-bg-vid"
+						className={clsx(
+							"w-full h-full", // Full screen
+							"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2", // Center the video
+							"object-cover" // Cover
+						)}
+					>
+						<source
+							src="https://d2prwyp3rwi40.cloudfront.net/home/assets/HeroSectionVideo.mp4"
+							type="video/mp4"
+						/>
+					</video>
+
+					{/* Text */}
+					<motion.div
+						initial="hidden"
+						animate="visible"
+						transition={{
+							staggerChildren: 0.1,
+						}}
+						className="absolute bottom-0 right-0 left-0"
+					>
+						<motion.p
+							className="text-center w-full text-ft-text-bright"
+							variants={textAppearVariants}
+						>
+							Swipe down to discover more
+						</motion.p>
+
+						<motion.div variants={textAppearVariants}>
+							<IconChevronCompactDown
+								size={48}
+								className="text-center w-full text-ft-text-bright"
+							/>
+						</motion.div>
+					</motion.div>
+				</div>
+			)}
+		</nav>
 	);
 };
 
