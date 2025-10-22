@@ -28,14 +28,27 @@ interface SidebarArticle {
 }
 
 // Helper function for formatting dates
+const addOrdinalSuffix = (day: number): string => {
+  if (day > 10 && day < 14) return `${day}th`;
+  const lastDigit = day % 10;
+  switch (lastDigit) {
+    case 1:
+      return `${day}st`;
+    case 2:
+      return `${day}nd`;
+    case 3:
+      return `${day}rd`;
+    default:
+      return `${day}th`;
+  }
+};
+
 const formatPublicationDate = (isoString: string): string => {
-  if (!isoString) return "";
   const dateObj = new Date(isoString);
-  return dateObj.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const day = addOrdinalSuffix(dateObj.getDate());
+  const month = dateObj.toLocaleString("en-US", { month: "long" });
+  const year = dateObj.getFullYear();
+  return `${month} ${day}, ${year}`;
 };
 
 export default function SpecificArticle({
@@ -80,12 +93,6 @@ export default function SpecificArticle({
 
     fetchArticleData();
   }, [params.id]);
-
-  const handleBreadcrumbClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    console.info("You clicked a breadcrumb.");
-  };
 
   // --- CONDITIONAL RENDERING ---
   if (loading) {

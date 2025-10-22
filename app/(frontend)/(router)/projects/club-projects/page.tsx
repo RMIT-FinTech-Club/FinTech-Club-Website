@@ -230,7 +230,7 @@ const ClubwideProjects = () => {
           <Button
             isIconOnly
             size="sm"
-            className="absolute mt-[5rem] right-[3.5rem] top-1/2 transform -translate-y-1/2 z-20 bg-[#EADDFF] text-[#000] backdrop-blur-sm hover:bg-white/20 hover:text-white border border-white/20"
+            className="absolute mt-[5rem] right-[3.5rem] top-1/2 rounded-full transform -translate-y-1/2 z-20 bg-[#DBB968] text-[#2C305F] backdrop-blur-sm"
             onClick={() => {
               nextSlide();
               registerInteraction();

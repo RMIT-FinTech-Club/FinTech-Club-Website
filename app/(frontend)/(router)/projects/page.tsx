@@ -1,5 +1,5 @@
-import ClubwideProjects from "@/components/projects/ClubwideProjects";
-import DeptProjects from "@/app/(frontend)/(router)/projects/dept-projects/page";
+import ClubwideProjects from "./club-projects/page";
+import DeptProjects from "./dept-projects/page";
 
 const Projects = () => {
 	return (

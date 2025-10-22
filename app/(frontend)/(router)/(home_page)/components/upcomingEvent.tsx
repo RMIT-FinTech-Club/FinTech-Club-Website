@@ -8,7 +8,6 @@ import clsx from "clsx";
 import axios from "axios";
 import Link from "next/link";
 import { CircularProgress } from "@mui/material";
-import Image from "next/image";
 
 interface EventItem {
   _id: string;

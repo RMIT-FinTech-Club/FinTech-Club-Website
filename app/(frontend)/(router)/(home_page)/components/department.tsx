@@ -95,26 +95,38 @@ const Department = () => {
           <p className="mt-4 text-base text-justify font-normal">
             {department.description}
           </p>
-          <button className="text-[#F0EDFF] bg-[#5E5E92] rounded-xl w-fit px-6 py-2 mt-4 font-semibold drop-shadow-lg text-[1rem]">
+          <Button className="text-[#F0EDFF] bg-[#5E5E92] rounded-xl w-fit px-6 py-2 mt-4 font-semibold drop-shadow-lg text-[1rem]">
             Explore more
-          </button>
-          <div className="mt-6 flex flex-row flex-wrap gap-4 justify-between">
-            {(Object.keys(departments) as Department[]).map((dept) => {
-              const department = departments[dept];
+          </Button>
+          <div className="mt-6 flex flex-row flex-wrap gap-4">
+            {(Object.keys(departments) as Department[]).map((deptKey) => {
+              // Get the info for the department being rendered in the loop
+              const currentDeptInfo = departments[deptKey];
+
+              const isActive = department.name === currentDeptInfo.name;
+
               return (
                 <div
-                  key={dept}
+                  key={deptKey}
                   className="group p-[1px] rounded-[10px]"
                   style={{
-                    background: "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
+                    background: isActive
+                      ? "linear-gradient(to bottom, #C9D6EA, #DBB968)"
+                      : "linear-gradient(to bottom, #F0EDFF, #5E5E92)",
                   }}
                 >
-                  <Button
-                    onPress={() => setDepartment(department)}
-                    className="w-[6.7rem] h-[4rem] rounded-[10px] text-[#0B0B3B] text-wrap font-semibold text-[0.85rem] bg-[#F0EDFF] group-hover:[background:linear-gradient(to_bottom,_#C9D6EA_0%,_#DBB968_58%)] transition-all duration-300"
+                  <button
+                    type="button"
+                    onClick={() => setDepartment(currentDeptInfo)}
+                    className={`w-[6.7rem] h-[4rem] rounded-[10px] text-[#0B0B3B] text-wrap font-semibold text-[0.85rem] 
+                    ${
+                      isActive
+                        ? "[background:linear-gradient(to_bottom,_#C9D6EA_0%,_#DBB968_58%)]" // Active style
+                        : "bg-[#F0EDFF] group-hover:[background:linear-gradient(to_bottom,_#C9D6EA_0%,_#DBB968_58%)]" // Inactive style
+                    }`}
                   >
-                    {department.button.toUpperCase()}
-                  </Button>
+                    {currentDeptInfo.button.toUpperCase()}
+                  </button>
                 </div>
               );
             })}

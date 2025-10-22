@@ -3,132 +3,51 @@ import Article from "../models/article";
 import Podcast from "../models/podcast";
 import { Types } from "mongoose";
 
-// --- NEW HELPER ---
-// This function takes raw data and structures it to match your schema's nested format.
-export const structureProjectData = (data: any) => {
-  const baseData: { [key: string]: any } = {};
-  const categorySpecificData: { [key: string]: any } = {};
-
-  // Lists of fields that belong inside 'category_specific' for each category
-  const categoryFields: { [key: string]: string[] } = {
-    technical: [
-      "goals",
-      "scope",
-      "team_structure",
-      "project_leader_name",
-      "gallery",
-      "timeline",
-      "product_link",
-    ],
-    media: [
-      "goals",
-      "target_audience",
-      "team_structure",
-      "project_leader_name",
-      "products",
-      "auto_update_type",
-      "auto_update_limit",
-    ],
-    event: [
-      "goals",
-      "target_audience",
-      "key_activities",
-      "guest_speakers",
-      "sponsors",
-      "team_structure",
-      "project_leader_name",
-      "key_metrics",
-      "gallery",
-    ],
-    community: [
-      "goals",
-      "target_audience",
-      "key_activities",
-      "partner_ngos",
-      "team_structure",
-      "project_leader_name",
-      "key_metrics",
-      "gallery",
-    ],
-    career: [
-      "company",
-      "goals",
-      "target_audience",
-      "team_structure",
-      "project_leader_name",
-      "key_metrics",
-      "gallery",
-    ],
-    competition: [
-      "theme",
-      "goals",
-      "target_audience",
-      "sponsors",
-      "team_structure",
-      "project_leader_name",
-      "key_metrics",
-      "gallery",
-      "details_link",
-    ],
-  };
-
-  const fieldsForCategory = categoryFields[data.category] || [];
-
-  for (const key in data) {
-    if (fieldsForCategory.includes(key)) {
-      categorySpecificData[key] = data[key];
-    } else {
-      baseData[key] = data[key];
-    }
-  }
-
-  return { ...baseData, category_specific: categorySpecificData };
-};
-
 // Helper to find a project and flatten its structure for the client
 const getProjectByIdOrSlug = async (idOrSlug: string) => {
   const query = Types.ObjectId.isValid(idOrSlug)
     ? { _id: idOrSlug }
     : { slug: idOrSlug };
 
-  const project = await Project.findOne(query).lean();
+  const project = (await Project.findOne(query).lean()) as any;
 
   if (!project) {
     throw new Error("Project not found");
   }
 
-  if (Array.isArray(project)) {
-    throw new Error(
-      "Expected a single project document, but received an array."
-    );
-  }
-  const cs = project.category_specific;
+  if (project.category === "media" && project.auto_update_type) {
+    let Model: any;
+    let fieldsToSelect: string;
 
-  if (project.category === "media" && cs && cs.auto_update_type) {
-    const Model = cs.auto_update_type === "Article" ? Article : Podcast;
+    switch (project.auto_update_type) {
+      case "FinTechTainment":
+        Model = Podcast;
+        fieldsToSelect = "_id title thumbnail_url publicationDate";
+        break;
+
+      case "Article":
+        Model = Article;
+        fieldsToSelect = "_id title illustration_url publicationDate";
+        break;
+
+      default:
+        console.warn(`Unknown auto_update_type: ${project.auto_update_type}`);
+        return project;
+    }
 
     const latestProducts = await Model.find({})
       .sort({ publicationDate: -1 })
-      .limit(cs.auto_update_limit || 5)
-      .select("_id title illustration_url publicationDate")
+      .limit(project.auto_update_limit || 6)
+      .select(fieldsToSelect)
       .lean();
-    cs.products = latestProducts.map((doc: any) => ({
-      onModel: cs.auto_update_type,
+
+    project.products = latestProducts.map((doc: any) => ({
+      onModel: project.auto_update_type,
       product: doc,
     }));
-
-    // Flatten the project for the client response
-    let flattenedProject = { ...project, ...(project.category_specific || {}) };
-    delete flattenedProject.category_specific;
-
-    return flattenedProject;
   }
 
-  // For non-media projects, just flatten and return
-  let flattenedProject = { ...project, ...(project.category_specific || {}) };
-  delete flattenedProject.category_specific;
-
-  return flattenedProject;
+  return project;
 };
 
 // GET all projects
@@ -167,7 +86,12 @@ export async function getDepartmentProjects(department: string) {
         department: { $first: "$department" },
         department_description: { $first: "$department_description" },
         projects: {
-          $push: { title: "$title", description: "$description", image_url: "$image_url", slug: "$slug" },
+          $push: {
+            title: "$title",
+            description: "$description",
+            image_url: "$image_url",
+            slug: "$slug",
+          },
         },
       },
     },
@@ -207,20 +131,20 @@ export async function getProjectDetails(idOrSlug: string) {
 
 // POST a new project
 export async function createProject(data: any) {
-  const structuredData = structureProjectData(data);
-  const project = new Project(structuredData);
+  const project = new Project(data);
   await project.save();
   return project;
 }
 
 // PUT (update) an existing project
 export async function updateProject(idOrSlug: string, updateData: any) {
-  const structuredData = structureProjectData(updateData);
+  // REMOVED: structureProjectData
   const query = Types.ObjectId.isValid(idOrSlug)
     ? { _id: idOrSlug }
     : { slug: idOrSlug };
 
-  const project = await Project.findOneAndUpdate(query, structuredData, {
+  // Pass updateData thẳng vào
+  const project = await Project.findOneAndUpdate(query, updateData, {
     new: true,
     runValidators: true,
   });
