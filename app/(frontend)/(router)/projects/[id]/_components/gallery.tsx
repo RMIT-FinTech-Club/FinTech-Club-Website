@@ -37,7 +37,7 @@ export default function Gallery({
   }
 
   return (
-    <section className="bg-gray-50 py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <SectionTitle>Project Gallery</SectionTitle>
 

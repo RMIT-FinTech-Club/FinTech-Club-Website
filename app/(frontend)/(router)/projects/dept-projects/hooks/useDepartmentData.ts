@@ -26,7 +26,7 @@ export function useDepartmentData(departments: readonly string[]) {
         await Promise.all(
           departments.map(async (dept) => {
             const res = await axios.get<ApiResponse>(`${API_BASE}/projects`, {
-              params: { type: "department", status: "ongoing", department: dept },
+              params: { type: "department", status: "Ongoing", department: dept },
               signal: controller.signal,
             });
 

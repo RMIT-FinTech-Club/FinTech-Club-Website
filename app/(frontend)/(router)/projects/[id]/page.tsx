@@ -6,7 +6,13 @@ import axios from "axios";
 import { CircularProgress } from "@mui/material";
 
 // --- Type Imports ---
-import { Project, Leader, Product, Guest } from "./_components/types";
+// Import the component-specific prop types
+import {
+  Project,
+  Leader as TeamStructureLeader, // Rename to avoid conflict
+  Product,
+  Guest,
+} from "./_components/types";
 
 // --- Component Imports ---
 import Hero from "./_components/hero";
@@ -24,7 +30,7 @@ import Partners from "./_components/partners";
 import ProductCta from "./_components/product-cta";
 import ProductCarousel from "./_components/product-carousel";
 import TargetAudience from "./_components/target-audience";
-import EventCta from "./_components/event-cta";
+import CompetitionCta from "./_components/competition-cta";
 
 // --- Main Page Component ---
 export default function ProjectDetail() {
@@ -58,19 +64,18 @@ export default function ProjectDetail() {
   }, [id]);
 
   // --- Ánh xạ (Mapping) dữ liệu ---
-  // (Chỉ map những thứ BẮT BUỘC thay đổi cấu trúc)
   const mappedData = useMemo(() => {
     if (!project) return null;
 
-    // 1. Map Project Leader (API -> Component Prop)
-    const mappedLeader: Leader | null = project.project_leader?.[0]
-      ? {
-          name: project.project_leader[0].name,
-          avatarUrl: project.project_leader[0].avatar_url,
-          role: project.project_leader[0].position || "Project Lead",
-          linkedinUrl: project.project_leader[0].linkedin_url,
-        }
-      : null;
+    // 1. Map Project Leaders (API -> Component Prop) - [FIXED]
+    const mappedLeaders: TeamStructureLeader[] = // <-- Changed to array
+      project.project_leader?.map((leader) => ({
+        // <-- Changed to .map()
+        name: leader.name,
+        avatarUrl: leader.avatar_url, // Maps snake_case to camelCase
+        role: leader.position || "Project Leader",
+        linkedinUrl: leader.linkedin_url, // Maps snake_case to camelCase
+      })) || []; // Default to empty array
 
     // 2. Map Products (API -> Component Prop)
     const mappedProducts: Product[] =
@@ -91,7 +96,7 @@ export default function ProjectDetail() {
       })) || [];
 
     return {
-      mappedLeader,
+      mappedLeaders, // <-- Pass the new array
       mappedProducts,
       mappedGuests,
     };
@@ -131,6 +136,7 @@ export default function ProjectDetail() {
         image_url={project.image_url}
         labels={project.labels}
         status={project.status}
+        detailsUrl={project.details_link}
       />
 
       {project.company && <CompanyHighlight company={project.company} />}
@@ -151,20 +157,8 @@ export default function ProjectDetail() {
         <Scope scope={project.scope} />
       )}
 
-      {/* Truyền data thô (với icon: string) */}
       {project.target_audience && project.target_audience.length > 0 && (
         <TargetAudience target_audience={project.target_audience} />
-      )}
-
-      {mappedData.mappedLeader && project.team_structure && (
-        <TeamStructure
-          leader={mappedData.mappedLeader}
-          teams={project.team_structure}
-        />
-      )}
-
-      {project.timeline && project.timeline.length > 0 && (
-        <Timeline timeline={project.timeline} />
       )}
 
       {project.featured_activities &&
@@ -174,11 +168,26 @@ export default function ProjectDetail() {
           />
         )}
 
+      {project.partners && project.partners.length > 0 && (
+        <Partners partners={project.partners} carouselThreshold={10} />
+      )}
+
       {mappedData.mappedGuests.length > 0 && (
         <GuestCarousel guest_speakers={mappedData.mappedGuests} />
       )}
 
-      {/* Truyền data thô (với icon: string) */}
+      {/* Check array length and pass the array */}
+      {mappedData.mappedLeaders.length > 0 && project.team_structure && (
+        <TeamStructure
+          leaders={mappedData.mappedLeaders}
+          teams={project.team_structure}
+        />
+      )}
+
+      {project.timeline && project.timeline.length > 0 && (
+        <Timeline timeline={project.timeline} />
+      )}
+
       {project.key_metrics && project.key_metrics.length > 0 && (
         <KeyMetric key_metrics={project.key_metrics} />
       )}
@@ -186,12 +195,6 @@ export default function ProjectDetail() {
       {project.gallery && project.gallery.length > 0 && (
         <Gallery gallery={project.gallery} imagesPerPage={6} />
       )}
-
-      {project.partners && project.partners.length > 0 && (
-        <Partners partners={project.partners} carouselThreshold={10} />
-      )}
-
-      {project.product_link && <ProductCta productUrl={project.product_link} />}
 
       {mappedData.mappedProducts.length > 0 && (
         <ProductCarousel
@@ -203,7 +206,9 @@ export default function ProjectDetail() {
         />
       )}
 
-      {/* <EventCta /> */}
+      {project.product_link && <ProductCta productUrl={project.product_link} />}
+
+      {project.details_link && <CompetitionCta detailsUrl={project.details_link} />}
     </div>
   );
 }

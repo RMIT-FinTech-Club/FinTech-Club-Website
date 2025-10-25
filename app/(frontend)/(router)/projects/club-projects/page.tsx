@@ -42,7 +42,7 @@ const ClubwideProjects = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "/api/v1/projects?type=large-scaled&status=ongoing"
+          "/api/v1/projects?type=large-scaled&status=Ongoing"
         );
         const apiProjects: ApiProject[] = response.data.data || [];
 
@@ -50,7 +50,7 @@ const ClubwideProjects = () => {
         const formattedProjects: ProjectData[] = apiProjects.map((p) => ({
           title: p.title,
           description: p.description,
-          labels: p.labels,
+          labels: p.labels || [],
           image: p.image_url,
           link: `/projects/${p.slug}`,
         }));
@@ -139,6 +139,10 @@ const ClubwideProjects = () => {
     );
   }
 
+  if (!projects || projects.length === 0) {
+    return null;
+  }
+
   const currentProject = projects[currentIndex];
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
@@ -169,14 +173,14 @@ const ClubwideProjects = () => {
         </div>
 
         {/* description */}
-        <div className="pt-[5rem] h-[calc(100vh-3rem)] relative z-10 flex items-center justify-center px-[5rem]">
+        <div className="pt-[5rem] h-[calc(100vh-3rem)] relative z-10 flex items-center gap-12 pl-16 pr-20">
           {/* Left */}
-          <div className="relative flex-1 max-w-xl text-white">
-            <div className="absolute top-[-4rem] px-[0.8rem] py-[0.5rem] text-[#2C305F] font-semibold bg-[#F0EDFF] rounded-tl-md rounded-tr-[5rem] rounded-br-[5rem] rounded-bl-md">
+          <div className="relative flex-1 max-w-2xl text-white">
+            <div className="absolute -top-[3.5rem] px-[0.8rem] py-[0.5rem] text-[#2C305F] font-semibold bg-[#F0EDFF] rounded-tl-md rounded-tr-[5rem] rounded-br-[5rem] rounded-bl-md">
               Clubwide Projects
             </div>
 
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-4">
               {currentProject.labels.map((label, index) => (
                 <span
                   key={index}
@@ -187,17 +191,17 @@ const ClubwideProjects = () => {
               ))}
             </div>
 
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            <h2 className="text-[2rem] lg:text-[2.5rem] font-bold mb-2 leading-tight">
               {currentProject.title.toUpperCase()}
             </h2>
 
-            <p className="text-base leading-relaxed mb-8 text-gray-100 text-justify w-[90%]">
+            <p className="text-base leading-relaxed mb-4 text-gray-100 text-justify w-[100%]">
               {currentProject.description}
             </p>
 
             {currentProject.link && (
               <Button
-                className="bg-[#DCB968] hover:bg-yellowEarth text-[#2C305F] text-[16px] py-3 font-semibold rounded-lg transition-colors"
+                className="bg-[#DCB968] hover:bg-[#DCB968]/80 text-[#2C305F] text-[16px] py-3 font-semibold rounded-lg transition-colors"
                 as="a"
                 href={currentProject.link}
               >
@@ -212,12 +216,13 @@ const ClubwideProjects = () => {
               <div className="w-[30rem] h-[22rem] rounded-[30px] bg-gradient-to-b from-[rgba(240,237,255,1)] to-[rgba(94,94,146,1)] z-0">
                 <div
                   className="absolute inset-0 m-[10px] bg-cover bg-center bg-no-repeat rounded-3xl transition-all duration-700 ease-in-out z-10"
-                  style={{ backgroundImage: `url(${currentProject.image})` }}
+                  style={{ backgroundImage: `url(${currentProject.image})`, backgroundSize: '100% 100%', }}
                 ></div>
                 <div
                   className="w-[16rem] h-[16rem] right-[-20rem] bottom-0 absolute ml-[10px] bg-cover bg-center bg-no-repeat rounded-3xl transition-all duration-700 ease-in-out z-10"
                   style={{
                     backgroundImage: `url(${nextProject!.image})`,
+                    backgroundSize: '100% 100%',
                   }}
                 ></div>
               </div>
@@ -230,7 +235,7 @@ const ClubwideProjects = () => {
           <Button
             isIconOnly
             size="sm"
-            className="absolute mt-[5rem] right-[3.5rem] top-1/2 rounded-full transform -translate-y-1/2 z-20 bg-[#DBB968] text-[#2C305F] backdrop-blur-sm"
+            className="absolute mt-[5rem] right-[2rem] top-1/2 rounded-full transform -translate-y-1/2 z-20 bg-[#DBB968] text-[#2C305F] backdrop-blur-sm"
             onClick={() => {
               nextSlide();
               registerInteraction();
@@ -267,7 +272,7 @@ const ClubwideProjects = () => {
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentIndex
                       ? "bg-[#DCB968] scale-125 shadow-lg"
-                      : "bg-[#FFFFFF] hover:bg-white/60 border border-white/30"
+                      : "bg-[#FFFFFF] hover:bg-[#DCB968]/60"
                   }`}
                   aria-label={`Go to project ${index + 1}`}
                 />

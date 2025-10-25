@@ -17,7 +17,7 @@ const PersonSchema = new Schema(
 const DetailedTeamMemberSchema = new Schema(
   {
     role: { type: String, required: true, trim: true },
-    leader_name: { type: String, required: true, trim: true },
+    leader_name: { type: [String], required: true, trim: true },
     responsibilities: { type: [String], required: true },
     skills: { type: [String], required: true },
   },
@@ -27,7 +27,7 @@ const DetailedTeamMemberSchema = new Schema(
 const SimpleTeamMemberSchema = new Schema(
   {
     role: { type: String, required: true, trim: true },
-    leader_name: { type: String, required: true, trim: true },
+    leader_name: { type: [String], required: true, trim: true },
   },
   { _id: false }
 );
@@ -36,7 +36,7 @@ const KeyMetricSchema = new Schema(
   {
     icon: { type: String, required: true, trim: true },
     value: { type: Number, required: true },
-    prefix: { type: String, required: true, trim: true },
+    prefix: { type: String, trim: true, default: "" },
     label: { type: String, required: true, trim: true },
   },
   { _id: false }
@@ -103,7 +103,7 @@ const projectSchema = new Schema(
       enum: ["large-scaled", "department"],
       required: true,
     },
-    status: { type: String, enum: ["ongoing", "completed"], required: true },
+    status: { type: String, enum: ["Ongoing", "Completed"], required: true },
     category: {
       type: String,
       required: true,
@@ -137,11 +137,9 @@ const projectSchema = new Schema(
     year: {
       type: Number,
       required: function (this: any): boolean {
-        return this.status === "completed";
+        return this.status === "Completed";
       },
     },
-    meta_title: { type: String, required: true },
-    meta_description: { type: String, required: true },
     slug: {
       type: String,
       unique: true,
@@ -185,20 +183,20 @@ const TechnicalSchema = new Schema({
   timeline: {
     type: [TimelineSchema],
     required: function (this: any): boolean {
-      return this.parent().status === "ongoing";
+      return this.parent().status === "Ongoing";
     },
   },
   gallery: {
     type: [String],
     trim: true,
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
   product_link: {
     type: String,
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
 });
@@ -234,14 +232,14 @@ const EventSchema = new Schema({
   key_metrics: {
     type: [KeyMetricSchema],
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
   gallery: {
     type: [String],
     trim: true,
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
 });
@@ -259,14 +257,14 @@ const CommunitySchema = new Schema({
   key_metrics: {
     type: [KeyMetricSchema],
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
   gallery: {
     type: [String],
     trim: true,
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
 });
@@ -280,14 +278,14 @@ const CareerSchema = new Schema({
   key_metrics: {
     type: [KeyMetricSchema],
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
   gallery: {
     type: [String],
     trim: true,
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
 });
@@ -305,14 +303,14 @@ const CompetitionSchema = new Schema({
   key_metrics: {
     type: [KeyMetricSchema],
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
   gallery: {
     type: [String],
     trim: true,
     required: function (this: any): boolean {
-      return this.parent().status === "completed";
+      return this.parent().status === "Completed";
     },
   },
 });

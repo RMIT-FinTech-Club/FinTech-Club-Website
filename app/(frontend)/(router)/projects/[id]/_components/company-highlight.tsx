@@ -19,7 +19,7 @@ export default function CompanyHighlight({
   }
 
   return (
-    <section className="bg-gray-50 py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 bg-white p-8 rounded-2xl shadow-md border border-gray-100">
           {label && (

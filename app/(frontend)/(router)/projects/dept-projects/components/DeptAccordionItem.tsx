@@ -67,7 +67,7 @@ export default function DeptAccordionItem({
       </AccordionTrigger>
 
       <AccordionContent
-        forceMount // Keep content in DOM for smoother animations and SEO
+        forceMount
         className={`
           w-full p-4 md:p-8 text-left
           lg:h-full lg:overflow-y-auto lg:overflow-x-hidden

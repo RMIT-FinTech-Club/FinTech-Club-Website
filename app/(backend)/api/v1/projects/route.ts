@@ -19,15 +19,15 @@ export async function GET(req: NextRequest) {
   const year = searchParams.get("year");
 
   try {
-    if (status === "completed" && year) {
+    if (status === "Completed" && year) {
       const result = await getCompletedProjectsByYear(year);
       return NextResponse.json(result);
     }
-    if (type === "large-scaled" && status === "ongoing") {
+    if (type === "large-scaled" && status === "Ongoing") {
       const result = await getLargeScaledOngoingProjects();
       return NextResponse.json(result);
     }
-    if (type === "department" && status === "ongoing" && department) {
+    if (type === "department" && status === "Ongoing" && department) {
       const result = await getDepartmentProjects(department);
       return NextResponse.json(result);
     }

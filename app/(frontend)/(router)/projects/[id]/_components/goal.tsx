@@ -17,7 +17,7 @@ const CheckIcon = () => (
 );
 
 const GoalItem = ({ text }: { text: string }) => (
-  <li className="bg-white rounded-xl shadow-md p-6 flex items-start gap-4 transition-transform hover:scale-105 border-l-4 border-[#2C305F]">
+  <li className="bg-ft-primary-blue-300 rounded-xl shadow-md p-6 flex items-start gap-4 transition-transform hover:scale-105 border-l-4 border-[#2C305F]">
     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#DBB968] text-[#2C305F] flex items-center justify-center">
       <CheckIcon />
     </div>
@@ -40,7 +40,7 @@ export default function Goal({ goals = [] }: GoalProps) {
   const secondColumnGoals = goals.slice(midpoint);
 
   return (
-    <section className="pt-8 pb-4 md:pb-8 md:pt-16">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <SectionTitle>Our Goals</SectionTitle>
 

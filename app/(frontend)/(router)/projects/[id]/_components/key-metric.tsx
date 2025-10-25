@@ -92,7 +92,7 @@ export default function KeyMetric({
   if (!key_metrics || key_metrics.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="bg-gray-50 py-16 md:py-24">
+    <section ref={sectionRef} className="py-8 md:py-12">
       <div className="max-w-6xl mx-auto px-6">
         <SectionTitle>{title}</SectionTitle>
         <div className="flex flex-wrap justify-center gap-6">

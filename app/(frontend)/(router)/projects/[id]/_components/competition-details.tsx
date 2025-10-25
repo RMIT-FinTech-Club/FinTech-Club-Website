@@ -76,7 +76,7 @@ export default function CompetitionDetails({
   }
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <div className="flex flex-col gap-6 md:gap-8">
           <DetailCard

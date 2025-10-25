@@ -1,5 +1,3 @@
-import { LucideProps } from "lucide-react";
-
 // Dùng cho CompanyHighlight
 export type Company = {
   name: string;
@@ -49,7 +47,7 @@ export type Leader = {
 
 export type Team = {
   role: string;
-  leader_name: string;
+  leader_name: string[];
   responsibilities?: string[];
   skills?: string[];
 };
@@ -84,7 +82,7 @@ export type Project = {
   theme?: string;
   goals?: string[];
   scope?: string[];
-  target_audience?: Audience[]; // icon là string
+  target_audience?: Audience[];
   project_leader?: {
     name: string;
     position: string;
@@ -101,10 +99,12 @@ export type Project = {
     avatar_url: string;
     linkedin_url: string;
   }[];
-  key_metrics?: Metric[]; // icon là string
+  key_metrics?: Metric[];
   gallery?: string[];
   partners?: Partner[];
   product_link?: string;
+  details_link?: string;
+
   products?: {
     onModel: string;
     product: {

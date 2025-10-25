@@ -17,7 +17,7 @@ export default function TargetAudience({
   }
 
   return (
-    <section className="bg-white py-4 md:py-8">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <SectionTitle>Target Audience</SectionTitle>
 
@@ -25,7 +25,7 @@ export default function TargetAudience({
           {target_audience.map((item, index) => (
             <div
               key={index}
-              className="w-full sm:w-[45%] md:w-[40%] lg:w-[30%] max-w-xs flex flex-col items-center text-center bg-gray-50 rounded-xl shadow-md p-6 transition-transform hover:scale-105 border-t-4 border-[#2C305F]"
+              className="w-full sm:w-[45%] md:w-[40%] lg:w-[30%] max-w-xs flex flex-col items-center text-center bg-ft-primary-blue-300 rounded-xl shadow-md p-6 transition-transform hover:scale-105 border-t-4 border-[#2C305F]"
             >
               <div className="mb-4 p-3 rounded-full bg-[#DBB968]">
                 <div className="flex justify-center items-center w-8 h-8 text-[#2C305F]">

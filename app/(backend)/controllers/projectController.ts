@@ -65,7 +65,7 @@ export async function getAllProjects() {
 export async function getLargeScaledOngoingProjects() {
   const projects = await Project.find({
     type: "large-scaled",
-    status: "ongoing",
+    status: "Ongoing",
   })
     .select("title description labels image_url slug")
     .sort({ createdAt: -1 })
@@ -77,7 +77,7 @@ export async function getLargeScaledOngoingProjects() {
 // GET department projects
 export async function getDepartmentProjects(department: string) {
   const result = await Project.aggregate([
-    { $match: { type: "department", status: "ongoing", department } },
+    { $match: { type: "department", status: "Ongoing", department } },
     { $sort: { createdAt: -1 } },
     { $limit: 50 },
     {
@@ -115,7 +115,7 @@ export async function getCompletedProjectsByYear(year: string) {
   const yearNum = parseInt(year);
   if (isNaN(yearNum)) throw new Error("Invalid year parameter");
 
-  const projects = await Project.find({ status: "completed", year: yearNum })
+  const projects = await Project.find({ status: "Completed", year: yearNum })
     .select("title description image_url year slug")
     .sort({ createdAt: -1 })
     .limit(50)

@@ -15,7 +15,7 @@ export default function FeaturedActivities({
   }
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <SectionTitle>Featured Activities</SectionTitle>
         <div className="relative pl-6">
@@ -29,7 +29,7 @@ export default function FeaturedActivities({
                 </div>
 
                 <div
-                  className={`bg-gray-50 rounded-lg shadow-sm p-5 ml-2 transition-shadow hover:shadow-md 
+                  className={`bg-ft-primary-blue-300 rounded-lg shadow-sm p-5 ml-2 transition-shadow hover:shadow-md 
                             border-l-4 border-[#2C305F]`}
                 >
                   <span className="text-lg font-semibold text-[#2C305F]">

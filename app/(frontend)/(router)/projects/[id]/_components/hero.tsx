@@ -8,6 +8,7 @@ type HeroProps = {
   image_url: string;
   labels: string[];
   status: string;
+  detailsUrl?: string;
 };
 
 export default function Hero({
@@ -16,37 +17,48 @@ export default function Hero({
   image_url,
   labels,
   status,
+  detailsUrl,
 }: HeroProps) {
   return (
     <section className="h-[92vh]">
       <div className="w-full h-full flex gap-4 items-center">
         {/* Left Column */}
-        <div className="w-[56%] h-full bg-ft-primary-blue-200 rounded-br-[2.5rem] flex flex-col justify-center px-20 text-ft-primary-blue-100">
-          <div className="flex gap-3 mb-4">
-            {labels.map((label) => (
-              <Chip
-                key={label}
-                className="bg-ft-primary-blue-300 text-ft-text-dark"
-              >
-                {label}
-              </Chip>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4 mb-4">
-            <h1 className="text-4xl lg:text-5xl font-bold text-ft-primary-blue-300">
-              {title}
-            </h1>
+        <div className="w-[58%] h-full bg-ft-primary-blue-200 rounded-br-[2.5rem] flex flex-col justify-center px-20 text-ft-primary-blue-100">
+          <div className="flex justify-between">
+            <div className="flex flex-wrap gap-3 mb-4 mr-4">
+              {labels.map((label) => (
+                <Chip
+                  key={label}
+                  className="bg-ft-primary-blue-300 text-ft-text-dark"
+                >
+                  {label}
+                </Chip>
+              ))}
+            </div>
             <Chip className="bg-ft-primary-yellow-300 text-ft-primary-yellow-100">
               {status}
             </Chip>
           </div>
 
+          <h1 className="text-[2rem] lg:text-[2.5rem] font-bold mb-4 leading-tight text-ft-primary-blue-300">
+            {title}
+          </h1>
+
           <p className="text-ft-text-bright text-base mb-4 leading-relaxed text-justify">
             {description}
           </p>
 
-          <div>
+          <div className="flex flex-start gap-4">
+            {detailsUrl ? (
+              <Button
+                as={Link}
+                href={detailsUrl}
+                className="bg-ft-primary-yellow hover:bg-ft-primary-yellow/90 text-ft-text-dark rounded-lg px-6 w-fit text-md font-semibold"
+              >
+                Visit our Website
+              </Button>
+            ) : null}
+
             <Button
               as={Link}
               href="/projects"
@@ -59,7 +71,7 @@ export default function Hero({
 
         {/* Right Column */}
         <div className="flex flex-col justify-between h-full flex-1 gap-4">
-          <div className="h-[75%] relative">
+          <div className="h-[70%] relative">
             <Image
               src={image_url}
               alt={`${title} hero graphic`}

@@ -23,14 +23,12 @@ export default function DepartmentAccordion({ items, defaultOpen }: Props) {
     return items.map((item, idx) => ({
       ...item,
       color: item.color || (idx % 2 === 0 ? YELLOW : BLUE),
-      // Default renderContent can be defined here if needed, or passed in directly
     }));
   }, [items]);
 
   const cssVars = {
     "--acc-dur": `${ANIMATION_DURATION_MS}ms`,
     "--acc-tab-w": `${DEFAULT_TAB_WIDTH_PX}px`,
-    // The open panel's width is the full width minus the width of all other (closed) tabs
     "--acc-open-w": `calc(100% - ${
       (items.length - 1) * DEFAULT_TAB_WIDTH_PX
     }px)`,
@@ -42,7 +40,6 @@ export default function DepartmentAccordion({ items, defaultOpen }: Props) {
       collapsible
       value={openItem}
       onValueChange={(v) => setOpenItem(v || undefined)}
-      // [+] Simplified classes for a full-screen layout on desktop
       className="flex w-full min-w-0 flex-col lg:flex-row"
       style={cssVars}
     >

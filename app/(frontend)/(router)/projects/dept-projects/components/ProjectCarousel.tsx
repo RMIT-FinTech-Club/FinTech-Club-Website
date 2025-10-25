@@ -118,7 +118,7 @@ export default function ProjectCarousel({ items }: { items: ProjectItem[] }) {
             onClick={goPrev}
             aria-label="Previous Project"
             disabled={!canPrev}
-            className="absolute top-1/2 left-0 md:-left-10 transform -translate-y-1/2 z-10 h-10 w-10 flex items-center justify-center rounded-full bg-[#DBB968] text-black shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
+            className="absolute top-1/2 left-0 md:-left-10 transform -translate-y-1/2 z-10 h-10 w-10 flex items-center justify-center rounded-full bg-[#DBB968] hover:bg-[#DBB968]/80 text-[#2C305F shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
@@ -126,7 +126,7 @@ export default function ProjectCarousel({ items }: { items: ProjectItem[] }) {
             onClick={goNext}
             aria-label="Next Project"
             disabled={!canNext}
-            className="absolute top-1/2 right-0 md:-right-10 transform -translate-y-1/2 z-10 h-10 w-10 flex items-center justify-center rounded-full bg-[#DBB968] text-black shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
+            className="absolute top-1/2 right-0 md:-right-10 transform -translate-y-1/2 z-10 h-10 w-10 flex items-center justify-center rounded-full bg-[#DBB968] hover:bg-[#DBB968]/80 text-[#2C305F] shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <ChevronRightIcon className="h-6 w-6" />
           </button>
@@ -141,7 +141,7 @@ export default function ProjectCarousel({ items }: { items: ProjectItem[] }) {
               key={i}
               onClick={() => setPage(i)}
               aria-label={`Go to page ${i + 1}`}
-              className={`h-2.5 w-2.5 rounded-full transition ${i === page ? "bg-[#DBB968]" : "bg-[#C5C5BF]"}`}
+              className={`h-2.5 w-2.5 rounded-full transition hover:bg-[#DBB968]/60 ${i === page ? "bg-[#DBB968]" : "bg-[#C5C5BF]"}`}
             />
           ))}
         </div>

@@ -5,11 +5,21 @@ import dotenv from "dotenv";
 // Tải biến môi trường
 dotenv.config({ path: ".env" });
 
-// Đảm bảo CLOUDFRONT_DOMAIN đã được set
+// --- Environment Variable Check ---
 if (!process.env.CLOUDFRONT_DOMAIN) {
   throw new Error("CLOUDFRONT_DOMAIN environment variable is not set.");
 }
+if (!process.env.MONGODB_URI) {
+  throw new Error("MONGODB_URI environment variable is not set.");
+}
 
+// --- Mock ObjectIDs (cho 'media' products) ---
+// These are needed to test the ProductReferenceSchema
+const mockArticleId1 = new mongoose.Types.ObjectId();
+const mockArticleId2 = new mongoose.Types.ObjectId();
+const mockPodcastId1 = new mongoose.Types.ObjectId();
+
+// --- Helper Functions ---
 const generateCloudFrontUrl = (path: string): string => {
   const cleanDomain = process.env.CLOUDFRONT_DOMAIN!
     .replace(/^https?:\/\//, "")
@@ -18,423 +28,486 @@ const generateCloudFrontUrl = (path: string): string => {
   return `https://${cleanDomain}/${cleanPath}`;
 };
 
-// --- Helper cho dữ liệu placeholder ---
 const placeholderAvatar = generateCloudFrontUrl("placeholders/avatar.png");
 
-const placeholderLeader = (name: string) => [{
+// Helper for PersonSchema (Project Leader / Guest Speaker)
+const placeholderLeader = (name: string, position?: string, linkedin?: string) => [{
   name,
+  position: position || "Project Lead",
   avatar_url: placeholderAvatar,
-  linkedin_url: "",
+  linkedin_url: linkedin || `https://linkedin.com/in/${name.toLowerCase().replace(" ", "")}`,
 }];
 
-const placeholderCompany = {
-  name: "FinTech Club",
-  logo_url: generateCloudFrontUrl("logos/club-logo.png"),
-  website_url: "",
-  tagline: "",
-};
+// Helper for DetailedTeamMemberSchema (Technical, Media)
+const detailedTeam = (role: string, name: string, responsibilities: string[], skills: string[]) => [{
+  role,
+  leader_name: name,
+  responsibilities,
+  skills,
+}];
 
-// --- Mảng testProjects đã được cập nhật (ĐÃ LÀM PHẲNG) ---
+// Helper for SimpleTeamMemberSchema (Event, Community, Career, Competition)
+const simpleTeam = (role: string, name: string) => [{
+  role,
+  leader_name: name,
+}];
+
+// Helper for TargetAudienceSchema
+const mockAudiences = (audiences: { name: string, icon: string }[]) => audiences;
+
+// Helper for PartnerSchema
+const mockPartners = (partners: { name: string, logo_url: string }[]) => partners;
+
+// Helper for KeyMetricSchema (for 'completed' projects)
+const mockMetrics = (metrics: { icon: string, value: number, prefix: string, label: string }[]) => metrics;
+
+// Helper for Gallery (for 'completed' projects)
+const mockGallery = (imagePaths: string[]) => imagePaths.map(generateCloudFrontUrl);
+
+// Helper for CompanySchema (for 'career' projects)
+const placeholderCompany = (name?: string, tagline?: string, website?: string) => ({
+  name: name || "FinTech Club",
+  logo_url: generateCloudFrontUrl("logos/club-logo.png"),
+  website_url: website || "https://rmit.edu.vn/fintech-club",
+  tagline: tagline || "Connecting students with FinTech",
+});
+
+
+// --- Mảng testProjects (Cập nhật với Discriminators) ---
 const testProjects = [
+  // =============================================
+  // =========== 1. TECHNICAL (ONGOING) ==========
+  // =============================================
   {
-    title: "AI Banking Platform",
-    description: "Revolutionary AI-powered banking platform for seamless financial transactions",
+    // Base fields
+    title: "AI Banking Platform (Ongoing)",
+    description: "Revolutionary AI-powered banking platform for seamless financial transactions.",
     type: "large-scaled",
     status: "ongoing",
     category: "technical",
     labels: ["AI", "Banking", "FinTech"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment02-Graphic.png"),
+    image_url: generateCloudFrontUrl("projects/tech/ai-banking.png"),
     meta_title: "AI Banking Platform - FinTech Club",
     meta_description: "A revolutionary AI banking platform.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Create an AI-powered banking platform"],
-    scope: ["Full-stack development with AI integration"],
-    team_structure: [{ role: "Lead Developer", leader_name: "John Doe", responsibilities: ["Architecture design"], skills: ["Python", "TensorFlow"] }],
-    project_leader: placeholderLeader("John Doe"),
-    timeline: [{ time: "2024-01-15", milestoneTitle: "Phase 1: Research", milestoneDescription: "Initial research and planning." }],
+    // 'department' fields not required for 'large-scaled'
+    
+    // TechnicalSchema fields
+    goals: ["Create an AI-powered banking platform", "Integrate predictive analytics"],
+    scope: ["Full-stack development", "AI model training", "API integration"],
+    team_structure: detailedTeam(
+      "Lead Developer", 
+      "John Doe", 
+      ["Architecture design", "Code review"], 
+      ["Python", "TensorFlow", "React"]
+    ),
+    project_leader: placeholderLeader("John Doe", "AI Lead", "https://linkedin.com/in/johndoe"),
+    timeline: [ // Required for 'ongoing'
+      { time: "2024-01-15", milestoneTitle: "Phase 1: Research", milestoneDescription: "Initial research and planning." },
+      { time: "2024-03-01", milestoneTitle: "Phase 2: Development", milestoneDescription: "Backend development started." }
+    ],
+    // 'gallery' & 'product_link' not required for 'ongoing'
   },
-  
+
   // =============================================
-  // =========== TECHNOLOGY DEPARTMENT ===========
+  // ======== 2. TECHNICAL (COMPLETED) ===========
   // =============================================
   {
-    title: "Web3 Development Bootcamp",
-    description: "An intensive bootcamp covering the fundamentals of Web3 and decentralized applications.",
+    // Base fields
+    title: "DeFi Lending Protocol (Completed)",
+    description: "A completed, audited DeFi protocol for lending and borrowing on Ethereum.",
     type: "department",
-    status: "ongoing",
+    status: "completed",
     category: "technical",
-    department: "Technology",
-    department_description: "This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game blending strategy with Vietnamese culture, an AI Financial Coach based on the 6 Jar Money Management system, and a feature-rich upgrade of the FinTech Club Website. Beyond practical coding projects, we also foster growth through mentorship, internal training, and a supportive community that empowers every member to thrive.",
-    labels: ["Web3", "Blockchain", "Development"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment05-Graphic.png"),
-    meta_title: "Web3 Development Bootcamp - FinTech Club",
-    meta_description: "An intensive bootcamp on Web3 and dApps.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Train the next generation of blockchain developers"],
-    scope: ["Smart contracts", "dApp architecture"],
-    team_structure: [{ role: "Tech Lead", leader_name: "Charlie Brown", responsibilities: ["Curriculum Design"], skills: ["Solidity", "React"] }],
-    project_leader: placeholderLeader("Charlie Brown"),
-    timeline: [{ time: "2024-03-01", milestoneTitle: "Curriculum Finalized", milestoneDescription: "All course materials prepared." }],
-  },
-  {
-    title: "Decentralized Finance (DeFi) Protocol",
-    description: "Building a new DeFi protocol for lending and borrowing on the Ethereum blockchain.",
-    type: "department",
-    status: "ongoing",
-    category: "technical",
-    department: "Technology",
-    department_description: "This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game blending strategy with Vietnamese culture, an AI Financial Coach based on the 6 Jar Money Management system, and a feature-rich upgrade of the FinTech Club Website. Beyond practical coding projects, we also foster growth through mentorship, internal training, and a supportive community that empowers every member to thrive.",
-    labels: ["DeFi", "Smart Contracts", "Ethereum"],
-    image_url: generateCloudFrontUrl("projects/tech/defi-protocol.png"),
-    meta_title: "DeFi Lending Protocol - FinTech Club",
-    meta_description: "A new DeFi protocol for decentralized lending.",
-    // KHÔNG CÒN "category_specific"
+    labels: ["DeFi", "Smart Contracts", "Ethereum", "Past Project"],
+    image_url: generateCloudFrontUrl("projects/tech/defi-protocol-done.png"),
+    department: "Technology", // Required for 'department'
+    department_description: "This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game, an AI Financial Coach, and a feature-rich upgrade of the FinTech Club Website.",
+    year: 2024, // Required for 'completed'
+    meta_title: "DeFi Lending Protocol (2024) - FinTech Club",
+    meta_description: "Showcase of the completed DeFi Lending Protocol from 2024.",
+    
+    // TechnicalSchema fields
     goals: ["Launch a secure and audited lending platform"],
     scope: ["Smart contract development", "Protocol design", "Security audit"],
-    team_structure: [{ role: "Smart Contract Developer", leader_name: "Satoshi Nakamoto", responsibilities: ["Develop core contracts"], skills: ["Solidity", "Hardhat"] }],
-    project_leader: placeholderLeader("Satoshi Nakamoto"),
-    timeline: [{ time: "2024-04-01", milestoneTitle: "Contracts Deployed to Testnet", milestoneDescription: "Begin internal testing." }],
+    team_structure: detailedTeam(
+      "Smart Contract Developer", 
+      "Satoshi Nakamoto", 
+      ["Develop core contracts", "Write tests"], 
+      ["Solidity", "Hardhat", "JavaScript"]
+    ),
+    project_leader: placeholderLeader("Satoshi Nakamoto", "Blockchain Lead"),
+    // 'timeline' not required for 'completed'
+    gallery: mockGallery([ // Required for 'completed'
+      "gallery/tech/defi-1.png",
+      "gallery/tech/defi-2.png",
+      "gallery/tech/demo-video.png"
+    ]),
+    product_link: "https://github.com/fintech-club/defi-protocol-2024" // Required for 'completed'
   },
+
+  // =============================================
+  // ============= 3. MEDIA (ONGOING) ============
+  // =============================================
   {
+    // Base fields
+    title: "FinTech Article Series",
+    description: "Our ongoing series of deep-dive FinTech articles, updated automatically.",
+    type: "large-scaled",
+    status: "ongoing",
+    category: "media",
+    labels: ["Articles", "Analysis", "Content"],
+    image_url: generateCloudFrontUrl("projects/media/article-series.png"),
+    meta_title: "FinTech Article Series - FinTech Club",
+    meta_description: "Deep-dive articles on FinTech, from DeFi to RegTech.",
+    
+    // MediaSchema fields
+    goals: ["Establish thought leadership", "Educate members on complex topics"],
+    target_audience: mockAudiences([
+      { name: "Readers", icon: "book-open" },
+      { name: "Students", icon: "user-graduate" }
+    ]),
+    team_structure: detailedTeam(
+      "Content Lead", 
+      "Diana Prince", 
+      ["Editing", "Content Strategy", "SEO"],
+      ["SEO", "Content Writing", "Journalism"]
+    ),
+    project_leader: placeholderLeader("Diana Prince", "Head of Content"),
+    products: [ // Test with mock data
+      { product: mockArticleId1, onModel: "Article" },
+      { product: mockArticleId2, onModel: "Article" }
+    ],
+    auto_update_type: "Article",
+    auto_update_limit: 5 // Test non-default limit
+  },
+
+  // =============================================
+  // ============= 4. MEDIA (ONGOING) ============
+  // =============================================
+  {
+    // Base fields
+    title: "The FinTech Feed Podcast",
+    description: "Launching a weekly podcast featuring interviews with industry leaders, market analysis, and career advice.",
+    type: "department",
+    status: "ongoing",
+    category: "media",
+    labels: ["Podcast", "Interviews", "Media"],
+    image_url: generateCloudFrontUrl("projects/media/podcast-launch.png"),
+    department: "Marketing",
+    department_description: "This semester, we’re launching an Internal Training Series, powering major campaigns, and revamping our TikTok Project to spotlight member stories.",
+    meta_title: "The FinTech Feed Podcast - FinTech Club",
+    meta_description: "A weekly podcast on all things FinTech.",
+    
+    // MediaSchema fields
+    goals: ["Reach a wider audience through audio content", "Network with industry leaders"],
+    target_audience: mockAudiences([
+      { name: "Podcast Listeners", icon: "headphones" },
+      { name: "Commuters", icon: "car" }
+    ]),
+    team_structure: detailedTeam(
+      "Podcast Host", 
+      "Clark Kent", 
+      ["Host episodes", "Edit audio", "Book guests"], 
+      ["Interviewing", "Audacity", "Networking"]
+    ),
+    project_leader: placeholderLeader("Clark Kent", "Podcast Lead"),
+    products: [ // Test with different model
+      { product: mockPodcastId1, onModel: "FinTechTainment" }
+    ],
+    auto_update_type: "FinTechTainment",
+    // 'auto_update_limit' will use default (6)
+  },
+
+  // =============================================
+  // ============= 5. EVENT (ONGOING) ============
+  // =============================================
+  {
+    // Base fields
+    title: "Business Workshop Series (Ongoing)",
+    description: "Comprehensive business workshops for students and professionals.",
+    type: "department",
+    status: "ongoing",
+    category: "event",
+    labels: ["Workshop", "Business", "Networking"],
+    image_url: generateCloudFrontUrl("projects/event/workshop-series.png"),
+    department: "Business",
+    department_description: "This semester, we are leading the Bi-weekly Article Series and Breaking the Curve, a workshop series that helps students excel academically.",
+    meta_title: "Business Workshop Series - FinTech Club",
+    meta_description: "Workshops for students and professionals.",
+    
+    // EventSchema fields
+    goals: ["Provide practical business knowledge", "Connect students with experts"],
+    target_audience: mockAudiences([
+      { name: "Students", icon: "user-graduate" },
+      { name: "Young professionals", icon: "briefcase" },
+    ]),
+    featured_activities: ["Case studies", "Guest speakers", "Networking sessions"],
+    guest_speakers: [ // Test with optional data
+      { name: "Jane Smith", position: "CEO, TechStart", avatar_url: generateCloudFrontUrl("speakers/jane-smith.jpg"), linkedin_url: "https://linkedin.com/in/janesmith" },
+      { name: "Bob Lee", position: "VC, InvestCo", avatar_url: generateCloudFrontUrl("speakers/bob-lee.jpg"), linkedin_url: "https://linkedin.com/in/boblee" }
+    ],
+    partners: mockPartners([ // Test with optional data
+      { name: "TechStart", logo_url: generateCloudFrontUrl("logos/techstart.png") },
+      { name: "InvestCo", logo_url: generateCloudFrontUrl("logos/investco.png") }
+    ]),
+    team_structure: simpleTeam("Event Coordinator", "Alice Johnson"),
+    project_leader: placeholderLeader("Alice Johnson", "Events Lead"),
+    // 'key_metrics' & 'gallery' not required for 'ongoing'
+  },
+
+  // =============================================
+  // ========== 6. EVENT (COMPLETED) =============
+  // =============================================
+  {
+    // Base fields
+    title: "Alumni Networking Gala (Completed)",
+    description: "Our 2024 annual gala to connect current members with the club's successful alumni network.",
+    type: "large-scaled",
+    status: "completed",
+    category: "event",
+    labels: ["Alumni", "Networking", "Gala", "Past Event"],
+    image_url: generateCloudFrontUrl("projects/event/alumni-gala-2024.png"),
+    year: 2024, // Required for 'completed'
+    meta_title: "Alumni Networking Gala 2024 - FinTech Club",
+    meta_description: "Highlights from the successful 2024 Alumni Networking Gala.",
+    
+    // EventSchema fields
+    goals: ["Strengthen the alumni community", "Provide networking opportunities"],
+    target_audience: mockAudiences([
+      { name: "Alumni", icon: "user-check" }, 
+      { name: "Current Members", icon: "users" }
+    ]),
+    featured_activities: ["Keynote Speech", "Networking Dinner", "Awards Ceremony"],
+    // 'guest_speakers' will use default ([])
+    // 'partners' will use default ([])
+    team_structure: simpleTeam("Event Lead", "Selina Kyle"),
+    project_leader: placeholderLeader("Selina Kyle", "Alumni Relations"),
+    key_metrics: mockMetrics([ // Required for 'completed'
+      { icon: "users", value: 250, prefix: "+", label: "Attendees" },
+      { icon: "user-check", value: 100, prefix: "+", label: "Alumni" },
+      { icon: "building", value: 20, prefix: "", label: "Companies" }
+    ]),
+    gallery: mockGallery([ // Required for 'completed'
+      "gallery/event/gala-1.jpg",
+      "gallery/event/gala-2.jpg",
+      "gallery/event/gala-3.jpg"
+    ]),
+  },
+
+  // =============================================
+  // =========== 7. COMMUNITY (ONGOING) ==========
+  // =============================================
+  {
+    // Base fields
+    title: "Social Media Growth Campaign",
+    description: "A multi-platform campaign to double our social media following and engagement.",
+    type: "department",
+    status: "ongoing",
+    category: "community",
+    labels: ["Social Media", "Campaign", "Growth"],
+    image_url: generateCloudFrontUrl("projects/community/social-campaign.png"),
+    department: "Marketing",
+    department_description: "This semester, we’re launching an Internal Training Series, powering major campaigns, and revamping our TikTok Project to spotlight member stories.",
+    meta_title: "Social Media Growth Campaign - FinTech Club",
+    meta_description: "A campaign to grow our social media presence.",
+    
+    // CommunitySchema fields
+    goals: ["Double social media followers", "Increase engagement metrics by 50%"],
+    target_audience: mockAudiences([
+      { name: "Social Media Users", icon: "hashtag" }, 
+      { name: "Students", icon: "user-graduate" }
+    ]),
+    featured_activities: ["Daily Content Posting", "Engagement Contests", "Giveaways"],
+    partners: mockPartners([ // Test with partners
+      { name: "UniNetwork", logo_url: generateCloudFrontUrl("logos/uninetwork.png") }
+    ]),
+    team_structure: simpleTeam("Social Media Manager", "Tony Stark"),
+    project_leader: placeholderLeader("Tony Stark", "Marketing Lead"),
+    // 'key_metrics' & 'gallery' not required for 'ongoing'
+  },
+
+  // =============================================
+  // ========= 8. COMMUNITY (COMPLETED) ==========
+  // =============================================
+  {
+    // Base fields
+    title: "Charity Drive 2024 (Completed)",
+    description: "Our 2024 club-wide charity drive to support local orphanages.",
+    type: "large-scaled",
+    status: "completed",
+    category: "community",
+    labels: ["Charity", "Fundraising", "Social Good"],
+    image_url: generateCloudFrontUrl("projects/community/charity-drive-2024.png"),
+    year: 2024, // Required
+    meta_title: "Charity Drive 2024 - FinTech Club",
+    meta_description: "Recap of our successful 2024 charity fundraising drive.",
+    
+    // CommunitySchema fields
+    goals: ["Raise $10,000 for local orphanages", "Promote social responsibility"],
+    target_audience: mockAudiences([
+      { name: "Club Members", icon: "users" }, 
+      { name: "Donors", icon: "heart" }
+    ]),
+    featured_activities: ["Fundraising Bake Sale", "Online Donation Portal", "Charity Gala"],
+    // 'partners' will use default ([])
+    team_structure: simpleTeam("Community Lead", "Peter Parker"),
+    project_leader: placeholderLeader("Peter Parker", "HR Lead"),
+    key_metrics: mockMetrics([ // Required
+      { icon: "dollar-sign", value: 12500, prefix: "$", label: "Raised" },
+      { icon: "users", value: 150, prefix: "+", label: "Volunteers" }
+    ]),
+    gallery: mockGallery([ // Required
+      "gallery/community/charity-1.jpg",
+      "gallery/community/charity-2.jpg"
+    ]),
+  },
+
+  // =============================================
+  // ============ 9. CAREER (ONGOING) ============
+  // =============================================
+  {
+    // Base fields
+    title: "Member Mentorship Program",
+    description: "Pairing new members with senior club members and alumni for guidance.",
+    type: "department",
+    status: "ongoing",
+    category: "career",
+    labels: ["Mentorship", "Career", "Development"],
+    image_url: generateCloudFrontUrl("projects/career/mentorship.png"),
+    department: "Human Resources",
+    department_description: "This semester, we’re bringing the community together through heartfelt initiatives, high-energy bonding, and personal growth workshops.",
+    meta_title: "Member Mentorship Program - FinTech Club",
+    meta_description: "A mentorship program for club members.",
+    
+    // CareerSchema fields
+    company: placeholderCompany( // Required
+      "FinTech Club Mentors", 
+      "Guiding the next generation", 
+      "https://rmit.edu.vn/fintech-club/mentorship"
+    ), 
+    goals: ["Facilitate knowledge transfer", "Improve member retention", "Enhance career readiness"],
+    target_audience: mockAudiences([
+      { name: "New Members (Mentees)", icon: "user-plus" }, 
+      { name: "Senior Members (Mentors)", icon: "user-tie" }
+    ]),
+    team_structure: simpleTeam("Mentorship Coordinator", "Alfred Pennyworth"),
+    project_leader: placeholderLeader("Alfred Pennyworth", "Head of HR"),
+    // 'key_metrics' & 'gallery' not required for 'ongoing'
+  },
+
+  // =============================================
+  // ========== 10. CAREER (COMPLETED) ===========
+  // =============================================
+  {
+    // Base fields
+    title: "Annual Recruitment Drive 2024",
+    description: "Our 2024 drive to recruit talented students to join the FinTech Club.",
+    type: "large-scaled",
+    status: "completed",
+    category: "career",
+    labels: ["Recruitment", "Networking", "Career", "Past Event"],
+    image_url: generateCloudFrontUrl("projects/career/recruitment-2024.png"),
+    year: 2024, // Required
+    meta_title: "Annual Recruitment Drive 2024 - FinTech Club",
+    meta_description: "Results from the 2024 FinTech Club recruitment drive.",
+    
+    // CareerSchema fields
+    company: placeholderCompany("FinTech Club Careers"), // Required
+    goals: ["Attract top talent", "Strengthen the club's member base"],
+    target_audience: mockAudiences([
+      { name: "University students", icon: "user-graduate" },
+      { name: "All Faculties", icon: "university" }
+    ]),
+    team_structure: simpleTeam("HR Lead", "Bruce Wayne"),
+    project_leader: placeholderLeader("Bruce Wayne", "President"),
+    key_metrics: mockMetrics([ // Required
+      { icon: "file-alt", value: 300, prefix: "+", label: "Applications" },
+      { icon: "user-plus", value: 45, prefix: "", label: "New Members" },
+      { icon: "users", value: 5, prefix: "", label: "Departments" }
+    ]),
+    gallery: mockGallery([ // Required
+      "gallery/career/recruitment-1.jpg",
+      "gallery/career/recruitment-2.jpg"
+    ]),
+  },
+
+  // =============================================
+  // ========== 11. COMPETITION (ONGOING) ========
+  // =============================================
+  {
+    // Base fields
     title: "Algorithmic Trading Bot Challenge",
     description: "A competitive challenge for members to design, build, and test their own trading algorithms.",
     type: "department",
     status: "ongoing",
     category: "competition",
-    department: "Technology",
-    department_description: "This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game blending strategy with Vietnamese culture, an AI Financial Coach based on the 6 Jar Money Management system, and a feature-rich upgrade of the FinTech Club Website. Beyond practical coding projects, we also foster growth through mentorship, internal training, and a supportive community that empowers every member to thrive.",
     labels: ["Algo-Trading", "Python", "Competition"],
-    image_url: generateCloudFrontUrl("projects/tech/algo-challenge.png"),
+    image_url: generateCloudFrontUrl("projects/competition/algo-challenge.png"),
+    department: "Technology",
+    department_description: "This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game, an AI Financial Coach, and a feature-rich upgrade of the FinTech Club Website.",
     meta_title: "Algorithmic Trading Challenge - FinTech Club",
     meta_description: "A competitive challenge for algorithmic trading.",
-    // KHÔNG CÒN "category_specific"
-    theme: "Quantitative Finance",
-    duration: "4 Weeks",
-    platformLocation: ["Online", "RMIT Vietnam"],
-    goals: ["Foster innovation in quantitative finance"],
-    target_audience: [{ name: "Students", icon: "user-graduate" }],
-    featured_activities: ["Introductory Workshop", "Final Pitching"],
-    team_structure: [{ role: "Competition Lead", leader_name: "Ada Lovelace" }],
-    project_leader: placeholderLeader("Ada Lovelace"),
-    details_link: "https://rmit.edu.vn/fintech-club/algo-challenge-2025",
-  },
-  {
-    title: "Club's Mobile App Development",
-    description: "Creating a dedicated mobile application for club members to access events, news, and networking.",
-    type: "department",
-    status: "ongoing",
-    category: "technical",
-    department: "Technology",
-    department_description: "This semester, we’re working on three exciting projects: a blockchain-powered History Chess Game blending strategy with Vietnamese culture, an AI Financial Coach based on the 6 Jar Money Management system, and a feature-rich upgrade of the FinTech Club Website. Beyond practical coding projects, we also foster growth through mentorship, internal training, and a supportive community that empowers every member to thrive.",
-    labels: ["Mobile App", "React Native", "Community"],
-    image_url: generateCloudFrontUrl("projects/tech/mobile-app.png"),
-    meta_title: "FinTech Club Mobile App - FinTech Club",
-    meta_description: "A mobile app for club members.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Enhance member engagement and accessibility"],
-    scope: ["Frontend (React Native)", "Backend API", "UI/UX Design"],
-    team_structure: [{ role: "Mobile Lead", leader_name: "Grace Hopper", responsibilities: ["Lead app development"], skills: ["React Native", "Firebase"] }],
-    project_leader: placeholderLeader("Grace Hopper"),
-    timeline: [{ time: "2024-05-01", milestoneTitle: "Beta Version Released", milestoneDescription: "Available for internal member testing." }],
-  },
-
-  // =============================================
-  // ============ BUSINESS DEPARTMENT ============
-  // =============================================
-  {
-    title: "Business Workshop Series",
-    description: "Comprehensive business workshops for students and professionals",
-    type: "department",
-    status: "ongoing",
-    category: "event",
-    department: "Business",
-    department_description: "This semester, we are leading two key initiatives: the Bi-weekly Article Series, which explores business and FinTech topics with academic depth and relevance, and Breaking the Curve, a workshop series that helps students excel academically through interactive sessions, expert insights, and practical learning. By engaging in writing, research, and discussions, members develop both analytical thinking and industry-ready skills while contributing to the club’s knowledge-sharing culture.",
-    labels: ["Workshop", "Business", "Networking"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment03-Graphic.png"),
-    meta_title: "Business Workshop Series - FinTech Club",
-    meta_description: "Workshops for students and professionals.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Provide practical business knowledge"],
-    target_audience: [
+    
+    // CompetitionSchema fields
+    theme: "Quantitative Finance", // Required
+    duration: "4 Weeks", // Required
+    platformLocation: ["Online (Discord)", "RMIT Vietnam (Pitching)"], // Required
+    goals: ["Foster innovation in quantitative finance", "Develop practical coding skills"],
+    target_audience: mockAudiences([
       { name: "Students", icon: "user-graduate" },
-      { name: "Young professionals", icon: "briefcase" },
-    ],
-    featured_activities: ["Case studies", "Guest speakers", "Networking sessions"],
-    guest_speakers: [{ name: "Jane Smith", avatar_url: generateCloudFrontUrl("speakers/jane-smith.jpg"), position: "CEO, TechStart", linkedin_url: "https://linkedin.com/in/janesmith" }],
-    team_structure: [{ role: "Event Coordinator", leader_name: "Alice Johnson" }],
-    project_leader: placeholderLeader("Alice Johnson"),
-  },
-  {
-    title: "Venture Capital Pitch Day",
-    description: "An exclusive event where student-led startups pitch their ideas to a panel of venture capitalists.",
-    type: "department",
-    status: "ongoing",
-    category: "event",
-    department: "Business",
-    department_description: "This semester, we are leading two key initiatives: the Bi-weekly Article Series, which explores business and FinTech topics with academic depth and relevance, and Breaking the Curve, a workshop series that helps students excel academically through interactive sessions, expert insights, and practical learning. By engaging in writing, research, and discussions, members develop both analytical thinking and industry-ready skills while contributing to the club’s knowledge-sharing culture.",
-    labels: ["Venture Capital", "Startups", "Pitching"],
-    image_url: generateCloudFrontUrl("projects/business/vc-pitch-day.png"),
-    meta_title: "Venture Capital Pitch Day - FinTech Club",
-    meta_description: "An event for student startups to pitch to VCs.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Connect student entrepreneurs with investors"],
-    target_audience: [{ name: "Student Startups", icon: "rocket" }, { name: "Investors", icon: "chart-line" }],
-    featured_activities: ["Startup Pitches", "VC Panel Discussion", "Networking"],
-    team_structure: [{ role: "Program Manager", leader_name: "Warren Buffett" }],
-    project_leader: placeholderLeader("Warren Buffett"),
-  },
-  {
-    title: "FinTech Market Research Report",
-    description: "A quarterly report analyzing the latest trends, challenges, and opportunities in the FinTech industry.",
-    type: "department",
-    status: "ongoing",
-    category: "community",
-    department: "Business",
-    department_description: "This semester, we are leading two key initiatives: the Bi-weekly Article Series, which explores business and FinTech topics with academic depth and relevance, and Breaking the Curve, a workshop series that helps students excel academically through interactive sessions, expert insights, and practical learning. By engaging in writing, research, and discussions, members develop both analytical thinking and industry-ready skills while contributing to the club’s knowledge-sharing culture.",
-    labels: ["Market Research", "Analysis", "Publication"],
-    image_url: generateCloudFrontUrl("projects/business/market-report.png"),
-    meta_title: "FinTech Market Research Report - FinTech Club",
-    meta_description: "Quarterly analysis of the FinTech industry.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Establish the club as a thought leader in FinTech"],
-    target_audience: [{ name: "FinTech Community", icon: "users" }, { name: "Industry Professionals", icon: "briefcase" }],
-    featured_activities: ["Quarterly Report Publishing", "Data Analysis & Insights"],
-    team_structure: [{ role: "Lead Analyst", leader_name: "Peter Thiel" }],
-    project_leader: placeholderLeader("Peter Thiel"),
-  },
-  {
-    title: "Corporate Partnership Program",
-    description: "Developing strategic partnerships with leading financial institutions and tech companies.",
-    type: "department",
-    status: "ongoing",
-    category: "career",
-    department: "Business",
-    department_description: "This semester, we are leading two key initiatives: the Bi-weekly Article Series, which explores business and FinTech topics with academic depth and relevance, and Breaking the Curve, a workshop series that helps students excel academically through interactive sessions, expert insights, and practical learning. By engaging in writing, research, and discussions, members develop both analytical thinking and industry-ready skills while contributing to the club’s knowledge-sharing culture.",
-    labels: ["Partnerships", "Networking", "Corporate"],
-    image_url: generateCloudFrontUrl("projects/business/partnerships.png"),
-    meta_title: "Corporate Partnership Program - FinTech Club",
-    meta_description: "Developing strategic partnerships with companies.",
-    // KHÔNG CÒN "category_specific"
-    company: { name: "FinTech Club Partners", logo_url: generateCloudFrontUrl("logos/partners.png"), website_url: "", tagline: "Building bridges to industry" },
-    goals: ["Secure sponsorships and career opportunities for members"],
-    target_audience: [{ name: "Corporate Partners", icon: "building" }, { name: "Club Members", icon: "users" }],
-    team_structure: [{ role: "Partnership Lead", leader_name: "Sheryl Sandberg" }],
-    project_leader: placeholderLeader("Sheryl Sandberg"),
+      { name: "Coders", icon: "code" }
+    ]),
+    featured_activities: ["Introductory Workshop", "Mid-point Check-in", "Final Pitching"],
+    team_structure: simpleTeam("Competition Lead", "Ada Lovelace"),
+    project_leader: placeholderLeader("Ada Lovelace", "Quant Lead"),
+    details_link: "https://rmit.edu.vn/fintech-club/algo-challenge-2025", // Test optional
+    // 'key_metrics' & 'gallery' not required for 'ongoing'
   },
 
   // =============================================
-  // ============ MARKETING DEPARTMENT ===========
+  // ======== 12. COMPETITION (COMPLETED) ========
   // =============================================
   {
-    title: "FinTech Content Strategy",
-    description: "A strategic initiative to create and distribute high-quality FinTech content across all digital platforms.",
-    type: "department",
-    status: "ongoing",
-    category: "media",
-    department: "Marketing",
-    department_description: "This semester, we’re launching an Internal Training Series to upskill members in content creation, from writing and photography to editing. We’re also powering major campaigns for FTC x Charity and Hack-A-Venture, crafting branding, visual identities, and promotional materials across social media. Additionally, our revamped TikTok Project aims to spotlight member stories through engaging short-form videos, fostering connection and inspiration within the FinTech Club community.",
-    labels: ["Content", "SEO", "Social Media"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment09-Graphic.png"),
-    meta_title: "FinTech Content Strategy - FinTech Club",
-    meta_description: "A strategic initiative for high-quality FinTech content.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Increase brand awareness", "Drive engagement"],
-    target_audience: [
-      { name: "FinTech enthusiasts", icon: "bullhorn" },
-      { name: "Investors", icon: "chart-line" },
-    ],
-    team_structure: [{ role: "Marketing Manager", leader_name: "Diana Prince", responsibilities: ["Oversee content strategy"], skills: ["SEO", "Content Writing"] }],
-    project_leader: placeholderLeader("Diana Prince"),
-    auto_update_type: 'Article',
-    auto_update_limit: 6,
-    products: [], 
-  },
-  {
-    title: "The FinTech Feed Podcast Launch",
-    description: "Launching a weekly podcast featuring interviews with industry leaders, market analysis, and career advice.",
-    type: "department",
-    status: "ongoing",
-    category: "media",
-    department: "Marketing",
-    department_description: "This semester, we’re launching an Internal Training Series to upskill members in content creation, from writing and photography to editing. We’re also powering major campaigns for FTC x Charity and Hack-A-Venture, crafting branding, visual identities, and promotional materials across social media. Additionally, our revamped TikTok Project aims to spotlight member stories through engaging short-form videos, fostering connection and inspiration within the FinTech Club community.",
-    labels: ["Podcast", "Interviews", "Media"],
-    image_url: generateCloudFrontUrl("projects/marketing/podcast-launch.png"),
-    meta_title: "The FinTech Feed Podcast - FinTech Club",
-    meta_description: "A weekly podcast on all things FinTech.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Reach a wider audience through audio content"],
-    target_audience: [{ name: "Podcast Listeners", icon: "headphones" }, { name: "Students", icon: "user-graduate" }],
-    team_structure: [{ role: "Podcast Host", leader_name: "Clark Kent", responsibilities: ["Host episodes", "Edit audio"], skills: ["Interviewing", "Audacity"] }],
-    project_leader: placeholderLeader("Clark Kent"),
-    auto_update_type: 'FinTechTainment',
-    auto_update_limit: 6,
-    products: [], 
-  },
-  {
-    title: "Social Media Growth Campaign",
-    description: "A multi-platform campaign to double our social media following and engagement in six months.",
-    type: "department",
-    status: "ongoing",
-    category: "community",
-    department: "Marketing",
-    department_description: "This semester, we’re launching an Internal Training Series to upskill members in content creation, from writing and photography to editing. We’re also powering major campaigns for FTC x Charity and Hack-A-Venture, crafting branding, visual identities, and promotional materials across social media. Additionally, our revamped TikTok Project aims to spotlight member stories through engaging short-form videos, fostering connection and inspiration within the FinTech Club community.",
-    labels: ["Social Media", "Campaign", "Growth"],
-    image_url: generateCloudFrontUrl("projects/marketing/social-campaign.png"),
-    meta_title: "Social Media Growth Campaign - FinTech Club",
-    meta_description: "A campaign to grow our social media presence.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Double social media followers", "Increase engagement metrics by 50%"],
-    target_audience: [{ name: "Social Media Users", icon: "hashtag" }, { name: "Students", icon: "user-graduate" }],
-    featured_activities: ["Daily Content Posting", "Engagement Contests", "Giveaways"],
-    team_structure: [{ role: "Social Media Manager", leader_name: "Tony Stark" }],
-    project_leader: placeholderLeader("Tony Stark"),
-  },
-  {
-    title: "Brand Ambassador Program",
-    description: "Recruiting and managing a team of student brand ambassadors to promote the club on campus.",
-    type: "department",
-    status: "ongoing",
-    category: "community",
-    department: "Marketing",
-    department_description: "This semester, we’re launching an Internal Training Series to upskill members in content creation, from writing and photography to editing. We’re also powering major campaigns for FTC x Charity and Hack-A-Venture, crafting branding, visual identities, and promotional materials across social media. Additionally, our revamped TikTok Project aims to spotlight member stories through engaging short-form videos, fostering connection and inspiration within the FinTech Club community.",
-    labels: ["Ambassadors", "Campus", "Marketing"],
-    image_url: generateCloudFrontUrl("projects/marketing/ambassador-program.png"),
-    meta_title: "Brand Ambassador Program - FinTech Club",
-    meta_description: "A program for student brand ambassadors.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Increase on-campus brand visibility and event attendance"],
-    target_audience: [{ name: "Campus Students", icon: "university" }],
-    featured_activities: ["Campus Outreach", "Event Promotion", "Info Sessions"],
-    team_structure: [{ role: "Program Coordinator", leader_name: "Pepper Potts" }],
-    project_leader: placeholderLeader("Pepper Potts"),
-  },
-
-  // =============================================
-  // ========= HUMAN RESOURCES DEPARTMENT ========
-  // =============================================
-  {
-    title: "Annual Recruitment Drive",
-    description: "Our yearly drive to recruit talented and passionate students to join the FinTech Club.",
-    type: "department",
-    status: "ongoing",
-    category: "career",
-    department: "Human Resources",
-    department_description: "This semester, we’re bringing the community together through heartfelt initiatives like the Charity Project for Tu Hanh Pagoda, high-energy bonding at the FinTech Olympics, and the adventurous End of Semester Trip. We also support personal growth with our Internal CV Review Workshop, and add a spark of fun with the festive FTC Halloween celebration. HR is where connections are built, memories are made, and every member feels at home.",
-    labels: ["Recruitment", "Networking", "Career"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment10-Graphic-New.png"),
-    meta_title: "Annual Recruitment Drive - FinTech Club",
-    meta_description: "Join the FinTech Club through our annual recruitment drive.",
-    // KHÔNG CÒN "category_specific"
-    company: placeholderCompany,
-    goals: ["Attract top talent", "Strengthen the club's member base"],
-    target_audience: [{ name: "University students", icon: "user-graduate" }],
-    team_structure: [{ role: "HR Lead", leader_name: "Bruce Wayne" }],
-    project_leader: placeholderLeader("Bruce Wayne"),
-  },
-  {
-    title: "Member Mentorship Program",
-    description: "Pairing new members with senior club members to provide guidance, support, and career advice.",
-    type: "department",
-    status: "ongoing",
-    category: "career",
-    department: "Human Resources",
-    department_description: "This semester, we’re bringing the community together through heartfelt initiatives like the Charity Project for Tu Hanh Pagoda, high-energy bonding at the FinTech Olympics, and the adventurous End of Semester Trip. We also support personal growth with our Internal CV Review Workshop, and add a spark of fun with the festive FTC Halloween celebration. HR is where connections are built, memories are made, and every member feels at home.",
-    labels: ["Mentorship", "Career", "Development"],
-    image_url: generateCloudFrontUrl("projects/hr/mentorship.png"),
-    meta_title: "Member Mentorship Program - FinTech Club",
-    meta_description: "A mentorship program for club members.",
-    // KHÔNG CÒN "category_specific"
-    company: placeholderCompany,
-    goals: ["Facilitate knowledge transfer", "Improve member retention"],
-    target_audience: [{ name: "New Members", icon: "user-plus" }, { name: "Senior Members", icon: "user-tie" }],
-    team_structure: [{ role: "Mentorship Coordinator", leader_name: "Alfred Pennyworth" }],
-    project_leader: placeholderLeader("Alfred Pennyworth"),
-  },
-  {
-    title: "Alumni Networking Gala",
-    description: "An annual gala to connect current members with the club's successful alumni network.",
-    type: "department",
-    status: "ongoing",
-    category: "event",
-    department: "Human Resources",
-    department_description: "This semester, we’re bringing the community together through heartfelt initiatives like the Charity Project for Tu Hanh Pagoda, high-energy bonding at the FinTech Olympics, and the adventurous End of Semester Trip. We also support personal growth with our Internal CV Review Workshop, and add a spark of fun with the festive FTC Halloween celebration. HR is where connections are built, memories are made, and every member feels at home.",
-    labels: ["Alumni", "Networking", "Gala"],
-    image_url: generateCloudFrontUrl("projects/hr/alumni-gala.png"),
-    meta_title: "Alumni Networking Gala - FinTech Club",
-    meta_description: "An annual gala for members and alumni.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Strengthen the alumni community", "Provide networking opportunities"],
-    target_audience: [{ name: "Alumni", icon: "user-check" }, { name: "Current Members", icon: "users" }],
-    featured_activities: ["Keynote Speech", "Networking Dinner", "Awards Ceremony"],
-    team_structure: [{ role: "Event Lead", leader_name: "Selina Kyle" }],
-    project_leader: placeholderLeader("Selina Kyle"),
-  },
-  {
-    title: "Skills Development Workshops",
-    description: "A series of workshops focused on developing essential soft and hard skills for a career in FinTech.",
-    type: "department",
-    status: "ongoing",
-    category: "career",
-    department: "Human Resources",
-    department_description: "This semester, we’re bringing the community together through heartfelt initiatives like the Charity Project for Tu Hanh Pagoda, high-energy bonding at the FinTech Olympics, and the adventurous End of Semester Trip. We also support personal growth with our Internal CV Review Workshop, and add a spark of fun with the festive FTC Halloween celebration. HR is where connections are built, memories are made, and every member feels at home.",
-    labels: ["Skills", "Workshop", "Training"],
-    image_url: generateCloudFrontUrl("projects/hr/skills-workshops.png"),
-    meta_title: "Skills Development Workshops - FinTech Club",
-    meta_description: "Workshops to develop essential skills.",
-    // KHÔNG CÒN "category_specific"
-    company: placeholderCompany,
-    goals: ["Enhance member employability", "Address skill gaps"],
-    target_audience: [{ name: "Club Members", icon: "users" }],
-    team_structure: [{ role: "Training Coordinator", leader_name: "Lucius Fox" }],
-    project_leader: placeholderLeader("Lucius Fox"),
-  },
-
-  // --- MEDIA PROJECTS (AUTO-UPDATE) ---
-  {
-    title: "Latest FinTech Podcasts",
-    description: "Our dynamic feed of the most recent podcast episodes, updated automatically.",
+    // Base fields
+    title: "FinTech Case Competition 2024",
+    description: "Our flagship case competition from 2024, focused on solving real-world FinTech problems.",
     type: "large-scaled",
-    status: "ongoing",
-    category: "media",
-    labels: ["Podcast", "Education", "FinTech"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment11-Graphic.png"),
-    meta_title: "Latest FinTech Podcasts - FinTech Club",
-    meta_description: "A dynamic feed of our latest podcast episodes.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Provide timely audio content"],
-    target_audience: [{ name: "Listeners", icon: "headphones" }],
-    team_structure: [{ role: "Media Team", leader_name: "Bob Wilson", responsibilities: ["Auto-publishing"], skills: ["CMS"] }],
-    project_leader: placeholderLeader("Bob Wilson"),
-    auto_update_type: 'FinTechTainment',
-    auto_update_limit: 6,
-    products: [],
+    status: "completed",
+    category: "competition",
+    labels: ["Case Competition", "Strategy", "FinTech", "Past Event"],
+    image_url: generateCloudFrontUrl("projects/competition/case-comp-2024.png"),
+    year: 2024, // Required
+    meta_title: "FinTech Case Competition 2024 - FinTech Club",
+    meta_description: "Recap of the 2024 FinTech Case Competition.",
+    
+    // CompetitionSchema fields
+    theme: "Innovation in Digital Payments", // Required
+    duration: "2 Weeks", // Required
+    platformLocation: ["Online", "RMIT Vietnam"], // Required
+    goals: ["Solve real-world industry problems", "Identify top talent"],
+    target_audience: mockAudiences([
+      { name: "Student Teams", icon: "users" },
+      { name: "Industry Judges", icon: "gavel" }
+    ]),
+    featured_activities: ["Opening Ceremony", "Mentorship Sessions", "Finals Pitch"],
+    team_structure: simpleTeam("Competition Manager", "Elon Musk"),
+    project_leader: placeholderLeader("Elon Musk", "Head of Business"),
+    // 'details_link' will use default ("")
+    key_metrics: mockMetrics([ // Required
+      { icon: "users", value: 80, prefix: "", label: "Teams" },
+      { icon: "dollar-sign", value: 5000, prefix: "$", label: "Prize Pool" },
+      { icon: "building", value: 10, prefix: "", label: "Sponsors" }
+    ]),
+    gallery: mockGallery([ // Required
+      "gallery/competition/case-1.jpg",
+      "gallery/competition/case-2.jpg",
+      "gallery/competition/winners.jpg"
+    ]),
   },
-  {
-    title: "Recent FinTech Articles",
-    description: "The latest articles and insights from our team, always up-to-date.",
-    type: "large-scaled",
-    status: "ongoing",
-    category: "media",
-    labels: ["Articles", "DeFi", "Analysis"],
-    image_url: generateCloudFrontUrl("media/podcast/graphics/Fintechtainment08-Graphic.png"),
-    meta_title: "Recent FinTech Articles - FinTech Club",
-    meta_description: "The latest articles and insights from our team.",
-    // KHÔNG CÒN "category_specific"
-    goals: ["Provide timely written content"],
-    target_audience: [{ name: "Readers", icon: "book-open" }],
-    team_structure: [{ role: "Media Team", leader_name: "Jane Smith", responsibilities: ["Auto-publishing"], skills: ["CMS"] }],
-    project_leader: placeholderLeader("Jane Smith"),
-    auto_update_type: 'Article',
-    auto_update_limit: 6,
-    products: [],
-  }
 ];
 
 async function seedProjects() {
-  const mongoUri = process.env.MONGODB_URI;
-  if (!mongoUri) {
-    throw new Error("MONGODB_URI environment variable is not set.");
-  }
+  const mongoUri = process.env.MONGODB_URI!;
 
   console.log("Connecting to MongoDB...");
   await mongoose.connect(mongoUri);

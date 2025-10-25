@@ -17,7 +17,7 @@ const EventCard = ({
 }) => (
   <>
     <h3 className="font-bold text-[#2C305F] mb-2 text-lg">{title}</h3>
-    <Card className="bg-[#F3F2F9] border-none rounded-lg shadow-md transition-transform hover:scale-105">
+    <Card className="bg-ft-primary-blue-300 border-none rounded-lg shadow-md transition-transform hover:scale-105">
       <CardBody className="p-4">
         <p className="text-gray-600 text-sm">{description}</p>
       </CardBody>
@@ -32,7 +32,7 @@ export default function Timeline({ timeline = [] }: TimelineProps) {
   }
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <SectionTitle>Timeline</SectionTitle>
 

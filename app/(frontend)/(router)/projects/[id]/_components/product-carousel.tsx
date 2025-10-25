@@ -89,7 +89,7 @@ export default function ProductCarousel({
   if (!products || products.length === 0) return null;
 
   return (
-    <section className="bg-white pt-4 pb-8 md:pt-8 md:pb-16">
+    <section className="py-8 md:py-12">
       <div className="flex flex-col items-center mx-auto px-20">
         <SectionTitle>{title}</SectionTitle>
         <div className="relative w-full px-8 md:px-16">

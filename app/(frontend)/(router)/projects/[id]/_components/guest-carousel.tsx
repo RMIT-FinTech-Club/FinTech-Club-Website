@@ -51,7 +51,7 @@ export default function GuestCarousel({
   if (!guest_speakers || guest_speakers.length === 0) return null;
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="mx-auto px-20">
         <SectionTitle>{title}</SectionTitle>
 
