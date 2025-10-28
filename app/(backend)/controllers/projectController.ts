@@ -138,20 +138,25 @@ export async function createProject(data: any) {
 
 // PUT (update) an existing project
 export async function updateProject(idOrSlug: string, updateData: any) {
-  // REMOVED: structureProjectData
   const query = Types.ObjectId.isValid(idOrSlug)
     ? { _id: idOrSlug }
     : { slug: idOrSlug };
 
-  // Pass updateData thẳng vào
-  const project = await Project.findOneAndUpdate(query, updateData, {
-    new: true,
-    runValidators: true,
-  });
+  const project = await Project.findOne(query);
 
-  if (!project) throw new Error("Project not found");
+  if (!project) {
+    throw new Error("Project not found");
+  }
 
-  return project;
+  for (const key in updateData) {
+    if (key !== "_id" && key !== "slug") {
+      project.set(key, updateData[key]);
+    }
+  }
+
+  const updatedProject = await project.save();
+
+  return updatedProject;
 }
 
 // DELETE a project

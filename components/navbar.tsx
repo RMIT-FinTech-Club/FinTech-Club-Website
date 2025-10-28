@@ -84,18 +84,18 @@ const Navbar = () => {
         <motion.ul
           variants={ulVariants}
           className={
-            "fixed -right-full bottom-0 bg-ft-primary-blue px-8 pr-16 md:hidden"
+            "fixed -right-full bottom-0 w-[50vw] bg-ft-primary-blue md:hidden"
           }
-          style={{ top: navBarRef.current?.offsetHeight }} // Right aligning the sidebar links
+          style={{ top: navBarRef.current?.offsetHeight }}
         >
           {siteConfig.navItems.map((item) => (
             <motion.li
               variants={navBarItemVariants}
               key={item.href}
-              className="mb-6"
+              className="my-6"
             >
               <Link
-                className="font-bold text-white hover:text-ft-secondary-yellow"
+                className="font-bold text-white mx-6 hover:text-ft-secondary-yellow"
                 href={item.href}
                 onClick={() => setIsOpen(false)}
               >
@@ -103,6 +103,16 @@ const Navbar = () => {
               </Link>
             </motion.li>
           ))}
+
+          <motion.li variants={navBarItemVariants} className="mt-10">
+            <Link
+              className="transition-all duration-200 hover:brightness-110 hover:scale-105 py-[2vh] px-[4vw] mx-6 bg-[#DCB968] text-white rounded-[1vh] cursor-pointer font-bold"
+              href="/join-us"
+              onClick={() => setIsOpen(false)}
+            >
+              Join Us
+            </Link>
+          </motion.li>
         </motion.ul>
         <div className="hidden md:relative md:flex">
           <ul className="flex md:items-center space-x-[4vw]">

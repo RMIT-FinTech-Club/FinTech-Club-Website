@@ -70,7 +70,6 @@ export default function ProjectDetail() {
     // 1. Map Project Leaders (API -> Component Prop) - [FIXED]
     const mappedLeaders: TeamStructureLeader[] = // <-- Changed to array
       project.project_leader?.map((leader) => ({
-        // <-- Changed to .map()
         name: leader.name,
         avatarUrl: leader.avatar_url, // Maps snake_case to camelCase
         role: leader.position || "Project Leader",

@@ -17,7 +17,7 @@ const PersonSchema = new Schema(
 const DetailedTeamMemberSchema = new Schema(
   {
     role: { type: String, required: true, trim: true },
-    leader_name: { type: [String], required: true, trim: true },
+    leader_name: { type: [String], trim: true },
     responsibilities: { type: [String], required: true },
     skills: { type: [String], required: true },
   },
@@ -54,7 +54,7 @@ const TimelineSchema = new Schema(
 const TargetAudienceSchema = new Schema(
   {
     name: { type: String, required: true, trim: true },
-    icon: { type: String, required: true, trim: true },
+    icon: { type: String, trim: true, default: "Target" },
   },
   { _id: false }
 );
@@ -177,7 +177,8 @@ projectSchema.index({ year: -1 });
 // Discriminator Schemas (Category-Specific)
 const TechnicalSchema = new Schema({
   goals: { type: [String], required: true },
-  scope: { type: [String], required: true },
+  scope: { type: [String] },
+  target_audience: { type: [TargetAudienceSchema] },
   team_structure: { type: [DetailedTeamMemberSchema], required: true },
   project_leader: { type: [PersonSchema], required: true },
   timeline: {

@@ -71,12 +71,12 @@ export default function Hero({
 
         {/* Right Column */}
         <div className="flex flex-col justify-between h-full flex-1 gap-4">
-          <div className="h-[70%] relative">
+          <div className="h-[75%] relative">
             <Image
               src={image_url}
               alt={`${title} hero graphic`}
               fill
-              className="w-full h-full object-fill rounded-bl-large"
+              className="w-full h-full object-fill rounded-bl-large bg-white border-ft-primary-yellow border-l-4 border-b-4"
               priority
             />
           </div>

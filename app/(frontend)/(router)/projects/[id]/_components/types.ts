@@ -47,7 +47,7 @@ export type Leader = {
 
 export type Team = {
   role: string;
-  leader_name: string[];
+  leader_name?: string[];
   responsibilities?: string[];
   skills?: string[];
 };

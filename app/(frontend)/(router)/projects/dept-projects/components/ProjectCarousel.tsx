@@ -26,7 +26,7 @@ function ProjectCard({ item }: { item: ProjectItem }) {
     >
       <article className="h-full flex flex-col">
         {/* Image Area with a subtle zoom effect on hover */}
-        <div className="relative w-full aspect-[16/9] border-[10px] border-[#2C305F] overflow-hidden">
+        <div className="relative w-full aspect-[10/7] border-[10px] border-[#2C305F] overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 text-[#2C305F]/40">
             <PhotoIcon className="h-12 w-12" />
           </div>
@@ -35,8 +35,7 @@ function ProjectCard({ item }: { item: ProjectItem }) {
               src={item.imageUrl}
               alt={item.title}
               fill
-              className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-fill transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
           )}
         </div>

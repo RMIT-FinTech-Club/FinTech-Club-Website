@@ -11,11 +11,12 @@ const IntroSection = () => {
   });
 
   return (
-    <section className="content flex flex-col bg-[#F9FAFB] md:flex-row items-center gap-6 w-full p-6 md:p-14">
+    <section className="content flex flex-col bg-[#F9FAFB] md:flex-row items-center md:gap-6 w-full p-4 md:p-14">
+      <div className="block md:hidden mx-auto text-[#2C305F] max-md:text-3xl md:text-[1.5rem] font-bold max-md:mx-auto">Our Key Metrics</div>
       {/* Left text */}
       <div
         ref={ref}
-        className="grid grid-rows-2 md:w-1/3 justify-center gap-y-16"
+        className="grid grid-rows-2 md:w-1/3 justify-center gap-y-8 md:gap-y-16"
       >
         <div className="flex flex-col justify-end text-center gap-3">
           <h4 className="text-ft-primary-yellow">
@@ -52,11 +53,11 @@ const IntroSection = () => {
         </div>
       </div>
       {/* Image */}
-      <div className="md:w-1/3 aspect-[1/1.5] content-center">
+      <div className="md:w-1/3 hidden md:block content-center">
         <MaskImage src="https://d2prwyp3rwi40.cloudfront.net/home/assets/KeyMetrics-EditedVersion.png" />
       </div>
       {/* Right text */}
-      <div className="grid grid-rows-2 md:w-1/3 justify-center gap-y-16">
+      <div className="grid grid-rows-2 md:w-1/3 justify-center mt-8 gap-y-8 md:gap-y-16">
         <div className="flex flex-col justify-start text-center gap-3">
           <h4 className="text-ft-primary-yellow">
             <CountUp start={0} end={inView ? 7000 : 0} duration={5}>

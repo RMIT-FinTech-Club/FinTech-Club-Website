@@ -241,3 +241,13 @@
 .circle_item_5_prev { animation-name: circle_item_5_prev; }
 .circle_item_6_prev { animation-name: circle_item_6_prev; }
 .circle_item_7_prev { animation-name: circle_item_7_prev; }
+
+.fade_in_content {
+  animation: fade_in 1.5s ease forwards;
+  opacity: 1;
+}
+
+.fade_out_content {
+  animation: fade_out 1.5s ease forwards;
+  opacity: 0;
+}

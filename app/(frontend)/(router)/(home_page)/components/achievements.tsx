@@ -4,75 +4,101 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 type CardStackProps = {
-	id: number;
-	image: string;
+  id: number;
+  image: string;
 };
 
 const achievementData = [
-	{
-		id: 1,
-		image: "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemA-2021.png",
-	},
-	{
-		id: 2,
-		image: "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2021.png",
-	},
-	{
-		id: 3,
-		image: "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemA-2023.png",
-	},
-	{
-		id: 4,
-		image: "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png",
-	},
-	{
-		id: 5,
-		image: "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemC-2024.png",
-	},
+  {
+    id: 1,
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemA-2021.png",
+  },
+  {
+    id: 2,
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2021.png",
+  },
+  {
+    id: 3,
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemA-2023.png",
+  },
+  {
+    id: 4,
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemB-2023.png",
+  },
+  {
+    id: 5,
+    image:
+      "https://d2prwyp3rwi40.cloudfront.net/home/achievement/BestClubSemC-2024.png",
+  },
 ];
 
 const Achievements = () => {
-	const [cards, setCards] = useState<CardStackProps[]>(achievementData);
+  const [cards, setCards] = useState<CardStackProps[]>(achievementData);
 
   return (
-    <section className="bg-[#F9FAFB] w-[100vw] pt-[4rem] pb-[2rem] relative">
+    <section className="w-full pt-4 md:pt-16 pb-8 relative overflow-hidden">
+      {/* --- Decorative Elements --- */}
       <Image
         src="https://d2prwyp3rwi40.cloudfront.net/global/Mascot+-+M%E1%BA%B7t+b%C3%AAn.svg"
         alt="Bear mascot"
-        className="absolute right-[-10rem] top-[17rem] rotate-[-25deg] z-30"
+        className="absolute right-[-10rem] top-[17rem] rotate-[-25deg] z-30 hidden md:block"
         width={400}
         height={400}
         loading="lazy"
       />
 
-			<div className="absolute top-[-2rem] right-[8rem] w-[4.5rem] h-[4.5rem] bg-[#5E5E92] rounded-full z-10"></div>
-			<div className="absolute top-[2.3rem] right-[6rem] w-[1.7rem] h-[1.7rem] bg-[#5E5E92] rounded-full z-10"></div>
+      {/* All decorative dots hidden on mobile */}
+      <div className="absolute top-0 right-[8rem] w-[4.5rem] h-[4.5rem] bg-[#5E5E92] rounded-full z-20 hidden md:block"></div>
+      <div className="absolute top-[4.3rem] right-[6rem] w-[1.7rem] h-[1.7rem] bg-[#5E5E92] rounded-full z-20 hidden md:block"></div>
+      
+      <div className="absolute top-[27rem] left-[3rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute top-[33rem] left-[-2rem] w-[4rem] h-[4rem] bg-[#C9D6EA] rounded-full z-20 hidden md:block"></div>
+      <div className="absolute top-[35rem] left-[1.25rem] w-[4rem] h-[4rem] bg-[#DBB968] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute top-[30rem] left-[-2.5rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute top-[34rem] left-[7rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute top-[26rem] left-[7rem] w-[0.8rem] h-[0.8rem] bg-[#2C305F] rounded-full z-10 hidden md:block"></div>
+      
+      <div className="absolute bottom-[4rem] right-[14rem] w-[8rem] h-[8rem] bg-[#2C305F] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute bottom-[27rem] right-[-2.7rem] w-[8rem] h-[8rem] bg-[#DCB968] rounded-full z-20 hidden md:block"></div>
+      <div className="absolute bottom-[6.5rem] right-[-5rem] w-[20rem] h-[20rem] bg-[#F7D27F] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute bottom-[7rem] right-[10.5rem] w-[5rem] h-[5rem] bg-[#5E5E92] rounded-full z-10 hidden md:block"></div>
+      <div className="absolute bottom-[34rem] right-[6rem] w-[2rem] h-[2rem] bg-[#97ABD6] rounded-full z-10 hidden md:block"></div>
 
-			<div className="absolute top-[30rem] left-[4rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
-			<div className="absolute top-[36rem] left-[-1rem] w-[4rem] h-[4rem] bg-[#C9D6EA] rounded-full z-20"></div>
-			<div className="absolute top-[38rem] left-[2.5rem] w-[4rem] h-[4rem] bg-[#DBB968] rounded-full z-10"></div>
-			<div className="absolute top-[33rem] left-[-1.5rem] w-[4rem] h-[4rem] bg-[#2C305F] rounded-full z-10"></div>
-			<div className="absolute top-[37rem] left-[8rem] w-[1rem] h-[1rem] bg-[#DBB968] rounded-full z-10"></div>
-			<div className="absolute top-[29rem] left-[8rem] w-[0.8rem] h-[0.8rem] bg-[#2C305F] rounded-full z-10"></div>
-
-			<div className="absolute bottom-[4rem] right-[16rem] w-[8rem] h-[8rem] bg-[#2C305F] rounded-full z-10"></div>
-			<div className="absolute bottom-[27rem] right-[-0.7rem] w-[8rem] h-[8rem] bg-[#DCB968] rounded-full z-20"></div>
-			<div className="absolute bottom-[6.5rem] right-[-3rem] w-[20rem] h-[20rem] bg-[#F7D27F] rounded-full z-10"></div>
-			<div className="absolute bottom-[7rem] right-[12.5rem] w-[5rem] h-[5rem] bg-[#5E5E92] rounded-full z-10"></div>
-			<div className="absolute bottom-[34rem] right-[8rem] w-[2rem] h-[2rem] bg-[#97ABD6] rounded-full z-10"></div>
-
-      <div className="pl-[7rem]">
-        <h2 className="text-[2.5rem] font-bold text-[#2C305F] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
-          Achievement
-        </h2>
-        <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[6rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+      <div className="px-4 md:pl-[7rem] md:px-0">
+        <div className="text-[2rem] md:text-[2.5rem] max-md:relative max-md:text-center font-bold text-[#2C305F] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+          Our Achievement
+          <Image
+            src="/Achievement_Decoration.svg"
+            alt="Left Achievement_Decoration"
+            className="absolute left-0 -top-2 z-10 md:hidden block"
+            width={70}
+            height={70}
+            loading="lazy"
+          />
+          <Image
+            src="/Achievement_Decoration.svg"
+            alt="Left Achievement_Decoration"
+            className="absolute right-0 -top-2 z-10 rotate-180 md:hidden block"
+            width={70}
+            height={70}
+            loading="lazy"
+          />
+        </div>
+        <h3 className="text-4xl md:text-[3.5rem] max-md:mt-8 font-bold text-[#DCB968] leading-tight md:leading-[6rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Best Club of Semester
         </h3>
-        <p className="text-[2.5rem] font-bold text-[#5E5E92] pl-[48rem]">
+        {/* Removed horizontal padding for mobile, restored for desktop */}
+        <p className="text-2xl md:text-[2.5rem] max-md:mt-2 max-md:text-right font-bold text-[#5E5E92] md:pl-[44rem]">
           5 times
         </p>
-        <div className="pb-[17rem]">
-          <div className="min-h-[200px] flex justify-center items-center relative">
+
+        <div className="-mt-12 md:mt-[5rem] md:pb-[9rem] md:-ml-[14rem]">
+          {/* Set a min-height for mobile to contain the absolute cards */}
+          <div className="min-h-[400px] md:min-h-[200px] flex justify-center items-center max-md:pl-4 relative">
             {cards.map((card) => (
               <CARD_STACK
                 key={card.id}
@@ -86,36 +112,37 @@ const Achievements = () => {
         </div>
       </div>
 
-      <div className="flex justify-center gap-[2rem] mt-[2rem] ">
+      {/* Innovation Award Section */}
+      <div className="flex flex-col-reverse md:items-center md:flex-row md:justify-between gap-4 md:gap-8 px-6 md:px-20">
         <Image
           src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/InnovationAward-2023.png"
-          className="object-fill w-[32rem] h-[90vh] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
-          width={200}
-          height={150}
+          className="object-cover w-full md:w-[35vw] h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
+          width={400} 
+          height={600}
           alt="Innovation Award"
-          fetchPriority="high"
-          loading="eager"
           priority={true}
         />
-        <div>
-          <h3 className="text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+        <div className="flex flex-col">
+          <h3 className="text-4xl md:text-[3.5rem] font-bold text-[#DCB968] leading-tight md:leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)] max-md:-mt-[4rem]">
             Innovation Award
           </h3>
-          <p className="text-[2.5rem] font-bold text-[#5E5E92] leading-[5rem]">
+          <div className="text-2xl md:text-[2.5rem] max-md:text-right max-md:mt-1 font-bold text-[#5E5E92] md:leading-[5rem]">
             2023
-          </p>
+          </div>
         </div>
       </div>
 
-      <div className="pl-[5rem] mt-[2rem]">
-        <h3 className="pt-[2rem] text-[3.5rem] font-bold text-[#DCB968] leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
+      {/* Publicity Award Section */}
+      <div className="px-6 md:pl-20 mt-4 md:mt-[2rem]">
+        <h3 className="pt-4 md:pt-[2rem] text-4xl md:text-[3.5rem] font-bold text-[#DCB968] leading-tight md:leading-[3rem] [text-shadow:_0_3px_4px_rgba(0,0,0,0.5)]">
           Publicity Award
         </h3>
-        <p className="mt-0 text-[2.5rem] font-bold text-[#5E5E92] leading-[5rem]">
+        <p className="mt-0 max-md:mb-1 text-2xl md:text-[2.5rem] max-md:text-right font-bold text-[#5E5E92] md:leading-[5rem]">
           2024
         </p>
-        <div className="flex flex-col md:flex-row gap-[7rem] relative">
-          <div className="absolute z-10 left-[37rem] top-[-6.3rem] rotate-[-5deg]">
+        {/* Centered items on mobile */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-[7rem] relative items-center md:items-start">
+          <div className="absolute z-10 left-[36.5rem] top-[-7rem] rotate-[-5deg] hidden md:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="70"
@@ -129,7 +156,7 @@ const Achievements = () => {
               />
             </svg>
           </div>
-          <div className="absolute z-10 left-[42rem] top-[-2.5rem] rotate-[-5deg]">
+          <div className="absolute z-10 left-[41rem] top-[-3rem] rotate-[-5deg] hidden md:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
@@ -145,12 +172,10 @@ const Achievements = () => {
           </div>
           <Image
             src="https://d2prwyp3rwi40.cloudfront.net/home/achievement/PublicityAward-2024.png"
-            className="object-cover w-[32rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
-            width={200}
-            height={150}
+            className="max-md:self-start object-cover w-full max-md:max-w-md md:w-[32rem] md:ml-[9rem] rounded-lg shadow-lg hover:scale-105 transition-transform duration-200"
+            width={400}
+            height={300}
             alt="Publicity Award"
-            fetchPriority="high"
-            loading="eager"
             priority={true}
           />
         </div>
@@ -160,62 +185,70 @@ const Achievements = () => {
 };
 
 const CARD_STACK = ({
-	id,
-	image,
-	cards,
-	setCards,
+  id,
+  image,
+  cards,
+  setCards,
 }: {
-	id: number;
-	image: string;
-	cards: CardStackProps[];
-	setCards: Dispatch<SetStateAction<CardStackProps[]>>;
+  id: number;
+  image: string;
+  cards: CardStackProps[];
+  setCards: Dispatch<SetStateAction<CardStackProps[]>>;
 }) => {
-	const x = useMotionValue(0);
-	const rotate = useTransform(x, [-150, 150], [-18, 18]);
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-150, 150], [-18, 18]);
 
-	const index = cards.findIndex((c) => c.id === id);
-	const isFront = index === cards.length - 1;
-	const offset = cards.length - 1 - index; // Offset from front to back
+  const index = cards.findIndex((c) => c.id === id);
+  const isFront = index === cards.length - 1;
+  const offset = cards.length - 1 - index;
+  const cardX = isFront ? x : -offset * 15;
+  const cardY = -offset * 15;
 
-	const handleDragEnd = () => {
-		const threshold = 100;
-		if (Math.abs(x.get()) > threshold) {
-			const direction = x.get() > 0 ? 1 : -1;
-			animate(x, direction * 1000, {
-				duration: 0.35,
-				ease: "easeInOut",
-				onComplete: () => {
-					setCards((prev) => {
-						const swiped = prev[prev.length - 1];
-						const rest = prev.slice(0, -1);
-						return [swiped, ...rest];
-					});
-					animate(x, 0, {
-						duration: 0.35,
-						ease: "easeOut",
-					});
-				},
-			});
-		} else {
-			animate(x, 0, { duration: 0.125, ease: "linear" });
-		}
-	};
+  // Reduced hover effect
+  const hoverTranslateY = isFront ? "0" : "-20px"; // Was -35px
+
+  const handleDragEnd = () => {
+    const threshold = 100; // Swipe threshold in pixels
+    if (Math.abs(x.get()) > threshold) {
+      const direction = x.get() > 0 ? 1 : -1;
+      animate(x, direction * 1000, {
+        duration: 0.35,
+        ease: "easeInOut",
+        onComplete: () => {
+          setCards((prev) => {
+            const swiped = prev[prev.length - 1];
+            const rest = prev.slice(0, -1);
+            return [swiped, ...rest];
+          });
+          x.set(0);
+        },
+      });
+    } else {
+      animate(x, 0, { duration: 0.125, ease: "linear" });
+    }
+  };
+
+  React.useEffect(() => {
+    if (!isFront) {
+      x.set(0);
+    }
+  }, [isFront, x]);
 
   return (
     <motion.img
       src={image}
       alt={`Achievement ${id}`}
-      className="mt-[20rem] object-cover w-[32rem] hover:cursor-grab active:cursor-grabbing rounded-lg"
+      className="object-cover w-full max-w-[20rem] md:w-[32rem] md:max-w-none hover:cursor-grab active:cursor-grabbing rounded-lg"
       style={{
         position: "absolute",
-        x: isFront ? x : -offset * 30, // Overlap from right to left
-        y: -offset * 30,
+        x: cardX,
+        y: cardY,
         rotate: isFront ? rotate : 0,
         transition: "0.125s transform",
         boxShadow: isFront
           ? "0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5)"
           : "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
-        zIndex: cards.length - offset, // Front card on top
+        zIndex: cards.length - offset,
       }}
       drag={isFront ? "x" : false}
       dragConstraints={{
@@ -226,7 +259,7 @@ const CARD_STACK = ({
       whileHover={{
         scale: isFront ? 1.05 : 1,
         transition: { duration: 0.2 },
-        translateY: isFront ? "0" : "-35px",
+        translateY: hoverTranslateY,
         rotate: isFront ? 7 : 0,
       }}
     />

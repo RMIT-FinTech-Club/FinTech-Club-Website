@@ -1,11 +1,11 @@
 import React from "react";
 import SectionTitle from "./SectionTitle";
 import { Audience } from "./types";
-import { Icon } from "./icon-map"; // <-- Dùng icon-map
+import { Icon } from "./icon-map";
 
 // --- Prop Types ---
 type TargetAudienceProps = {
-  target_audience: Audience[]; // Nhận type từ API (icon là string)
+  target_audience: Audience[];
 };
 
 // --- Main Component ---
@@ -29,7 +29,6 @@ export default function TargetAudience({
             >
               <div className="mb-4 p-3 rounded-full bg-[#DBB968]">
                 <div className="flex justify-center items-center w-8 h-8 text-[#2C305F]">
-                  {/* Dùng <Icon /> để "biên dịch" string */}
                   <Icon name={item.icon} />
                 </div>
               </div>

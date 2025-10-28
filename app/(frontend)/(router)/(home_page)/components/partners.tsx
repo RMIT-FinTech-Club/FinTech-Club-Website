@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef } from "react"; // Không cần useMemo nữa
 import PartnersCircle from "@/components/home/PartnersCircle";
 import PartnersDiv from "@/components/home/PartnersDiv";
 import styles from "@/styles/partners.module.css";
@@ -11,7 +11,7 @@ export type PartnerItem = {
   bg: string;
 };
 
-// Initial state: 7 partners
+// Initial state: 6 partners
 const baseItems = [
   { id: 1, icon: "/home/other_partners.svg" },
   { id: 2, icon: "/home/hospitality.svg" },
@@ -22,16 +22,30 @@ const baseItems = [
 ] as const;
 
 // Create the initial state by mapping over baseItems
-// Assign alternating background colors:
-// Even indices → bg-blueSlate, odd indices → bg-bluePrimary
 const initialItems: PartnerItem[] = baseItems.map((it, i) => ({
   ...it,
   bg: i % 2 === 0 ? "bg-blueSlate" : "bg-bluePrimary",
 }));
 
+// --- CONFIGURATION ---
+const ANIMATION_DURATION = 3000; // Tổng thời gian animation vòng tròn (3s)
+const CONTENT_UPDATE_DELAY = 1000; // Thời gian update nội dung sớm (1s)
+// --- END CONFIGURATION ---
+
 export default function Partners() {
-  const [items, setItems] = useState(initialItems);
-  const [animating, setAnimating] = useState(false);
+  // STATE 1: Chỉ dành cho vòng tròn. Update SAU 3 giây.
+  const [circleItems, setCircleItems] = useState(initialItems);
+
+  // STATE 2: Chỉ dành cho PartnersDiv. Update SỚM sau 1 giây.
+  // Ban đầu, item active là item ở vị trí thứ 4 (index 3)
+  const [activeItemId, setActiveItemId] = useState(initialItems[3].id);
+
+  // STATE 3: Điều khiển fade-in/out cho PartnersDiv
+  const [isContentAnimating, setIsContentAnimating] = useState(false);
+
+  // STATE 4: Khóa click khi vòng tròn đang xoay
+  const [isCircleAnimating, setIsCircleAnimating] = useState(false);
+
   const circleRef = useRef<(HTMLDivElement | null)[]>([]);
 
   // Helper: return the opposite background color of neighbor
@@ -39,49 +53,69 @@ export default function Partners() {
     neighborBg === "bg-blueSlate" ? "bg-bluePrimary" : "bg-blueSlate";
 
   const handleClick = (dir: "next" | "prev") => {
-    if (animating) return;
-    setAnimating(true);
+    // Nếu vòng tròn đang xoay thì không làm gì cả
+    if (isCircleAnimating) return;
 
-    // Add animation class to each element
+    // 1. BẮT ĐẦU: Khóa click, chạy animation CSS và bắt đầu fade-out content
+    setIsCircleAnimating(true);
+    setIsContentAnimating(true); // Ra lệnh cho PartnersDiv mờ đi (fade-out)
+
     circleRef.current.forEach((el, index) => {
       if (el) {
         el.classList.add(styles[`circle_item_${index + 1}_${dir}`]);
       }
     });
 
-    // Wait for animation to finish before updating positions
+    // 2. UPDATE CONTENT SỚM (Sau 1 giây)
     setTimeout(() => {
-      const rotated = [...items];
+      // Tìm ID của item *sắp* đi vào giữa
+      // Dựa trên state *hiện tại* của vòng tròn
+      const nextActiveItem =
+        dir === "next"
+          ? circleItems[4] // Item ở vị trí 5 (index 4)
+          : circleItems[2]; // Item ở vị trí 3 (index 2)
 
-      if (dir === "prev") {
-        const popped = rotated.pop()!;
-        const neighborBg = rotated[0].bg;
-        popped.bg = getNextBg(neighborBg);
-        rotated.unshift(popped);
-      } else {
-        const shifted = rotated.shift()!;
-        const neighborBg = rotated[rotated.length - 1].bg;
-        shifted.bg = getNextBg(neighborBg);
-        rotated.push(shifted);
-      }
+      setActiveItemId(nextActiveItem.id); // Cập nhật state cho PartnersDiv
+      setIsContentAnimating(false); // Ra lệnh cho PartnersDiv hiện ra (fade-in)
+    }, CONTENT_UPDATE_DELAY); // 1000ms
 
-      setItems(rotated);
-      setAnimating(false);
+    // 3. UPDATE VÒNG TRÒN MUỘN (Sau 3 giây)
+    setTimeout(() => {
+      // Bây giờ mới thực sự update state của vòng tròn
+      setCircleItems((prevItems) => {
+        const rotated = [...prevItems];
 
-      // Remove animation classes after done
+        if (dir === "prev") {
+          const popped = rotated.pop()!;
+          const neighborBg = rotated[0].bg;
+          popped.bg = getNextBg(neighborBg);
+          rotated.unshift(popped);
+        } else {
+          const shifted = rotated.shift()!;
+          const neighborBg = rotated[rotated.length - 1].bg;
+          shifted.bg = getNextBg(neighborBg);
+          rotated.push(shifted);
+        }
+        return rotated;
+      });
+
+      // 4. DỌN DẸP
+      setIsCircleAnimating(false); // Mở khóa click
+
+      // Xóa class CSS animation
       circleRef.current.forEach((el, index) => {
         el?.classList.remove(styles[`circle_item_${index + 1}_${dir}`]);
       });
-    }, 3000); // Match animation duration in CSS
+    }, ANIMATION_DURATION); // 3000ms
   };
 
   return (
     <div className="w-[100vw] h-fit min-h-[35vh] bg-[#F9FAFB] py-20 relative flex items-center">
       <PartnersCircle
-        items={items}
+        items={circleItems}
         handleClick={handleClick}
         circleRef={circleRef}
-        animating={animating}
+        animating={isCircleAnimating}
       />
       <div className="absolute z-30 left-[37rem] top-[3.3rem] rotate-[-5deg]">
         <svg
@@ -97,7 +131,7 @@ export default function Partners() {
           />
         </svg>
       </div>
-      <div className="absolute z-30 left-[42rem] top-[.5rem] rotate-[-5deg]">
+      <div className="absolute z-30 left-[42rem] top-[7rem] rotate-[-5deg]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="30"
@@ -111,7 +145,11 @@ export default function Partners() {
           />
         </svg>
       </div>
-      <PartnersDiv items={items} />
+      <PartnersDiv
+        allItems={initialItems}
+        activeItemId={activeItemId}
+        animating={isContentAnimating}
+      />
     </div>
   );
 }

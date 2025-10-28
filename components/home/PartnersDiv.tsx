@@ -1,15 +1,18 @@
 import { PartnerItem } from "@/app/(frontend)/(router)/(home_page)/components/partners";
 import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import clsx from "clsx";
+import styles from "@/styles/partners.module.css";
 
 interface PartnerLogo {
   id: number;
   url: string;
   alt: string;
 }
-
 interface PartnersDivProps {
-  items: PartnerItem[];
-  activeItemId?: number;
+  allItems: PartnerItem[];
+  activeItemId: number;
+  animating: boolean; // State fade-in/out
 }
 
 const DecorativeSVG = ({ className }: { className: string }) => (
@@ -283,33 +286,46 @@ const partnerConfig: Record<
     title: "Academic",
     partners: academicPartners,
     gridCols: "flex-row",
-    imageHeight: "h-[7rem]",
+    imageHeight: "h-[15rem]",
   },
   2: {
     title: "Hospitality",
     partners: hospitalityPartners,
     gridCols: "flex-row",
-    imageHeight: "h-[10rem]",
+    imageHeight: "h-[12rem]",
   },
   6: {
     title: "Charity Organizations",
     partners: charityPartners,
     gridCols: "flex-row",
-    imageHeight: "h-[10rem]",
+    imageHeight: "h-[15rem]",
   },
   1: {
     title: "Other Partners",
     partners: otherPartners,
     gridCols: "flex-row",
-    imageHeight: "h-[12rem]",
+    imageHeight: "h-[20rem]",
   },
 };
 
-export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
-  const activeItem = items.find((item) => item.id === activeItemId) || items[3];
+export default function PartnersDiv({
+  allItems,
+  activeItemId,
+  animating,
+}: PartnersDivProps) {
+  const activeItem =
+    allItems.find((item) => item.id === activeItemId) || allItems[3];
   const config = partnerConfig[activeItem.id];
 
   const { title, partners, gridCols, imageHeight, centerLast } = config;
+
+  const [animationClass, setAnimationClass] = useState(styles.fade_in_content);
+
+  useEffect(() => {
+    setAnimationClass(
+      animating ? styles.fade_out_content : styles.fade_in_content
+    );
+  }, [animating, activeItemId]);
 
   return (
     <div className="content mr-[8.5vw] ml-auto">
@@ -320,20 +336,24 @@ export default function PartnersDiv({ items, activeItemId }: PartnersDivProps) {
         Partners
       </h1>
       <div className="bg-[linear-gradient(90deg,_#C9D6EA_10px,_#FFEFCA)] w-[70vw] h-[88vh] rounded-[2vw] p-[1vw]">
-        <div className="w-full h-full rounded-[1vw] bg-white flex justify-center items-center">
-          <div className="w-full h-full flex flex-col items-center justify-start relative">
+        <div className="w-full h-full rounded-[1vw] bg-white flex justify-center">
+          <div
+            className={
+              (clsx("w-full h-full flex flex-col relative"), animationClass)
+            }
+          >
             <DecorativeSVG className="absolute z-30 left-[1rem] top-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
             <DecorativeSVG className="absolute z-30 left-[1rem] bottom-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
             <DecorativeSVG className="absolute z-30 right-[1rem] top-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
             <DecorativeSVG className="absolute z-30 right-[1rem] bottom-[1rem] rotate-[-5deg] w-[30px] h-[30px]" />
-            <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 text-[2rem] font-semibold rounded-b-[1rem]">
+            <h6 className="text-[#DCB968] bg-[#2C305F] w-fit text-center p-4 mx-auto text-[2rem] font-semibold rounded-b-[1rem]">
               {title}
             </h6>
             <div
-              className={`flex-1 flex items-center justify-center max-h-[65vh] px-[4rem] py-[1rem] pb-0 ${
+              className={`flex-1 flex items-center justify-center px-[4rem] py-[1rem] pb-0 ${
                 gridCols.includes("grid")
-                  ? `grid ${gridCols} gap-4 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:${gridCols}`
-                  : "flex flex-row gap-12 flex-wrap"
+                  ? `grid ${gridCols} h-[65vh] gap-4 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:${gridCols}`
+                  : "flex flex-row h-[62vh] gap-12 flex-wrap"
               }`}
             >
               {partners.map((partner, index) => {

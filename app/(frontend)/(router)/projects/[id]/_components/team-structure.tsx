@@ -27,8 +27,8 @@ const ProjectLeaderSpotlight = ({ leader }: { leader: Leader }) => (
       <Image
         src={leader.avatarUrl}
         alt={`${leader.name}'s Avatar`}
-        width={144}
-        height={144}
+        width={192}
+        height={192}
         loading="lazy"
         className="w-48 h-48 rounded-full object-contain shadow-lg
                    ring-4 ring-[#DBB968]"
@@ -53,7 +53,7 @@ const ProjectLeaderSpotlight = ({ leader }: { leader: Leader }) => (
 // Dùng cho cả Accordion và TeamBar
 const TeamLeaderTag = ({ name }: { name: string }) => (
   <span className="flex items-center gap-2 bg-[#DBB968] text-[#2C305F] font-bold px-3 py-1.5 rounded-full text-sm shadow-sm">
-    <img width="20" height="20" src="/leader.png" alt="Leader Icon" />
+    <img width="20" height="20" src="/leader.png" alt="" />
     {name}
   </span>
 );
@@ -63,7 +63,7 @@ const TeamBar = ({ team }: { team: Team }) => (
     <div className="flex flex-wrap justify-between items-center gap-y-3 gap-x-4">
       <h3 className="text-white font-bold text-lg md:text-xl">{team.role}</h3>
       <div className="flex flex-wrap gap-2 justify-end">
-        {team.leader_name.map((leader) => (
+        {team.leader_name?.map((leader) => (
           <TeamLeaderTag key={leader} name={leader} />
         ))}
       </div>
@@ -142,15 +142,15 @@ export default function TeamStructure({
         {hasTeams && (
           <div className="w-full mx-auto mt-12">
             <Accordion
-              defaultExpandedKeys={[teamsWithContent[0]?.role]}
-              itemClasses={{
-                base: "group rounded-xl !border-none mb-4 shadow-md",
-                title: "text-white font-bold text-lg md:text-xl",
-                trigger:
-                  "p-5 bg-[#2C305F] rounded-xl hover:bg-[#3e358a] transition-colors",
-                content: "bg-white rounded-b-xl p-6",
-              }}
-            >
+              defaultExpandedKeys={[teamsWithContent[0]?.role]}
+              itemClasses={{
+                base: "group rounded-xl !border-none mb-4 shadow-md",
+                title: "text-white font-bold text-lg md:text-xl",
+                trigger:
+                  "p-5 bg-[#2C305F] rounded-xl hover:bg-[#3e358a] transition-colors",
+                content: "bg-white rounded-b-xl p-6",
+              }}
+            >
               {teamsWithContent.map((team) => (
                 <AccordionItem
                   key={team.role}
@@ -158,12 +158,18 @@ export default function TeamStructure({
                   title={team.role}
                   subtitle={
                     <div className="flex flex-wrap gap-2 justify-end">
-                      {team.leader_name.map((leader) => (
+                      {team.leader_name?.map((leader) => (
                         <TeamLeaderTag key={leader} name={leader} />
                       ))}
                     </div>
                   }
-                  indicator={({isOpen}) => (isOpen ? <ChevronLeft className="text-2xl font-bold text-white transition-transform duration-300 ease-in-out -rotate-90" /> : <ChevronLeft className="text-2xl font-bold text-white transition-transform duration-300 ease-in-out rotate-0" />)}
+                  indicator={({ isOpen }) => (
+                    <ChevronLeft
+                      className={`text-2xl font-bold text-white transition-transform duration-300 ease-in-out ${
+                        isOpen ? "-rotate-90" : "rotate-0"
+                      }`}
+                    />
+                  )}
                 >
                   {/* Responsibilities & Skills */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
